@@ -1,0 +1,99 @@
+#-----------------------------------------------------------
+# Vivado v2019.2 (64-bit)
+# SW Build 2700185 on Thu Oct 24 18:45:48 MDT 2019
+# IP Build 2699827 on Thu Oct 24 21:16:38 MDT 2019
+# Start of session at: Wed Dec 18 18:19:15 2019
+# Process ID: 29494
+# Current directory: /home/vm/projects/ipcores
+# Command line: vivado
+# Log file: /home/vm/projects/ipcores/vivado.log
+# Journal file: /home/vm/projects/ipcores/vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project /home/vm/projects/simpleneutron/vivado/project_1/project_1.xpr
+update_compile_order -fileset sources_1
+open_bd_design {/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/design_1.bd}
+startgroup
+create_bd_cell -type ip -vlnv user.org:user:signal_input:1.0 signal_input_0
+endgroup
+set_property location {1 115 654} [get_bd_cells signal_input_0]
+create_bd_port -dir I pmod_input
+connect_bd_net [get_bd_ports pmod_input] [get_bd_pins signal_input_0/signal_input]
+connect_bd_net [get_bd_pins signal_input_0/out0] [get_bd_pins signal_detector_0/signal_input]
+connect_bd_net [get_bd_pins signal_input_0/out1] [get_bd_pins signal_detector_1/signal_input]
+connect_bd_net [get_bd_pins signal_input_0/out2] [get_bd_pins signal_detector_2/signal_input]
+connect_bd_net [get_bd_pins signal_input_0/out3] [get_bd_pins signal_detector_3/signal_input]
+connect_bd_net [get_bd_pins signal_input_0/out4] [get_bd_pins signal_detector_4/signal_input]
+connect_bd_net [get_bd_pins signal_input_0/out5] [get_bd_pins signal_detector_5/signal_input]
+connect_bd_net [get_bd_pins signal_input_0/out6] [get_bd_pins signal_detector_6/signal_input]
+connect_bd_net [get_bd_pins signal_input_0/out7] [get_bd_pins signal_detector_7/signal_input]
+regenerate_bd_layout
+save_bd_design
+delete_bd_objs [get_bd_addr_segs processing_system7_0/Data/SEG_axi_gpio_0_Reg]
+delete_bd_objs [get_bd_addr_segs processing_system7_0/Data/SEG_axi_dma_1_Reg]
+delete_bd_objs [get_bd_addr_segs processing_system7_0/Data/SEG_axi_dma_2_Reg]
+delete_bd_objs [get_bd_addr_segs processing_system7_0/Data/SEG_axi_dma_3_Reg]
+delete_bd_objs [get_bd_addr_segs processing_system7_0/Data/SEG_axi_dma_4_Reg]
+delete_bd_objs [get_bd_addr_segs processing_system7_0/Data/SEG_axi_dma_5_Reg]
+delete_bd_objs [get_bd_addr_segs processing_system7_0/Data/SEG_axi_dma_6_Reg]
+delete_bd_objs [get_bd_addr_segs processing_system7_0/Data/SEG_axi_dma_7_Reg]
+assign_bd_address
+save_bd_design
+reset_run synth_1
+launch_runs synth_1 -jobs 2
+wait_on_run synth_1
+create_ip_run [get_files -of_objects [get_fileset sources_1] /home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/design_1.bd]
+synth_design -rtl -name rtl_1
+open_run synth_1 -name synth_1
+add_files -fileset constrs_1 -norecurse /home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/zedboard_master_XDC_RevC_D_v3.xdc
+import_files -fileset constrs_1 /home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/zedboard_master_XDC_RevC_D_v3.xdc
+set_property target_constrs_file /home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/constrs_1/imports/project_1.srcs/zedboard_master_XDC_RevC_D_v3.xdc [current_fileset -constrset]
+create_ip_run [get_files -of_objects [get_fileset sources_1] /home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/design_1.bd]
+refresh_design
+reset_run synth_1
+launch_runs impl_1 -jobs 2
+current_design rtl_1
+set_property package_pin "" [get_ports [list  {sws_8bits[6]}]]
+set_property package_pin "" [get_ports [list  {sws_8bits[7]}]]
+create_ip_run [get_files -of_objects [get_fileset sources_1] /home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/design_1.bd]
+refresh_design
+set_property package_pin "" [get_ports [list  {leds_8bits1[5]}]]
+place_ports {leds_8bits1[7]} T22
+set_property package_pin "" [get_ports [list  {leds_8bits1[4]}]]
+place_ports {leds_8bits1[6]} T21
+place_ports {leds_8bits1[5]} U22
+place_ports {leds_8bits1[4]} U21
+place_ports {leds_8bits1[3]} V22
+place_ports {leds_8bits1[2]} W22
+place_ports {leds_8bits1[1]} U19
+place_ports {leds_8bits1[0]} U14
+set_property IOSTANDARD LVCMOS33 [get_ports [list {leds_8bits1[7]}]]
+set_property IOSTANDARD LVCMOS33 [get_ports [list {leds_8bits1[7]}]]
+set_property IOSTANDARD LVCMOS33 [get_ports [list {leds_8bits1[5]}]]
+set_property IOSTANDARD LVCMOS33 [get_ports [list {leds_8bits1[6]}]]
+set_property IOSTANDARD LVCMOS33 [get_ports [list {leds_8bits1[4]}]]
+set_property IOSTANDARD LVCMOS25 [get_ports [list {leds_8bits1[3]}]]
+set_property IOSTANDARD LVCMOS33 [get_ports [list {leds_8bits1[3]}]]
+set_property IOSTANDARD LVCMOS33 [get_ports [list {leds_8bits1[2]}]]
+set_property IOSTANDARD LVCMOS33 [get_ports [list {leds_8bits1[1]}]]
+set_property IOSTANDARD LVCMOS33 [get_ports [list {leds_8bits1[0]}]]
+save_constraints
+set_property iostandard LVCMOS33 [get_ports [list pmod_input]]
+place_ports {sws_8bits[0]} F22
+place_ports {sws_8bits[1]} G22
+place_ports {sws_8bits[2]} H22
+place_ports {sws_8bits[3]} F21
+place_ports {sws_8bits[4]} H19
+place_ports {sws_8bits[5]} H18
+place_ports {sws_8bits[6]} H17
+place_ports {sws_8bits[7]} M15
+save_constraints
+open_bd_design {/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/design_1.bd}
+delete_bd_objs [get_bd_nets pmod_input_1] [get_bd_ports pmod_input]
+startgroup
+create_bd_port -dir I -from 7 -to 0 pmod_input
+connect_bd_net [get_bd_pins /signal_input_0/signal_input] [get_bd_ports pmod_input]
+endgroup
+save_bd_design
+reset_run synth_1
+launch_runs synth_1 -jobs 2

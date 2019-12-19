@@ -1,0 +1,17 @@
+#-----------------------------------------------------------
+# Vivado v2019.2 (64-bit)
+# SW Build 2700185 on Thu Oct 24 18:45:48 MDT 2019
+# IP Build 2699827 on Thu Oct 24 21:16:38 MDT 2019
+# Start of session at: Wed Dec 18 21:54:18 2019
+# Process ID: 2908
+# Current directory: /home/vm/projects/simpleneutron/vivado/project_1/project_1.runs/design_1_auto_us_4_synth_1
+# Command line: vivado -log design_1_auto_us_4.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source design_1_auto_us_4.tcl
+# Log file: /home/vm/projects/simpleneutron/vivado/project_1/project_1.runs/design_1_auto_us_4_synth_1/design_1_auto_us_4.vds
+# Journal file: /home/vm/projects/simpleneutron/vivado/project_1/project_1.runs/design_1_auto_us_4_synth_1/vivado.jou
+#-----------------------------------------------------------
+source design_1_auto_us_4.tcl -notrace
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository '/home/vm/projects/ipcores/ip_repo'.
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/home/vm/tools/Xilinx/Vivado/2019.2/data/ip'.
+INFO: [IP_Flow 19-4838] Using cached IP synthesis design for IP design_1_auto_us_4, cache-ID = d58ae625b4ed3dba.
+INFO: [Common 17-206] Exiting Vivado at Wed Dec 18 21:54:39 2019...

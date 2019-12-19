@@ -1,0 +1,5 @@
+signal_detector_v1_0_M00_AXIS.vhd,vhdl,xil_defaultlib,../../../bd/design_1/ipshared/d3f7/hdl/signal_detector_v1_0_M00_AXIS.vhd,
+signal_detector_v1_0.vhd,vhdl,xil_defaultlib,../../../bd/design_1/ipshared/d3f7/hdl/signal_detector_v1_0.vhd,
+design_1_signal_detector_0_0.vhd,vhdl,xil_defaultlib,../../../bd/design_1/ip/design_1_signal_detector_0_0/sim/design_1_signal_detector_0_0.vhd,
+design_1.v,verilog,xil_defaultlib,../../../bd/design_1/sim/design_1.v,
+glbl.v,Verilog,xil_defaultlib,glbl.v

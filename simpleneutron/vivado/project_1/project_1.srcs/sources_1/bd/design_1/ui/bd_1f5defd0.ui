@@ -1,0 +1,117 @@
+{
+   "ActiveEmotionalView":"Default View",
+   "Default View_ScaleFactor":"2.65058",
+   "Default View_TopLeft":"-244,1293",
+   "ExpandedHierarchyInLayout":"",
+   "PinnedBlocks":"",
+   "PinnedPorts":"",
+   "guistr":"# # String gsaved with Nlview 7.0.21  2019-05-29 bk=1.5064 VDI=41 GEI=36 GUI=JA:9.0 TLS
+#  -string -flagsOSRD
+preplace port DDR -pg 1 -lvl 6 -x 2400 -y 1270 -defaultsOSRD
+preplace port FIXED_IO -pg 1 -lvl 6 -x 2400 -y 1290 -defaultsOSRD
+preplace portBus leds_8bits1 -pg 1 -lvl 6 -x 2400 -y 1740 -defaultsOSRD
+preplace portBus sws_8bits -pg 1 -lvl 0 -x -60 -y 1240 -defaultsOSRD
+preplace portBus pmod_input -pg 1 -lvl 0 -x -60 -y 1490 -defaultsOSRD
+preplace inst signal_detector_0 -pg 1 -lvl 2 -x 600 -y 810 -defaultsOSRD
+preplace inst signal_detector_1 -pg 1 -lvl 2 -x 600 -y 1350 -defaultsOSRD
+preplace inst signal_detector_2 -pg 1 -lvl 2 -x 600 -y 1190 -defaultsOSRD
+preplace inst signal_detector_3 -pg 1 -lvl 2 -x 600 -y 1030 -defaultsOSRD
+preplace inst signal_detector_4 -pg 1 -lvl 2 -x 600 -y 1510 -defaultsOSRD
+preplace inst signal_detector_5 -pg 1 -lvl 2 -x 600 -y 1990 -defaultsOSRD
+preplace inst signal_detector_6 -pg 1 -lvl 2 -x 600 -y 1830 -defaultsOSRD
+preplace inst signal_detector_7 -pg 1 -lvl 2 -x 600 -y 1670 -defaultsOSRD
+preplace inst processing_system7_0 -pg 1 -lvl 5 -x 2140 -y 1350 -defaultsOSRD
+preplace inst axi_dma_0 -pg 1 -lvl 3 -x 1100 -y 100 -defaultsOSRD
+preplace inst axi_dma_1 -pg 1 -lvl 3 -x 1100 -y 280 -defaultsOSRD
+preplace inst axi_dma_2 -pg 1 -lvl 3 -x 1100 -y 460 -defaultsOSRD
+preplace inst axi_dma_3 -pg 1 -lvl 3 -x 1100 -y 820 -defaultsOSRD
+preplace inst axi_dma_4 -pg 1 -lvl 3 -x 1100 -y 1000 -defaultsOSRD
+preplace inst axi_dma_5 -pg 1 -lvl 3 -x 1100 -y 640 -defaultsOSRD
+preplace inst axi_dma_6 -pg 1 -lvl 3 -x 1100 -y 1180 -defaultsOSRD
+preplace inst axi_dma_7 -pg 1 -lvl 3 -x 1100 -y 1380 -defaultsOSRD
+preplace inst ps7_0_axi_periph -pg 1 -lvl 2 -x 600 -y 460 -defaultsOSRD
+preplace inst rst_ps7_0_100M -pg 1 -lvl 1 -x 160 -y 1040 -defaultsOSRD
+preplace inst axi_mem_intercon -pg 1 -lvl 4 -x 1660 -y 910 -defaultsOSRD
+preplace inst xlconcat_0 -pg 1 -lvl 4 -x 1660 -y 1350 -defaultsOSRD
+preplace inst xlconcat_1 -pg 1 -lvl 5 -x 2140 -y 1740 -defaultsOSRD
+preplace inst enable_splitter_0 -pg 1 -lvl 1 -x 160 -y 1250 -defaultsOSRD
+preplace inst axi_gpio_0 -pg 1 -lvl 3 -x 1100 -y 1570 -defaultsOSRD
+preplace inst signal_input_0 -pg 1 -lvl 1 -x 160 -y 1490 -defaultsOSRD
+preplace netloc processing_system7_0_FCLK_CLK0 1 0 6 -40 920 400 170 910 1480 1380 1480 1820 1490 2380
+preplace netloc processing_system7_0_FCLK_RESET0_N 1 0 6 -30 930 NJ 930 840J 1490 1340J 1500 NJ 1500 2370
+preplace netloc rst_ps7_0_100M_peripheral_aresetn 1 1 3 410 180 920 1280 1360
+preplace netloc axi_dma_7_s2mm_introut 1 3 1 1280 1400n
+preplace netloc axi_dma_6_s2mm_introut 1 3 1 1290 1200n
+preplace netloc axi_dma_5_s2mm_introut 1 3 1 1310 660n
+preplace netloc axi_dma_0_s2mm_introut 1 3 1 1390 120n
+preplace netloc axi_dma_4_s2mm_introut 1 3 1 1300 1020n
+preplace netloc axi_dma_3_s2mm_introut 1 3 1 1320 840n
+preplace netloc axi_dma_2_s2mm_introut 1 3 1 1350 480n
+preplace netloc axi_dma_1_s2mm_introut 1 3 1 1370 300n
+preplace netloc xlconcat_0_dout 1 4 1 1810 1350n
+preplace netloc signal_detector_7_signal_state 1 2 3 N 1680 NJ 1680 1810J
+preplace netloc signal_detector_6_signal_state 1 2 3 910 1790 NJ 1790 NJ
+preplace netloc signal_detector_5_signal_state 1 2 3 920 1770 NJ 1770 NJ
+preplace netloc signal_detector_0_signal_state 1 2 3 800 1670 NJ 1670 NJ
+preplace netloc signal_detector_4_signal_state 1 2 3 750 1750 NJ 1750 NJ
+preplace netloc signal_detector_3_signal_state 1 2 3 780 1730 NJ 1730 NJ
+preplace netloc signal_detector_2_signal_state 1 2 3 770 1710 NJ 1710 NJ
+preplace netloc signal_detector_1_signal_state 1 2 3 760 1690 NJ 1690 NJ
+preplace netloc xlconcat_1_dout 1 5 1 NJ 1740
+preplace netloc enable_splitter_0_out7 1 1 1 340 1320n
+preplace netloc enable_splitter_0_out6 1 1 1 390 1300n
+preplace netloc enable_splitter_0_out5 1 1 1 380 1280n
+preplace netloc enable_splitter_0_out4 1 1 1 450 1260n
+preplace netloc enable_splitter_0_out3 1 1 1 380 1000n
+preplace netloc enable_splitter_0_out2 1 1 1 390 1160n
+preplace netloc enable_splitter_0_out0 1 1 1 350 780n
+preplace netloc enable_splitter_0_out1 1 1 1 350 1200n
+preplace netloc sws_8bits_1 1 0 1 NJ 1240
+preplace netloc axi_gpio_0_gpio_io_o 1 0 4 -20 940 NJ 940 790J 1650 1350
+preplace netloc signal_input_0_out0 1 1 1 360 800n
+preplace netloc signal_input_0_out1 1 1 1 440 1340n
+preplace netloc signal_input_0_out2 1 1 1 430 1180n
+preplace netloc signal_input_0_out3 1 1 1 420 1020n
+preplace netloc signal_input_0_out4 1 1 1 N 1500
+preplace netloc signal_input_0_out5 1 1 1 350 1520n
+preplace netloc signal_input_0_out6 1 1 1 360 1540n
+preplace netloc signal_input_0_out7 1 1 1 370 1560n
+preplace netloc pmod_input_1 1 0 1 N 1490
+preplace netloc ps7_0_axi_periph_M08_AXI 1 2 1 850 540n
+preplace netloc axi_dma_6_M_AXI_S2MM 1 3 1 1340 760n
+preplace netloc axi_dma_1_M_AXI_S2MM 1 3 1 1400 260n
+preplace netloc axi_dma_2_M_AXI_S2MM 1 3 1 1380 440n
+preplace netloc axi_dma_3_M_AXI_S2MM 1 3 1 1300 700n
+preplace netloc axi_dma_7_M_AXI_S2MM 1 3 1 1280 780n
+preplace netloc ps7_0_axi_periph_M05_AXI 1 2 1 790 480n
+preplace netloc ps7_0_axi_periph_M01_AXI 1 2 1 790 240n
+preplace netloc ps7_0_axi_periph_M06_AXI 1 2 1 890 500n
+preplace netloc signal_detector_7_M00_AXIS 1 2 1 900 1360n
+preplace netloc signal_detector_2_M00_AXIS 1 2 1 820 440n
+preplace netloc ps7_0_axi_periph_M07_AXI 1 2 1 870 520n
+preplace netloc ps7_0_axi_periph_M02_AXI 1 2 1 N 420
+preplace netloc processing_system7_0_M_AXI_GP0 1 1 5 430 0 NJ 0 NJ 0 NJ 0 2380
+preplace netloc axi_dma_5_M_AXI_S2MM 1 3 1 1360 620n
+preplace netloc signal_detector_3_M00_AXIS 1 2 1 830 800n
+preplace netloc axi_mem_intercon_M00_AXI 1 4 1 1810 910n
+preplace netloc axi_dma_0_M_AXI_S2MM 1 3 1 1410 80n
+preplace netloc ps7_0_axi_periph_M04_AXI 1 2 1 770 460n
+preplace netloc signal_detector_0_M00_AXIS 1 2 1 780 80n
+preplace netloc ps7_0_axi_periph_M03_AXI 1 2 1 800 440n
+preplace netloc ps7_0_axi_periph_M00_AXI 1 2 1 770 60n
+preplace netloc axi_dma_4_M_AXI_S2MM 1 3 1 1330 720n
+preplace netloc processing_system7_0_FIXED_IO 1 5 1 NJ 1290
+preplace netloc processing_system7_0_DDR 1 5 1 NJ 1270
+preplace netloc signal_detector_4_M00_AXIS 1 2 1 860 980n
+preplace netloc signal_detector_1_M00_AXIS 1 2 1 810 260n
+preplace netloc signal_detector_5_M00_AXIS 1 2 1 880 620n
+preplace netloc signal_detector_6_M00_AXIS 1 2 1 890 1160n
+levelinfo -pg 1 -60 160 600 1100 1660 2140 2400
+pagesize -pg 1 -db -bbox -sgen -230 -10 2570 2080
+"
+}
+{
+   "da_axi4_cnt":"17",
+   "da_clkrst_cnt":"8",
+   "da_ps7_cnt":"1"
+}
