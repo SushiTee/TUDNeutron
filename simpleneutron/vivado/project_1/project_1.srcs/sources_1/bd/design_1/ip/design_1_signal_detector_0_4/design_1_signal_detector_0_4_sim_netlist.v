@@ -1,7 +1,7 @@
 // Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
-// Tool Version: Vivado v.2019.2 (lin64) Build 2700185 Thu Oct 24 18:45:48 MDT 2019
-// Date        : Wed Dec 18 16:22:08 2019
+// Tool Version: Vivado v.2019.2.1 (lin64) Build 2729669 Thu Dec  5 04:48:12 MST 2019
+// Date        : Sun Dec 29 20:53:47 2019
 // Host        : vm-VirtualBox running 64-bit Ubuntu 18.04.3 LTS
 // Command     : write_verilog -force -mode funcsim -rename_top design_1_signal_detector_0_4 -prefix
 //               design_1_signal_detector_0_4_ design_1_signal_detector_0_0_sim_netlist.v
@@ -12,12 +12,14 @@
 // --------------------------------------------------------------------------------
 `timescale 1 ps / 1 ps
 
-(* CHECK_LICENSE_TYPE = "design_1_signal_detector_0_0,signal_detector_v1_0,{}" *) (* downgradeipidentifiedwarnings = "yes" *) (* x_core_info = "signal_detector_v1_0,Vivado 2019.2" *) 
+(* CHECK_LICENSE_TYPE = "design_1_signal_detector_0_0,signal_detector_v1_0,{}" *) (* downgradeipidentifiedwarnings = "yes" *) (* x_core_info = "signal_detector_v1_0,Vivado 2019.2.1" *) 
 (* NotValidForBitStream *)
 module design_1_signal_detector_0_4
    (enabled,
     signal_input,
     signal_state,
+    fifo_reset,
+    number_words,
     m00_axis_aclk,
     m00_axis_aresetn,
     m00_axis_tvalid,
@@ -28,9 +30,11 @@ module design_1_signal_detector_0_4
   input enabled;
   input signal_input;
   output signal_state;
-  (* x_interface_info = "xilinx.com:signal:clock:1.0 M00_AXIS_CLK CLK" *) (* x_interface_parameter = "XIL_INTERFACENAME M00_AXIS_CLK, ASSOCIATED_BUSIF M00_AXIS, ASSOCIATED_RESET m00_axis_aresetn, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN design_1_m00_axis_aclk, INSERT_VIP 0" *) input m00_axis_aclk;
+  (* x_interface_info = "xilinx.com:signal:reset:1.0 fifo_reset RST" *) (* x_interface_parameter = "XIL_INTERFACENAME fifo_reset, POLARITY ACTIVE_LOW, INSERT_VIP 0" *) output fifo_reset;
+  input [15:0]number_words;
+  (* x_interface_info = "xilinx.com:signal:clock:1.0 M00_AXIS_CLK CLK" *) (* x_interface_parameter = "XIL_INTERFACENAME M00_AXIS_CLK, ASSOCIATED_BUSIF M00_AXIS, ASSOCIATED_RESET m00_axis_aresetn, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *) input m00_axis_aclk;
   (* x_interface_info = "xilinx.com:signal:reset:1.0 M00_AXIS_RST RST" *) (* x_interface_parameter = "XIL_INTERFACENAME M00_AXIS_RST, POLARITY ACTIVE_LOW, INSERT_VIP 0" *) input m00_axis_aresetn;
-  (* x_interface_info = "xilinx.com:interface:axis:1.0 M00_AXIS TVALID" *) (* x_interface_parameter = "XIL_INTERFACENAME M00_AXIS, WIZ_DATA_WIDTH 32, TDATA_NUM_BYTES 4, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 1, HAS_TKEEP 0, HAS_TLAST 1, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN design_1_m00_axis_aclk, LAYERED_METADATA undef, INSERT_VIP 0" *) output m00_axis_tvalid;
+  (* x_interface_info = "xilinx.com:interface:axis:1.0 M00_AXIS TVALID" *) (* x_interface_parameter = "XIL_INTERFACENAME M00_AXIS, WIZ_DATA_WIDTH 32, TDATA_NUM_BYTES 4, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 1, HAS_TKEEP 0, HAS_TLAST 1, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK0, LAYERED_METADATA undef, INSERT_VIP 0" *) output m00_axis_tvalid;
   (* x_interface_info = "xilinx.com:interface:axis:1.0 M00_AXIS TDATA" *) output [31:0]m00_axis_tdata;
   (* x_interface_info = "xilinx.com:interface:axis:1.0 M00_AXIS TSTRB" *) output [3:0]m00_axis_tstrb;
   (* x_interface_info = "xilinx.com:interface:axis:1.0 M00_AXIS TLAST" *) output m00_axis_tlast;
@@ -38,24 +42,31 @@ module design_1_signal_detector_0_4
 
   wire \<const1> ;
   wire enabled;
+  wire fifo_reset;
   wire m00_axis_aclk;
   wire m00_axis_aresetn;
   wire [31:0]m00_axis_tdata;
+  wire m00_axis_tlast;
+  wire m00_axis_tready;
   wire m00_axis_tvalid;
+  wire [15:0]number_words;
   wire signal_input;
   wire signal_state;
 
-  assign m00_axis_tlast = m00_axis_tvalid;
   assign m00_axis_tstrb[3] = \<const1> ;
   assign m00_axis_tstrb[2] = \<const1> ;
   assign m00_axis_tstrb[1] = \<const1> ;
   assign m00_axis_tstrb[0] = \<const1> ;
   design_1_signal_detector_0_4_signal_detector_v1_0 U0
        (.enabled(enabled),
+        .fifo_reset(fifo_reset),
         .m00_axis_aclk(m00_axis_aclk),
         .m00_axis_aresetn(m00_axis_aresetn),
         .m00_axis_tdata(m00_axis_tdata),
+        .m00_axis_tlast(m00_axis_tlast),
+        .m00_axis_tready(m00_axis_tready),
         .m00_axis_tvalid(m00_axis_tvalid),
+        .number_words(number_words),
         .signal_input(signal_input),
         .signal_state(signal_state));
   VCC VCC
@@ -63,64 +74,103 @@ module design_1_signal_detector_0_4
 endmodule
 
 module design_1_signal_detector_0_4_signal_detector_v1_0
-   (m00_axis_tdata,
-    signal_state,
+   (fifo_reset,
+    m00_axis_tlast,
+    m00_axis_tdata,
     m00_axis_tvalid,
-    enabled,
-    m00_axis_aresetn,
+    signal_state,
+    number_words,
     m00_axis_aclk,
-    signal_input);
+    signal_input,
+    m00_axis_aresetn,
+    enabled,
+    m00_axis_tready);
+  output fifo_reset;
+  output m00_axis_tlast;
   output [31:0]m00_axis_tdata;
-  output signal_state;
   output m00_axis_tvalid;
-  input enabled;
-  input m00_axis_aresetn;
+  output signal_state;
+  input [15:0]number_words;
   input m00_axis_aclk;
   input signal_input;
+  input m00_axis_aresetn;
+  input enabled;
+  input m00_axis_tready;
 
   wire enabled;
+  wire fifo_reset;
   wire m00_axis_aclk;
   wire m00_axis_aresetn;
   wire [31:0]m00_axis_tdata;
+  wire m00_axis_tlast;
+  wire m00_axis_tready;
   wire m00_axis_tvalid;
+  wire [15:0]number_words;
   wire signal_input;
   wire signal_state;
 
   design_1_signal_detector_0_4_signal_detector_v1_0_M00_AXIS signal_detector_v1_0_M00_AXIS_inst
        (.enabled(enabled),
+        .fifo_reset(fifo_reset),
         .m00_axis_aclk(m00_axis_aclk),
         .m00_axis_aresetn(m00_axis_aresetn),
         .m00_axis_tdata(m00_axis_tdata),
+        .m00_axis_tlast(m00_axis_tlast),
+        .m00_axis_tready(m00_axis_tready),
         .m00_axis_tvalid(m00_axis_tvalid),
+        .number_words(number_words),
         .signal_input(signal_input),
         .signal_state(signal_state));
 endmodule
 
 module design_1_signal_detector_0_4_signal_detector_v1_0_M00_AXIS
-   (m00_axis_tdata,
-    signal_state,
+   (fifo_reset,
+    m00_axis_tlast,
+    m00_axis_tdata,
     m00_axis_tvalid,
-    enabled,
-    m00_axis_aresetn,
+    signal_state,
+    number_words,
     m00_axis_aclk,
-    signal_input);
+    signal_input,
+    m00_axis_aresetn,
+    enabled,
+    m00_axis_tready);
+  output fifo_reset;
+  output m00_axis_tlast;
   output [31:0]m00_axis_tdata;
-  output signal_state;
   output m00_axis_tvalid;
-  input enabled;
-  input m00_axis_aresetn;
+  output signal_state;
+  input [15:0]number_words;
   input m00_axis_aclk;
   input signal_input;
+  input m00_axis_aresetn;
+  input enabled;
+  input m00_axis_tready;
 
-  wire \FSM_sequential_mst_exec_state[0]_i_1_n_0 ;
-  wire \FSM_sequential_mst_exec_state[1]_i_1_n_0 ;
-  wire \FSM_sequential_mst_exec_state[1]_i_2_n_0 ;
+  wire \FSM_onehot_mst_exec_state[1]_i_1_n_0 ;
+  wire \FSM_onehot_mst_exec_state[2]_i_1_n_0 ;
+  wire \FSM_onehot_mst_exec_state[2]_i_2_n_0 ;
+  wire \FSM_onehot_mst_exec_state_reg_n_0_[0] ;
+  wire \FSM_onehot_mst_exec_state_reg_n_0_[1] ;
+  wire axis_tlast1;
+  wire axis_tlast1_carry__0_i_1_n_0;
+  wire axis_tlast1_carry__0_i_2_n_0;
+  wire axis_tlast1_carry__0_n_3;
+  wire axis_tlast1_carry_i_1_n_0;
+  wire axis_tlast1_carry_i_2_n_0;
+  wire axis_tlast1_carry_i_3_n_0;
+  wire axis_tlast1_carry_i_4_n_0;
+  wire axis_tlast1_carry_n_0;
+  wire axis_tlast1_carry_n_1;
+  wire axis_tlast1_carry_n_2;
+  wire axis_tlast1_carry_n_3;
+  wire axis_tvalid_calculated0;
   wire axis_tvalid_calculated_i_1_n_0;
   wire axis_tvalid_calculated_previous;
   wire axis_tvalid_calculated_reg_n_0;
-  wire [31:31]clock_counter0_in;
   wire \clock_counter[0]_i_1_n_0 ;
   wire \clock_counter[1]_i_1_n_0 ;
+  wire \clock_counter[31]_i_1_n_0 ;
   wire \clock_counter_reg[12]_i_1_n_0 ;
   wire \clock_counter_reg[12]_i_1_n_1 ;
   wire \clock_counter_reg[12]_i_1_n_2 ;
@@ -215,78 +265,202 @@ module design_1_signal_detector_0_4_signal_detector_v1_0_M00_AXIS
   wire \clock_counter_reg_n_0_[8] ;
   wire \clock_counter_reg_n_0_[9] ;
   wire enabled;
+  wire fifo_reset;
+  wire fifo_reset_internal;
+  wire fifo_reset_internal_i_1_n_0;
   wire init_counter;
-  wire \init_counter[2]_i_1_n_0 ;
-  wire \init_counter[4]_i_1_n_0 ;
   wire [4:0]init_counter_reg;
   wire m00_axis_aclk;
   wire m00_axis_aresetn;
   wire [31:0]m00_axis_tdata;
+  wire m00_axis_tlast;
+  wire m00_axis_tready;
   wire m00_axis_tvalid;
-  wire [1:0]mst_exec_state;
-  wire [4:0]plusOp;
-  wire \signal_counter[0]_i_1_n_0 ;
-  wire \signal_counter[1]_i_1_n_0 ;
-  wire \signal_counter_reg_n_0_[0] ;
-  wire \signal_counter_reg_n_0_[1] ;
+  wire [15:0]number_words;
+  wire [15:1]plusOp;
+  wire [4:0]plusOp__0;
   wire signal_input;
   wire signal_input_previous;
   wire signal_state;
+  wire [15:0]tlast_counter;
+  wire tlast_counter1_carry__0_i_1_n_0;
+  wire tlast_counter1_carry__0_i_2_n_0;
+  wire tlast_counter1_carry__0_i_3_n_0;
+  wire tlast_counter1_carry__0_i_4_n_0;
+  wire tlast_counter1_carry__0_i_5_n_0;
+  wire tlast_counter1_carry__0_i_6_n_0;
+  wire tlast_counter1_carry__0_i_7_n_0;
+  wire tlast_counter1_carry__0_i_8_n_0;
+  wire tlast_counter1_carry__0_n_0;
+  wire tlast_counter1_carry__0_n_1;
+  wire tlast_counter1_carry__0_n_2;
+  wire tlast_counter1_carry__0_n_3;
+  wire tlast_counter1_carry_i_1_n_0;
+  wire tlast_counter1_carry_i_2_n_0;
+  wire tlast_counter1_carry_i_3_n_0;
+  wire tlast_counter1_carry_i_4_n_0;
+  wire tlast_counter1_carry_i_5_n_0;
+  wire tlast_counter1_carry_i_6_n_0;
+  wire tlast_counter1_carry_i_7_n_0;
+  wire tlast_counter1_carry_i_8_n_0;
+  wire tlast_counter1_carry_n_0;
+  wire tlast_counter1_carry_n_1;
+  wire tlast_counter1_carry_n_2;
+  wire tlast_counter1_carry_n_3;
+  wire \tlast_counter[0]_i_1_n_0 ;
+  wire [15:15]tlast_counter_0;
+  wire \tlast_counter_reg[12]_i_1_n_0 ;
+  wire \tlast_counter_reg[12]_i_1_n_1 ;
+  wire \tlast_counter_reg[12]_i_1_n_2 ;
+  wire \tlast_counter_reg[12]_i_1_n_3 ;
+  wire \tlast_counter_reg[15]_i_3_n_2 ;
+  wire \tlast_counter_reg[15]_i_3_n_3 ;
+  wire \tlast_counter_reg[4]_i_1_n_0 ;
+  wire \tlast_counter_reg[4]_i_1_n_1 ;
+  wire \tlast_counter_reg[4]_i_1_n_2 ;
+  wire \tlast_counter_reg[4]_i_1_n_3 ;
+  wire \tlast_counter_reg[8]_i_1_n_0 ;
+  wire \tlast_counter_reg[8]_i_1_n_1 ;
+  wire \tlast_counter_reg[8]_i_1_n_2 ;
+  wire \tlast_counter_reg[8]_i_1_n_3 ;
+  wire [3:0]NLW_axis_tlast1_carry_O_UNCONNECTED;
+  wire [3:2]NLW_axis_tlast1_carry__0_CO_UNCONNECTED;
+  wire [3:0]NLW_axis_tlast1_carry__0_O_UNCONNECTED;
   wire [3:2]\NLW_clock_counter_reg[31]_i_2_CO_UNCONNECTED ;
   wire [3:3]\NLW_clock_counter_reg[31]_i_2_O_UNCONNECTED ;
+  wire [3:0]NLW_tlast_counter1_carry_O_UNCONNECTED;
+  wire [3:0]NLW_tlast_counter1_carry__0_O_UNCONNECTED;
+  wire [3:2]\NLW_tlast_counter_reg[15]_i_3_CO_UNCONNECTED ;
+  wire [3:3]\NLW_tlast_counter_reg[15]_i_3_O_UNCONNECTED ;
 
+  LUT2 #(
+    .INIT(4'hE)) 
+    \FSM_onehot_mst_exec_state[1]_i_1 
+       (.I0(init_counter),
+        .I1(\FSM_onehot_mst_exec_state_reg_n_0_[0] ),
+        .O(\FSM_onehot_mst_exec_state[1]_i_1_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair20" *) 
+  LUT3 #(
+    .INIT(8'hF4)) 
+    \FSM_onehot_mst_exec_state[2]_i_1 
+       (.I0(\FSM_onehot_mst_exec_state[2]_i_2_n_0 ),
+        .I1(\FSM_onehot_mst_exec_state_reg_n_0_[1] ),
+        .I2(fifo_reset_internal),
+        .O(\FSM_onehot_mst_exec_state[2]_i_1_n_0 ));
   (* SOFT_HLUTNM = "soft_lutpair1" *) 
   LUT5 #(
-    .INIT(32'h07000000)) 
-    \FSM_sequential_mst_exec_state[0]_i_1 
-       (.I0(mst_exec_state[0]),
-        .I1(\FSM_sequential_mst_exec_state[1]_i_2_n_0 ),
-        .I2(mst_exec_state[1]),
-        .I3(enabled),
-        .I4(m00_axis_aresetn),
-        .O(\FSM_sequential_mst_exec_state[0]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair1" *) 
-  LUT5 #(
-    .INIT(32'h62000000)) 
-    \FSM_sequential_mst_exec_state[1]_i_1 
-       (.I0(mst_exec_state[1]),
-        .I1(mst_exec_state[0]),
-        .I2(\FSM_sequential_mst_exec_state[1]_i_2_n_0 ),
-        .I3(enabled),
-        .I4(m00_axis_aresetn),
-        .O(\FSM_sequential_mst_exec_state[1]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair0" *) 
-  LUT5 #(
-    .INIT(32'h80000000)) 
-    \FSM_sequential_mst_exec_state[1]_i_2 
+    .INIT(32'h7FFFFFFF)) 
+    \FSM_onehot_mst_exec_state[2]_i_2 
        (.I0(init_counter_reg[3]),
         .I1(init_counter_reg[1]),
         .I2(init_counter_reg[0]),
-        .I3(init_counter_reg[4]),
-        .I4(init_counter_reg[2]),
-        .O(\FSM_sequential_mst_exec_state[1]_i_2_n_0 ));
-  (* FSM_ENCODED_STATES = "state_idle:00,state_init_counter:01,state_send_stream:10" *) 
-  FDRE \FSM_sequential_mst_exec_state_reg[0] 
+        .I3(init_counter_reg[2]),
+        .I4(init_counter_reg[4]),
+        .O(\FSM_onehot_mst_exec_state[2]_i_2_n_0 ));
+  (* FSM_ENCODED_STATES = "state_idle:001,state_init_counter:010,state_send_stream:100" *) 
+  FDSE #(
+    .INIT(1'b1)) 
+    \FSM_onehot_mst_exec_state_reg[0] 
        (.C(m00_axis_aclk),
         .CE(1'b1),
-        .D(\FSM_sequential_mst_exec_state[0]_i_1_n_0 ),
-        .Q(mst_exec_state[0]),
-        .R(1'b0));
-  (* FSM_ENCODED_STATES = "state_idle:00,state_init_counter:01,state_send_stream:10" *) 
-  FDRE \FSM_sequential_mst_exec_state_reg[1] 
+        .D(1'b0),
+        .Q(\FSM_onehot_mst_exec_state_reg_n_0_[0] ),
+        .S(fifo_reset_internal_i_1_n_0));
+  (* FSM_ENCODED_STATES = "state_idle:001,state_init_counter:010,state_send_stream:100" *) 
+  FDRE #(
+    .INIT(1'b0)) 
+    \FSM_onehot_mst_exec_state_reg[1] 
        (.C(m00_axis_aclk),
         .CE(1'b1),
-        .D(\FSM_sequential_mst_exec_state[1]_i_1_n_0 ),
-        .Q(mst_exec_state[1]),
-        .R(1'b0));
-  (* SOFT_HLUTNM = "soft_lutpair2" *) 
-  LUT4 #(
-    .INIT(16'h0020)) 
+        .D(\FSM_onehot_mst_exec_state[1]_i_1_n_0 ),
+        .Q(\FSM_onehot_mst_exec_state_reg_n_0_[1] ),
+        .R(fifo_reset_internal_i_1_n_0));
+  (* FSM_ENCODED_STATES = "state_idle:001,state_init_counter:010,state_send_stream:100" *) 
+  FDRE #(
+    .INIT(1'b0)) 
+    \FSM_onehot_mst_exec_state_reg[2] 
+       (.C(m00_axis_aclk),
+        .CE(1'b1),
+        .D(\FSM_onehot_mst_exec_state[2]_i_1_n_0 ),
+        .Q(fifo_reset_internal),
+        .R(fifo_reset_internal_i_1_n_0));
+  CARRY4 axis_tlast1_carry
+       (.CI(1'b0),
+        .CO({axis_tlast1_carry_n_0,axis_tlast1_carry_n_1,axis_tlast1_carry_n_2,axis_tlast1_carry_n_3}),
+        .CYINIT(1'b1),
+        .DI({1'b0,1'b0,1'b0,1'b0}),
+        .O(NLW_axis_tlast1_carry_O_UNCONNECTED[3:0]),
+        .S({axis_tlast1_carry_i_1_n_0,axis_tlast1_carry_i_2_n_0,axis_tlast1_carry_i_3_n_0,axis_tlast1_carry_i_4_n_0}));
+  CARRY4 axis_tlast1_carry__0
+       (.CI(axis_tlast1_carry_n_0),
+        .CO({NLW_axis_tlast1_carry__0_CO_UNCONNECTED[3:2],axis_tlast1,axis_tlast1_carry__0_n_3}),
+        .CYINIT(1'b0),
+        .DI({1'b0,1'b0,1'b0,1'b0}),
+        .O(NLW_axis_tlast1_carry__0_O_UNCONNECTED[3:0]),
+        .S({1'b0,1'b0,axis_tlast1_carry__0_i_1_n_0,axis_tlast1_carry__0_i_2_n_0}));
+  LUT2 #(
+    .INIT(4'h9)) 
+    axis_tlast1_carry__0_i_1
+       (.I0(number_words[15]),
+        .I1(tlast_counter[15]),
+        .O(axis_tlast1_carry__0_i_1_n_0));
+  LUT6 #(
+    .INIT(64'h9009000000009009)) 
+    axis_tlast1_carry__0_i_2
+       (.I0(tlast_counter[13]),
+        .I1(number_words[13]),
+        .I2(tlast_counter[12]),
+        .I3(number_words[12]),
+        .I4(number_words[14]),
+        .I5(tlast_counter[14]),
+        .O(axis_tlast1_carry__0_i_2_n_0));
+  LUT6 #(
+    .INIT(64'h9009000000009009)) 
+    axis_tlast1_carry_i_1
+       (.I0(tlast_counter[9]),
+        .I1(number_words[9]),
+        .I2(tlast_counter[11]),
+        .I3(number_words[11]),
+        .I4(number_words[10]),
+        .I5(tlast_counter[10]),
+        .O(axis_tlast1_carry_i_1_n_0));
+  LUT6 #(
+    .INIT(64'h9009000000009009)) 
+    axis_tlast1_carry_i_2
+       (.I0(tlast_counter[7]),
+        .I1(number_words[7]),
+        .I2(tlast_counter[6]),
+        .I3(number_words[6]),
+        .I4(number_words[8]),
+        .I5(tlast_counter[8]),
+        .O(axis_tlast1_carry_i_2_n_0));
+  LUT6 #(
+    .INIT(64'h9009000000009009)) 
+    axis_tlast1_carry_i_3
+       (.I0(tlast_counter[3]),
+        .I1(number_words[3]),
+        .I2(tlast_counter[5]),
+        .I3(number_words[5]),
+        .I4(number_words[4]),
+        .I5(tlast_counter[4]),
+        .O(axis_tlast1_carry_i_3_n_0));
+  LUT6 #(
+    .INIT(64'h9009000000009009)) 
+    axis_tlast1_carry_i_4
+       (.I0(tlast_counter[1]),
+        .I1(number_words[1]),
+        .I2(tlast_counter[0]),
+        .I3(number_words[0]),
+        .I4(number_words[2]),
+        .I5(tlast_counter[2]),
+        .O(axis_tlast1_carry_i_4_n_0));
+  (* SOFT_HLUTNM = "soft_lutpair0" *) 
+  LUT3 #(
+    .INIT(8'h40)) 
     axis_tvalid_calculated_i_1
-       (.I0(signal_input),
-        .I1(signal_input_previous),
-        .I2(mst_exec_state[1]),
-        .I3(mst_exec_state[0]),
+       (.I0(signal_input_previous),
+        .I1(signal_input),
+        .I2(fifo_reset_internal),
         .O(axis_tvalid_calculated_i_1_n_0));
   FDRE #(
     .INIT(1'b0)) 
@@ -309,21 +483,19 @@ module design_1_signal_detector_0_4_signal_detector_v1_0_M00_AXIS
     \clock_counter[0]_i_1 
        (.I0(\clock_counter_reg_n_0_[0] ),
         .O(\clock_counter[0]_i_1_n_0 ));
-  LUT4 #(
-    .INIT(16'h3200)) 
-    \clock_counter[1]_i_1 
-       (.I0(\clock_counter_reg[4]_i_1_n_7 ),
-        .I1(mst_exec_state[0]),
-        .I2(axis_tvalid_calculated_previous),
-        .I3(mst_exec_state[1]),
-        .O(\clock_counter[1]_i_1_n_0 ));
   LUT3 #(
-    .INIT(8'hEF)) 
+    .INIT(8'hC8)) 
+    \clock_counter[1]_i_1 
+       (.I0(axis_tvalid_calculated_previous),
+        .I1(fifo_reset_internal),
+        .I2(\clock_counter_reg[4]_i_1_n_7 ),
+        .O(\clock_counter[1]_i_1_n_0 ));
+  LUT2 #(
+    .INIT(4'hB)) 
     \clock_counter[31]_i_1 
        (.I0(axis_tvalid_calculated_previous),
-        .I1(mst_exec_state[0]),
-        .I2(mst_exec_state[1]),
-        .O(clock_counter0_in));
+        .I1(fifo_reset_internal),
+        .O(\clock_counter[31]_i_1_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[0] 
@@ -331,7 +503,7 @@ module design_1_signal_detector_0_4_signal_detector_v1_0_M00_AXIS
         .CE(1'b1),
         .D(\clock_counter[0]_i_1_n_0 ),
         .Q(\clock_counter_reg_n_0_[0] ),
-        .R(clock_counter0_in));
+        .R(\clock_counter[31]_i_1_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[10] 
@@ -339,7 +511,7 @@ module design_1_signal_detector_0_4_signal_detector_v1_0_M00_AXIS
         .CE(1'b1),
         .D(\clock_counter_reg[12]_i_1_n_6 ),
         .Q(\clock_counter_reg_n_0_[10] ),
-        .R(clock_counter0_in));
+        .R(\clock_counter[31]_i_1_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[11] 
@@ -347,7 +519,7 @@ module design_1_signal_detector_0_4_signal_detector_v1_0_M00_AXIS
         .CE(1'b1),
         .D(\clock_counter_reg[12]_i_1_n_5 ),
         .Q(\clock_counter_reg_n_0_[11] ),
-        .R(clock_counter0_in));
+        .R(\clock_counter[31]_i_1_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[12] 
@@ -355,7 +527,7 @@ module design_1_signal_detector_0_4_signal_detector_v1_0_M00_AXIS
         .CE(1'b1),
         .D(\clock_counter_reg[12]_i_1_n_4 ),
         .Q(\clock_counter_reg_n_0_[12] ),
-        .R(clock_counter0_in));
+        .R(\clock_counter[31]_i_1_n_0 ));
   CARRY4 \clock_counter_reg[12]_i_1 
        (.CI(\clock_counter_reg[8]_i_1_n_0 ),
         .CO({\clock_counter_reg[12]_i_1_n_0 ,\clock_counter_reg[12]_i_1_n_1 ,\clock_counter_reg[12]_i_1_n_2 ,\clock_counter_reg[12]_i_1_n_3 }),
@@ -370,7 +542,7 @@ module design_1_signal_detector_0_4_signal_detector_v1_0_M00_AXIS
         .CE(1'b1),
         .D(\clock_counter_reg[16]_i_1_n_7 ),
         .Q(\clock_counter_reg_n_0_[13] ),
-        .R(clock_counter0_in));
+        .R(\clock_counter[31]_i_1_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[14] 
@@ -378,7 +550,7 @@ module design_1_signal_detector_0_4_signal_detector_v1_0_M00_AXIS
         .CE(1'b1),
         .D(\clock_counter_reg[16]_i_1_n_6 ),
         .Q(\clock_counter_reg_n_0_[14] ),
-        .R(clock_counter0_in));
+        .R(\clock_counter[31]_i_1_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[15] 
@@ -386,7 +558,7 @@ module design_1_signal_detector_0_4_signal_detector_v1_0_M00_AXIS
         .CE(1'b1),
         .D(\clock_counter_reg[16]_i_1_n_5 ),
         .Q(\clock_counter_reg_n_0_[15] ),
-        .R(clock_counter0_in));
+        .R(\clock_counter[31]_i_1_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[16] 
@@ -394,7 +566,7 @@ module design_1_signal_detector_0_4_signal_detector_v1_0_M00_AXIS
         .CE(1'b1),
         .D(\clock_counter_reg[16]_i_1_n_4 ),
         .Q(\clock_counter_reg_n_0_[16] ),
-        .R(clock_counter0_in));
+        .R(\clock_counter[31]_i_1_n_0 ));
   CARRY4 \clock_counter_reg[16]_i_1 
        (.CI(\clock_counter_reg[12]_i_1_n_0 ),
         .CO({\clock_counter_reg[16]_i_1_n_0 ,\clock_counter_reg[16]_i_1_n_1 ,\clock_counter_reg[16]_i_1_n_2 ,\clock_counter_reg[16]_i_1_n_3 }),
@@ -409,7 +581,7 @@ module design_1_signal_detector_0_4_signal_detector_v1_0_M00_AXIS
         .CE(1'b1),
         .D(\clock_counter_reg[20]_i_1_n_7 ),
         .Q(\clock_counter_reg_n_0_[17] ),
-        .R(clock_counter0_in));
+        .R(\clock_counter[31]_i_1_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[18] 
@@ -417,7 +589,7 @@ module design_1_signal_detector_0_4_signal_detector_v1_0_M00_AXIS
         .CE(1'b1),
         .D(\clock_counter_reg[20]_i_1_n_6 ),
         .Q(\clock_counter_reg_n_0_[18] ),
-        .R(clock_counter0_in));
+        .R(\clock_counter[31]_i_1_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[19] 
@@ -425,7 +597,7 @@ module design_1_signal_detector_0_4_signal_detector_v1_0_M00_AXIS
         .CE(1'b1),
         .D(\clock_counter_reg[20]_i_1_n_5 ),
         .Q(\clock_counter_reg_n_0_[19] ),
-        .R(clock_counter0_in));
+        .R(\clock_counter[31]_i_1_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[1] 
@@ -441,7 +613,7 @@ module design_1_signal_detector_0_4_signal_detector_v1_0_M00_AXIS
         .CE(1'b1),
         .D(\clock_counter_reg[20]_i_1_n_4 ),
         .Q(\clock_counter_reg_n_0_[20] ),
-        .R(clock_counter0_in));
+        .R(\clock_counter[31]_i_1_n_0 ));
   CARRY4 \clock_counter_reg[20]_i_1 
        (.CI(\clock_counter_reg[16]_i_1_n_0 ),
         .CO({\clock_counter_reg[20]_i_1_n_0 ,\clock_counter_reg[20]_i_1_n_1 ,\clock_counter_reg[20]_i_1_n_2 ,\clock_counter_reg[20]_i_1_n_3 }),
@@ -456,7 +628,7 @@ module design_1_signal_detector_0_4_signal_detector_v1_0_M00_AXIS
         .CE(1'b1),
         .D(\clock_counter_reg[24]_i_1_n_7 ),
         .Q(\clock_counter_reg_n_0_[21] ),
-        .R(clock_counter0_in));
+        .R(\clock_counter[31]_i_1_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[22] 
@@ -464,7 +636,7 @@ module design_1_signal_detector_0_4_signal_detector_v1_0_M00_AXIS
         .CE(1'b1),
         .D(\clock_counter_reg[24]_i_1_n_6 ),
         .Q(\clock_counter_reg_n_0_[22] ),
-        .R(clock_counter0_in));
+        .R(\clock_counter[31]_i_1_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[23] 
@@ -472,7 +644,7 @@ module design_1_signal_detector_0_4_signal_detector_v1_0_M00_AXIS
         .CE(1'b1),
         .D(\clock_counter_reg[24]_i_1_n_5 ),
         .Q(\clock_counter_reg_n_0_[23] ),
-        .R(clock_counter0_in));
+        .R(\clock_counter[31]_i_1_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[24] 
@@ -480,7 +652,7 @@ module design_1_signal_detector_0_4_signal_detector_v1_0_M00_AXIS
         .CE(1'b1),
         .D(\clock_counter_reg[24]_i_1_n_4 ),
         .Q(\clock_counter_reg_n_0_[24] ),
-        .R(clock_counter0_in));
+        .R(\clock_counter[31]_i_1_n_0 ));
   CARRY4 \clock_counter_reg[24]_i_1 
        (.CI(\clock_counter_reg[20]_i_1_n_0 ),
         .CO({\clock_counter_reg[24]_i_1_n_0 ,\clock_counter_reg[24]_i_1_n_1 ,\clock_counter_reg[24]_i_1_n_2 ,\clock_counter_reg[24]_i_1_n_3 }),
@@ -495,7 +667,7 @@ module design_1_signal_detector_0_4_signal_detector_v1_0_M00_AXIS
         .CE(1'b1),
         .D(\clock_counter_reg[28]_i_1_n_7 ),
         .Q(\clock_counter_reg_n_0_[25] ),
-        .R(clock_counter0_in));
+        .R(\clock_counter[31]_i_1_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[26] 
@@ -503,7 +675,7 @@ module design_1_signal_detector_0_4_signal_detector_v1_0_M00_AXIS
         .CE(1'b1),
         .D(\clock_counter_reg[28]_i_1_n_6 ),
         .Q(\clock_counter_reg_n_0_[26] ),
-        .R(clock_counter0_in));
+        .R(\clock_counter[31]_i_1_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[27] 
@@ -511,7 +683,7 @@ module design_1_signal_detector_0_4_signal_detector_v1_0_M00_AXIS
         .CE(1'b1),
         .D(\clock_counter_reg[28]_i_1_n_5 ),
         .Q(\clock_counter_reg_n_0_[27] ),
-        .R(clock_counter0_in));
+        .R(\clock_counter[31]_i_1_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[28] 
@@ -519,7 +691,7 @@ module design_1_signal_detector_0_4_signal_detector_v1_0_M00_AXIS
         .CE(1'b1),
         .D(\clock_counter_reg[28]_i_1_n_4 ),
         .Q(\clock_counter_reg_n_0_[28] ),
-        .R(clock_counter0_in));
+        .R(\clock_counter[31]_i_1_n_0 ));
   CARRY4 \clock_counter_reg[28]_i_1 
        (.CI(\clock_counter_reg[24]_i_1_n_0 ),
         .CO({\clock_counter_reg[28]_i_1_n_0 ,\clock_counter_reg[28]_i_1_n_1 ,\clock_counter_reg[28]_i_1_n_2 ,\clock_counter_reg[28]_i_1_n_3 }),
@@ -534,7 +706,7 @@ module design_1_signal_detector_0_4_signal_detector_v1_0_M00_AXIS
         .CE(1'b1),
         .D(\clock_counter_reg[31]_i_2_n_7 ),
         .Q(\clock_counter_reg_n_0_[29] ),
-        .R(clock_counter0_in));
+        .R(\clock_counter[31]_i_1_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[2] 
@@ -542,7 +714,7 @@ module design_1_signal_detector_0_4_signal_detector_v1_0_M00_AXIS
         .CE(1'b1),
         .D(\clock_counter_reg[4]_i_1_n_6 ),
         .Q(\clock_counter_reg_n_0_[2] ),
-        .R(clock_counter0_in));
+        .R(\clock_counter[31]_i_1_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[30] 
@@ -550,7 +722,7 @@ module design_1_signal_detector_0_4_signal_detector_v1_0_M00_AXIS
         .CE(1'b1),
         .D(\clock_counter_reg[31]_i_2_n_6 ),
         .Q(\clock_counter_reg_n_0_[30] ),
-        .R(clock_counter0_in));
+        .R(\clock_counter[31]_i_1_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[31] 
@@ -558,7 +730,7 @@ module design_1_signal_detector_0_4_signal_detector_v1_0_M00_AXIS
         .CE(1'b1),
         .D(\clock_counter_reg[31]_i_2_n_5 ),
         .Q(\clock_counter_reg_n_0_[31] ),
-        .R(clock_counter0_in));
+        .R(\clock_counter[31]_i_1_n_0 ));
   CARRY4 \clock_counter_reg[31]_i_2 
        (.CI(\clock_counter_reg[28]_i_1_n_0 ),
         .CO({\NLW_clock_counter_reg[31]_i_2_CO_UNCONNECTED [3:2],\clock_counter_reg[31]_i_2_n_2 ,\clock_counter_reg[31]_i_2_n_3 }),
@@ -573,7 +745,7 @@ module design_1_signal_detector_0_4_signal_detector_v1_0_M00_AXIS
         .CE(1'b1),
         .D(\clock_counter_reg[4]_i_1_n_5 ),
         .Q(\clock_counter_reg_n_0_[3] ),
-        .R(clock_counter0_in));
+        .R(\clock_counter[31]_i_1_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[4] 
@@ -581,7 +753,7 @@ module design_1_signal_detector_0_4_signal_detector_v1_0_M00_AXIS
         .CE(1'b1),
         .D(\clock_counter_reg[4]_i_1_n_4 ),
         .Q(\clock_counter_reg_n_0_[4] ),
-        .R(clock_counter0_in));
+        .R(\clock_counter[31]_i_1_n_0 ));
   CARRY4 \clock_counter_reg[4]_i_1 
        (.CI(1'b0),
         .CO({\clock_counter_reg[4]_i_1_n_0 ,\clock_counter_reg[4]_i_1_n_1 ,\clock_counter_reg[4]_i_1_n_2 ,\clock_counter_reg[4]_i_1_n_3 }),
@@ -596,7 +768,7 @@ module design_1_signal_detector_0_4_signal_detector_v1_0_M00_AXIS
         .CE(1'b1),
         .D(\clock_counter_reg[8]_i_1_n_7 ),
         .Q(\clock_counter_reg_n_0_[5] ),
-        .R(clock_counter0_in));
+        .R(\clock_counter[31]_i_1_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[6] 
@@ -604,7 +776,7 @@ module design_1_signal_detector_0_4_signal_detector_v1_0_M00_AXIS
         .CE(1'b1),
         .D(\clock_counter_reg[8]_i_1_n_6 ),
         .Q(\clock_counter_reg_n_0_[6] ),
-        .R(clock_counter0_in));
+        .R(\clock_counter[31]_i_1_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[7] 
@@ -612,7 +784,7 @@ module design_1_signal_detector_0_4_signal_detector_v1_0_M00_AXIS
         .CE(1'b1),
         .D(\clock_counter_reg[8]_i_1_n_5 ),
         .Q(\clock_counter_reg_n_0_[7] ),
-        .R(clock_counter0_in));
+        .R(\clock_counter[31]_i_1_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[8] 
@@ -620,7 +792,7 @@ module design_1_signal_detector_0_4_signal_detector_v1_0_M00_AXIS
         .CE(1'b1),
         .D(\clock_counter_reg[8]_i_1_n_4 ),
         .Q(\clock_counter_reg_n_0_[8] ),
-        .R(clock_counter0_in));
+        .R(\clock_counter[31]_i_1_n_0 ));
   CARRY4 \clock_counter_reg[8]_i_1 
        (.CI(\clock_counter_reg[4]_i_1_n_0 ),
         .CO({\clock_counter_reg[8]_i_1_n_0 ,\clock_counter_reg[8]_i_1_n_1 ,\clock_counter_reg[8]_i_1_n_2 ,\clock_counter_reg[8]_i_1_n_3 }),
@@ -635,464 +807,382 @@ module design_1_signal_detector_0_4_signal_detector_v1_0_M00_AXIS
         .CE(1'b1),
         .D(\clock_counter_reg[12]_i_1_n_7 ),
         .Q(\clock_counter_reg_n_0_[9] ),
-        .R(clock_counter0_in));
-  (* SOFT_HLUTNM = "soft_lutpair4" *) 
+        .R(\clock_counter[31]_i_1_n_0 ));
+  LUT2 #(
+    .INIT(4'h7)) 
+    fifo_reset_internal_i_1
+       (.I0(m00_axis_aresetn),
+        .I1(enabled),
+        .O(fifo_reset_internal_i_1_n_0));
+  FDRE #(
+    .INIT(1'b0)) 
+    fifo_reset_internal_reg
+       (.C(m00_axis_aclk),
+        .CE(1'b1),
+        .D(fifo_reset_internal),
+        .Q(fifo_reset),
+        .R(fifo_reset_internal_i_1_n_0));
+  (* SOFT_HLUTNM = "soft_lutpair21" *) 
   LUT1 #(
     .INIT(2'h1)) 
     \init_counter[0]_i_1 
        (.I0(init_counter_reg[0]),
-        .O(plusOp[0]));
-  (* SOFT_HLUTNM = "soft_lutpair4" *) 
+        .O(plusOp__0[0]));
+  (* SOFT_HLUTNM = "soft_lutpair21" *) 
   LUT2 #(
     .INIT(4'h6)) 
     \init_counter[1]_i_1 
        (.I0(init_counter_reg[0]),
         .I1(init_counter_reg[1]),
-        .O(plusOp[1]));
+        .O(plusOp__0[1]));
   (* SOFT_HLUTNM = "soft_lutpair3" *) 
   LUT3 #(
     .INIT(8'h78)) 
     \init_counter[2]_i_1 
-       (.I0(init_counter_reg[0]),
-        .I1(init_counter_reg[1]),
+       (.I0(init_counter_reg[1]),
+        .I1(init_counter_reg[0]),
         .I2(init_counter_reg[2]),
-        .O(\init_counter[2]_i_1_n_0 ));
+        .O(plusOp__0[2]));
   (* SOFT_HLUTNM = "soft_lutpair3" *) 
   LUT4 #(
     .INIT(16'h7F80)) 
     \init_counter[3]_i_1 
-       (.I0(init_counter_reg[1]),
-        .I1(init_counter_reg[0]),
-        .I2(init_counter_reg[2]),
-        .I3(init_counter_reg[3]),
-        .O(plusOp[3]));
-  LUT2 #(
-    .INIT(4'h7)) 
-    \init_counter[4]_i_1 
-       (.I0(m00_axis_aresetn),
-        .I1(enabled),
-        .O(\init_counter[4]_i_1_n_0 ));
-  LUT3 #(
-    .INIT(8'h04)) 
-    \init_counter[4]_i_2 
-       (.I0(mst_exec_state[1]),
-        .I1(mst_exec_state[0]),
-        .I2(\FSM_sequential_mst_exec_state[1]_i_2_n_0 ),
-        .O(init_counter));
-  (* SOFT_HLUTNM = "soft_lutpair0" *) 
-  LUT5 #(
-    .INIT(32'h7FFF8000)) 
-    \init_counter[4]_i_3 
        (.I0(init_counter_reg[2]),
         .I1(init_counter_reg[0]),
         .I2(init_counter_reg[1]),
         .I3(init_counter_reg[3]),
+        .O(plusOp__0[3]));
+  LUT6 #(
+    .INIT(64'h7FFFFFFF00000000)) 
+    \init_counter[4]_i_1 
+       (.I0(init_counter_reg[4]),
+        .I1(init_counter_reg[2]),
+        .I2(init_counter_reg[0]),
+        .I3(init_counter_reg[1]),
+        .I4(init_counter_reg[3]),
+        .I5(\FSM_onehot_mst_exec_state_reg_n_0_[1] ),
+        .O(init_counter));
+  (* SOFT_HLUTNM = "soft_lutpair1" *) 
+  LUT5 #(
+    .INIT(32'h7FFF8000)) 
+    \init_counter[4]_i_2 
+       (.I0(init_counter_reg[3]),
+        .I1(init_counter_reg[1]),
+        .I2(init_counter_reg[0]),
+        .I3(init_counter_reg[2]),
         .I4(init_counter_reg[4]),
-        .O(plusOp[4]));
+        .O(plusOp__0[4]));
   FDRE #(
     .INIT(1'b0)) 
     \init_counter_reg[0] 
        (.C(m00_axis_aclk),
         .CE(init_counter),
-        .D(plusOp[0]),
+        .D(plusOp__0[0]),
         .Q(init_counter_reg[0]),
-        .R(\init_counter[4]_i_1_n_0 ));
+        .R(fifo_reset_internal_i_1_n_0));
   FDRE #(
     .INIT(1'b0)) 
     \init_counter_reg[1] 
        (.C(m00_axis_aclk),
         .CE(init_counter),
-        .D(plusOp[1]),
+        .D(plusOp__0[1]),
         .Q(init_counter_reg[1]),
-        .R(\init_counter[4]_i_1_n_0 ));
+        .R(fifo_reset_internal_i_1_n_0));
   FDRE #(
     .INIT(1'b0)) 
     \init_counter_reg[2] 
        (.C(m00_axis_aclk),
         .CE(init_counter),
-        .D(\init_counter[2]_i_1_n_0 ),
+        .D(plusOp__0[2]),
         .Q(init_counter_reg[2]),
-        .R(\init_counter[4]_i_1_n_0 ));
+        .R(fifo_reset_internal_i_1_n_0));
   FDRE #(
     .INIT(1'b0)) 
     \init_counter_reg[3] 
        (.C(m00_axis_aclk),
         .CE(init_counter),
-        .D(plusOp[3]),
+        .D(plusOp__0[3]),
         .Q(init_counter_reg[3]),
-        .R(\init_counter[4]_i_1_n_0 ));
+        .R(fifo_reset_internal_i_1_n_0));
   FDRE #(
     .INIT(1'b0)) 
     \init_counter_reg[4] 
        (.C(m00_axis_aclk),
         .CE(init_counter),
-        .D(plusOp[4]),
+        .D(plusOp__0[4]),
         .Q(init_counter_reg[4]),
-        .R(\init_counter[4]_i_1_n_0 ));
-  LUT6 #(
-    .INIT(64'h0200000000000000)) 
-    \m00_axis_tdata[0]_INST_0 
-       (.I0(\signal_counter_reg_n_0_[1] ),
-        .I1(\signal_counter_reg_n_0_[0] ),
-        .I2(mst_exec_state[0]),
-        .I3(axis_tvalid_calculated_reg_n_0),
-        .I4(mst_exec_state[1]),
-        .I5(\clock_counter_reg_n_0_[0] ),
-        .O(m00_axis_tdata[0]));
-  LUT6 #(
-    .INIT(64'h0200000000000000)) 
-    \m00_axis_tdata[10]_INST_0 
-       (.I0(\signal_counter_reg_n_0_[1] ),
-        .I1(\signal_counter_reg_n_0_[0] ),
-        .I2(mst_exec_state[0]),
-        .I3(axis_tvalid_calculated_reg_n_0),
-        .I4(mst_exec_state[1]),
-        .I5(\clock_counter_reg_n_0_[10] ),
-        .O(m00_axis_tdata[10]));
-  LUT6 #(
-    .INIT(64'h0200000000000000)) 
-    \m00_axis_tdata[11]_INST_0 
-       (.I0(\signal_counter_reg_n_0_[1] ),
-        .I1(\signal_counter_reg_n_0_[0] ),
-        .I2(mst_exec_state[0]),
-        .I3(axis_tvalid_calculated_reg_n_0),
-        .I4(mst_exec_state[1]),
-        .I5(\clock_counter_reg_n_0_[11] ),
-        .O(m00_axis_tdata[11]));
-  LUT6 #(
-    .INIT(64'h0200000000000000)) 
-    \m00_axis_tdata[12]_INST_0 
-       (.I0(\signal_counter_reg_n_0_[1] ),
-        .I1(\signal_counter_reg_n_0_[0] ),
-        .I2(mst_exec_state[0]),
-        .I3(axis_tvalid_calculated_reg_n_0),
-        .I4(mst_exec_state[1]),
-        .I5(\clock_counter_reg_n_0_[12] ),
-        .O(m00_axis_tdata[12]));
-  LUT6 #(
-    .INIT(64'h0200000000000000)) 
-    \m00_axis_tdata[13]_INST_0 
-       (.I0(\signal_counter_reg_n_0_[1] ),
-        .I1(\signal_counter_reg_n_0_[0] ),
-        .I2(mst_exec_state[0]),
-        .I3(axis_tvalid_calculated_reg_n_0),
-        .I4(mst_exec_state[1]),
-        .I5(\clock_counter_reg_n_0_[13] ),
-        .O(m00_axis_tdata[13]));
-  LUT6 #(
-    .INIT(64'h0200000000000000)) 
-    \m00_axis_tdata[14]_INST_0 
-       (.I0(\signal_counter_reg_n_0_[1] ),
-        .I1(\signal_counter_reg_n_0_[0] ),
-        .I2(mst_exec_state[0]),
-        .I3(axis_tvalid_calculated_reg_n_0),
-        .I4(mst_exec_state[1]),
-        .I5(\clock_counter_reg_n_0_[14] ),
-        .O(m00_axis_tdata[14]));
-  LUT6 #(
-    .INIT(64'h0200000000000000)) 
-    \m00_axis_tdata[15]_INST_0 
-       (.I0(\signal_counter_reg_n_0_[1] ),
-        .I1(\signal_counter_reg_n_0_[0] ),
-        .I2(mst_exec_state[0]),
-        .I3(axis_tvalid_calculated_reg_n_0),
-        .I4(mst_exec_state[1]),
-        .I5(\clock_counter_reg_n_0_[15] ),
-        .O(m00_axis_tdata[15]));
-  LUT6 #(
-    .INIT(64'h0200000000000000)) 
-    \m00_axis_tdata[16]_INST_0 
-       (.I0(\signal_counter_reg_n_0_[1] ),
-        .I1(\signal_counter_reg_n_0_[0] ),
-        .I2(mst_exec_state[0]),
-        .I3(axis_tvalid_calculated_reg_n_0),
-        .I4(mst_exec_state[1]),
-        .I5(\clock_counter_reg_n_0_[16] ),
-        .O(m00_axis_tdata[16]));
-  LUT6 #(
-    .INIT(64'h0200000000000000)) 
-    \m00_axis_tdata[17]_INST_0 
-       (.I0(\signal_counter_reg_n_0_[1] ),
-        .I1(\signal_counter_reg_n_0_[0] ),
-        .I2(mst_exec_state[0]),
-        .I3(axis_tvalid_calculated_reg_n_0),
-        .I4(mst_exec_state[1]),
-        .I5(\clock_counter_reg_n_0_[17] ),
-        .O(m00_axis_tdata[17]));
-  LUT6 #(
-    .INIT(64'h0200000000000000)) 
-    \m00_axis_tdata[18]_INST_0 
-       (.I0(\signal_counter_reg_n_0_[1] ),
-        .I1(\signal_counter_reg_n_0_[0] ),
-        .I2(mst_exec_state[0]),
-        .I3(axis_tvalid_calculated_reg_n_0),
-        .I4(mst_exec_state[1]),
-        .I5(\clock_counter_reg_n_0_[18] ),
-        .O(m00_axis_tdata[18]));
-  LUT6 #(
-    .INIT(64'h0200000000000000)) 
-    \m00_axis_tdata[19]_INST_0 
-       (.I0(\signal_counter_reg_n_0_[1] ),
-        .I1(\signal_counter_reg_n_0_[0] ),
-        .I2(mst_exec_state[0]),
-        .I3(axis_tvalid_calculated_reg_n_0),
-        .I4(mst_exec_state[1]),
-        .I5(\clock_counter_reg_n_0_[19] ),
-        .O(m00_axis_tdata[19]));
-  LUT6 #(
-    .INIT(64'h0200000000000000)) 
-    \m00_axis_tdata[1]_INST_0 
-       (.I0(\signal_counter_reg_n_0_[1] ),
-        .I1(\signal_counter_reg_n_0_[0] ),
-        .I2(mst_exec_state[0]),
-        .I3(axis_tvalid_calculated_reg_n_0),
-        .I4(mst_exec_state[1]),
-        .I5(\clock_counter_reg_n_0_[1] ),
-        .O(m00_axis_tdata[1]));
-  LUT6 #(
-    .INIT(64'h0200000000000000)) 
-    \m00_axis_tdata[20]_INST_0 
-       (.I0(\signal_counter_reg_n_0_[1] ),
-        .I1(\signal_counter_reg_n_0_[0] ),
-        .I2(mst_exec_state[0]),
-        .I3(axis_tvalid_calculated_reg_n_0),
-        .I4(mst_exec_state[1]),
-        .I5(\clock_counter_reg_n_0_[20] ),
-        .O(m00_axis_tdata[20]));
-  LUT6 #(
-    .INIT(64'h0200000000000000)) 
-    \m00_axis_tdata[21]_INST_0 
-       (.I0(\signal_counter_reg_n_0_[1] ),
-        .I1(\signal_counter_reg_n_0_[0] ),
-        .I2(mst_exec_state[0]),
-        .I3(axis_tvalid_calculated_reg_n_0),
-        .I4(mst_exec_state[1]),
-        .I5(\clock_counter_reg_n_0_[21] ),
-        .O(m00_axis_tdata[21]));
-  LUT6 #(
-    .INIT(64'h0200000000000000)) 
-    \m00_axis_tdata[22]_INST_0 
-       (.I0(\signal_counter_reg_n_0_[1] ),
-        .I1(\signal_counter_reg_n_0_[0] ),
-        .I2(mst_exec_state[0]),
-        .I3(axis_tvalid_calculated_reg_n_0),
-        .I4(mst_exec_state[1]),
-        .I5(\clock_counter_reg_n_0_[22] ),
-        .O(m00_axis_tdata[22]));
-  LUT6 #(
-    .INIT(64'h0200000000000000)) 
-    \m00_axis_tdata[23]_INST_0 
-       (.I0(\signal_counter_reg_n_0_[1] ),
-        .I1(\signal_counter_reg_n_0_[0] ),
-        .I2(mst_exec_state[0]),
-        .I3(axis_tvalid_calculated_reg_n_0),
-        .I4(mst_exec_state[1]),
-        .I5(\clock_counter_reg_n_0_[23] ),
-        .O(m00_axis_tdata[23]));
-  LUT6 #(
-    .INIT(64'h0200000000000000)) 
-    \m00_axis_tdata[24]_INST_0 
-       (.I0(\signal_counter_reg_n_0_[1] ),
-        .I1(\signal_counter_reg_n_0_[0] ),
-        .I2(mst_exec_state[0]),
-        .I3(axis_tvalid_calculated_reg_n_0),
-        .I4(mst_exec_state[1]),
-        .I5(\clock_counter_reg_n_0_[24] ),
-        .O(m00_axis_tdata[24]));
-  LUT6 #(
-    .INIT(64'h0200000000000000)) 
-    \m00_axis_tdata[25]_INST_0 
-       (.I0(\signal_counter_reg_n_0_[1] ),
-        .I1(\signal_counter_reg_n_0_[0] ),
-        .I2(mst_exec_state[0]),
-        .I3(axis_tvalid_calculated_reg_n_0),
-        .I4(mst_exec_state[1]),
-        .I5(\clock_counter_reg_n_0_[25] ),
-        .O(m00_axis_tdata[25]));
-  LUT6 #(
-    .INIT(64'h0200000000000000)) 
-    \m00_axis_tdata[26]_INST_0 
-       (.I0(\signal_counter_reg_n_0_[1] ),
-        .I1(\signal_counter_reg_n_0_[0] ),
-        .I2(mst_exec_state[0]),
-        .I3(axis_tvalid_calculated_reg_n_0),
-        .I4(mst_exec_state[1]),
-        .I5(\clock_counter_reg_n_0_[26] ),
-        .O(m00_axis_tdata[26]));
-  LUT6 #(
-    .INIT(64'h0200000000000000)) 
-    \m00_axis_tdata[27]_INST_0 
-       (.I0(\signal_counter_reg_n_0_[1] ),
-        .I1(\signal_counter_reg_n_0_[0] ),
-        .I2(mst_exec_state[0]),
-        .I3(axis_tvalid_calculated_reg_n_0),
-        .I4(mst_exec_state[1]),
-        .I5(\clock_counter_reg_n_0_[27] ),
-        .O(m00_axis_tdata[27]));
-  LUT6 #(
-    .INIT(64'h0200000000000000)) 
-    \m00_axis_tdata[28]_INST_0 
-       (.I0(\signal_counter_reg_n_0_[1] ),
-        .I1(\signal_counter_reg_n_0_[0] ),
-        .I2(mst_exec_state[0]),
-        .I3(axis_tvalid_calculated_reg_n_0),
-        .I4(mst_exec_state[1]),
-        .I5(\clock_counter_reg_n_0_[28] ),
-        .O(m00_axis_tdata[28]));
-  LUT6 #(
-    .INIT(64'h0200000000000000)) 
-    \m00_axis_tdata[29]_INST_0 
-       (.I0(\signal_counter_reg_n_0_[1] ),
-        .I1(\signal_counter_reg_n_0_[0] ),
-        .I2(mst_exec_state[0]),
-        .I3(axis_tvalid_calculated_reg_n_0),
-        .I4(mst_exec_state[1]),
-        .I5(\clock_counter_reg_n_0_[29] ),
-        .O(m00_axis_tdata[29]));
-  LUT6 #(
-    .INIT(64'h0200000000000000)) 
-    \m00_axis_tdata[2]_INST_0 
-       (.I0(\signal_counter_reg_n_0_[1] ),
-        .I1(\signal_counter_reg_n_0_[0] ),
-        .I2(mst_exec_state[0]),
-        .I3(axis_tvalid_calculated_reg_n_0),
-        .I4(mst_exec_state[1]),
-        .I5(\clock_counter_reg_n_0_[2] ),
-        .O(m00_axis_tdata[2]));
-  LUT6 #(
-    .INIT(64'h0200000000000000)) 
-    \m00_axis_tdata[30]_INST_0 
-       (.I0(\signal_counter_reg_n_0_[1] ),
-        .I1(\signal_counter_reg_n_0_[0] ),
-        .I2(mst_exec_state[0]),
-        .I3(axis_tvalid_calculated_reg_n_0),
-        .I4(mst_exec_state[1]),
-        .I5(\clock_counter_reg_n_0_[30] ),
-        .O(m00_axis_tdata[30]));
-  LUT6 #(
-    .INIT(64'h0200000000000000)) 
-    \m00_axis_tdata[31]_INST_0 
-       (.I0(\signal_counter_reg_n_0_[1] ),
-        .I1(\signal_counter_reg_n_0_[0] ),
-        .I2(mst_exec_state[0]),
-        .I3(axis_tvalid_calculated_reg_n_0),
-        .I4(mst_exec_state[1]),
-        .I5(\clock_counter_reg_n_0_[31] ),
-        .O(m00_axis_tdata[31]));
-  LUT6 #(
-    .INIT(64'h0200000000000000)) 
-    \m00_axis_tdata[3]_INST_0 
-       (.I0(\signal_counter_reg_n_0_[1] ),
-        .I1(\signal_counter_reg_n_0_[0] ),
-        .I2(mst_exec_state[0]),
-        .I3(axis_tvalid_calculated_reg_n_0),
-        .I4(mst_exec_state[1]),
-        .I5(\clock_counter_reg_n_0_[3] ),
-        .O(m00_axis_tdata[3]));
-  LUT6 #(
-    .INIT(64'h0200000000000000)) 
-    \m00_axis_tdata[4]_INST_0 
-       (.I0(\signal_counter_reg_n_0_[1] ),
-        .I1(\signal_counter_reg_n_0_[0] ),
-        .I2(mst_exec_state[0]),
-        .I3(axis_tvalid_calculated_reg_n_0),
-        .I4(mst_exec_state[1]),
-        .I5(\clock_counter_reg_n_0_[4] ),
-        .O(m00_axis_tdata[4]));
-  LUT6 #(
-    .INIT(64'h0200000000000000)) 
-    \m00_axis_tdata[5]_INST_0 
-       (.I0(\signal_counter_reg_n_0_[1] ),
-        .I1(\signal_counter_reg_n_0_[0] ),
-        .I2(mst_exec_state[0]),
-        .I3(axis_tvalid_calculated_reg_n_0),
-        .I4(mst_exec_state[1]),
-        .I5(\clock_counter_reg_n_0_[5] ),
-        .O(m00_axis_tdata[5]));
-  LUT6 #(
-    .INIT(64'h0200000000000000)) 
-    \m00_axis_tdata[6]_INST_0 
-       (.I0(\signal_counter_reg_n_0_[1] ),
-        .I1(\signal_counter_reg_n_0_[0] ),
-        .I2(mst_exec_state[0]),
-        .I3(axis_tvalid_calculated_reg_n_0),
-        .I4(mst_exec_state[1]),
-        .I5(\clock_counter_reg_n_0_[6] ),
-        .O(m00_axis_tdata[6]));
-  LUT6 #(
-    .INIT(64'h0200000000000000)) 
-    \m00_axis_tdata[7]_INST_0 
-       (.I0(\signal_counter_reg_n_0_[1] ),
-        .I1(\signal_counter_reg_n_0_[0] ),
-        .I2(mst_exec_state[0]),
-        .I3(axis_tvalid_calculated_reg_n_0),
-        .I4(mst_exec_state[1]),
-        .I5(\clock_counter_reg_n_0_[7] ),
-        .O(m00_axis_tdata[7]));
-  LUT6 #(
-    .INIT(64'h0200000000000000)) 
-    \m00_axis_tdata[8]_INST_0 
-       (.I0(\signal_counter_reg_n_0_[1] ),
-        .I1(\signal_counter_reg_n_0_[0] ),
-        .I2(mst_exec_state[0]),
-        .I3(axis_tvalid_calculated_reg_n_0),
-        .I4(mst_exec_state[1]),
-        .I5(\clock_counter_reg_n_0_[8] ),
-        .O(m00_axis_tdata[8]));
-  LUT6 #(
-    .INIT(64'h0200000000000000)) 
-    \m00_axis_tdata[9]_INST_0 
-       (.I0(\signal_counter_reg_n_0_[1] ),
-        .I1(\signal_counter_reg_n_0_[0] ),
-        .I2(mst_exec_state[0]),
-        .I3(axis_tvalid_calculated_reg_n_0),
-        .I4(mst_exec_state[1]),
-        .I5(\clock_counter_reg_n_0_[9] ),
-        .O(m00_axis_tdata[9]));
-  (* SOFT_HLUTNM = "soft_lutpair2" *) 
+        .R(fifo_reset_internal_i_1_n_0));
+  (* SOFT_HLUTNM = "soft_lutpair20" *) 
   LUT3 #(
-    .INIT(8'h40)) 
+    .INIT(8'h80)) 
+    \m00_axis_tdata[0]_INST_0 
+       (.I0(axis_tvalid_calculated_reg_n_0),
+        .I1(fifo_reset_internal),
+        .I2(\clock_counter_reg_n_0_[0] ),
+        .O(m00_axis_tdata[0]));
+  (* SOFT_HLUTNM = "soft_lutpair15" *) 
+  LUT3 #(
+    .INIT(8'h80)) 
+    \m00_axis_tdata[10]_INST_0 
+       (.I0(axis_tvalid_calculated_reg_n_0),
+        .I1(fifo_reset_internal),
+        .I2(\clock_counter_reg_n_0_[10] ),
+        .O(m00_axis_tdata[10]));
+  (* SOFT_HLUTNM = "soft_lutpair14" *) 
+  LUT3 #(
+    .INIT(8'h80)) 
+    \m00_axis_tdata[11]_INST_0 
+       (.I0(axis_tvalid_calculated_reg_n_0),
+        .I1(fifo_reset_internal),
+        .I2(\clock_counter_reg_n_0_[11] ),
+        .O(m00_axis_tdata[11]));
+  (* SOFT_HLUTNM = "soft_lutpair14" *) 
+  LUT3 #(
+    .INIT(8'h80)) 
+    \m00_axis_tdata[12]_INST_0 
+       (.I0(axis_tvalid_calculated_reg_n_0),
+        .I1(fifo_reset_internal),
+        .I2(\clock_counter_reg_n_0_[12] ),
+        .O(m00_axis_tdata[12]));
+  (* SOFT_HLUTNM = "soft_lutpair13" *) 
+  LUT3 #(
+    .INIT(8'h80)) 
+    \m00_axis_tdata[13]_INST_0 
+       (.I0(axis_tvalid_calculated_reg_n_0),
+        .I1(fifo_reset_internal),
+        .I2(\clock_counter_reg_n_0_[13] ),
+        .O(m00_axis_tdata[13]));
+  (* SOFT_HLUTNM = "soft_lutpair13" *) 
+  LUT3 #(
+    .INIT(8'h80)) 
+    \m00_axis_tdata[14]_INST_0 
+       (.I0(axis_tvalid_calculated_reg_n_0),
+        .I1(fifo_reset_internal),
+        .I2(\clock_counter_reg_n_0_[14] ),
+        .O(m00_axis_tdata[14]));
+  (* SOFT_HLUTNM = "soft_lutpair12" *) 
+  LUT3 #(
+    .INIT(8'h80)) 
+    \m00_axis_tdata[15]_INST_0 
+       (.I0(axis_tvalid_calculated_reg_n_0),
+        .I1(fifo_reset_internal),
+        .I2(\clock_counter_reg_n_0_[15] ),
+        .O(m00_axis_tdata[15]));
+  (* SOFT_HLUTNM = "soft_lutpair12" *) 
+  LUT3 #(
+    .INIT(8'h80)) 
+    \m00_axis_tdata[16]_INST_0 
+       (.I0(axis_tvalid_calculated_reg_n_0),
+        .I1(fifo_reset_internal),
+        .I2(\clock_counter_reg_n_0_[16] ),
+        .O(m00_axis_tdata[16]));
+  (* SOFT_HLUTNM = "soft_lutpair11" *) 
+  LUT3 #(
+    .INIT(8'h80)) 
+    \m00_axis_tdata[17]_INST_0 
+       (.I0(axis_tvalid_calculated_reg_n_0),
+        .I1(fifo_reset_internal),
+        .I2(\clock_counter_reg_n_0_[17] ),
+        .O(m00_axis_tdata[17]));
+  (* SOFT_HLUTNM = "soft_lutpair11" *) 
+  LUT3 #(
+    .INIT(8'h80)) 
+    \m00_axis_tdata[18]_INST_0 
+       (.I0(axis_tvalid_calculated_reg_n_0),
+        .I1(fifo_reset_internal),
+        .I2(\clock_counter_reg_n_0_[18] ),
+        .O(m00_axis_tdata[18]));
+  (* SOFT_HLUTNM = "soft_lutpair10" *) 
+  LUT3 #(
+    .INIT(8'h80)) 
+    \m00_axis_tdata[19]_INST_0 
+       (.I0(axis_tvalid_calculated_reg_n_0),
+        .I1(fifo_reset_internal),
+        .I2(\clock_counter_reg_n_0_[19] ),
+        .O(m00_axis_tdata[19]));
+  (* SOFT_HLUTNM = "soft_lutpair19" *) 
+  LUT3 #(
+    .INIT(8'h80)) 
+    \m00_axis_tdata[1]_INST_0 
+       (.I0(axis_tvalid_calculated_reg_n_0),
+        .I1(fifo_reset_internal),
+        .I2(\clock_counter_reg_n_0_[1] ),
+        .O(m00_axis_tdata[1]));
+  (* SOFT_HLUTNM = "soft_lutpair10" *) 
+  LUT3 #(
+    .INIT(8'h80)) 
+    \m00_axis_tdata[20]_INST_0 
+       (.I0(axis_tvalid_calculated_reg_n_0),
+        .I1(fifo_reset_internal),
+        .I2(\clock_counter_reg_n_0_[20] ),
+        .O(m00_axis_tdata[20]));
+  (* SOFT_HLUTNM = "soft_lutpair9" *) 
+  LUT3 #(
+    .INIT(8'h80)) 
+    \m00_axis_tdata[21]_INST_0 
+       (.I0(axis_tvalid_calculated_reg_n_0),
+        .I1(fifo_reset_internal),
+        .I2(\clock_counter_reg_n_0_[21] ),
+        .O(m00_axis_tdata[21]));
+  (* SOFT_HLUTNM = "soft_lutpair9" *) 
+  LUT3 #(
+    .INIT(8'h80)) 
+    \m00_axis_tdata[22]_INST_0 
+       (.I0(axis_tvalid_calculated_reg_n_0),
+        .I1(fifo_reset_internal),
+        .I2(\clock_counter_reg_n_0_[22] ),
+        .O(m00_axis_tdata[22]));
+  (* SOFT_HLUTNM = "soft_lutpair8" *) 
+  LUT3 #(
+    .INIT(8'h80)) 
+    \m00_axis_tdata[23]_INST_0 
+       (.I0(axis_tvalid_calculated_reg_n_0),
+        .I1(fifo_reset_internal),
+        .I2(\clock_counter_reg_n_0_[23] ),
+        .O(m00_axis_tdata[23]));
+  (* SOFT_HLUTNM = "soft_lutpair8" *) 
+  LUT3 #(
+    .INIT(8'h80)) 
+    \m00_axis_tdata[24]_INST_0 
+       (.I0(axis_tvalid_calculated_reg_n_0),
+        .I1(fifo_reset_internal),
+        .I2(\clock_counter_reg_n_0_[24] ),
+        .O(m00_axis_tdata[24]));
+  (* SOFT_HLUTNM = "soft_lutpair7" *) 
+  LUT3 #(
+    .INIT(8'h80)) 
+    \m00_axis_tdata[25]_INST_0 
+       (.I0(axis_tvalid_calculated_reg_n_0),
+        .I1(fifo_reset_internal),
+        .I2(\clock_counter_reg_n_0_[25] ),
+        .O(m00_axis_tdata[25]));
+  (* SOFT_HLUTNM = "soft_lutpair7" *) 
+  LUT3 #(
+    .INIT(8'h80)) 
+    \m00_axis_tdata[26]_INST_0 
+       (.I0(axis_tvalid_calculated_reg_n_0),
+        .I1(fifo_reset_internal),
+        .I2(\clock_counter_reg_n_0_[26] ),
+        .O(m00_axis_tdata[26]));
+  (* SOFT_HLUTNM = "soft_lutpair6" *) 
+  LUT3 #(
+    .INIT(8'h80)) 
+    \m00_axis_tdata[27]_INST_0 
+       (.I0(axis_tvalid_calculated_reg_n_0),
+        .I1(fifo_reset_internal),
+        .I2(\clock_counter_reg_n_0_[27] ),
+        .O(m00_axis_tdata[27]));
+  (* SOFT_HLUTNM = "soft_lutpair6" *) 
+  LUT3 #(
+    .INIT(8'h80)) 
+    \m00_axis_tdata[28]_INST_0 
+       (.I0(axis_tvalid_calculated_reg_n_0),
+        .I1(fifo_reset_internal),
+        .I2(\clock_counter_reg_n_0_[28] ),
+        .O(m00_axis_tdata[28]));
+  (* SOFT_HLUTNM = "soft_lutpair5" *) 
+  LUT3 #(
+    .INIT(8'h80)) 
+    \m00_axis_tdata[29]_INST_0 
+       (.I0(axis_tvalid_calculated_reg_n_0),
+        .I1(fifo_reset_internal),
+        .I2(\clock_counter_reg_n_0_[29] ),
+        .O(m00_axis_tdata[29]));
+  (* SOFT_HLUTNM = "soft_lutpair19" *) 
+  LUT3 #(
+    .INIT(8'h80)) 
+    \m00_axis_tdata[2]_INST_0 
+       (.I0(axis_tvalid_calculated_reg_n_0),
+        .I1(fifo_reset_internal),
+        .I2(\clock_counter_reg_n_0_[2] ),
+        .O(m00_axis_tdata[2]));
+  (* SOFT_HLUTNM = "soft_lutpair4" *) 
+  LUT3 #(
+    .INIT(8'h80)) 
+    \m00_axis_tdata[30]_INST_0 
+       (.I0(axis_tvalid_calculated_reg_n_0),
+        .I1(fifo_reset_internal),
+        .I2(\clock_counter_reg_n_0_[30] ),
+        .O(m00_axis_tdata[30]));
+  (* SOFT_HLUTNM = "soft_lutpair5" *) 
+  LUT3 #(
+    .INIT(8'h80)) 
+    \m00_axis_tdata[31]_INST_0 
+       (.I0(axis_tvalid_calculated_reg_n_0),
+        .I1(fifo_reset_internal),
+        .I2(\clock_counter_reg_n_0_[31] ),
+        .O(m00_axis_tdata[31]));
+  (* SOFT_HLUTNM = "soft_lutpair18" *) 
+  LUT3 #(
+    .INIT(8'h80)) 
+    \m00_axis_tdata[3]_INST_0 
+       (.I0(axis_tvalid_calculated_reg_n_0),
+        .I1(fifo_reset_internal),
+        .I2(\clock_counter_reg_n_0_[3] ),
+        .O(m00_axis_tdata[3]));
+  (* SOFT_HLUTNM = "soft_lutpair18" *) 
+  LUT3 #(
+    .INIT(8'h80)) 
+    \m00_axis_tdata[4]_INST_0 
+       (.I0(axis_tvalid_calculated_reg_n_0),
+        .I1(fifo_reset_internal),
+        .I2(\clock_counter_reg_n_0_[4] ),
+        .O(m00_axis_tdata[4]));
+  (* SOFT_HLUTNM = "soft_lutpair17" *) 
+  LUT3 #(
+    .INIT(8'h80)) 
+    \m00_axis_tdata[5]_INST_0 
+       (.I0(axis_tvalid_calculated_reg_n_0),
+        .I1(fifo_reset_internal),
+        .I2(\clock_counter_reg_n_0_[5] ),
+        .O(m00_axis_tdata[5]));
+  (* SOFT_HLUTNM = "soft_lutpair17" *) 
+  LUT3 #(
+    .INIT(8'h80)) 
+    \m00_axis_tdata[6]_INST_0 
+       (.I0(axis_tvalid_calculated_reg_n_0),
+        .I1(fifo_reset_internal),
+        .I2(\clock_counter_reg_n_0_[6] ),
+        .O(m00_axis_tdata[6]));
+  (* SOFT_HLUTNM = "soft_lutpair16" *) 
+  LUT3 #(
+    .INIT(8'h80)) 
+    \m00_axis_tdata[7]_INST_0 
+       (.I0(axis_tvalid_calculated_reg_n_0),
+        .I1(fifo_reset_internal),
+        .I2(\clock_counter_reg_n_0_[7] ),
+        .O(m00_axis_tdata[7]));
+  (* SOFT_HLUTNM = "soft_lutpair16" *) 
+  LUT3 #(
+    .INIT(8'h80)) 
+    \m00_axis_tdata[8]_INST_0 
+       (.I0(axis_tvalid_calculated_reg_n_0),
+        .I1(fifo_reset_internal),
+        .I2(\clock_counter_reg_n_0_[8] ),
+        .O(m00_axis_tdata[8]));
+  (* SOFT_HLUTNM = "soft_lutpair15" *) 
+  LUT3 #(
+    .INIT(8'h80)) 
+    \m00_axis_tdata[9]_INST_0 
+       (.I0(axis_tvalid_calculated_reg_n_0),
+        .I1(fifo_reset_internal),
+        .I2(\clock_counter_reg_n_0_[9] ),
+        .O(m00_axis_tdata[9]));
+  (* SOFT_HLUTNM = "soft_lutpair4" *) 
+  LUT3 #(
+    .INIT(8'h80)) 
     m00_axis_tlast_INST_0
-       (.I0(mst_exec_state[0]),
+       (.I0(axis_tvalid_calculated_reg_n_0),
+        .I1(fifo_reset_internal),
+        .I2(axis_tlast1),
+        .O(m00_axis_tlast));
+  (* SOFT_HLUTNM = "soft_lutpair2" *) 
+  LUT2 #(
+    .INIT(4'h8)) 
+    m00_axis_tvalid_INST_0
+       (.I0(fifo_reset_internal),
         .I1(axis_tvalid_calculated_reg_n_0),
-        .I2(mst_exec_state[1]),
         .O(m00_axis_tvalid));
-  LUT6 #(
-    .INIT(64'h00000000AAA60000)) 
-    \signal_counter[0]_i_1 
-       (.I0(\signal_counter_reg_n_0_[0] ),
-        .I1(signal_input),
-        .I2(signal_input_previous),
-        .I3(\signal_counter_reg_n_0_[1] ),
-        .I4(mst_exec_state[1]),
-        .I5(mst_exec_state[0]),
-        .O(\signal_counter[0]_i_1_n_0 ));
-  LUT6 #(
-    .INIT(64'h00000000BAAA0000)) 
-    \signal_counter[1]_i_1 
-       (.I0(\signal_counter_reg_n_0_[1] ),
-        .I1(signal_input_previous),
-        .I2(signal_input),
-        .I3(\signal_counter_reg_n_0_[0] ),
-        .I4(mst_exec_state[1]),
-        .I5(mst_exec_state[0]),
-        .O(\signal_counter[1]_i_1_n_0 ));
-  FDRE #(
-    .INIT(1'b0)) 
-    \signal_counter_reg[0] 
-       (.C(m00_axis_aclk),
-        .CE(1'b1),
-        .D(\signal_counter[0]_i_1_n_0 ),
-        .Q(\signal_counter_reg_n_0_[0] ),
-        .R(1'b0));
-  FDRE #(
-    .INIT(1'b0)) 
-    \signal_counter_reg[1] 
-       (.C(m00_axis_aclk),
-        .CE(1'b1),
-        .D(\signal_counter[1]_i_1_n_0 ),
-        .Q(\signal_counter_reg_n_0_[1] ),
-        .R(1'b0));
   FDRE #(
     .INIT(1'b0)) 
     signal_input_previous_reg
@@ -1101,12 +1191,337 @@ module design_1_signal_detector_0_4_signal_detector_v1_0_M00_AXIS
         .D(signal_input),
         .Q(signal_input_previous),
         .R(1'b0));
+  (* SOFT_HLUTNM = "soft_lutpair2" *) 
+  LUT4 #(
+    .INIT(16'h0400)) 
+    signal_state_INST_0
+       (.I0(axis_tvalid_calculated_reg_n_0),
+        .I1(m00_axis_tready),
+        .I2(signal_input),
+        .I3(enabled),
+        .O(signal_state));
+  CARRY4 tlast_counter1_carry
+       (.CI(1'b0),
+        .CO({tlast_counter1_carry_n_0,tlast_counter1_carry_n_1,tlast_counter1_carry_n_2,tlast_counter1_carry_n_3}),
+        .CYINIT(1'b0),
+        .DI({tlast_counter1_carry_i_1_n_0,tlast_counter1_carry_i_2_n_0,tlast_counter1_carry_i_3_n_0,tlast_counter1_carry_i_4_n_0}),
+        .O(NLW_tlast_counter1_carry_O_UNCONNECTED[3:0]),
+        .S({tlast_counter1_carry_i_5_n_0,tlast_counter1_carry_i_6_n_0,tlast_counter1_carry_i_7_n_0,tlast_counter1_carry_i_8_n_0}));
+  CARRY4 tlast_counter1_carry__0
+       (.CI(tlast_counter1_carry_n_0),
+        .CO({tlast_counter1_carry__0_n_0,tlast_counter1_carry__0_n_1,tlast_counter1_carry__0_n_2,tlast_counter1_carry__0_n_3}),
+        .CYINIT(1'b0),
+        .DI({tlast_counter1_carry__0_i_1_n_0,tlast_counter1_carry__0_i_2_n_0,tlast_counter1_carry__0_i_3_n_0,tlast_counter1_carry__0_i_4_n_0}),
+        .O(NLW_tlast_counter1_carry__0_O_UNCONNECTED[3:0]),
+        .S({tlast_counter1_carry__0_i_5_n_0,tlast_counter1_carry__0_i_6_n_0,tlast_counter1_carry__0_i_7_n_0,tlast_counter1_carry__0_i_8_n_0}));
+  LUT4 #(
+    .INIT(16'h22B2)) 
+    tlast_counter1_carry__0_i_1
+       (.I0(number_words[15]),
+        .I1(tlast_counter[15]),
+        .I2(number_words[14]),
+        .I3(tlast_counter[14]),
+        .O(tlast_counter1_carry__0_i_1_n_0));
+  LUT4 #(
+    .INIT(16'h22B2)) 
+    tlast_counter1_carry__0_i_2
+       (.I0(number_words[13]),
+        .I1(tlast_counter[13]),
+        .I2(number_words[12]),
+        .I3(tlast_counter[12]),
+        .O(tlast_counter1_carry__0_i_2_n_0));
+  LUT4 #(
+    .INIT(16'h22B2)) 
+    tlast_counter1_carry__0_i_3
+       (.I0(number_words[11]),
+        .I1(tlast_counter[11]),
+        .I2(number_words[10]),
+        .I3(tlast_counter[10]),
+        .O(tlast_counter1_carry__0_i_3_n_0));
+  LUT4 #(
+    .INIT(16'h22B2)) 
+    tlast_counter1_carry__0_i_4
+       (.I0(number_words[9]),
+        .I1(tlast_counter[9]),
+        .I2(number_words[8]),
+        .I3(tlast_counter[8]),
+        .O(tlast_counter1_carry__0_i_4_n_0));
+  LUT4 #(
+    .INIT(16'h9009)) 
+    tlast_counter1_carry__0_i_5
+       (.I0(tlast_counter[14]),
+        .I1(number_words[14]),
+        .I2(tlast_counter[15]),
+        .I3(number_words[15]),
+        .O(tlast_counter1_carry__0_i_5_n_0));
+  LUT4 #(
+    .INIT(16'h9009)) 
+    tlast_counter1_carry__0_i_6
+       (.I0(number_words[12]),
+        .I1(tlast_counter[12]),
+        .I2(number_words[13]),
+        .I3(tlast_counter[13]),
+        .O(tlast_counter1_carry__0_i_6_n_0));
+  LUT4 #(
+    .INIT(16'h9009)) 
+    tlast_counter1_carry__0_i_7
+       (.I0(number_words[10]),
+        .I1(tlast_counter[10]),
+        .I2(number_words[11]),
+        .I3(tlast_counter[11]),
+        .O(tlast_counter1_carry__0_i_7_n_0));
+  LUT4 #(
+    .INIT(16'h9009)) 
+    tlast_counter1_carry__0_i_8
+       (.I0(number_words[9]),
+        .I1(tlast_counter[9]),
+        .I2(number_words[8]),
+        .I3(tlast_counter[8]),
+        .O(tlast_counter1_carry__0_i_8_n_0));
+  LUT4 #(
+    .INIT(16'h22B2)) 
+    tlast_counter1_carry_i_1
+       (.I0(number_words[7]),
+        .I1(tlast_counter[7]),
+        .I2(number_words[6]),
+        .I3(tlast_counter[6]),
+        .O(tlast_counter1_carry_i_1_n_0));
+  LUT4 #(
+    .INIT(16'h22B2)) 
+    tlast_counter1_carry_i_2
+       (.I0(number_words[5]),
+        .I1(tlast_counter[5]),
+        .I2(number_words[4]),
+        .I3(tlast_counter[4]),
+        .O(tlast_counter1_carry_i_2_n_0));
+  LUT4 #(
+    .INIT(16'h22B2)) 
+    tlast_counter1_carry_i_3
+       (.I0(number_words[3]),
+        .I1(tlast_counter[3]),
+        .I2(number_words[2]),
+        .I3(tlast_counter[2]),
+        .O(tlast_counter1_carry_i_3_n_0));
+  LUT4 #(
+    .INIT(16'h22B2)) 
+    tlast_counter1_carry_i_4
+       (.I0(number_words[1]),
+        .I1(tlast_counter[1]),
+        .I2(number_words[0]),
+        .I3(tlast_counter[0]),
+        .O(tlast_counter1_carry_i_4_n_0));
+  LUT4 #(
+    .INIT(16'h9009)) 
+    tlast_counter1_carry_i_5
+       (.I0(number_words[6]),
+        .I1(tlast_counter[6]),
+        .I2(number_words[7]),
+        .I3(tlast_counter[7]),
+        .O(tlast_counter1_carry_i_5_n_0));
+  LUT4 #(
+    .INIT(16'h9009)) 
+    tlast_counter1_carry_i_6
+       (.I0(number_words[4]),
+        .I1(tlast_counter[4]),
+        .I2(number_words[5]),
+        .I3(tlast_counter[5]),
+        .O(tlast_counter1_carry_i_6_n_0));
+  LUT4 #(
+    .INIT(16'h9009)) 
+    tlast_counter1_carry_i_7
+       (.I0(number_words[3]),
+        .I1(tlast_counter[3]),
+        .I2(number_words[2]),
+        .I3(tlast_counter[2]),
+        .O(tlast_counter1_carry_i_7_n_0));
+  LUT4 #(
+    .INIT(16'h9009)) 
+    tlast_counter1_carry_i_8
+       (.I0(number_words[0]),
+        .I1(tlast_counter[0]),
+        .I2(number_words[1]),
+        .I3(tlast_counter[1]),
+        .O(tlast_counter1_carry_i_8_n_0));
+  (* SOFT_HLUTNM = "soft_lutpair0" *) 
+  LUT5 #(
+    .INIT(32'hC0C070C0)) 
+    \tlast_counter[0]_i_1 
+       (.I0(tlast_counter1_carry__0_n_0),
+        .I1(tlast_counter[0]),
+        .I2(fifo_reset_internal),
+        .I3(signal_input),
+        .I4(signal_input_previous),
+        .O(\tlast_counter[0]_i_1_n_0 ));
+  LUT4 #(
+    .INIT(16'h04FF)) 
+    \tlast_counter[15]_i_1 
+       (.I0(tlast_counter1_carry__0_n_0),
+        .I1(signal_input),
+        .I2(signal_input_previous),
+        .I3(fifo_reset_internal),
+        .O(tlast_counter_0));
   LUT2 #(
     .INIT(4'h2)) 
-    signal_state_INST_0
-       (.I0(enabled),
-        .I1(axis_tvalid_calculated_reg_n_0),
-        .O(signal_state));
+    \tlast_counter[15]_i_2 
+       (.I0(signal_input),
+        .I1(signal_input_previous),
+        .O(axis_tvalid_calculated0));
+  FDRE #(
+    .INIT(1'b0)) 
+    \tlast_counter_reg[0] 
+       (.C(m00_axis_aclk),
+        .CE(1'b1),
+        .D(\tlast_counter[0]_i_1_n_0 ),
+        .Q(tlast_counter[0]),
+        .R(1'b0));
+  FDRE #(
+    .INIT(1'b0)) 
+    \tlast_counter_reg[10] 
+       (.C(m00_axis_aclk),
+        .CE(axis_tvalid_calculated0),
+        .D(plusOp[10]),
+        .Q(tlast_counter[10]),
+        .R(tlast_counter_0));
+  FDRE #(
+    .INIT(1'b0)) 
+    \tlast_counter_reg[11] 
+       (.C(m00_axis_aclk),
+        .CE(axis_tvalid_calculated0),
+        .D(plusOp[11]),
+        .Q(tlast_counter[11]),
+        .R(tlast_counter_0));
+  FDRE #(
+    .INIT(1'b0)) 
+    \tlast_counter_reg[12] 
+       (.C(m00_axis_aclk),
+        .CE(axis_tvalid_calculated0),
+        .D(plusOp[12]),
+        .Q(tlast_counter[12]),
+        .R(tlast_counter_0));
+  CARRY4 \tlast_counter_reg[12]_i_1 
+       (.CI(\tlast_counter_reg[8]_i_1_n_0 ),
+        .CO({\tlast_counter_reg[12]_i_1_n_0 ,\tlast_counter_reg[12]_i_1_n_1 ,\tlast_counter_reg[12]_i_1_n_2 ,\tlast_counter_reg[12]_i_1_n_3 }),
+        .CYINIT(1'b0),
+        .DI({1'b0,1'b0,1'b0,1'b0}),
+        .O(plusOp[12:9]),
+        .S(tlast_counter[12:9]));
+  FDRE #(
+    .INIT(1'b0)) 
+    \tlast_counter_reg[13] 
+       (.C(m00_axis_aclk),
+        .CE(axis_tvalid_calculated0),
+        .D(plusOp[13]),
+        .Q(tlast_counter[13]),
+        .R(tlast_counter_0));
+  FDRE #(
+    .INIT(1'b0)) 
+    \tlast_counter_reg[14] 
+       (.C(m00_axis_aclk),
+        .CE(axis_tvalid_calculated0),
+        .D(plusOp[14]),
+        .Q(tlast_counter[14]),
+        .R(tlast_counter_0));
+  FDRE #(
+    .INIT(1'b0)) 
+    \tlast_counter_reg[15] 
+       (.C(m00_axis_aclk),
+        .CE(axis_tvalid_calculated0),
+        .D(plusOp[15]),
+        .Q(tlast_counter[15]),
+        .R(tlast_counter_0));
+  CARRY4 \tlast_counter_reg[15]_i_3 
+       (.CI(\tlast_counter_reg[12]_i_1_n_0 ),
+        .CO({\NLW_tlast_counter_reg[15]_i_3_CO_UNCONNECTED [3:2],\tlast_counter_reg[15]_i_3_n_2 ,\tlast_counter_reg[15]_i_3_n_3 }),
+        .CYINIT(1'b0),
+        .DI({1'b0,1'b0,1'b0,1'b0}),
+        .O({\NLW_tlast_counter_reg[15]_i_3_O_UNCONNECTED [3],plusOp[15:13]}),
+        .S({1'b0,tlast_counter[15:13]}));
+  FDRE #(
+    .INIT(1'b0)) 
+    \tlast_counter_reg[1] 
+       (.C(m00_axis_aclk),
+        .CE(axis_tvalid_calculated0),
+        .D(plusOp[1]),
+        .Q(tlast_counter[1]),
+        .R(tlast_counter_0));
+  FDRE #(
+    .INIT(1'b0)) 
+    \tlast_counter_reg[2] 
+       (.C(m00_axis_aclk),
+        .CE(axis_tvalid_calculated0),
+        .D(plusOp[2]),
+        .Q(tlast_counter[2]),
+        .R(tlast_counter_0));
+  FDRE #(
+    .INIT(1'b0)) 
+    \tlast_counter_reg[3] 
+       (.C(m00_axis_aclk),
+        .CE(axis_tvalid_calculated0),
+        .D(plusOp[3]),
+        .Q(tlast_counter[3]),
+        .R(tlast_counter_0));
+  FDRE #(
+    .INIT(1'b0)) 
+    \tlast_counter_reg[4] 
+       (.C(m00_axis_aclk),
+        .CE(axis_tvalid_calculated0),
+        .D(plusOp[4]),
+        .Q(tlast_counter[4]),
+        .R(tlast_counter_0));
+  CARRY4 \tlast_counter_reg[4]_i_1 
+       (.CI(1'b0),
+        .CO({\tlast_counter_reg[4]_i_1_n_0 ,\tlast_counter_reg[4]_i_1_n_1 ,\tlast_counter_reg[4]_i_1_n_2 ,\tlast_counter_reg[4]_i_1_n_3 }),
+        .CYINIT(tlast_counter[0]),
+        .DI({1'b0,1'b0,1'b0,1'b0}),
+        .O(plusOp[4:1]),
+        .S(tlast_counter[4:1]));
+  FDRE #(
+    .INIT(1'b0)) 
+    \tlast_counter_reg[5] 
+       (.C(m00_axis_aclk),
+        .CE(axis_tvalid_calculated0),
+        .D(plusOp[5]),
+        .Q(tlast_counter[5]),
+        .R(tlast_counter_0));
+  FDRE #(
+    .INIT(1'b0)) 
+    \tlast_counter_reg[6] 
+       (.C(m00_axis_aclk),
+        .CE(axis_tvalid_calculated0),
+        .D(plusOp[6]),
+        .Q(tlast_counter[6]),
+        .R(tlast_counter_0));
+  FDRE #(
+    .INIT(1'b0)) 
+    \tlast_counter_reg[7] 
+       (.C(m00_axis_aclk),
+        .CE(axis_tvalid_calculated0),
+        .D(plusOp[7]),
+        .Q(tlast_counter[7]),
+        .R(tlast_counter_0));
+  FDRE #(
+    .INIT(1'b0)) 
+    \tlast_counter_reg[8] 
+       (.C(m00_axis_aclk),
+        .CE(axis_tvalid_calculated0),
+        .D(plusOp[8]),
+        .Q(tlast_counter[8]),
+        .R(tlast_counter_0));
+  CARRY4 \tlast_counter_reg[8]_i_1 
+       (.CI(\tlast_counter_reg[4]_i_1_n_0 ),
+        .CO({\tlast_counter_reg[8]_i_1_n_0 ,\tlast_counter_reg[8]_i_1_n_1 ,\tlast_counter_reg[8]_i_1_n_2 ,\tlast_counter_reg[8]_i_1_n_3 }),
+        .CYINIT(1'b0),
+        .DI({1'b0,1'b0,1'b0,1'b0}),
+        .O(plusOp[8:5]),
+        .S(tlast_counter[8:5]));
+  FDRE #(
+    .INIT(1'b0)) 
+    \tlast_counter_reg[9] 
+       (.C(m00_axis_aclk),
+        .CE(axis_tvalid_calculated0),
+        .D(plusOp[9]),
+        .Q(tlast_counter[9]),
+        .R(tlast_counter_0));
 endmodule
 `ifndef GLBL
 `define GLBL

@@ -86,7 +86,7 @@ ARCHITECTURE design_1_enable_splitter_0_0_arch OF design_1_enable_splitter_0_0 I
     );
   END COMPONENT enable_splitter_v1_0;
   ATTRIBUTE X_CORE_INFO : STRING;
-  ATTRIBUTE X_CORE_INFO OF design_1_enable_splitter_0_0_arch: ARCHITECTURE IS "enable_splitter_v1_0,Vivado 2019.2";
+  ATTRIBUTE X_CORE_INFO OF design_1_enable_splitter_0_0_arch: ARCHITECTURE IS "enable_splitter_v1_0,Vivado 2019.2.1";
   ATTRIBUTE CHECK_LICENSE_TYPE : STRING;
   ATTRIBUTE CHECK_LICENSE_TYPE OF design_1_enable_splitter_0_0_arch : ARCHITECTURE IS "design_1_enable_splitter_0_0,enable_splitter_v1_0,{}";
 BEGIN

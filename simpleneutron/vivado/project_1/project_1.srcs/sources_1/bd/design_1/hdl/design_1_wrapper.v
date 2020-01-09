@@ -1,8 +1,8 @@
 //Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
-//Tool Version: Vivado v.2019.2 (lin64) Build 2700185 Thu Oct 24 18:45:48 MDT 2019
-//Date        : Wed Dec 18 21:49:45 2019
-//Host        : vm-VirtualBox running 64-bit unknown
+//Tool Version: Vivado v.2019.2.1 (lin64) Build 2729669 Thu Dec  5 04:48:12 MST 2019
+//Date        : Sun Dec 29 20:47:29 2019
+//Host        : vm-VirtualBox running 64-bit Ubuntu 18.04.3 LTS
 //Command     : generate_target design_1_wrapper.bd
 //Design      : design_1_wrapper
 //Purpose     : IP block netlist
@@ -31,6 +31,7 @@ module design_1_wrapper
     FIXED_IO_ps_clk,
     FIXED_IO_ps_porb,
     FIXED_IO_ps_srstb,
+    btnc,
     leds_8bits1,
     pmod_input,
     sws_8bits);
@@ -55,6 +56,7 @@ module design_1_wrapper
   inout FIXED_IO_ps_clk;
   inout FIXED_IO_ps_porb;
   inout FIXED_IO_ps_srstb;
+  input [0:0]btnc;
   output [7:0]leds_8bits1;
   input [7:0]pmod_input;
   input [7:0]sws_8bits;
@@ -80,6 +82,7 @@ module design_1_wrapper
   wire FIXED_IO_ps_clk;
   wire FIXED_IO_ps_porb;
   wire FIXED_IO_ps_srstb;
+  wire [0:0]btnc;
   wire [7:0]leds_8bits1;
   wire [7:0]pmod_input;
   wire [7:0]sws_8bits;
@@ -106,6 +109,7 @@ module design_1_wrapper
         .FIXED_IO_ps_clk(FIXED_IO_ps_clk),
         .FIXED_IO_ps_porb(FIXED_IO_ps_porb),
         .FIXED_IO_ps_srstb(FIXED_IO_ps_srstb),
+        .btnc(btnc),
         .leds_8bits1(leds_8bits1),
         .pmod_input(pmod_input),
         .sws_8bits(sws_8bits));

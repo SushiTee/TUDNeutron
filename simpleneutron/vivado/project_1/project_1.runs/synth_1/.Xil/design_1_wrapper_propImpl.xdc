@@ -47,3 +47,5 @@ set_property src_info {type:XDC file:1 line:120 export:INPUT save:INPUT read:REA
 set_property PACKAGE_PIN AB9 [get_ports {pmod_input[6]}]
 set_property src_info {type:XDC file:1 line:121 export:INPUT save:INPUT read:READ} [current_design]
 set_property PACKAGE_PIN AA8 [get_ports {pmod_input[7]}]
+set_property src_info {type:XDC file:1 line:132 export:INPUT save:INPUT read:READ} [current_design]
+set_property PACKAGE_PIN P16 [get_ports {btnc[0]}]

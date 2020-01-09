@@ -1,7 +1,7 @@
 // Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
-// Tool Version: Vivado v.2019.2 (lin64) Build 2700185 Thu Oct 24 18:45:48 MDT 2019
-// Date        : Wed Dec 18 18:37:04 2019
+// Tool Version: Vivado v.2019.2.1 (lin64) Build 2729669 Thu Dec  5 04:48:12 MST 2019
+// Date        : Mon Dec 23 23:05:27 2019
 // Host        : vm-VirtualBox running 64-bit Ubuntu 18.04.3 LTS
 // Command     : write_verilog -force -mode synth_stub -rename_top design_1_auto_us_2 -prefix
 //               design_1_auto_us_2_ design_1_auto_us_7_stub.v
@@ -13,7 +13,7 @@
 // This empty module with port declaration file causes synthesis tools to infer a black box for IP.
 // The synthesis directives are for Synopsys Synplify support to prevent IO buffer insertion.
 // Please paste the declaration into a Verilog source file or add the file as an additional source.
-(* X_CORE_INFO = "axi_dwidth_converter_v2_1_20_top,Vivado 2019.2" *)
+(* X_CORE_INFO = "axi_dwidth_converter_v2_1_20_top,Vivado 2019.2.1" *)
 module design_1_auto_us_2(s_axi_aclk, s_axi_aresetn, s_axi_awaddr, 
   s_axi_awlen, s_axi_awsize, s_axi_awburst, s_axi_awlock, s_axi_awcache, s_axi_awprot, 
   s_axi_awregion, s_axi_awqos, s_axi_awvalid, s_axi_awready, s_axi_wdata, s_axi_wstrb, 

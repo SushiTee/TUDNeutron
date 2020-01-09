@@ -17,7 +17,6 @@ proc create_report { reportName command } {
     send_msg_id runtcl-5 warning "$msg"
   }
 }
-set_param chipscope.maxJobs 1
 create_project -in_memory -part xc7z020clg484-1
 
 set_param project.singleFileAddWarning.threshold 0
@@ -69,6 +68,14 @@ set_property used_in_implementation false [get_files -all /home/vm/projects/simp
 set_property used_in_implementation false [get_files -all /home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_0_1/design_1_axi_gpio_0_1_board.xdc]
 set_property used_in_implementation false [get_files -all /home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_0_1/design_1_axi_gpio_0_1_ooc.xdc]
 set_property used_in_implementation false [get_files -all /home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_0_1/design_1_axi_gpio_0_1.xdc]
+set_property used_in_implementation false [get_files -all /home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_0/design_1_axis_data_fifo_0_0_ooc.xdc]
+set_property used_in_implementation false [get_files -all /home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_1/design_1_axis_data_fifo_0_1_ooc.xdc]
+set_property used_in_implementation false [get_files -all /home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_2/design_1_axis_data_fifo_0_2_ooc.xdc]
+set_property used_in_implementation false [get_files -all /home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_3/design_1_axis_data_fifo_0_3_ooc.xdc]
+set_property used_in_implementation false [get_files -all /home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_4/design_1_axis_data_fifo_0_4_ooc.xdc]
+set_property used_in_implementation false [get_files -all /home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_5/design_1_axis_data_fifo_0_5_ooc.xdc]
+set_property used_in_implementation false [get_files -all /home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_6/design_1_axis_data_fifo_0_6_ooc.xdc]
+set_property used_in_implementation false [get_files -all /home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_7/design_1_axis_data_fifo_0_7_ooc.xdc]
 set_property used_in_implementation false [get_files -all /home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_pc_0/design_1_auto_pc_0_ooc.xdc]
 set_property used_in_synthesis false [get_files -all /home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_0/design_1_auto_us_0_clocks.xdc]
 set_property used_in_implementation false [get_files -all /home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_0/design_1_auto_us_0_clocks.xdc]
@@ -95,6 +102,9 @@ set_property used_in_synthesis false [get_files -all /home/vm/projects/simpleneu
 set_property used_in_implementation false [get_files -all /home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_7/design_1_auto_us_7_clocks.xdc]
 set_property used_in_implementation false [get_files -all /home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_7/design_1_auto_us_7_ooc.xdc]
 set_property used_in_implementation false [get_files -all /home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_pc_1/design_1_auto_pc_1_ooc.xdc]
+set_property used_in_implementation false [get_files -all /home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_1_1/design_1_axi_gpio_1_1_board.xdc]
+set_property used_in_implementation false [get_files -all /home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_1_1/design_1_axi_gpio_1_1_ooc.xdc]
+set_property used_in_implementation false [get_files -all /home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_1_1/design_1_axi_gpio_1_1.xdc]
 set_property used_in_implementation false [get_files -all /home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/design_1_ooc.xdc]
 
 # Mark all dcp files as not used in implementation to prevent them from being

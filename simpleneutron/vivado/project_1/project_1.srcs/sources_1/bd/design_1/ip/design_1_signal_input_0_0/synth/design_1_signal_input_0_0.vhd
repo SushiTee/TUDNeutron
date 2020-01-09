@@ -84,7 +84,7 @@ ARCHITECTURE design_1_signal_input_0_0_arch OF design_1_signal_input_0_0 IS
     );
   END COMPONENT signal_input_v1_0;
   ATTRIBUTE X_CORE_INFO : STRING;
-  ATTRIBUTE X_CORE_INFO OF design_1_signal_input_0_0_arch: ARCHITECTURE IS "signal_input_v1_0,Vivado 2019.2";
+  ATTRIBUTE X_CORE_INFO OF design_1_signal_input_0_0_arch: ARCHITECTURE IS "signal_input_v1_0,Vivado 2019.2.1";
   ATTRIBUTE CHECK_LICENSE_TYPE : STRING;
   ATTRIBUTE CHECK_LICENSE_TYPE OF design_1_signal_input_0_0_arch : ARCHITECTURE IS "design_1_signal_input_0_0,signal_input_v1_0,{}";
 BEGIN
