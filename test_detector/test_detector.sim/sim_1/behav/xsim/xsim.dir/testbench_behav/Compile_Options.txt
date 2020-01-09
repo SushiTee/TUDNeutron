@@ -1,0 +1,1 @@
+-wto "78dcbf7c29af4ec19ff43ed22cb4107b" --incr --debug "typical" --relax --mt "8" -L "xil_defaultlib" -L "axis_infrastructure_v1_1_0" -L "axis_data_fifo_v2_0_2" -L "util_vector_logic_v2_0_1" -L "unisims_ver" -L "unimacro_ver" -L "secureip" -L "xpm" --snapshot "testbench_behav" "xil_defaultlib.testbench" "xil_defaultlib.glbl" -log "elaborate.log" 
