@@ -1,0 +1,32 @@
+message(STATUS "loading config")
+
+# this is an example config file
+# edit the lines below to fit your needs.
+# The example shows a cross compile config. If this is what
+# you need all you have to do is change the pathes in the
+# next two lines.
+
+set(sysroot_base_path ~/sysroot)
+set(toolchain_path ~/gcc-arm-8.3-2019.03-x86_64-arm-linux-gnueabihf)
+
+message(STATUS "sysroot: ${sysroot_base_path}")
+message(STATUS "toolchain: ${toolchain_path}")
+
+set(CMAKE_C_COMPILER ${toolchain_path}/bin/arm-linux-gnueabihf-g++)
+set(CMAKE_CXX_COMPILER ${toolchain_path}/bin/arm-linux-gnueabihf-g++)
+set(CMAKE_SYSROOT ${sysroot_base_path})
+set(CMAKE_LIBRARY_ARCHITECTURE arm-linux-gnueabihf)
+set(CMAKE_FIND_ROOT_PATH ${sysroot_base_path}/usr/lib/arm-linux-gnueabihf)
+
+# Don't search for programs in the host environment
+set (CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
+
+# Search for the libraries and headers in the target environment
+set (CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
+set (CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+
+SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-rpath -Wl,/lib/arm-linux-gnueabihf")
+
+include_directories(${sysroot_base_path}/usr/include/arm-linux-gnueabihf)
+link_directories(${sysroot_base_path}/usr/lib/arm-linux-gnueabihf)
+

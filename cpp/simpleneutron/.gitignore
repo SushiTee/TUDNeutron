@@ -1,0 +1,12 @@
+*build*
+
+!CMakeLists.txt
+!*.c
+!*.cpp
+!*.h
+!*.cmake
+config/config.cmake
+!*.example
+
+!compile
+!README.md
