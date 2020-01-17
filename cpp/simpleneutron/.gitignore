@@ -8,7 +8,5 @@
 config/config.cmake
 !*.example
 
-!.vscode/*
-
 !compile
 !README.md
