@@ -1,0 +1,8 @@
+{
+    "C_Cpp.default.intelliSenseMode": "gcc-x64",
+    "C_Cpp.default.includePath": [
+        "/home/sushi/zedboard/sysroot/usr/include",
+        "/home/sushi/zedboard/sysroot/usr/include/arm-linux-gnueabihf",
+        "${default}"
+    ]
+}
