@@ -32,14 +32,14 @@ Dma::Dma(uint32_t memoryBase, uint32_t registerBase, int mem)
 {
     mRegister = (uint32_t *)mmap(NULL, 128, PROT_READ | PROT_WRITE, MAP_SHARED, mMem, REGISTER_BASE);
     if (mRegister == MAP_FAILED) {
-        std::cout << "could not map register" << std::endl;
+        std::cout << "Dma: could not map register" << std::endl;
         mHasError = true;
         return;
     }
 
     mMemoryMap = (uint32_t *)mmap(NULL, 0x2000000, PROT_READ | PROT_WRITE, MAP_SHARED, mMem, MEMORY_BASE);
     if (mMemoryMap == MAP_FAILED) {
-        std::cout << "could not map memory map" << std::endl;
+        std::cout << "Dma: could not map memory map" << std::endl;
         mHasError = true;
     }
 }
