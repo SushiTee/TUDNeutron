@@ -29,7 +29,7 @@ entity signal_detector_v1_0 is
     m00_axis_aresetn : in std_logic;
     m00_axis_tvalid  : out std_logic;
     m00_axis_tdata   : out std_logic_vector(C_M00_AXIS_TDATA_WIDTH-1 downto 0);
-    m00_axis_tstrb   : out std_logic_vector((C_M00_AXIS_TDATA_WIDTH/8)-1 downto 0);
+    m00_axis_tkeep   : out std_logic_vector((C_M00_AXIS_TDATA_WIDTH/8)-1 downto 0);
     m00_axis_tlast   : out std_logic;
     m00_axis_tready  : in std_logic
   );
@@ -53,7 +53,7 @@ architecture arch_imp of signal_detector_v1_0 is
     M_AXIS_ARESETN : in std_logic;
     M_AXIS_TVALID  : out std_logic;
     M_AXIS_TDATA   : out std_logic_vector(C_M_AXIS_TDATA_WIDTH-1 downto 0);
-    M_AXIS_TSTRB   : out std_logic_vector((C_M_AXIS_TDATA_WIDTH/8)-1 downto 0);
+    M_AXIS_TKEEP   : out std_logic_vector((C_M_AXIS_TDATA_WIDTH/8)-1 downto 0);
     M_AXIS_TLAST   : out std_logic;
     M_AXIS_TREADY  : in std_logic
     );
@@ -77,7 +77,7 @@ signal_detector_v1_0_M00_AXIS_inst : signal_detector_v1_0_M00_AXIS
     M_AXIS_ARESETN => m00_axis_aresetn,
     M_AXIS_TVALID  => m00_axis_tvalid,
     M_AXIS_TDATA   => m00_axis_tdata,
-    M_AXIS_TSTRB   => m00_axis_tstrb,
+    M_AXIS_TKEEP   => m00_axis_tkeep,
     M_AXIS_TLAST   => m00_axis_tlast,
     M_AXIS_TREADY  => m00_axis_tready
   );

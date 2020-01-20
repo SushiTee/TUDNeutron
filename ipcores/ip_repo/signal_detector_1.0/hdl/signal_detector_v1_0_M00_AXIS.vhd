@@ -32,8 +32,8 @@ entity signal_detector_v1_0_M00_AXIS is
     M_AXIS_TVALID : out std_logic;
     -- TDATA is the primary payload that is used to provide the data that is passing across the interface from the master.
     M_AXIS_TDATA : out std_logic_vector(C_M_AXIS_TDATA_WIDTH-1 downto 0);
-    -- TSTRB is the byte qualifier that indicates whether the content of the associated byte of TDATA is processed as a data byte or a position byte.
-    M_AXIS_TSTRB : out std_logic_vector((C_M_AXIS_TDATA_WIDTH/8)-1 downto 0);
+    -- TKEEP is the byte qualifier that indicates whether the content of the associated byte of TDATA is processed as a data byte or a position byte.
+    M_AXIS_TKEEP : out std_logic_vector((C_M_AXIS_TDATA_WIDTH/8)-1 downto 0);
     -- TLAST indicates the boundary of a packet.
     M_AXIS_TLAST : out std_logic;
     -- TREADY indicates that the slave can accept a transfer in the current cycle.
@@ -96,7 +96,7 @@ begin
   M_AXIS_TVALID <= axis_tvalid;
   M_AXIS_TDATA  <= stream_data_out;
   M_AXIS_TLAST  <= axis_tlast;
-  M_AXIS_TSTRB  <= (others => '1'); -- this is always 1 for reasons!
+  M_AXIS_TKEEP  <= (others => '1'); -- this is always 1 for reasons!
   signal_state  <= signal_state_internal;
   fifo_reset    <= fifo_reset_internal;
 
