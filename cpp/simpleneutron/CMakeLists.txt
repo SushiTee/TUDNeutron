@@ -23,4 +23,5 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 endif()
 
 # The executable code is here
+add_subdirectory(components)
 add_subdirectory(app)

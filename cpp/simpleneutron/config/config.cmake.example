@@ -6,13 +6,27 @@ message(STATUS "loading config")
 # you need all you have to do is change the pathes in the
 # next two lines.
 
-set(sysroot_base_path ~/sysroot)
-set(toolchain_path ~/gcc-arm-8.3-2019.03-x86_64-arm-linux-gnueabihf)
+set(sysroot_base_path /home/user/zedboard/sysroot)
+set(toolchain_path /home/user/gcc-arm-8.3-2019.03-x86_64-arm-linux-gnueabihf)
 
+# nfs copy config
+# if the directory exists the app will be copied to the nfs folder
+# if the target directory is not served via nfs this doesn't work
+set(nfs_path /home/user/nfs)
+
+# ssh copy config
+# this only works if you can log in on the target device without password (via public key)
+# set ssh_copy to FLASE to turn this off
+set(ssh_copy TRUE)
+set(ssh_user debian)
+set(ssh_host zedboard)
+set(ssh_target_dir /home/user/app)
+
+# do not touch the following!
 message(STATUS "sysroot: ${sysroot_base_path}")
 message(STATUS "toolchain: ${toolchain_path}")
 
-set(CMAKE_C_COMPILER ${toolchain_path}/bin/arm-linux-gnueabihf-g++)
+set(CMAKE_C_COMPILER ${toolchain_path}/bin/arm-linux-gnueabihf-gcc)
 set(CMAKE_CXX_COMPILER ${toolchain_path}/bin/arm-linux-gnueabihf-g++)
 set(CMAKE_SYSROOT ${sysroot_base_path})
 set(CMAKE_LIBRARY_ARCHITECTURE arm-linux-gnueabihf)
