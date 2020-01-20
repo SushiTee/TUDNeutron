@@ -16,6 +16,7 @@ public:
 
     void activateAll();
     void deactivateAll();
+    void activateSpecific(uint8_t value);
     uint8_t getStatus();
 };
 

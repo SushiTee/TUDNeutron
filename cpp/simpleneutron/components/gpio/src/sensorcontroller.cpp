@@ -19,6 +19,9 @@ void SensorController::deactivateAll() {
     setValue(0u);
 }
 
+void SensorController::activateSpecific(uint8_t value) {
+    setValue(static_cast<uint32_t>(value));
+}
 uint8_t SensorController::getStatus() {
     return static_cast<uint8_t>(getValue());
 }

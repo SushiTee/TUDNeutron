@@ -24,7 +24,7 @@ uint8_t MemoryControl::registerGetBit(uint32_t *file, Offset offset, Bit bit) {
     return (file[offset>>2u] >> bit) & 1u;
 }
 
-uint8_t MemoryControl::memoryRead(uint32_t *file, uint32_t offset) {
+uint32_t MemoryControl::memoryRead(uint32_t *file, uint32_t offset) {
     return file[offset>>2u];
 }
 

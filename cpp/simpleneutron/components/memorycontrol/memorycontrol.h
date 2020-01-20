@@ -17,7 +17,7 @@ public:
     static uint32_t registerRead(uint32_t *file, Offset offset);
     static void registerSetBit(uint32_t *file, Offset offset, Bit bit, uint8_t value);
     static uint8_t registerGetBit(uint32_t *file, Offset offset, Bit bit);
-    static uint8_t memoryRead(uint32_t *file, uint32_t offset);
+    static uint32_t memoryRead(uint32_t *file, uint32_t offset);
 };
 
 } // memorycontrol    
