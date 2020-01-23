@@ -1,9 +1,0 @@
-vhdl xil_defaultlib  \
-"../../../bd/design_1/ipshared/9f48/hdl/signal_detector_v1_0_M00_AXIS.vhd" \
-"../../../bd/design_1/ipshared/9f48/hdl/signal_detector_v1_0.vhd" \
-"../../../bd/design_1/ip/design_1_signal_detector_0_0/sim/design_1_signal_detector_0_0.vhd" \
-"../../../bd/design_1/ipshared/e8fd/hdl/signal_input_v1_0.vhd" \
-"../../../bd/design_1/ip/design_1_signal_input_0_0/sim/design_1_signal_input_0_0.vhd" \
-"../../../bd/design_1/sim/design_1.vhd" \
-
-nosort

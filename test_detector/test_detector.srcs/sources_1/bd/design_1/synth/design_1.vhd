@@ -1,7 +1,7 @@
 --Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2019.2.1 (lin64) Build 2729669 Thu Dec  5 04:48:12 MST 2019
---Date        : Sun Dec 29 20:33:56 2019
+--Date        : Thu Jan 23 01:19:41 2020
 --Host        : vm-VirtualBox running 64-bit Ubuntu 18.04.3 LTS
 --Command     : generate_target design_1.bd
 --Design      : design_1
@@ -45,12 +45,12 @@ architecture STRUCTURE of design_1 is
     s_axis_tvalid : in STD_LOGIC;
     s_axis_tready : out STD_LOGIC;
     s_axis_tdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    s_axis_tstrb : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    s_axis_tkeep : in STD_LOGIC_VECTOR ( 3 downto 0 );
     s_axis_tlast : in STD_LOGIC;
     m_axis_tvalid : out STD_LOGIC;
     m_axis_tready : in STD_LOGIC;
     m_axis_tdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
-    m_axis_tstrb : out STD_LOGIC_VECTOR ( 3 downto 0 );
+    m_axis_tkeep : out STD_LOGIC_VECTOR ( 3 downto 0 );
     m_axis_tlast : out STD_LOGIC;
     axis_wr_data_count : out STD_LOGIC_VECTOR ( 31 downto 0 );
     axis_rd_data_count : out STD_LOGIC_VECTOR ( 31 downto 0 )
@@ -87,7 +87,7 @@ architecture STRUCTURE of design_1 is
     m00_axis_aresetn : in STD_LOGIC;
     m00_axis_tvalid : out STD_LOGIC;
     m00_axis_tdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
-    m00_axis_tstrb : out STD_LOGIC_VECTOR ( 3 downto 0 );
+    m00_axis_tkeep : out STD_LOGIC_VECTOR ( 3 downto 0 );
     m00_axis_tlast : out STD_LOGIC;
     m00_axis_tready : in STD_LOGIC
   );
@@ -95,8 +95,8 @@ architecture STRUCTURE of design_1 is
   signal axis_data_fifo_0_axis_rd_data_count : STD_LOGIC_VECTOR ( 31 downto 0 );
   signal axis_data_fifo_0_axis_wr_data_count : STD_LOGIC_VECTOR ( 31 downto 0 );
   signal axis_data_fifo_0_m_axis_tdata : STD_LOGIC_VECTOR ( 31 downto 0 );
+  signal axis_data_fifo_0_m_axis_tkeep : STD_LOGIC_VECTOR ( 3 downto 0 );
   signal axis_data_fifo_0_m_axis_tlast : STD_LOGIC;
-  signal axis_data_fifo_0_m_axis_tstrb : STD_LOGIC_VECTOR ( 3 downto 0 );
   signal axis_data_fifo_0_m_axis_tvalid : STD_LOGIC;
   signal clock_1 : STD_LOGIC;
   signal enabled_1 : STD_LOGIC;
@@ -104,8 +104,8 @@ architecture STRUCTURE of design_1 is
   signal ready_1 : STD_LOGIC;
   signal reset_1 : STD_LOGIC;
   signal signal_detector_0_M00_AXIS_TDATA : STD_LOGIC_VECTOR ( 31 downto 0 );
+  signal signal_detector_0_M00_AXIS_TKEEP : STD_LOGIC_VECTOR ( 3 downto 0 );
   signal signal_detector_0_M00_AXIS_TREADY : STD_LOGIC;
-  signal signal_detector_0_M00_AXIS_TSTRB : STD_LOGIC_VECTOR ( 3 downto 0 );
   signal signal_detector_0_fifo_reset : STD_LOGIC;
   signal signal_detector_0_m00_axis_tlast : STD_LOGIC;
   signal signal_detector_0_m00_axis_tvalid : STD_LOGIC;
@@ -141,7 +141,7 @@ begin
   reset_1 <= reset;
   signal_input_1_1(7 downto 0) <= signal_input(7 downto 0);
   signal_state <= signal_detector_0_signal_state;
-  strb(3 downto 0) <= axis_data_fifo_0_m_axis_tstrb(3 downto 0);
+  strb(3 downto 0) <= axis_data_fifo_0_m_axis_tkeep(3 downto 0);
   valid <= axis_data_fifo_0_m_axis_tvalid;
   wr_fifo_fill(31 downto 0) <= axis_data_fifo_0_axis_wr_data_count(31 downto 0);
 axis_data_fifo_0: component design_1_axis_data_fifo_0_0
@@ -149,16 +149,16 @@ axis_data_fifo_0: component design_1_axis_data_fifo_0_0
       axis_rd_data_count(31 downto 0) => axis_data_fifo_0_axis_rd_data_count(31 downto 0),
       axis_wr_data_count(31 downto 0) => axis_data_fifo_0_axis_wr_data_count(31 downto 0),
       m_axis_tdata(31 downto 0) => axis_data_fifo_0_m_axis_tdata(31 downto 0),
+      m_axis_tkeep(3 downto 0) => axis_data_fifo_0_m_axis_tkeep(3 downto 0),
       m_axis_tlast => axis_data_fifo_0_m_axis_tlast,
       m_axis_tready => ready_1,
-      m_axis_tstrb(3 downto 0) => axis_data_fifo_0_m_axis_tstrb(3 downto 0),
       m_axis_tvalid => axis_data_fifo_0_m_axis_tvalid,
       s_axis_aclk => clock_1,
       s_axis_aresetn => util_vector_logic_0_Res(0),
       s_axis_tdata(31 downto 0) => signal_detector_0_M00_AXIS_TDATA(31 downto 0),
+      s_axis_tkeep(3 downto 0) => signal_detector_0_M00_AXIS_TKEEP(3 downto 0),
       s_axis_tlast => signal_detector_0_m00_axis_tlast,
       s_axis_tready => signal_detector_0_M00_AXIS_TREADY,
-      s_axis_tstrb(3 downto 0) => signal_detector_0_M00_AXIS_TSTRB(3 downto 0),
       s_axis_tvalid => signal_detector_0_m00_axis_tvalid
     );
 signal_detector_0: component design_1_signal_detector_0_0
@@ -168,9 +168,9 @@ signal_detector_0: component design_1_signal_detector_0_0
       m00_axis_aclk => clock_1,
       m00_axis_aresetn => reset_1,
       m00_axis_tdata(31 downto 0) => signal_detector_0_M00_AXIS_TDATA(31 downto 0),
+      m00_axis_tkeep(3 downto 0) => signal_detector_0_M00_AXIS_TKEEP(3 downto 0),
       m00_axis_tlast => signal_detector_0_m00_axis_tlast,
       m00_axis_tready => signal_detector_0_M00_AXIS_TREADY,
-      m00_axis_tstrb(3 downto 0) => signal_detector_0_M00_AXIS_TSTRB(3 downto 0),
       m00_axis_tvalid => signal_detector_0_m00_axis_tvalid,
       number_words(15 downto 0) => number_words_1(15 downto 0),
       signal_input => signal_input_0_out0,

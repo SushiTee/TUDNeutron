@@ -2,166 +2,167 @@
 # Vivado v2019.2.1 (64-bit)
 # SW Build 2729669 on Thu Dec  5 04:48:12 MST 2019
 # IP Build 2729494 on Thu Dec  5 07:38:25 MST 2019
-# Start of session at: Sun Dec 29 20:58:53 2019
-# Process ID: 16385
-# Current directory: /home/vm/projects/simpleneutron/vivado/project_1/project_1.runs/impl_1
+# Start of session at: Thu Jan 23 01:34:49 2020
+# Process ID: 17225
+# Current directory: /home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/impl_1
 # Command line: vivado -log design_1_wrapper.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source design_1_wrapper.tcl -notrace
-# Log file: /home/vm/projects/simpleneutron/vivado/project_1/project_1.runs/impl_1/design_1_wrapper.vdi
-# Journal file: /home/vm/projects/simpleneutron/vivado/project_1/project_1.runs/impl_1/vivado.jou
+# Log file: /home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/impl_1/design_1_wrapper.vdi
+# Journal file: /home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/impl_1/vivado.jou
 #-----------------------------------------------------------
 source design_1_wrapper.tcl -notrace
 INFO: [IP_Flow 19-234] Refreshing IP repositories
-INFO: [IP_Flow 19-1700] Loaded user IP repository '/home/vm/projects/ipcores/ip_repo'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository '/home/vm/projects/TUDNeutron/ipcores/ip_repo'.
 INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/home/vm/tools/Xilinx/Vivado/2019.2/data/ip'.
-add_files: Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1471.660 ; gain = 0.000 ; free physical = 764 ; free virtual = 3479
+add_files: Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 1471.656 ; gain = 0.000 ; free physical = 778 ; free virtual = 3079
 Command: link_design -top design_1_wrapper -part xc7z020clg484-1
 Design is defaulting to srcset: sources_1
 Design is defaulting to constrset: constrs_1
 INFO: [Device 21-403] Loading part xc7z020clg484-1
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_0/design_1_axi_dma_0_0.dcp' for cell 'design_1_i/axi_dma_0'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_1/design_1_axi_dma_0_1.dcp' for cell 'design_1_i/axi_dma_1'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_2/design_1_axi_dma_0_2.dcp' for cell 'design_1_i/axi_dma_2'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_3/design_1_axi_dma_0_3.dcp' for cell 'design_1_i/axi_dma_3'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_4/design_1_axi_dma_0_4.dcp' for cell 'design_1_i/axi_dma_4'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_5/design_1_axi_dma_0_5.dcp' for cell 'design_1_i/axi_dma_5'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_6/design_1_axi_dma_0_6.dcp' for cell 'design_1_i/axi_dma_6'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_7/design_1_axi_dma_0_7.dcp' for cell 'design_1_i/axi_dma_7'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_0_1/design_1_axi_gpio_0_1.dcp' for cell 'design_1_i/axi_gpio_0'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_1_1/design_1_axi_gpio_1_1.dcp' for cell 'design_1_i/axi_gpio_1'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_0/design_1_axis_data_fifo_0_0.dcp' for cell 'design_1_i/axis_data_fifo_0'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_1/design_1_axis_data_fifo_0_1.dcp' for cell 'design_1_i/axis_data_fifo_1'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_2/design_1_axis_data_fifo_0_2.dcp' for cell 'design_1_i/axis_data_fifo_2'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_3/design_1_axis_data_fifo_0_3.dcp' for cell 'design_1_i/axis_data_fifo_3'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_4/design_1_axis_data_fifo_0_4.dcp' for cell 'design_1_i/axis_data_fifo_4'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_5/design_1_axis_data_fifo_0_5.dcp' for cell 'design_1_i/axis_data_fifo_5'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_6/design_1_axis_data_fifo_0_6.dcp' for cell 'design_1_i/axis_data_fifo_6'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_7/design_1_axis_data_fifo_0_7.dcp' for cell 'design_1_i/axis_data_fifo_7'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_enable_splitter_0_0/design_1_enable_splitter_0_0.dcp' for cell 'design_1_i/enable_splitter_0'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/design_1_processing_system7_0_0.dcp' for cell 'design_1_i/processing_system7_0'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_rst_ps7_0_100M_0/design_1_rst_ps7_0_100M_0.dcp' for cell 'design_1_i/rst_ps7_0_100M'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_signal_detector_0_0/design_1_signal_detector_0_0.dcp' for cell 'design_1_i/signal_detector_0'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_signal_detector_0_1/design_1_signal_detector_0_1.dcp' for cell 'design_1_i/signal_detector_1'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_signal_detector_0_2/design_1_signal_detector_0_2.dcp' for cell 'design_1_i/signal_detector_2'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_signal_detector_0_3/design_1_signal_detector_0_3.dcp' for cell 'design_1_i/signal_detector_3'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_signal_detector_0_4/design_1_signal_detector_0_4.dcp' for cell 'design_1_i/signal_detector_4'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_signal_detector_0_5/design_1_signal_detector_0_5.dcp' for cell 'design_1_i/signal_detector_5'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_signal_detector_0_6/design_1_signal_detector_0_6.dcp' for cell 'design_1_i/signal_detector_6'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_signal_detector_0_7/design_1_signal_detector_0_7.dcp' for cell 'design_1_i/signal_detector_7'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_signal_input_0_0/design_1_signal_input_0_0.dcp' for cell 'design_1_i/signal_input_0'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_util_vector_logic_0_0/design_1_util_vector_logic_0_0.dcp' for cell 'design_1_i/util_vector_logic_0'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_util_vector_logic_1_0/design_1_util_vector_logic_1_0.dcp' for cell 'design_1_i/util_vector_logic_1'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_util_vector_logic_1_1/design_1_util_vector_logic_1_1.dcp' for cell 'design_1_i/util_vector_logic_2'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_util_vector_logic_1_2/design_1_util_vector_logic_1_2.dcp' for cell 'design_1_i/util_vector_logic_3'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_util_vector_logic_1_3/design_1_util_vector_logic_1_3.dcp' for cell 'design_1_i/util_vector_logic_4'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_util_vector_logic_1_4/design_1_util_vector_logic_1_4.dcp' for cell 'design_1_i/util_vector_logic_5'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_util_vector_logic_1_5/design_1_util_vector_logic_1_5.dcp' for cell 'design_1_i/util_vector_logic_6'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_util_vector_logic_1_6/design_1_util_vector_logic_1_6.dcp' for cell 'design_1_i/util_vector_logic_7'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_util_vector_logic_1_7/design_1_util_vector_logic_1_7.dcp' for cell 'design_1_i/util_vector_logic_8'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_xbar_1/design_1_xbar_1.dcp' for cell 'design_1_i/axi_mem_intercon/xbar'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_pc_1/design_1_auto_pc_1.dcp' for cell 'design_1_i/axi_mem_intercon/m00_couplers/auto_pc'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_0/design_1_auto_us_0.dcp' for cell 'design_1_i/axi_mem_intercon/s00_couplers/auto_us'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_1/design_1_auto_us_1.dcp' for cell 'design_1_i/axi_mem_intercon/s01_couplers/auto_us'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_2/design_1_auto_us_2.dcp' for cell 'design_1_i/axi_mem_intercon/s02_couplers/auto_us'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_3/design_1_auto_us_3.dcp' for cell 'design_1_i/axi_mem_intercon/s03_couplers/auto_us'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_4/design_1_auto_us_4.dcp' for cell 'design_1_i/axi_mem_intercon/s04_couplers/auto_us'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_5/design_1_auto_us_5.dcp' for cell 'design_1_i/axi_mem_intercon/s05_couplers/auto_us'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_6/design_1_auto_us_6.dcp' for cell 'design_1_i/axi_mem_intercon/s06_couplers/auto_us'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_7/design_1_auto_us_7.dcp' for cell 'design_1_i/axi_mem_intercon/s07_couplers/auto_us'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_xbar_0/design_1_xbar_0.dcp' for cell 'design_1_i/ps7_0_axi_periph/xbar'
-INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_pc_0/design_1_auto_pc_0.dcp' for cell 'design_1_i/ps7_0_axi_periph/s00_couplers/auto_pc'
-Netlist sorting complete. Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 1798.879 ; gain = 2.000 ; free physical = 411 ; free virtual = 3129
-INFO: [Netlist 29-17] Analyzing 709 Unisim elements for replacement
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_0/design_1_axi_dma_0_0.dcp' for cell 'design_1_i/axi_dma_0'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_1/design_1_axi_dma_0_1.dcp' for cell 'design_1_i/axi_dma_1'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_2/design_1_axi_dma_0_2.dcp' for cell 'design_1_i/axi_dma_2'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_3/design_1_axi_dma_0_3.dcp' for cell 'design_1_i/axi_dma_3'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_4/design_1_axi_dma_0_4.dcp' for cell 'design_1_i/axi_dma_4'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_5/design_1_axi_dma_0_5.dcp' for cell 'design_1_i/axi_dma_5'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_6/design_1_axi_dma_0_6.dcp' for cell 'design_1_i/axi_dma_6'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_7/design_1_axi_dma_0_7.dcp' for cell 'design_1_i/axi_dma_7'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_0_1/design_1_axi_gpio_0_1.dcp' for cell 'design_1_i/axi_gpio_0'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_1_1/design_1_axi_gpio_1_1.dcp' for cell 'design_1_i/axi_gpio_1'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_0/design_1_axis_data_fifo_0_0.dcp' for cell 'design_1_i/axis_data_fifo_0'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_1/design_1_axis_data_fifo_0_1.dcp' for cell 'design_1_i/axis_data_fifo_1'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_2/design_1_axis_data_fifo_0_2.dcp' for cell 'design_1_i/axis_data_fifo_2'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_3/design_1_axis_data_fifo_0_3.dcp' for cell 'design_1_i/axis_data_fifo_3'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_4/design_1_axis_data_fifo_0_4.dcp' for cell 'design_1_i/axis_data_fifo_4'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_5/design_1_axis_data_fifo_0_5.dcp' for cell 'design_1_i/axis_data_fifo_5'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_6/design_1_axis_data_fifo_0_6.dcp' for cell 'design_1_i/axis_data_fifo_6'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_7/design_1_axis_data_fifo_0_7.dcp' for cell 'design_1_i/axis_data_fifo_7'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_debounce_0_0/design_1_debounce_0_0.dcp' for cell 'design_1_i/debounce_0'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_enable_splitter_0_0/design_1_enable_splitter_0_0.dcp' for cell 'design_1_i/enable_splitter_0'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/design_1_processing_system7_0_0.dcp' for cell 'design_1_i/processing_system7_0'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_rst_ps7_0_100M_0/design_1_rst_ps7_0_100M_0.dcp' for cell 'design_1_i/rst_ps7_0_100M'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_signal_detector_0_0/design_1_signal_detector_0_0.dcp' for cell 'design_1_i/signal_detector_0'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_signal_detector_0_1/design_1_signal_detector_0_1.dcp' for cell 'design_1_i/signal_detector_1'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_signal_detector_0_2/design_1_signal_detector_0_2.dcp' for cell 'design_1_i/signal_detector_2'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_signal_detector_0_3/design_1_signal_detector_0_3.dcp' for cell 'design_1_i/signal_detector_3'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_signal_detector_0_4/design_1_signal_detector_0_4.dcp' for cell 'design_1_i/signal_detector_4'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_signal_detector_0_5/design_1_signal_detector_0_5.dcp' for cell 'design_1_i/signal_detector_5'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_signal_detector_6_0/design_1_signal_detector_6_0.dcp' for cell 'design_1_i/signal_detector_6'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_signal_detector_0_7/design_1_signal_detector_0_7.dcp' for cell 'design_1_i/signal_detector_7'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_signal_input_0_0/design_1_signal_input_0_0.dcp' for cell 'design_1_i/signal_input_0'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_util_vector_logic_0_0/design_1_util_vector_logic_0_0.dcp' for cell 'design_1_i/util_vector_logic_0'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_util_vector_logic_1_0/design_1_util_vector_logic_1_0.dcp' for cell 'design_1_i/util_vector_logic_1'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_util_vector_logic_1_1/design_1_util_vector_logic_1_1.dcp' for cell 'design_1_i/util_vector_logic_2'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_util_vector_logic_1_2/design_1_util_vector_logic_1_2.dcp' for cell 'design_1_i/util_vector_logic_3'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_util_vector_logic_1_3/design_1_util_vector_logic_1_3.dcp' for cell 'design_1_i/util_vector_logic_4'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_util_vector_logic_1_4/design_1_util_vector_logic_1_4.dcp' for cell 'design_1_i/util_vector_logic_5'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_util_vector_logic_1_5/design_1_util_vector_logic_1_5.dcp' for cell 'design_1_i/util_vector_logic_6'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_util_vector_logic_1_6/design_1_util_vector_logic_1_6.dcp' for cell 'design_1_i/util_vector_logic_7'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_util_vector_logic_1_7/design_1_util_vector_logic_1_7.dcp' for cell 'design_1_i/util_vector_logic_8'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_xbar_1/design_1_xbar_1.dcp' for cell 'design_1_i/axi_mem_intercon/xbar'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_pc_1/design_1_auto_pc_1.dcp' for cell 'design_1_i/axi_mem_intercon/m00_couplers/auto_pc'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_0/design_1_auto_us_0.dcp' for cell 'design_1_i/axi_mem_intercon/s00_couplers/auto_us'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_1/design_1_auto_us_1.dcp' for cell 'design_1_i/axi_mem_intercon/s01_couplers/auto_us'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_2/design_1_auto_us_2.dcp' for cell 'design_1_i/axi_mem_intercon/s02_couplers/auto_us'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_3/design_1_auto_us_3.dcp' for cell 'design_1_i/axi_mem_intercon/s03_couplers/auto_us'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_4/design_1_auto_us_4.dcp' for cell 'design_1_i/axi_mem_intercon/s04_couplers/auto_us'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_5/design_1_auto_us_5.dcp' for cell 'design_1_i/axi_mem_intercon/s05_couplers/auto_us'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_6/design_1_auto_us_6.dcp' for cell 'design_1_i/axi_mem_intercon/s06_couplers/auto_us'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_7/design_1_auto_us_7.dcp' for cell 'design_1_i/axi_mem_intercon/s07_couplers/auto_us'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_xbar_0/design_1_xbar_0.dcp' for cell 'design_1_i/ps7_0_axi_periph/xbar'
+INFO: [Project 1-454] Reading design checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_pc_0/design_1_auto_pc_0.dcp' for cell 'design_1_i/ps7_0_axi_periph/s00_couplers/auto_pc'
+Netlist sorting complete. Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 1798.875 ; gain = 2.000 ; free physical = 424 ; free virtual = 2728
+INFO: [Netlist 29-17] Analyzing 685 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-479] Netlist was created with Vivado 2019.2.1
 INFO: [Project 1-570] Preparing netlist for logic optimization
-Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/design_1_processing_system7_0_0.xdc] for cell 'design_1_i/processing_system7_0/inst'
-Finished Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/design_1_processing_system7_0_0.xdc] for cell 'design_1_i/processing_system7_0/inst'
-Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_0/design_1_axi_dma_0_0.xdc] for cell 'design_1_i/axi_dma_0/U0'
-WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-1' -to list should not be empty. [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_0/design_1_axi_dma_0_0.xdc:52]
-WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-1' -to list should not be empty. [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_0/design_1_axi_dma_0_0.xdc:56]
-WARNING: [Vivado_Tcl 4-919] Waiver ID 'CDC-1' -from list should not be empty. [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_0/design_1_axi_dma_0_0.xdc:61]
-Finished Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_0/design_1_axi_dma_0_0.xdc] for cell 'design_1_i/axi_dma_0/U0'
-Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_1/design_1_axi_dma_0_1.xdc] for cell 'design_1_i/axi_dma_1/U0'
-WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-1' -to list should not be empty. [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_1/design_1_axi_dma_0_1.xdc:52]
-WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-1' -to list should not be empty. [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_1/design_1_axi_dma_0_1.xdc:56]
-WARNING: [Vivado_Tcl 4-919] Waiver ID 'CDC-1' -from list should not be empty. [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_1/design_1_axi_dma_0_1.xdc:61]
-Finished Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_1/design_1_axi_dma_0_1.xdc] for cell 'design_1_i/axi_dma_1/U0'
-Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_2/design_1_axi_dma_0_2.xdc] for cell 'design_1_i/axi_dma_2/U0'
-WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-1' -to list should not be empty. [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_2/design_1_axi_dma_0_2.xdc:52]
-WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-1' -to list should not be empty. [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_2/design_1_axi_dma_0_2.xdc:56]
-WARNING: [Vivado_Tcl 4-919] Waiver ID 'CDC-1' -from list should not be empty. [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_2/design_1_axi_dma_0_2.xdc:61]
-Finished Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_2/design_1_axi_dma_0_2.xdc] for cell 'design_1_i/axi_dma_2/U0'
-Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_3/design_1_axi_dma_0_3.xdc] for cell 'design_1_i/axi_dma_3/U0'
-WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-1' -to list should not be empty. [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_3/design_1_axi_dma_0_3.xdc:52]
-WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-1' -to list should not be empty. [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_3/design_1_axi_dma_0_3.xdc:56]
-WARNING: [Vivado_Tcl 4-919] Waiver ID 'CDC-1' -from list should not be empty. [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_3/design_1_axi_dma_0_3.xdc:61]
-Finished Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_3/design_1_axi_dma_0_3.xdc] for cell 'design_1_i/axi_dma_3/U0'
-Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_4/design_1_axi_dma_0_4.xdc] for cell 'design_1_i/axi_dma_4/U0'
-WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-1' -to list should not be empty. [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_4/design_1_axi_dma_0_4.xdc:52]
-WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-1' -to list should not be empty. [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_4/design_1_axi_dma_0_4.xdc:56]
-WARNING: [Vivado_Tcl 4-919] Waiver ID 'CDC-1' -from list should not be empty. [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_4/design_1_axi_dma_0_4.xdc:61]
-Finished Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_4/design_1_axi_dma_0_4.xdc] for cell 'design_1_i/axi_dma_4/U0'
-Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_5/design_1_axi_dma_0_5.xdc] for cell 'design_1_i/axi_dma_5/U0'
-WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-1' -to list should not be empty. [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_5/design_1_axi_dma_0_5.xdc:52]
-WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-1' -to list should not be empty. [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_5/design_1_axi_dma_0_5.xdc:56]
-WARNING: [Vivado_Tcl 4-919] Waiver ID 'CDC-1' -from list should not be empty. [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_5/design_1_axi_dma_0_5.xdc:61]
-Finished Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_5/design_1_axi_dma_0_5.xdc] for cell 'design_1_i/axi_dma_5/U0'
-Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_6/design_1_axi_dma_0_6.xdc] for cell 'design_1_i/axi_dma_6/U0'
-WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-1' -to list should not be empty. [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_6/design_1_axi_dma_0_6.xdc:52]
-WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-1' -to list should not be empty. [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_6/design_1_axi_dma_0_6.xdc:56]
-WARNING: [Vivado_Tcl 4-919] Waiver ID 'CDC-1' -from list should not be empty. [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_6/design_1_axi_dma_0_6.xdc:61]
-Finished Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_6/design_1_axi_dma_0_6.xdc] for cell 'design_1_i/axi_dma_6/U0'
-Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_7/design_1_axi_dma_0_7.xdc] for cell 'design_1_i/axi_dma_7/U0'
-WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-1' -to list should not be empty. [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_7/design_1_axi_dma_0_7.xdc:52]
-WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-1' -to list should not be empty. [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_7/design_1_axi_dma_0_7.xdc:56]
-WARNING: [Vivado_Tcl 4-919] Waiver ID 'CDC-1' -from list should not be empty. [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_7/design_1_axi_dma_0_7.xdc:61]
-Finished Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_7/design_1_axi_dma_0_7.xdc] for cell 'design_1_i/axi_dma_7/U0'
-Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_rst_ps7_0_100M_0/design_1_rst_ps7_0_100M_0_board.xdc] for cell 'design_1_i/rst_ps7_0_100M/U0'
-Finished Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_rst_ps7_0_100M_0/design_1_rst_ps7_0_100M_0_board.xdc] for cell 'design_1_i/rst_ps7_0_100M/U0'
-Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_rst_ps7_0_100M_0/design_1_rst_ps7_0_100M_0.xdc] for cell 'design_1_i/rst_ps7_0_100M/U0'
-Finished Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_rst_ps7_0_100M_0/design_1_rst_ps7_0_100M_0.xdc] for cell 'design_1_i/rst_ps7_0_100M/U0'
-Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_0_1/design_1_axi_gpio_0_1_board.xdc] for cell 'design_1_i/axi_gpio_0/U0'
-Finished Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_0_1/design_1_axi_gpio_0_1_board.xdc] for cell 'design_1_i/axi_gpio_0/U0'
-Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_0_1/design_1_axi_gpio_0_1.xdc] for cell 'design_1_i/axi_gpio_0/U0'
-Finished Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_0_1/design_1_axi_gpio_0_1.xdc] for cell 'design_1_i/axi_gpio_0/U0'
-Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_1_1/design_1_axi_gpio_1_1_board.xdc] for cell 'design_1_i/axi_gpio_1/U0'
-Finished Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_1_1/design_1_axi_gpio_1_1_board.xdc] for cell 'design_1_i/axi_gpio_1/U0'
-Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_1_1/design_1_axi_gpio_1_1.xdc] for cell 'design_1_i/axi_gpio_1/U0'
-Finished Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_1_1/design_1_axi_gpio_1_1.xdc] for cell 'design_1_i/axi_gpio_1/U0'
-Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/constrs_1/imports/project_1.srcs/zedboard_master_XDC_RevC_D_v3.xdc]
-Finished Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/constrs_1/imports/project_1.srcs/zedboard_master_XDC_RevC_D_v3.xdc]
-Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_0/design_1_axi_dma_0_0_clocks.xdc] for cell 'design_1_i/axi_dma_0/U0'
-Finished Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_0/design_1_axi_dma_0_0_clocks.xdc] for cell 'design_1_i/axi_dma_0/U0'
-Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_1/design_1_axi_dma_0_1_clocks.xdc] for cell 'design_1_i/axi_dma_1/U0'
-Finished Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_1/design_1_axi_dma_0_1_clocks.xdc] for cell 'design_1_i/axi_dma_1/U0'
-Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_2/design_1_axi_dma_0_2_clocks.xdc] for cell 'design_1_i/axi_dma_2/U0'
-Finished Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_2/design_1_axi_dma_0_2_clocks.xdc] for cell 'design_1_i/axi_dma_2/U0'
-Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_3/design_1_axi_dma_0_3_clocks.xdc] for cell 'design_1_i/axi_dma_3/U0'
-Finished Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_3/design_1_axi_dma_0_3_clocks.xdc] for cell 'design_1_i/axi_dma_3/U0'
-Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_4/design_1_axi_dma_0_4_clocks.xdc] for cell 'design_1_i/axi_dma_4/U0'
-Finished Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_4/design_1_axi_dma_0_4_clocks.xdc] for cell 'design_1_i/axi_dma_4/U0'
-Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_5/design_1_axi_dma_0_5_clocks.xdc] for cell 'design_1_i/axi_dma_5/U0'
-Finished Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_5/design_1_axi_dma_0_5_clocks.xdc] for cell 'design_1_i/axi_dma_5/U0'
-Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_6/design_1_axi_dma_0_6_clocks.xdc] for cell 'design_1_i/axi_dma_6/U0'
-Finished Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_6/design_1_axi_dma_0_6_clocks.xdc] for cell 'design_1_i/axi_dma_6/U0'
-Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_7/design_1_axi_dma_0_7_clocks.xdc] for cell 'design_1_i/axi_dma_7/U0'
-Finished Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_7/design_1_axi_dma_0_7_clocks.xdc] for cell 'design_1_i/axi_dma_7/U0'
-Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_0/design_1_auto_us_0_clocks.xdc] for cell 'design_1_i/axi_mem_intercon/s00_couplers/auto_us/inst'
-Finished Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_0/design_1_auto_us_0_clocks.xdc] for cell 'design_1_i/axi_mem_intercon/s00_couplers/auto_us/inst'
-Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_1/design_1_auto_us_1_clocks.xdc] for cell 'design_1_i/axi_mem_intercon/s01_couplers/auto_us/inst'
-Finished Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_1/design_1_auto_us_1_clocks.xdc] for cell 'design_1_i/axi_mem_intercon/s01_couplers/auto_us/inst'
-Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_2/design_1_auto_us_2_clocks.xdc] for cell 'design_1_i/axi_mem_intercon/s02_couplers/auto_us/inst'
-Finished Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_2/design_1_auto_us_2_clocks.xdc] for cell 'design_1_i/axi_mem_intercon/s02_couplers/auto_us/inst'
-Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_3/design_1_auto_us_3_clocks.xdc] for cell 'design_1_i/axi_mem_intercon/s03_couplers/auto_us/inst'
-Finished Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_3/design_1_auto_us_3_clocks.xdc] for cell 'design_1_i/axi_mem_intercon/s03_couplers/auto_us/inst'
-Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_4/design_1_auto_us_4_clocks.xdc] for cell 'design_1_i/axi_mem_intercon/s04_couplers/auto_us/inst'
-Finished Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_4/design_1_auto_us_4_clocks.xdc] for cell 'design_1_i/axi_mem_intercon/s04_couplers/auto_us/inst'
-Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_5/design_1_auto_us_5_clocks.xdc] for cell 'design_1_i/axi_mem_intercon/s05_couplers/auto_us/inst'
-Finished Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_5/design_1_auto_us_5_clocks.xdc] for cell 'design_1_i/axi_mem_intercon/s05_couplers/auto_us/inst'
-Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_6/design_1_auto_us_6_clocks.xdc] for cell 'design_1_i/axi_mem_intercon/s06_couplers/auto_us/inst'
-Finished Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_6/design_1_auto_us_6_clocks.xdc] for cell 'design_1_i/axi_mem_intercon/s06_couplers/auto_us/inst'
-Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_7/design_1_auto_us_7_clocks.xdc] for cell 'design_1_i/axi_mem_intercon/s07_couplers/auto_us/inst'
-Finished Parsing XDC File [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_7/design_1_auto_us_7_clocks.xdc] for cell 'design_1_i/axi_mem_intercon/s07_couplers/auto_us/inst'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/design_1_processing_system7_0_0.xdc] for cell 'design_1_i/processing_system7_0/inst'
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/design_1_processing_system7_0_0.xdc] for cell 'design_1_i/processing_system7_0/inst'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_0/design_1_axi_dma_0_0.xdc] for cell 'design_1_i/axi_dma_0/U0'
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-1' -to list should not be empty. [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_0/design_1_axi_dma_0_0.xdc:52]
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-1' -to list should not be empty. [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_0/design_1_axi_dma_0_0.xdc:56]
+WARNING: [Vivado_Tcl 4-919] Waiver ID 'CDC-1' -from list should not be empty. [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_0/design_1_axi_dma_0_0.xdc:61]
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_0/design_1_axi_dma_0_0.xdc] for cell 'design_1_i/axi_dma_0/U0'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_1/design_1_axi_dma_0_1.xdc] for cell 'design_1_i/axi_dma_1/U0'
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-1' -to list should not be empty. [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_1/design_1_axi_dma_0_1.xdc:52]
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-1' -to list should not be empty. [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_1/design_1_axi_dma_0_1.xdc:56]
+WARNING: [Vivado_Tcl 4-919] Waiver ID 'CDC-1' -from list should not be empty. [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_1/design_1_axi_dma_0_1.xdc:61]
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_1/design_1_axi_dma_0_1.xdc] for cell 'design_1_i/axi_dma_1/U0'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_2/design_1_axi_dma_0_2.xdc] for cell 'design_1_i/axi_dma_2/U0'
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-1' -to list should not be empty. [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_2/design_1_axi_dma_0_2.xdc:52]
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-1' -to list should not be empty. [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_2/design_1_axi_dma_0_2.xdc:56]
+WARNING: [Vivado_Tcl 4-919] Waiver ID 'CDC-1' -from list should not be empty. [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_2/design_1_axi_dma_0_2.xdc:61]
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_2/design_1_axi_dma_0_2.xdc] for cell 'design_1_i/axi_dma_2/U0'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_3/design_1_axi_dma_0_3.xdc] for cell 'design_1_i/axi_dma_3/U0'
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-1' -to list should not be empty. [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_3/design_1_axi_dma_0_3.xdc:52]
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-1' -to list should not be empty. [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_3/design_1_axi_dma_0_3.xdc:56]
+WARNING: [Vivado_Tcl 4-919] Waiver ID 'CDC-1' -from list should not be empty. [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_3/design_1_axi_dma_0_3.xdc:61]
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_3/design_1_axi_dma_0_3.xdc] for cell 'design_1_i/axi_dma_3/U0'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_4/design_1_axi_dma_0_4.xdc] for cell 'design_1_i/axi_dma_4/U0'
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-1' -to list should not be empty. [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_4/design_1_axi_dma_0_4.xdc:52]
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-1' -to list should not be empty. [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_4/design_1_axi_dma_0_4.xdc:56]
+WARNING: [Vivado_Tcl 4-919] Waiver ID 'CDC-1' -from list should not be empty. [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_4/design_1_axi_dma_0_4.xdc:61]
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_4/design_1_axi_dma_0_4.xdc] for cell 'design_1_i/axi_dma_4/U0'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_5/design_1_axi_dma_0_5.xdc] for cell 'design_1_i/axi_dma_5/U0'
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-1' -to list should not be empty. [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_5/design_1_axi_dma_0_5.xdc:52]
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-1' -to list should not be empty. [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_5/design_1_axi_dma_0_5.xdc:56]
+WARNING: [Vivado_Tcl 4-919] Waiver ID 'CDC-1' -from list should not be empty. [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_5/design_1_axi_dma_0_5.xdc:61]
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_5/design_1_axi_dma_0_5.xdc] for cell 'design_1_i/axi_dma_5/U0'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_6/design_1_axi_dma_0_6.xdc] for cell 'design_1_i/axi_dma_6/U0'
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-1' -to list should not be empty. [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_6/design_1_axi_dma_0_6.xdc:52]
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-1' -to list should not be empty. [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_6/design_1_axi_dma_0_6.xdc:56]
+WARNING: [Vivado_Tcl 4-919] Waiver ID 'CDC-1' -from list should not be empty. [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_6/design_1_axi_dma_0_6.xdc:61]
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_6/design_1_axi_dma_0_6.xdc] for cell 'design_1_i/axi_dma_6/U0'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_7/design_1_axi_dma_0_7.xdc] for cell 'design_1_i/axi_dma_7/U0'
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-1' -to list should not be empty. [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_7/design_1_axi_dma_0_7.xdc:52]
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-1' -to list should not be empty. [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_7/design_1_axi_dma_0_7.xdc:56]
+WARNING: [Vivado_Tcl 4-919] Waiver ID 'CDC-1' -from list should not be empty. [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_7/design_1_axi_dma_0_7.xdc:61]
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_7/design_1_axi_dma_0_7.xdc] for cell 'design_1_i/axi_dma_7/U0'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_rst_ps7_0_100M_0/design_1_rst_ps7_0_100M_0_board.xdc] for cell 'design_1_i/rst_ps7_0_100M/U0'
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_rst_ps7_0_100M_0/design_1_rst_ps7_0_100M_0_board.xdc] for cell 'design_1_i/rst_ps7_0_100M/U0'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_rst_ps7_0_100M_0/design_1_rst_ps7_0_100M_0.xdc] for cell 'design_1_i/rst_ps7_0_100M/U0'
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_rst_ps7_0_100M_0/design_1_rst_ps7_0_100M_0.xdc] for cell 'design_1_i/rst_ps7_0_100M/U0'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_0_1/design_1_axi_gpio_0_1_board.xdc] for cell 'design_1_i/axi_gpio_0/U0'
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_0_1/design_1_axi_gpio_0_1_board.xdc] for cell 'design_1_i/axi_gpio_0/U0'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_0_1/design_1_axi_gpio_0_1.xdc] for cell 'design_1_i/axi_gpio_0/U0'
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_0_1/design_1_axi_gpio_0_1.xdc] for cell 'design_1_i/axi_gpio_0/U0'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_1_1/design_1_axi_gpio_1_1_board.xdc] for cell 'design_1_i/axi_gpio_1/U0'
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_1_1/design_1_axi_gpio_1_1_board.xdc] for cell 'design_1_i/axi_gpio_1/U0'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_1_1/design_1_axi_gpio_1_1.xdc] for cell 'design_1_i/axi_gpio_1/U0'
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_1_1/design_1_axi_gpio_1_1.xdc] for cell 'design_1_i/axi_gpio_1/U0'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/constrs_1/imports/project_1.srcs/zedboard_master_XDC_RevC_D_v3.xdc]
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/constrs_1/imports/project_1.srcs/zedboard_master_XDC_RevC_D_v3.xdc]
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_0/design_1_axi_dma_0_0_clocks.xdc] for cell 'design_1_i/axi_dma_0/U0'
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_0/design_1_axi_dma_0_0_clocks.xdc] for cell 'design_1_i/axi_dma_0/U0'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_1/design_1_axi_dma_0_1_clocks.xdc] for cell 'design_1_i/axi_dma_1/U0'
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_1/design_1_axi_dma_0_1_clocks.xdc] for cell 'design_1_i/axi_dma_1/U0'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_2/design_1_axi_dma_0_2_clocks.xdc] for cell 'design_1_i/axi_dma_2/U0'
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_2/design_1_axi_dma_0_2_clocks.xdc] for cell 'design_1_i/axi_dma_2/U0'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_3/design_1_axi_dma_0_3_clocks.xdc] for cell 'design_1_i/axi_dma_3/U0'
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_3/design_1_axi_dma_0_3_clocks.xdc] for cell 'design_1_i/axi_dma_3/U0'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_4/design_1_axi_dma_0_4_clocks.xdc] for cell 'design_1_i/axi_dma_4/U0'
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_4/design_1_axi_dma_0_4_clocks.xdc] for cell 'design_1_i/axi_dma_4/U0'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_5/design_1_axi_dma_0_5_clocks.xdc] for cell 'design_1_i/axi_dma_5/U0'
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_5/design_1_axi_dma_0_5_clocks.xdc] for cell 'design_1_i/axi_dma_5/U0'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_6/design_1_axi_dma_0_6_clocks.xdc] for cell 'design_1_i/axi_dma_6/U0'
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_6/design_1_axi_dma_0_6_clocks.xdc] for cell 'design_1_i/axi_dma_6/U0'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_7/design_1_axi_dma_0_7_clocks.xdc] for cell 'design_1_i/axi_dma_7/U0'
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_7/design_1_axi_dma_0_7_clocks.xdc] for cell 'design_1_i/axi_dma_7/U0'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_0/design_1_auto_us_0_clocks.xdc] for cell 'design_1_i/axi_mem_intercon/s00_couplers/auto_us/inst'
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_0/design_1_auto_us_0_clocks.xdc] for cell 'design_1_i/axi_mem_intercon/s00_couplers/auto_us/inst'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_1/design_1_auto_us_1_clocks.xdc] for cell 'design_1_i/axi_mem_intercon/s01_couplers/auto_us/inst'
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_1/design_1_auto_us_1_clocks.xdc] for cell 'design_1_i/axi_mem_intercon/s01_couplers/auto_us/inst'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_2/design_1_auto_us_2_clocks.xdc] for cell 'design_1_i/axi_mem_intercon/s02_couplers/auto_us/inst'
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_2/design_1_auto_us_2_clocks.xdc] for cell 'design_1_i/axi_mem_intercon/s02_couplers/auto_us/inst'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_3/design_1_auto_us_3_clocks.xdc] for cell 'design_1_i/axi_mem_intercon/s03_couplers/auto_us/inst'
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_3/design_1_auto_us_3_clocks.xdc] for cell 'design_1_i/axi_mem_intercon/s03_couplers/auto_us/inst'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_4/design_1_auto_us_4_clocks.xdc] for cell 'design_1_i/axi_mem_intercon/s04_couplers/auto_us/inst'
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_4/design_1_auto_us_4_clocks.xdc] for cell 'design_1_i/axi_mem_intercon/s04_couplers/auto_us/inst'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_5/design_1_auto_us_5_clocks.xdc] for cell 'design_1_i/axi_mem_intercon/s05_couplers/auto_us/inst'
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_5/design_1_auto_us_5_clocks.xdc] for cell 'design_1_i/axi_mem_intercon/s05_couplers/auto_us/inst'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_6/design_1_auto_us_6_clocks.xdc] for cell 'design_1_i/axi_mem_intercon/s06_couplers/auto_us/inst'
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_6/design_1_auto_us_6_clocks.xdc] for cell 'design_1_i/axi_mem_intercon/s06_couplers/auto_us/inst'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_7/design_1_auto_us_7_clocks.xdc] for cell 'design_1_i/axi_mem_intercon/s07_couplers/auto_us/inst'
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_7/design_1_auto_us_7_clocks.xdc] for cell 'design_1_i/axi_mem_intercon/s07_couplers/auto_us/inst'
 Sourcing Tcl File [/home/vm/tools/Xilinx/Vivado/2019.2/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_async_rst.tcl] for cell 'design_1_i/axi_mem_intercon/m00_couplers/auto_pc/inst/gen_axi4_axi3.axi3_conv_inst/USE_READ.USE_SPLIT_R.read_addr_inst/USE_R_CHANNEL.cmd_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gnsckt_wrst.rst_wr_reg2_inst'
 Finished Sourcing Tcl File [/home/vm/tools/Xilinx/Vivado/2019.2/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_async_rst.tcl] for cell 'design_1_i/axi_mem_intercon/m00_couplers/auto_pc/inst/gen_axi4_axi3.axi3_conv_inst/USE_READ.USE_SPLIT_R.read_addr_inst/USE_R_CHANNEL.cmd_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gnsckt_wrst.rst_wr_reg2_inst'
 Sourcing Tcl File [/home/vm/tools/Xilinx/Vivado/2019.2/data/ip/xpm/xpm_cdc/tcl/xpm_cdc_async_rst.tcl] for cell 'design_1_i/axi_mem_intercon/m00_couplers/auto_pc/inst/gen_axi4_axi3.axi3_conv_inst/USE_WRITE.write_addr_inst/USE_BURSTS.cmd_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/ngwrdrst.grst.g7serrst.gnsckt_wrst.rst_wr_reg2_inst'
@@ -233,15 +234,15 @@ Finished Sourcing Tcl File [/home/vm/tools/Xilinx/Vivado/2019.2/data/ip/xpm/xpm_
 Sourcing Tcl File [/home/vm/tools/Xilinx/Vivado/2019.2/data/ip/xpm/xpm_fifo/tcl/xpm_fifo_rst.tcl] for cell 'design_1_i/axi_dma_7/U0/I_PRMRY_DATAMOVER/GEN_S2MM_FULL.I_S2MM_FULL_WRAPPER/GEN_ENABLE_INDET_BTT_SF.I_INDET_BTT/I_DATA_FIFO/BLK_MEM.I_SYNC_FIFOGEN_FIFO/xpm_fifo_instance.xpm_fifo_sync_inst'
 Finished Sourcing Tcl File [/home/vm/tools/Xilinx/Vivado/2019.2/data/ip/xpm/xpm_fifo/tcl/xpm_fifo_rst.tcl] for cell 'design_1_i/axi_dma_7/U0/I_PRMRY_DATAMOVER/GEN_S2MM_FULL.I_S2MM_FULL_WRAPPER/GEN_ENABLE_INDET_BTT_SF.I_INDET_BTT/I_DATA_FIFO/BLK_MEM.I_SYNC_FIFOGEN_FIFO/xpm_fifo_instance.xpm_fifo_sync_inst'
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00.03 ; elapsed = 00:00:00.03 . Memory (MB): peak = 1995.176 ; gain = 0.000 ; free physical = 274 ; free virtual = 2993
+Netlist sorting complete. Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.01 . Memory (MB): peak = 1996.172 ; gain = 0.000 ; free physical = 288 ; free virtual = 2592
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 20 instances were transformed.
   RAM32M => RAM32M (RAMD32(x6), RAMS32(x2)): 19 instances
   RAM32X1D => RAM32X1D (RAMD32(x2)): 1 instance 
 
-61 Infos, 24 Warnings, 0 Critical Warnings and 0 Errors encountered.
+62 Infos, 24 Warnings, 0 Critical Warnings and 0 Errors encountered.
 link_design completed successfully
-link_design: Time (s): cpu = 00:00:53 ; elapsed = 00:01:02 . Memory (MB): peak = 1995.176 ; gain = 523.516 ; free physical = 274 ; free virtual = 2993
+link_design: Time (s): cpu = 00:00:40 ; elapsed = 00:00:47 . Memory (MB): peak = 1996.172 ; gain = 524.516 ; free physical = 288 ; free virtual = 2592
 Command: opt_design
 Attempting to get a license for feature 'Implementation' and/or device 'xc7z020'
 INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7z020'
@@ -252,60 +253,60 @@ INFO: [DRC 23-27] Running DRC with 4 threads
 INFO: [Project 1-461] DRC finished with 0 Errors
 INFO: [Project 1-462] Please refer to the DRC report (report_drc) for more information.
 
-Time (s): cpu = 00:00:07 ; elapsed = 00:00:05 . Memory (MB): peak = 2066.656 ; gain = 71.480 ; free physical = 261 ; free virtual = 2981
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:03 . Memory (MB): peak = 2048.840 ; gain = 52.668 ; free physical = 280 ; free virtual = 2585
 
 Starting Cache Timing Information Task
 INFO: [Timing 38-35] Done setting XDC timing constraints.
-Ending Cache Timing Information Task | Checksum: 1a4971371
+Ending Cache Timing Information Task | Checksum: c7ea2e3f
 
-Time (s): cpu = 00:00:36 ; elapsed = 00:00:40 . Memory (MB): peak = 2493.508 ; gain = 426.852 ; free physical = 119 ; free virtual = 2568
+Time (s): cpu = 00:00:24 ; elapsed = 00:00:27 . Memory (MB): peak = 2493.699 ; gain = 444.859 ; free physical = 114 ; free virtual = 2189
 
 Starting Logic Optimization Task
 
 Phase 1 Retarget
 INFO: [Opt 31-138] Pushed 8 inverter(s) to 64 load pin(s).
 INFO: [Opt 31-49] Retargeted 0 cell(s).
-Phase 1 Retarget | Checksum: 16b1b30ae
+Phase 1 Retarget | Checksum: c3d711d2
 
-Time (s): cpu = 00:00:08 ; elapsed = 00:00:06 . Memory (MB): peak = 2652.414 ; gain = 0.000 ; free physical = 159 ; free virtual = 2438
-INFO: [Opt 31-389] Phase Retarget created 61 cells and removed 442 cells
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:05 . Memory (MB): peak = 2652.605 ; gain = 0.000 ; free physical = 138 ; free virtual = 2058
+INFO: [Opt 31-389] Phase Retarget created 29 cells and removed 410 cells
 INFO: [Opt 31-1021] In phase Retarget, 24 netlist objects are constrained preventing optimization. Please run opt_design with -debug_log to get more detail. 
 
 Phase 2 Constant propagation
 INFO: [Opt 31-138] Pushed 8 inverter(s) to 48 load pin(s).
-Phase 2 Constant propagation | Checksum: 1f41a41c8
+Phase 2 Constant propagation | Checksum: f6891709
 
-Time (s): cpu = 00:00:13 ; elapsed = 00:00:11 . Memory (MB): peak = 2652.414 ; gain = 0.000 ; free physical = 159 ; free virtual = 2438
-INFO: [Opt 31-389] Phase Constant propagation created 1096 cells and removed 2600 cells
+Time (s): cpu = 00:00:10 ; elapsed = 00:00:08 . Memory (MB): peak = 2652.605 ; gain = 0.000 ; free physical = 138 ; free virtual = 2058
+INFO: [Opt 31-389] Phase Constant propagation created 1096 cells and removed 2568 cells
 INFO: [Opt 31-1021] In phase Constant propagation, 26 netlist objects are constrained preventing optimization. Please run opt_design with -debug_log to get more detail. 
 
 Phase 3 Sweep
-Phase 3 Sweep | Checksum: 180f805a8
+Phase 3 Sweep | Checksum: 89911fc6
 
-Time (s): cpu = 00:00:20 ; elapsed = 00:00:18 . Memory (MB): peak = 2652.414 ; gain = 0.000 ; free physical = 156 ; free virtual = 2437
-INFO: [Opt 31-389] Phase Sweep created 0 cells and removed 2025 cells
+Time (s): cpu = 00:00:15 ; elapsed = 00:00:13 . Memory (MB): peak = 2652.605 ; gain = 0.000 ; free physical = 136 ; free virtual = 2056
+INFO: [Opt 31-389] Phase Sweep created 0 cells and removed 2041 cells
 INFO: [Opt 31-1021] In phase Sweep, 96 netlist objects are constrained preventing optimization. Please run opt_design with -debug_log to get more detail. 
 
 Phase 4 BUFG optimization
 INFO: [Opt 31-1112] Starts optimizing BUFG(s) with a common MMCM/DPLL/XPLL driver.
 INFO: [Opt 31-1112] Starts optimizing BUFG(s) with a common driver.
 INFO: [Opt 31-1092] Phase BUFG optimization transformed 0 BUFG(s) to MBUFG(s).
-Phase 4 BUFG optimization | Checksum: 180f805a8
+Phase 4 BUFG optimization | Checksum: 89911fc6
 
-Time (s): cpu = 00:00:21 ; elapsed = 00:00:19 . Memory (MB): peak = 2652.414 ; gain = 0.000 ; free physical = 157 ; free virtual = 2438
+Time (s): cpu = 00:00:16 ; elapsed = 00:00:15 . Memory (MB): peak = 2652.605 ; gain = 0.000 ; free physical = 138 ; free virtual = 2057
 INFO: [Opt 31-662] Phase BUFG optimization created 0 cells of which 0 are BUFGs and removed 0 cells.
 
 Phase 5 Shift Register Optimization
 INFO: [Opt 31-1064] SRL Remap converted 0 SRLs to 0 registers and converted 0 registers of register chains to 0 SRLs
-Phase 5 Shift Register Optimization | Checksum: 180f805a8
+Phase 5 Shift Register Optimization | Checksum: 89911fc6
 
-Time (s): cpu = 00:00:22 ; elapsed = 00:00:20 . Memory (MB): peak = 2652.414 ; gain = 0.000 ; free physical = 157 ; free virtual = 2438
+Time (s): cpu = 00:00:17 ; elapsed = 00:00:16 . Memory (MB): peak = 2652.605 ; gain = 0.000 ; free physical = 138 ; free virtual = 2057
 INFO: [Opt 31-389] Phase Shift Register Optimization created 0 cells and removed 0 cells
 
 Phase 6 Post Processing Netlist
-Phase 6 Post Processing Netlist | Checksum: 180f805a8
+Phase 6 Post Processing Netlist | Checksum: 89911fc6
 
-Time (s): cpu = 00:00:23 ; elapsed = 00:00:21 . Memory (MB): peak = 2652.414 ; gain = 0.000 ; free physical = 157 ; free virtual = 2438
+Time (s): cpu = 00:00:18 ; elapsed = 00:00:16 . Memory (MB): peak = 2652.605 ; gain = 0.000 ; free physical = 138 ; free virtual = 2057
 INFO: [Opt 31-389] Phase Post Processing Netlist created 0 cells and removed 0 cells
 INFO: [Opt 31-1021] In phase Post Processing Netlist, 33 netlist objects are constrained preventing optimization. Please run opt_design with -debug_log to get more detail. 
 Opt_design Change Summary
@@ -315,9 +316,9 @@ Opt_design Change Summary
 -------------------------------------------------------------------------------------------------------------------------
 |  Phase                        |  #Cells created  |  #Cells Removed  |  #Constrained objects preventing optimizations  |
 -------------------------------------------------------------------------------------------------------------------------
-|  Retarget                     |              61  |             442  |                                             24  |
-|  Constant propagation         |            1096  |            2600  |                                             26  |
-|  Sweep                        |               0  |            2025  |                                             96  |
+|  Retarget                     |              29  |             410  |                                             24  |
+|  Constant propagation         |            1096  |            2568  |                                             26  |
+|  Sweep                        |               0  |            2041  |                                             96  |
 |  BUFG optimization            |               0  |               0  |                                              0  |
 |  Shift Register Optimization  |               0  |               0  |                                              0  |
 |  Post Processing Netlist      |               0  |               0  |                                             33  |
@@ -327,10 +328,10 @@ Opt_design Change Summary
 
 Starting Connectivity Check Task
 
-Time (s): cpu = 00:00:00.25 ; elapsed = 00:00:00.26 . Memory (MB): peak = 2652.414 ; gain = 0.000 ; free physical = 157 ; free virtual = 2439
-Ending Logic Optimization Task | Checksum: ec54122f
+Time (s): cpu = 00:00:00.22 ; elapsed = 00:00:00.23 . Memory (MB): peak = 2652.605 ; gain = 0.000 ; free physical = 137 ; free virtual = 2057
+Ending Logic Optimization Task | Checksum: 1a475cbca
 
-Time (s): cpu = 00:00:26 ; elapsed = 00:00:24 . Memory (MB): peak = 2652.414 ; gain = 0.000 ; free physical = 157 ; free virtual = 2439
+Time (s): cpu = 00:00:20 ; elapsed = 00:00:19 . Memory (MB): peak = 2652.605 ; gain = 0.000 ; free physical = 137 ; free virtual = 2057
 
 Starting Power Optimization Task
 INFO: [Pwropt 34-132] Skipping clock gating for clocks with a period < 2.00 ns.
@@ -347,43 +348,42 @@ Starting PowerOpt Patch Enables Task
 INFO: [Pwropt 34-162] WRITE_MODE attribute of 0 BRAM(s) out of a total of 24 has been updated to save power. Run report_power_opt to get a complete listing of the BRAMs updated.
 INFO: [Pwropt 34-201] Structural ODC has moved 0 WE to EN ports
 Number of BRAM Ports augmented: 24 newly gated: 0 Total Ports: 48
-Ending PowerOpt Patch Enables Task | Checksum: bbb165e4
+Ending PowerOpt Patch Enables Task | Checksum: 12fbb3613
 
-Time (s): cpu = 00:00:00.95 ; elapsed = 00:00:00.97 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 308 ; free virtual = 2385
-Ending Power Optimization Task | Checksum: bbb165e4
+Time (s): cpu = 00:00:00.67 ; elapsed = 00:00:00.67 . Memory (MB): peak = 2992.211 ; gain = 0.000 ; free physical = 326 ; free virtual = 1996
+Ending Power Optimization Task | Checksum: 12fbb3613
 
-Time (s): cpu = 00:00:51 ; elapsed = 00:00:25 . Memory (MB): peak = 3000.039 ; gain = 347.625 ; free physical = 328 ; free virtual = 2405
+Time (s): cpu = 00:00:37 ; elapsed = 00:00:19 . Memory (MB): peak = 2992.211 ; gain = 339.605 ; free physical = 361 ; free virtual = 2031
 
 Starting Final Cleanup Task
-Ending Final Cleanup Task | Checksum: bbb165e4
+Ending Final Cleanup Task | Checksum: 12fbb3613
 
-Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 328 ; free virtual = 2405
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2992.211 ; gain = 0.000 ; free physical = 361 ; free virtual = 2031
 
 Starting Netlist Obfuscation Task
-Netlist sorting complete. Time (s): cpu = 00:00:00.39 ; elapsed = 00:00:00.40 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 327 ; free virtual = 2405
-Ending Netlist Obfuscation Task | Checksum: 711e7dec
+Netlist sorting complete. Time (s): cpu = 00:00:00.29 ; elapsed = 00:00:00.29 . Memory (MB): peak = 2992.211 ; gain = 0.000 ; free physical = 361 ; free virtual = 2031
+Ending Netlist Obfuscation Task | Checksum: 14777b4ee
 
-Time (s): cpu = 00:00:00.39 ; elapsed = 00:00:00.40 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 327 ; free virtual = 2405
+Time (s): cpu = 00:00:00.29 ; elapsed = 00:00:00.29 . Memory (MB): peak = 2992.211 ; gain = 0.000 ; free physical = 361 ; free virtual = 2031
 INFO: [Common 17-83] Releasing license: Implementation
-91 Infos, 24 Warnings, 0 Critical Warnings and 0 Errors encountered.
+92 Infos, 24 Warnings, 0 Critical Warnings and 0 Errors encountered.
 opt_design completed successfully
-opt_design: Time (s): cpu = 00:02:09 ; elapsed = 00:01:44 . Memory (MB): peak = 3000.039 ; gain = 1004.863 ; free physical = 327 ; free virtual = 2406
-Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.02 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 325 ; free virtual = 2406
+opt_design: Time (s): cpu = 00:01:32 ; elapsed = 00:01:13 . Memory (MB): peak = 2992.211 ; gain = 996.039 ; free physical = 361 ; free virtual = 2031
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2992.211 ; gain = 0.000 ; free physical = 361 ; free virtual = 2031
 INFO: [Timing 38-480] Writing timing data to binary archive.
 Writing placer database...
 Writing XDEF routing.
 Writing XDEF routing logical nets.
 Writing XDEF routing special nets.
-Write XDEF Complete: Time (s): cpu = 00:00:00.71 ; elapsed = 00:00:00.20 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 311 ; free virtual = 2401
-INFO: [Common 17-1381] The checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.runs/impl_1/design_1_wrapper_opt.dcp' has been generated.
-write_checkpoint: Time (s): cpu = 00:00:16 ; elapsed = 00:00:10 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 304 ; free virtual = 2404
+Write XDEF Complete: Time (s): cpu = 00:00:00.71 ; elapsed = 00:00:00.21 . Memory (MB): peak = 2992.211 ; gain = 0.000 ; free physical = 346 ; free virtual = 2021
+INFO: [Common 17-1381] The checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/impl_1/design_1_wrapper_opt.dcp' has been generated.
+write_checkpoint: Time (s): cpu = 00:00:12 ; elapsed = 00:00:08 . Memory (MB): peak = 2992.211 ; gain = 0.000 ; free physical = 358 ; free virtual = 2038
 INFO: [runtcl-4] Executing : report_drc -file design_1_wrapper_drc_opted.rpt -pb design_1_wrapper_drc_opted.pb -rpx design_1_wrapper_drc_opted.rpx
 Command: report_drc -file design_1_wrapper_drc_opted.rpt -pb design_1_wrapper_drc_opted.pb -rpx design_1_wrapper_drc_opted.rpx
 INFO: [IP_Flow 19-1839] IP Catalog is up to date.
 INFO: [DRC 23-27] Running DRC with 4 threads
-INFO: [Coretcl 2-168] The results of DRC are in file /home/vm/projects/simpleneutron/vivado/project_1/project_1.runs/impl_1/design_1_wrapper_drc_opted.rpt.
+INFO: [Coretcl 2-168] The results of DRC are in file /home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/impl_1/design_1_wrapper_drc_opted.rpt.
 report_drc completed successfully
-report_drc: Time (s): cpu = 00:00:15 ; elapsed = 00:00:07 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 282 ; free virtual = 2404
 Command: place_design
 Attempting to get a license for feature 'Implementation' and/or device 'xc7z020'
 INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7z020'
@@ -401,43 +401,43 @@ INFO: [Place 30-611] Multithreading enabled for place_design using a maximum of 
 Phase 1 Placer Initialization
 
 Phase 1.1 Placer Initialization Netlist Sorting
-Netlist sorting complete. Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.03 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 276 ; free virtual = 2403
-Phase 1.1 Placer Initialization Netlist Sorting | Checksum: 69e6572f
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.02 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 337 ; free virtual = 2031
+Phase 1.1 Placer Initialization Netlist Sorting | Checksum: b524d9f5
 
-Time (s): cpu = 00:00:00.06 ; elapsed = 00:00:00.09 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 276 ; free virtual = 2403
-Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.02 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 276 ; free virtual = 2403
+Time (s): cpu = 00:00:00.03 ; elapsed = 00:00:00.06 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 337 ; free virtual = 2031
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 337 ; free virtual = 2031
 
 Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device
 INFO: [Timing 38-35] Done setting XDC timing constraints.
-Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device | Checksum: 157d73cdf
+Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device | Checksum: bcb94be4
 
-Time (s): cpu = 00:00:15 ; elapsed = 00:00:10 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 240 ; free virtual = 2376
+Time (s): cpu = 00:00:11 ; elapsed = 00:00:07 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 308 ; free virtual = 2006
 
 Phase 1.3 Build Placer Netlist Model
-Phase 1.3 Build Placer Netlist Model | Checksum: 2382189ec
+Phase 1.3 Build Placer Netlist Model | Checksum: 1c22a993f
 
-Time (s): cpu = 00:00:38 ; elapsed = 00:00:24 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 190 ; free virtual = 2334
+Time (s): cpu = 00:00:28 ; elapsed = 00:00:18 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 261 ; free virtual = 1963
 
 Phase 1.4 Constrain Clocks/Macros
-Phase 1.4 Constrain Clocks/Macros | Checksum: 2382189ec
+Phase 1.4 Constrain Clocks/Macros | Checksum: 1c22a993f
 
-Time (s): cpu = 00:00:39 ; elapsed = 00:00:24 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 190 ; free virtual = 2334
-Phase 1 Placer Initialization | Checksum: 2382189ec
+Time (s): cpu = 00:00:29 ; elapsed = 00:00:18 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 261 ; free virtual = 1963
+Phase 1 Placer Initialization | Checksum: 1c22a993f
 
-Time (s): cpu = 00:00:39 ; elapsed = 00:00:24 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 188 ; free virtual = 2333
+Time (s): cpu = 00:00:29 ; elapsed = 00:00:18 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 260 ; free virtual = 1963
 
 Phase 2 Global Placement
 
 Phase 2.1 Floorplanning
-Phase 2.1 Floorplanning | Checksum: 1bfc7dbd1
+Phase 2.1 Floorplanning | Checksum: 166d5714e
 
-Time (s): cpu = 00:00:47 ; elapsed = 00:00:28 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 170 ; free virtual = 2316
+Time (s): cpu = 00:00:34 ; elapsed = 00:00:20 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 242 ; free virtual = 1945
 
 Phase 2.2 Global Placement Core
 
 Phase 2.2.1 Physical Synthesis In Placer
-INFO: [Physopt 32-1018] Found 1237 candidate LUT instances to create LUTNM shape
-INFO: [Physopt 32-775] End 1 Pass. Optimized 465 nets or cells. Created 41 new cells, deleted 424 existing cells and moved 0 existing cell
+INFO: [Physopt 32-1018] Found 1247 candidate LUT instances to create LUTNM shape
+INFO: [Physopt 32-775] End 1 Pass. Optimized 475 nets or cells. Created 41 new cells, deleted 434 existing cells and moved 0 existing cell
 INFO: [Physopt 32-65] No nets found for high-fanout optimization.
 INFO: [Physopt 32-232] Optimized 0 net. Created 0 new instance.
 INFO: [Physopt 32-775] End 1 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
@@ -450,7 +450,7 @@ INFO: [Physopt 32-526] No candidate cells for BRAM register optimization found i
 INFO: [Physopt 32-775] End 1 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
 INFO: [Physopt 32-949] No candidate nets found for HD net replication
 INFO: [Physopt 32-775] End 1 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
-Netlist sorting complete. Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.02 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 146 ; free virtual = 2307
+Netlist sorting complete. Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.02 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 234 ; free virtual = 1940
 
 Summary of Physical Synthesis Optimizations
 ============================================
@@ -459,71 +459,71 @@ Summary of Physical Synthesis Optimizations
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 |  Optimization                                     |  Added Cells  |  Removed Cells  |  Optimized Cells/Nets  |  Dont Touch  |  Iterations  |  Elapsed   |
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
-|  LUT Combining                                    |           41  |            424  |                   465  |           0  |           1  |  00:00:02  |
+|  LUT Combining                                    |           41  |            434  |                   475  |           0  |           1  |  00:00:02  |
 |  Very High Fanout                                 |            0  |              0  |                     0  |           0  |           1  |  00:00:01  |
 |  DSP Register                                     |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
 |  Shift Register to Pipeline                       |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
 |  Shift Register                                   |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
 |  BRAM Register                                    |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
 |  Dynamic/Static Region Interface Net Replication  |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
-|  Total                                            |           41  |            424  |                   465  |           0  |           7  |  00:00:04  |
+|  Total                                            |           41  |            434  |                   475  |           0  |           7  |  00:00:03  |
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-Phase 2.2.1 Physical Synthesis In Placer | Checksum: feaa1bd6
+Phase 2.2.1 Physical Synthesis In Placer | Checksum: 19465a375
 
-Time (s): cpu = 00:02:00 ; elapsed = 00:01:09 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 145 ; free virtual = 2307
-Phase 2.2 Global Placement Core | Checksum: 14db7d940
+Time (s): cpu = 00:01:27 ; elapsed = 00:00:49 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 233 ; free virtual = 1939
+Phase 2.2 Global Placement Core | Checksum: 1d90207ad
 
-Time (s): cpu = 00:02:04 ; elapsed = 00:01:10 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 143 ; free virtual = 2305
-Phase 2 Global Placement | Checksum: 14db7d940
+Time (s): cpu = 00:01:30 ; elapsed = 00:00:50 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 230 ; free virtual = 1937
+Phase 2 Global Placement | Checksum: 1d90207ad
 
-Time (s): cpu = 00:02:04 ; elapsed = 00:01:10 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 151 ; free virtual = 2314
+Time (s): cpu = 00:01:30 ; elapsed = 00:00:50 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 238 ; free virtual = 1945
 
 Phase 3 Detail Placement
 
 Phase 3.1 Commit Multi Column Macros
-Phase 3.1 Commit Multi Column Macros | Checksum: da058e6e
+Phase 3.1 Commit Multi Column Macros | Checksum: 1dd7e3f6f
 
-Time (s): cpu = 00:02:12 ; elapsed = 00:01:15 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 147 ; free virtual = 2309
+Time (s): cpu = 00:01:36 ; elapsed = 00:00:53 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 235 ; free virtual = 1943
 
 Phase 3.2 Commit Most Macros & LUTRAMs
-Phase 3.2 Commit Most Macros & LUTRAMs | Checksum: 2102b4bc3
+Phase 3.2 Commit Most Macros & LUTRAMs | Checksum: 229806bb5
 
-Time (s): cpu = 00:02:26 ; elapsed = 00:01:22 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 144 ; free virtual = 2308
+Time (s): cpu = 00:01:45 ; elapsed = 00:00:58 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 232 ; free virtual = 1941
 
 Phase 3.3 Area Swap Optimization
-Phase 3.3 Area Swap Optimization | Checksum: 1412db395
+Phase 3.3 Area Swap Optimization | Checksum: 26b97f957
 
-Time (s): cpu = 00:02:27 ; elapsed = 00:01:23 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 144 ; free virtual = 2308
+Time (s): cpu = 00:01:46 ; elapsed = 00:00:58 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 232 ; free virtual = 1941
 
 Phase 3.4 Pipeline Register Optimization
-Phase 3.4 Pipeline Register Optimization | Checksum: 17d5491f4
+Phase 3.4 Pipeline Register Optimization | Checksum: 23c2559ce
 
-Time (s): cpu = 00:02:27 ; elapsed = 00:01:23 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 144 ; free virtual = 2308
+Time (s): cpu = 00:01:46 ; elapsed = 00:00:58 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 232 ; free virtual = 1941
 
 Phase 3.5 Fast Optimization
-Phase 3.5 Fast Optimization | Checksum: 16f9c7933
+Phase 3.5 Fast Optimization | Checksum: 20c6acfd1
 
-Time (s): cpu = 00:02:39 ; elapsed = 00:01:28 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 146 ; free virtual = 2310
+Time (s): cpu = 00:01:55 ; elapsed = 00:01:02 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 233 ; free virtual = 1942
 
 Phase 3.6 Small Shape Detail Placement
-Phase 3.6 Small Shape Detail Placement | Checksum: aea8cd48
+Phase 3.6 Small Shape Detail Placement | Checksum: 238f9cb81
 
-Time (s): cpu = 00:03:05 ; elapsed = 00:02:07 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 130 ; free virtual = 2294
+Time (s): cpu = 00:02:12 ; elapsed = 00:01:20 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 215 ; free virtual = 1925
 
 Phase 3.7 Re-assign LUT pins
-Phase 3.7 Re-assign LUT pins | Checksum: f9550d03
+Phase 3.7 Re-assign LUT pins | Checksum: 28a5e484e
 
-Time (s): cpu = 00:03:08 ; elapsed = 00:02:11 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 131 ; free virtual = 2295
+Time (s): cpu = 00:02:15 ; elapsed = 00:01:23 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 215 ; free virtual = 1925
 
 Phase 3.8 Pipeline Register Optimization
-Phase 3.8 Pipeline Register Optimization | Checksum: 11cce3f61
+Phase 3.8 Pipeline Register Optimization | Checksum: 14b1cad2c
 
-Time (s): cpu = 00:03:09 ; elapsed = 00:02:11 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 131 ; free virtual = 2295
-Phase 3 Detail Placement | Checksum: 11cce3f61
+Time (s): cpu = 00:02:16 ; elapsed = 00:01:23 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 215 ; free virtual = 1925
+Phase 3 Detail Placement | Checksum: 14b1cad2c
 
-Time (s): cpu = 00:03:09 ; elapsed = 00:02:12 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 131 ; free virtual = 2295
+Time (s): cpu = 00:02:16 ; elapsed = 00:01:24 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 215 ; free virtual = 1925
 
 Phase 4 Post Placement Optimization and Clean-Up
 
@@ -531,78 +531,78 @@ Phase 4.1 Post Commit Optimization
 INFO: [Timing 38-35] Done setting XDC timing constraints.
 
 Phase 4.1.1 Post Placement Optimization
-Post Placement Optimization Initialization | Checksum: 15ea48ec6
+Post Placement Optimization Initialization | Checksum: 196ff75cc
 
 Phase 4.1.1.1 BUFG Insertion
 INFO: [Place 46-56] BUFG insertion identified 0 candidate nets. Inserted BUFG: 0, Replicated BUFG Driver: 0, Skipped due to Placement/Routing Conflicts: 0, Skipped due to Timing Degradation: 0, Skipped due to Illegal Netlist: 0.
-Phase 4.1.1.1 BUFG Insertion | Checksum: 15ea48ec6
+Phase 4.1.1.1 BUFG Insertion | Checksum: 196ff75cc
 
-Time (s): cpu = 00:03:36 ; elapsed = 00:02:26 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 130 ; free virtual = 2294
-INFO: [Place 30-746] Post Placement Timing Summary WNS=0.582. For the most accurate timing information please run report_timing.
-Phase 4.1.1 Post Placement Optimization | Checksum: 19da05201
+Time (s): cpu = 00:02:36 ; elapsed = 00:01:34 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 216 ; free virtual = 1926
+INFO: [Place 30-746] Post Placement Timing Summary WNS=0.602. For the most accurate timing information please run report_timing.
+Phase 4.1.1 Post Placement Optimization | Checksum: cc4b8639
 
-Time (s): cpu = 00:03:41 ; elapsed = 00:02:30 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 128 ; free virtual = 2292
-Phase 4.1 Post Commit Optimization | Checksum: 19da05201
+Time (s): cpu = 00:02:39 ; elapsed = 00:01:37 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 213 ; free virtual = 1923
+Phase 4.1 Post Commit Optimization | Checksum: cc4b8639
 
-Time (s): cpu = 00:03:41 ; elapsed = 00:02:31 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 128 ; free virtual = 2292
+Time (s): cpu = 00:02:39 ; elapsed = 00:01:37 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 213 ; free virtual = 1923
 
 Phase 4.2 Post Placement Cleanup
-Phase 4.2 Post Placement Cleanup | Checksum: 19da05201
+Phase 4.2 Post Placement Cleanup | Checksum: cc4b8639
 
-Time (s): cpu = 00:03:42 ; elapsed = 00:02:31 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 128 ; free virtual = 2292
+Time (s): cpu = 00:02:40 ; elapsed = 00:01:38 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 215 ; free virtual = 1925
 
 Phase 4.3 Placer Reporting
-Phase 4.3 Placer Reporting | Checksum: 19da05201
+Phase 4.3 Placer Reporting | Checksum: cc4b8639
 
-Time (s): cpu = 00:03:43 ; elapsed = 00:02:32 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 129 ; free virtual = 2294
+Time (s): cpu = 00:02:41 ; elapsed = 00:01:38 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 216 ; free virtual = 1926
 
 Phase 4.4 Final Placement Cleanup
-Netlist sorting complete. Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.02 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 129 ; free virtual = 2294
-Phase 4.4 Final Placement Cleanup | Checksum: 21cb88d6e
+Netlist sorting complete. Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.02 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 216 ; free virtual = 1926
+Phase 4.4 Final Placement Cleanup | Checksum: da12c39a
 
-Time (s): cpu = 00:03:43 ; elapsed = 00:02:32 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 129 ; free virtual = 2294
-Phase 4 Post Placement Optimization and Clean-Up | Checksum: 21cb88d6e
+Time (s): cpu = 00:02:41 ; elapsed = 00:01:39 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 216 ; free virtual = 1926
+Phase 4 Post Placement Optimization and Clean-Up | Checksum: da12c39a
 
-Time (s): cpu = 00:03:44 ; elapsed = 00:02:33 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 129 ; free virtual = 2294
-Ending Placer Task | Checksum: 16d8e823f
+Time (s): cpu = 00:02:41 ; elapsed = 00:01:39 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 216 ; free virtual = 1926
+Ending Placer Task | Checksum: a1dfeff1
 
-Time (s): cpu = 00:03:44 ; elapsed = 00:02:33 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 129 ; free virtual = 2294
+Time (s): cpu = 00:02:41 ; elapsed = 00:01:39 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 216 ; free virtual = 1926
 INFO: [Common 17-83] Releasing license: Implementation
-124 Infos, 24 Warnings, 0 Critical Warnings and 0 Errors encountered.
+125 Infos, 24 Warnings, 0 Critical Warnings and 0 Errors encountered.
 place_design completed successfully
-place_design: Time (s): cpu = 00:03:55 ; elapsed = 00:02:38 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 161 ; free virtual = 2326
-Netlist sorting complete. Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.02 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 161 ; free virtual = 2326
+place_design: Time (s): cpu = 00:02:51 ; elapsed = 00:01:44 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 244 ; free virtual = 1954
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.02 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 244 ; free virtual = 1954
 INFO: [Timing 38-480] Writing timing data to binary archive.
 Writing placer database...
 Writing XDEF routing.
 Writing XDEF routing logical nets.
 Writing XDEF routing special nets.
-Write XDEF Complete: Time (s): cpu = 00:00:18 ; elapsed = 00:00:06 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 108 ; free virtual = 2313
-INFO: [Common 17-1381] The checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.runs/impl_1/design_1_wrapper_placed.dcp' has been generated.
-write_checkpoint: Time (s): cpu = 00:00:23 ; elapsed = 00:00:11 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 148 ; free virtual = 2324
+Write XDEF Complete: Time (s): cpu = 00:00:13 ; elapsed = 00:00:05 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 191 ; free virtual = 1941
+INFO: [Common 17-1381] The checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/impl_1/design_1_wrapper_placed.dcp' has been generated.
+write_checkpoint: Time (s): cpu = 00:00:17 ; elapsed = 00:00:09 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 231 ; free virtual = 1952
 INFO: [runtcl-4] Executing : report_io -file design_1_wrapper_io_placed.rpt
-report_io: Time (s): cpu = 00:00:00.65 ; elapsed = 00:00:00.79 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 137 ; free virtual = 2314
+report_io: Time (s): cpu = 00:00:00.44 ; elapsed = 00:00:00.57 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 219 ; free virtual = 1940
 INFO: [runtcl-4] Executing : report_utilization -file design_1_wrapper_utilization_placed.rpt -pb design_1_wrapper_utilization_placed.pb
 INFO: [runtcl-4] Executing : report_control_sets -verbose -file design_1_wrapper_control_sets_placed.rpt
-report_control_sets: Time (s): cpu = 00:00:00.54 ; elapsed = 00:00:00.68 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 145 ; free virtual = 2322
+report_control_sets: Time (s): cpu = 00:00:00.41 ; elapsed = 00:00:00.50 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 228 ; free virtual = 1950
 Command: phys_opt_design
 Attempting to get a license for feature 'Implementation' and/or device 'xc7z020'
 INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7z020'
 INFO: [Vivado_Tcl 4-383] Design worst setup slack (WNS) is greater than or equal to 0.250 ns. Skipping all physical synthesis optimizations.
 INFO: [Vivado_Tcl 4-232] No setup violation found. The netlist was not modified.
 INFO: [Common 17-83] Releasing license: Implementation
-133 Infos, 24 Warnings, 0 Critical Warnings and 0 Errors encountered.
+134 Infos, 24 Warnings, 0 Critical Warnings and 0 Errors encountered.
 phys_opt_design completed successfully
-phys_opt_design: Time (s): cpu = 00:00:20 ; elapsed = 00:00:09 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 117 ; free virtual = 2295
-Netlist sorting complete. Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.02 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 117 ; free virtual = 2295
+phys_opt_design: Time (s): cpu = 00:00:15 ; elapsed = 00:00:07 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 203 ; free virtual = 1924
+Netlist sorting complete. Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.01 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 203 ; free virtual = 1924
 INFO: [Timing 38-480] Writing timing data to binary archive.
 Writing placer database...
 Writing XDEF routing.
 Writing XDEF routing logical nets.
 Writing XDEF routing special nets.
-Write XDEF Complete: Time (s): cpu = 00:00:18 ; elapsed = 00:00:06 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 110 ; free virtual = 2279
-INFO: [Common 17-1381] The checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.runs/impl_1/design_1_wrapper_physopt.dcp' has been generated.
-write_checkpoint: Time (s): cpu = 00:00:23 ; elapsed = 00:00:11 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 153 ; free virtual = 2294
+Write XDEF Complete: Time (s): cpu = 00:00:16 ; elapsed = 00:00:06 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 146 ; free virtual = 1908
+INFO: [Common 17-1381] The checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/impl_1/design_1_wrapper_physopt.dcp' has been generated.
+write_checkpoint: Time (s): cpu = 00:00:19 ; elapsed = 00:00:10 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 189 ; free virtual = 1921
 Command: route_design
 Attempting to get a license for feature 'Implementation' and/or device 'xc7z020'
 INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7z020'
@@ -614,41 +614,41 @@ INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more in
 
 Starting Routing Task
 INFO: [Route 35-254] Multithreading enabled for route_design using a maximum of 4 CPUs
-Checksum: PlaceDB: af1209bc ConstDB: 0 ShapeSum: be7c7883 RouteDB: 0
+Checksum: PlaceDB: 4c36301a ConstDB: 0 ShapeSum: 55a9bfd7 RouteDB: 0
 
 Phase 1 Build RT Design
-Phase 1 Build RT Design | Checksum: 1197da82
+Phase 1 Build RT Design | Checksum: 104b50ba1
 
-Time (s): cpu = 00:01:14 ; elapsed = 00:01:00 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 128 ; free virtual = 2148
-Post Restoration Checksum: NetGraph: 9016f5a NumContArr: 8966b28 Constraints: 0 Timing: 0
+Time (s): cpu = 00:00:56 ; elapsed = 00:00:44 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 116 ; free virtual = 1780
+Post Restoration Checksum: NetGraph: f7698cb6 NumContArr: d4b7eeb Constraints: 0 Timing: 0
 
 Phase 2 Router Initialization
 
 Phase 2.1 Create Timer
-Phase 2.1 Create Timer | Checksum: 1197da82
+Phase 2.1 Create Timer | Checksum: 104b50ba1
 
-Time (s): cpu = 00:01:14 ; elapsed = 00:01:00 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 128 ; free virtual = 2150
+Time (s): cpu = 00:00:56 ; elapsed = 00:00:44 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 119 ; free virtual = 1784
 
 Phase 2.2 Fix Topology Constraints
-Phase 2.2 Fix Topology Constraints | Checksum: 1197da82
+Phase 2.2 Fix Topology Constraints | Checksum: 104b50ba1
 
-Time (s): cpu = 00:01:15 ; elapsed = 00:01:01 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 108 ; free virtual = 2132
+Time (s): cpu = 00:00:57 ; elapsed = 00:00:45 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 100 ; free virtual = 1766
 
 Phase 2.3 Pre Route Cleanup
-Phase 2.3 Pre Route Cleanup | Checksum: 1197da82
+Phase 2.3 Pre Route Cleanup | Checksum: 104b50ba1
 
-Time (s): cpu = 00:01:15 ; elapsed = 00:01:01 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 108 ; free virtual = 2132
+Time (s): cpu = 00:00:57 ; elapsed = 00:00:45 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 100 ; free virtual = 1766
  Number of Nodes with overlaps = 0
 
 Phase 2.4 Update Timing
-Phase 2.4 Update Timing | Checksum: 16f7b0123
+Phase 2.4 Update Timing | Checksum: 11dc1e59f
 
-Time (s): cpu = 00:01:49 ; elapsed = 00:01:19 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 117 ; free virtual = 2116
-INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.665  | TNS=0.000  | WHS=-0.331 | THS=-406.950|
+Time (s): cpu = 00:01:22 ; elapsed = 00:00:58 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 129 ; free virtual = 1743
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.815  | TNS=0.000  | WHS=-0.346 | THS=-444.651|
 
-Phase 2 Router Initialization | Checksum: 20b3a6d65
+Phase 2 Router Initialization | Checksum: 166beeb6f
 
-Time (s): cpu = 00:02:06 ; elapsed = 00:01:27 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 114 ; free virtual = 2113
+Time (s): cpu = 00:01:34 ; elapsed = 00:01:03 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 126 ; free virtual = 1740
 
 Router Utilization Summary
   Global Vertical Routing Utilization    = 0 %
@@ -656,96 +656,96 @@ Router Utilization Summary
   Routable Net Status*
   *Does not include unroutable nets such as driverless and loadless.
   Run report_route_status for detailed report.
-  Number of Failed Nets               = 19787
+  Number of Failed Nets               = 19968
     (Failed Nets is the sum of unrouted and partially routed nets)
-  Number of Unrouted Nets             = 19787
+  Number of Unrouted Nets             = 19968
   Number of Partially Routed Nets     = 0
   Number of Node Overlaps             = 0
 
 
 Phase 3 Initial Routing
-Phase 3 Initial Routing | Checksum: fd82a349
+Phase 3 Initial Routing | Checksum: 203df3bc5
 
-Time (s): cpu = 00:02:18 ; elapsed = 00:01:32 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 113 ; free virtual = 2114
+Time (s): cpu = 00:01:45 ; elapsed = 00:01:07 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 124 ; free virtual = 1740
 
 Phase 4 Rip-up And Reroute
 
 Phase 4.1 Global Iteration 0
- Number of Nodes with overlaps = 2007
- Number of Nodes with overlaps = 248
- Number of Nodes with overlaps = 64
- Number of Nodes with overlaps = 16
- Number of Nodes with overlaps = 10
- Number of Nodes with overlaps = 2
- Number of Nodes with overlaps = 4
+ Number of Nodes with overlaps = 1937
+ Number of Nodes with overlaps = 198
+ Number of Nodes with overlaps = 33
+ Number of Nodes with overlaps = 11
+ Number of Nodes with overlaps = 8
  Number of Nodes with overlaps = 2
  Number of Nodes with overlaps = 0
-INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.332  | TNS=0.000  | WHS=N/A    | THS=N/A    |
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.638  | TNS=0.000  | WHS=N/A    | THS=N/A    |
 
-Phase 4.1 Global Iteration 0 | Checksum: 1645c3adc
+Phase 4.1 Global Iteration 0 | Checksum: 2699acebe
 
-Time (s): cpu = 00:03:14 ; elapsed = 00:02:06 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 107 ; free virtual = 2110
+Time (s): cpu = 00:02:17 ; elapsed = 00:01:23 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 116 ; free virtual = 1735
 
 Phase 4.2 Global Iteration 1
- Number of Nodes with overlaps = 27
- Number of Nodes with overlaps = 28
- Number of Nodes with overlaps = 15
  Number of Nodes with overlaps = 4
- Number of Nodes with overlaps = 1
+ Number of Nodes with overlaps = 31
+ Number of Nodes with overlaps = 7
+ Number of Nodes with overlaps = 4
+ Number of Nodes with overlaps = 2
+ Number of Nodes with overlaps = 2
+ Number of Nodes with overlaps = 3
  Number of Nodes with overlaps = 0
-INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.475  | TNS=0.000  | WHS=N/A    | THS=N/A    |
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.669  | TNS=0.000  | WHS=N/A    | THS=N/A    |
 
-Phase 4.2 Global Iteration 1 | Checksum: ae84d68b
+Phase 4.2 Global Iteration 1 | Checksum: bca30202
 
-Time (s): cpu = 00:03:25 ; elapsed = 00:02:18 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 106 ; free virtual = 2109
-Phase 4 Rip-up And Reroute | Checksum: ae84d68b
+Time (s): cpu = 00:02:26 ; elapsed = 00:01:33 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 116 ; free virtual = 1735
+Phase 4 Rip-up And Reroute | Checksum: bca30202
 
-Time (s): cpu = 00:03:25 ; elapsed = 00:02:18 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 106 ; free virtual = 2109
+Time (s): cpu = 00:02:26 ; elapsed = 00:01:33 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 116 ; free virtual = 1735
 
 Phase 5 Delay and Skew Optimization
 
 Phase 5.1 Delay CleanUp
 
 Phase 5.1.1 Update Timing
-Phase 5.1.1 Update Timing | Checksum: 114255ff6
+Phase 5.1.1 Update Timing | Checksum: edd87c22
 
-Time (s): cpu = 00:03:33 ; elapsed = 00:02:22 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 106 ; free virtual = 2109
-INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.590  | TNS=0.000  | WHS=N/A    | THS=N/A    |
+Time (s): cpu = 00:02:32 ; elapsed = 00:01:35 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 117 ; free virtual = 1735
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.708  | TNS=0.000  | WHS=N/A    | THS=N/A    |
 
-Phase 5.1 Delay CleanUp | Checksum: 114255ff6
+Phase 5.1 Delay CleanUp | Checksum: edd87c22
 
-Time (s): cpu = 00:03:33 ; elapsed = 00:02:22 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 106 ; free virtual = 2109
+Time (s): cpu = 00:02:32 ; elapsed = 00:01:35 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 117 ; free virtual = 1735
 
 Phase 5.2 Clock Skew Optimization
-Phase 5.2 Clock Skew Optimization | Checksum: 114255ff6
+Phase 5.2 Clock Skew Optimization | Checksum: edd87c22
 
-Time (s): cpu = 00:03:34 ; elapsed = 00:02:22 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 106 ; free virtual = 2109
-Phase 5 Delay and Skew Optimization | Checksum: 114255ff6
+Time (s): cpu = 00:02:32 ; elapsed = 00:01:35 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 117 ; free virtual = 1735
+Phase 5 Delay and Skew Optimization | Checksum: edd87c22
 
-Time (s): cpu = 00:03:34 ; elapsed = 00:02:22 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 106 ; free virtual = 2109
+Time (s): cpu = 00:02:32 ; elapsed = 00:01:35 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 117 ; free virtual = 1735
 
 Phase 6 Post Hold Fix
 
 Phase 6.1 Hold Fix Iter
 
 Phase 6.1.1 Update Timing
-Phase 6.1.1 Update Timing | Checksum: 1052cc321
+Phase 6.1.1 Update Timing | Checksum: fd3336f8
 
-Time (s): cpu = 00:03:43 ; elapsed = 00:02:27 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 116 ; free virtual = 2106
-INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.590  | TNS=0.000  | WHS=0.008  | THS=0.000  |
+Time (s): cpu = 00:02:39 ; elapsed = 00:01:39 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 118 ; free virtual = 1737
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.708  | TNS=0.000  | WHS=0.015  | THS=0.000  |
 
-Phase 6.1 Hold Fix Iter | Checksum: 143fb96c3
+Phase 6.1 Hold Fix Iter | Checksum: cb4e4510
 
-Time (s): cpu = 00:03:44 ; elapsed = 00:02:27 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 116 ; free virtual = 2106
-Phase 6 Post Hold Fix | Checksum: 143fb96c3
+Time (s): cpu = 00:02:39 ; elapsed = 00:01:39 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 118 ; free virtual = 1737
+Phase 6 Post Hold Fix | Checksum: cb4e4510
 
-Time (s): cpu = 00:03:44 ; elapsed = 00:02:27 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 116 ; free virtual = 2106
+Time (s): cpu = 00:02:39 ; elapsed = 00:01:39 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 118 ; free virtual = 1737
 
 Phase 7 Route finalize
 
 Router Utilization Summary
-  Global Vertical Routing Utilization    = 3.89479 %
-  Global Horizontal Routing Utilization  = 5.36646 %
+  Global Vertical Routing Utilization    = 3.90199 %
+  Global Horizontal Routing Utilization  = 5.08156 %
   Routable Net Status*
   *Does not include unroutable nets such as driverless and loadless.
   Run report_route_status for detailed report.
@@ -755,63 +755,63 @@ Router Utilization Summary
   Number of Partially Routed Nets     = 0
   Number of Node Overlaps             = 0
 
-Phase 7 Route finalize | Checksum: 19050cda7
+Phase 7 Route finalize | Checksum: cad5f457
 
-Time (s): cpu = 00:03:44 ; elapsed = 00:02:28 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 116 ; free virtual = 2106
+Time (s): cpu = 00:02:39 ; elapsed = 00:01:39 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 118 ; free virtual = 1737
 
 Phase 8 Verifying routed nets
 
  Verification completed successfully
-Phase 8 Verifying routed nets | Checksum: 19050cda7
+Phase 8 Verifying routed nets | Checksum: cad5f457
 
-Time (s): cpu = 00:03:45 ; elapsed = 00:02:28 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 115 ; free virtual = 2105
+Time (s): cpu = 00:02:39 ; elapsed = 00:01:40 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 117 ; free virtual = 1735
 
 Phase 9 Depositing Routes
-Phase 9 Depositing Routes | Checksum: 1b9579959
+Phase 9 Depositing Routes | Checksum: 14349299b
 
-Time (s): cpu = 00:03:50 ; elapsed = 00:02:33 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 118 ; free virtual = 2108
+Time (s): cpu = 00:02:43 ; elapsed = 00:01:44 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 119 ; free virtual = 1737
 
 Phase 10 Post Router Timing
-INFO: [Route 35-57] Estimated Timing Summary | WNS=0.590  | TNS=0.000  | WHS=0.008  | THS=0.000  |
+INFO: [Route 35-57] Estimated Timing Summary | WNS=0.708  | TNS=0.000  | WHS=0.015  | THS=0.000  |
 
 INFO: [Route 35-327] The final timing numbers are based on the router estimated timing analysis. For a complete and accurate timing signoff, please run report_timing_summary.
-Phase 10 Post Router Timing | Checksum: 1b9579959
+Phase 10 Post Router Timing | Checksum: 14349299b
 
-Time (s): cpu = 00:03:50 ; elapsed = 00:02:33 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 121 ; free virtual = 2111
+Time (s): cpu = 00:02:44 ; elapsed = 00:01:44 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 121 ; free virtual = 1740
 INFO: [Route 35-16] Router Completed Successfully
 
-Time (s): cpu = 00:03:50 ; elapsed = 00:02:33 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 144 ; free virtual = 2134
+Time (s): cpu = 00:02:44 ; elapsed = 00:01:44 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 143 ; free virtual = 1762
 
 Routing Is Done.
 INFO: [Common 17-83] Releasing license: Implementation
-149 Infos, 24 Warnings, 0 Critical Warnings and 0 Errors encountered.
+150 Infos, 24 Warnings, 0 Critical Warnings and 0 Errors encountered.
 route_design completed successfully
-route_design: Time (s): cpu = 00:04:03 ; elapsed = 00:02:39 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 142 ; free virtual = 2136
+route_design: Time (s): cpu = 00:02:55 ; elapsed = 00:01:49 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 143 ; free virtual = 1762
 INFO: [Common 17-600] The following parameters have non-default value.
 general.maxThreads
-Netlist sorting complete. Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.02 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 142 ; free virtual = 2136
+Netlist sorting complete. Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.01 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 143 ; free virtual = 1762
 INFO: [Timing 38-480] Writing timing data to binary archive.
 Writing placer database...
 Writing XDEF routing.
 Writing XDEF routing logical nets.
 Writing XDEF routing special nets.
-Write XDEF Complete: Time (s): cpu = 00:00:20 ; elapsed = 00:00:07 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 131 ; free virtual = 2121
-INFO: [Common 17-1381] The checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.runs/impl_1/design_1_wrapper_routed.dcp' has been generated.
-write_checkpoint: Time (s): cpu = 00:00:24 ; elapsed = 00:00:12 . Memory (MB): peak = 3000.039 ; gain = 0.000 ; free physical = 178 ; free virtual = 2133
+Write XDEF Complete: Time (s): cpu = 00:00:15 ; elapsed = 00:00:06 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 108 ; free virtual = 1748
+INFO: [Common 17-1381] The checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/impl_1/design_1_wrapper_routed.dcp' has been generated.
+write_checkpoint: Time (s): cpu = 00:00:18 ; elapsed = 00:00:10 . Memory (MB): peak = 3000.215 ; gain = 0.000 ; free physical = 154 ; free virtual = 1758
 INFO: [runtcl-4] Executing : report_drc -file design_1_wrapper_drc_routed.rpt -pb design_1_wrapper_drc_routed.pb -rpx design_1_wrapper_drc_routed.rpx
 Command: report_drc -file design_1_wrapper_drc_routed.rpt -pb design_1_wrapper_drc_routed.pb -rpx design_1_wrapper_drc_routed.rpx
 INFO: [IP_Flow 19-1839] IP Catalog is up to date.
 INFO: [DRC 23-27] Running DRC with 4 threads
-INFO: [Coretcl 2-168] The results of DRC are in file /home/vm/projects/simpleneutron/vivado/project_1/project_1.runs/impl_1/design_1_wrapper_drc_routed.rpt.
+INFO: [Coretcl 2-168] The results of DRC are in file /home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/impl_1/design_1_wrapper_drc_routed.rpt.
 report_drc completed successfully
-report_drc: Time (s): cpu = 00:00:23 ; elapsed = 00:00:08 . Memory (MB): peak = 3038.059 ; gain = 38.020 ; free physical = 161 ; free virtual = 2123
+report_drc: Time (s): cpu = 00:00:21 ; elapsed = 00:00:07 . Memory (MB): peak = 3041.234 ; gain = 41.020 ; free physical = 140 ; free virtual = 1744
 INFO: [runtcl-4] Executing : report_methodology -file design_1_wrapper_methodology_drc_routed.rpt -pb design_1_wrapper_methodology_drc_routed.pb -rpx design_1_wrapper_methodology_drc_routed.rpx
 Command: report_methodology -file design_1_wrapper_methodology_drc_routed.rpt -pb design_1_wrapper_methodology_drc_routed.pb -rpx design_1_wrapper_methodology_drc_routed.rpx
 INFO: [Timing 38-35] Done setting XDC timing constraints.
 INFO: [DRC 23-133] Running Methodology with 4 threads
-INFO: [Coretcl 2-1520] The results of Report Methodology are in file /home/vm/projects/simpleneutron/vivado/project_1/project_1.runs/impl_1/design_1_wrapper_methodology_drc_routed.rpt.
+INFO: [Coretcl 2-1520] The results of Report Methodology are in file /home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/impl_1/design_1_wrapper_methodology_drc_routed.rpt.
 report_methodology completed successfully
-report_methodology: Time (s): cpu = 00:00:59 ; elapsed = 00:00:23 . Memory (MB): peak = 3074.734 ; gain = 36.676 ; free physical = 203 ; free virtual = 2106
+report_methodology: Time (s): cpu = 00:00:53 ; elapsed = 00:00:20 . Memory (MB): peak = 3081.879 ; gain = 40.645 ; free physical = 203 ; free virtual = 1728
 INFO: [runtcl-4] Executing : report_power -file design_1_wrapper_power_routed.rpt -pb design_1_wrapper_power_summary_routed.pb -rpx design_1_wrapper_power_routed.rpx
 Command: report_power -file design_1_wrapper_power_routed.rpt -pb design_1_wrapper_power_summary_routed.pb -rpx design_1_wrapper_power_routed.rpx
 INFO: [Timing 38-35] Done setting XDC timing constraints.
@@ -820,9 +820,9 @@ Running Vector-less Activity Propagation...
 Finished Running Vector-less Activity Propagation
 WARNING: [Power 33-332] Found switching activity that implies high-fanout reset nets being asserted for excessive periods of time which may result in inaccurate power analysis.
 Resolution: To review and fix problems, please run Power Constraints Advisor in the GUI from Tools > Power Constraints Advisor or run report_power with the -advisory option to generate a text report.
-162 Infos, 25 Warnings, 0 Critical Warnings and 0 Errors encountered.
+163 Infos, 25 Warnings, 0 Critical Warnings and 0 Errors encountered.
 report_power completed successfully
-report_power: Time (s): cpu = 00:00:32 ; elapsed = 00:00:19 . Memory (MB): peak = 3115.660 ; gain = 40.926 ; free physical = 156 ; free virtual = 2079
+report_power: Time (s): cpu = 00:00:26 ; elapsed = 00:00:14 . Memory (MB): peak = 3120.734 ; gain = 38.855 ; free physical = 162 ; free virtual = 1701
 INFO: [runtcl-4] Executing : report_route_status -file design_1_wrapper_route_status.rpt -pb design_1_wrapper_route_status.pb
 INFO: [runtcl-4] Executing : report_timing_summary -max_paths 10 -file design_1_wrapper_timing_summary_routed.rpt -pb design_1_wrapper_timing_summary_routed.pb -rpx design_1_wrapper_timing_summary_routed.rpx -warn_on_violation 
 INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: min_max.
@@ -830,7 +830,6 @@ INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum o
 INFO: [runtcl-4] Executing : report_incremental_reuse -file design_1_wrapper_incremental_reuse_routed.rpt
 INFO: [Vivado_Tcl 4-1062] Incremental flow is disabled. No incremental reuse Info to report.
 INFO: [runtcl-4] Executing : report_clock_utilization -file design_1_wrapper_clock_utilization_routed.rpt
-report_clock_utilization: Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 3115.660 ; gain = 0.000 ; free physical = 138 ; free virtual = 2069
 INFO: [runtcl-4] Executing : report_bus_skew -warn_on_violation -file design_1_wrapper_bus_skew_routed.rpt -pb design_1_wrapper_bus_skew_routed.pb -rpx design_1_wrapper_bus_skew_routed.rpx
 INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: min_max.
 INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 4 CPUs
@@ -864,7 +863,7 @@ INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc
 Running DRC as a precondition to command write_bitstream
 INFO: [IP_Flow 19-1839] IP Catalog is up to date.
 INFO: [DRC 23-27] Running DRC with 4 threads
-WARNING: [DRC RTSTAT-10] No routable loads: 33 net(s) have no routable loads. The problem bus(es) and/or net(s) are design_1_i/axi_mem_intercon/m00_couplers/auto_pc/inst/gen_axi4_axi3.axi3_conv_inst/USE_WRITE.write_addr_inst/USE_B_CHANNEL.cmd_b_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gr1.gr1_int.rfwft/aempty_fwft_i, design_1_i/axi_mem_intercon/m00_couplers/auto_pc/inst/gen_axi4_axi3.axi3_conv_inst/USE_READ.USE_SPLIT_R.read_addr_inst/USE_R_CHANNEL.cmd_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gr1.gr1_int.rfwft/aempty_fwft_i, design_1_i/axi_mem_intercon/m00_couplers/auto_pc/inst/gen_axi4_axi3.axi3_conv_inst/USE_WRITE.write_addr_inst/USE_BURSTS.cmd_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gr1.gr1_int.rfwft/aempty_fwft_i, design_1_i/axi_mem_intercon/m00_couplers/auto_pc/inst/gen_axi4_axi3.axi3_conv_inst/USE_READ.USE_SPLIT_R.read_addr_inst/USE_R_CHANNEL.cmd_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_fb, design_1_i/axi_mem_intercon/m00_couplers/auto_pc/inst/gen_axi4_axi3.axi3_conv_inst/USE_WRITE.write_addr_inst/USE_B_CHANNEL.cmd_b_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_fb, design_1_i/axi_mem_intercon/m00_couplers/auto_pc/inst/gen_axi4_axi3.axi3_conv_inst/USE_WRITE.write_addr_inst/USE_BURSTS.cmd_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_fb, design_1_i/axi_mem_intercon/m00_couplers/auto_pc/inst/gen_axi4_axi3.axi3_conv_inst/USE_WRITE.write_addr_inst/USE_B_CHANNEL.cmd_b_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_i, design_1_i/axi_mem_intercon/m00_couplers/auto_pc/inst/gen_axi4_axi3.axi3_conv_inst/USE_READ.USE_SPLIT_R.read_addr_inst/USE_R_CHANNEL.cmd_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_i, design_1_i/axi_mem_intercon/m00_couplers/auto_pc/inst/gen_axi4_axi3.axi3_conv_inst/USE_WRITE.write_addr_inst/USE_BURSTS.cmd_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_i, design_1_i/axi_mem_intercon/m00_couplers/auto_pc/inst/gen_axi4_axi3.axi3_conv_inst/USE_WRITE.write_addr_inst/USE_BURSTS.cmd_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_i, design_1_i/axi_mem_intercon/m00_couplers/auto_pc/inst/gen_axi4_axi3.axi3_conv_inst/USE_WRITE.write_addr_inst/USE_B_CHANNEL.cmd_b_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_i, design_1_i/axi_mem_intercon/m00_couplers/auto_pc/inst/gen_axi4_axi3.axi3_conv_inst/USE_READ.USE_SPLIT_R.read_addr_inst/USE_R_CHANNEL.cmd_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_i, design_1_i/axi_mem_intercon/m00_couplers/auto_pc/inst/gen_axi4_axi3.axi3_conv_inst/USE_WRITE.write_addr_inst/USE_BURSTS.cmd_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/rd_rst_reg[2:0], design_1_i/axi_mem_intercon/m00_couplers/auto_pc/inst/gen_axi4_axi3.axi3_conv_inst/USE_WRITE.write_addr_inst/USE_B_CHANNEL.cmd_b_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/rd_rst_reg[2:0], design_1_i/axi_mem_intercon/m00_couplers/auto_pc/inst/gen_axi4_axi3.axi3_conv_inst/USE_READ.USE_SPLIT_R.read_addr_inst/USE_R_CHANNEL.cmd_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/rd_rst_reg[2:0]... and (the first 15 of 21 listed).
+WARNING: [DRC RTSTAT-10] No routable loads: 33 net(s) have no routable loads. The problem bus(es) and/or net(s) are design_1_i/axi_mem_intercon/m00_couplers/auto_pc/inst/gen_axi4_axi3.axi3_conv_inst/USE_WRITE.write_addr_inst/USE_B_CHANNEL.cmd_b_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gr1.gr1_int.rfwft/aempty_fwft_i, design_1_i/axi_mem_intercon/m00_couplers/auto_pc/inst/gen_axi4_axi3.axi3_conv_inst/USE_READ.USE_SPLIT_R.read_addr_inst/USE_R_CHANNEL.cmd_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gr1.gr1_int.rfwft/aempty_fwft_i, design_1_i/axi_mem_intercon/m00_couplers/auto_pc/inst/gen_axi4_axi3.axi3_conv_inst/USE_WRITE.write_addr_inst/USE_BURSTS.cmd_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gr1.gr1_int.rfwft/aempty_fwft_i, design_1_i/axi_mem_intercon/m00_couplers/auto_pc/inst/gen_axi4_axi3.axi3_conv_inst/USE_WRITE.write_addr_inst/USE_B_CHANNEL.cmd_b_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_fb, design_1_i/axi_mem_intercon/m00_couplers/auto_pc/inst/gen_axi4_axi3.axi3_conv_inst/USE_READ.USE_SPLIT_R.read_addr_inst/USE_R_CHANNEL.cmd_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_fb, design_1_i/axi_mem_intercon/m00_couplers/auto_pc/inst/gen_axi4_axi3.axi3_conv_inst/USE_WRITE.write_addr_inst/USE_BURSTS.cmd_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_fb, design_1_i/axi_mem_intercon/m00_couplers/auto_pc/inst/gen_axi4_axi3.axi3_conv_inst/USE_READ.USE_SPLIT_R.read_addr_inst/USE_R_CHANNEL.cmd_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_i, design_1_i/axi_mem_intercon/m00_couplers/auto_pc/inst/gen_axi4_axi3.axi3_conv_inst/USE_WRITE.write_addr_inst/USE_B_CHANNEL.cmd_b_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_i, design_1_i/axi_mem_intercon/m00_couplers/auto_pc/inst/gen_axi4_axi3.axi3_conv_inst/USE_WRITE.write_addr_inst/USE_BURSTS.cmd_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_i, design_1_i/axi_mem_intercon/m00_couplers/auto_pc/inst/gen_axi4_axi3.axi3_conv_inst/USE_WRITE.write_addr_inst/USE_B_CHANNEL.cmd_b_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_i, design_1_i/axi_mem_intercon/m00_couplers/auto_pc/inst/gen_axi4_axi3.axi3_conv_inst/USE_READ.USE_SPLIT_R.read_addr_inst/USE_R_CHANNEL.cmd_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_i, design_1_i/axi_mem_intercon/m00_couplers/auto_pc/inst/gen_axi4_axi3.axi3_conv_inst/USE_WRITE.write_addr_inst/USE_BURSTS.cmd_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_i, design_1_i/axi_mem_intercon/m00_couplers/auto_pc/inst/gen_axi4_axi3.axi3_conv_inst/USE_WRITE.write_addr_inst/USE_BURSTS.cmd_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/rd_rst_reg[2:0], design_1_i/axi_mem_intercon/m00_couplers/auto_pc/inst/gen_axi4_axi3.axi3_conv_inst/USE_WRITE.write_addr_inst/USE_B_CHANNEL.cmd_b_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/rd_rst_reg[2:0], design_1_i/axi_mem_intercon/m00_couplers/auto_pc/inst/gen_axi4_axi3.axi3_conv_inst/USE_READ.USE_SPLIT_R.read_addr_inst/USE_R_CHANNEL.cmd_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/rd_rst_reg[2:0]... and (the first 15 of 21 listed).
 INFO: [DRC REQP-181] writefirst: Synchronous clocking is detected for BRAM (design_1_i/axi_dma_0/U0/I_PRMRY_DATAMOVER/GEN_S2MM_FULL.I_S2MM_FULL_WRAPPER/GEN_ENABLE_INDET_BTT_SF.I_INDET_BTT/I_DATA_FIFO/BLK_MEM.I_SYNC_FIFOGEN_FIFO/xpm_fifo_instance.xpm_fifo_sync_inst/xpm_fifo_base_inst/gen_sdpram.xpm_memory_base_inst/gen_wr_a.gen_word_narrow.mem_reg) in SDP mode with WRITE_FIRST write-mode. This is the preferred mode for best power characteristics, however it may exhibit address collisions if the same address appears on both read and write ports resulting in unknown or corrupted read data. It is suggested to confirm via simulation that an address collision never occurs and if so it is suggested to try and avoid this situation. If address collisions cannot be avoided, the write-mode may be set to READ_FIRST which guarantees that the read data is the prior contents of the memory at the cost of additional power in the design. See the FPGA Memory Resources User Guide for additional information.
 INFO: [DRC REQP-181] writefirst: Synchronous clocking is detected for BRAM (design_1_i/axi_dma_1/U0/I_PRMRY_DATAMOVER/GEN_S2MM_FULL.I_S2MM_FULL_WRAPPER/GEN_ENABLE_INDET_BTT_SF.I_INDET_BTT/I_DATA_FIFO/BLK_MEM.I_SYNC_FIFOGEN_FIFO/xpm_fifo_instance.xpm_fifo_sync_inst/xpm_fifo_base_inst/gen_sdpram.xpm_memory_base_inst/gen_wr_a.gen_word_narrow.mem_reg) in SDP mode with WRITE_FIRST write-mode. This is the preferred mode for best power characteristics, however it may exhibit address collisions if the same address appears on both read and write ports resulting in unknown or corrupted read data. It is suggested to confirm via simulation that an address collision never occurs and if so it is suggested to try and avoid this situation. If address collisions cannot be avoided, the write-mode may be set to READ_FIRST which guarantees that the read data is the prior contents of the memory at the cost of additional power in the design. See the FPGA Memory Resources User Guide for additional information.
 INFO: [DRC REQP-181] writefirst: Synchronous clocking is detected for BRAM (design_1_i/axi_dma_2/U0/I_PRMRY_DATAMOVER/GEN_S2MM_FULL.I_S2MM_FULL_WRAPPER/GEN_ENABLE_INDET_BTT_SF.I_INDET_BTT/I_DATA_FIFO/BLK_MEM.I_SYNC_FIFOGEN_FIFO/xpm_fifo_instance.xpm_fifo_sync_inst/xpm_fifo_base_inst/gen_sdpram.xpm_memory_base_inst/gen_wr_a.gen_word_narrow.mem_reg) in SDP mode with WRITE_FIRST write-mode. This is the preferred mode for best power characteristics, however it may exhibit address collisions if the same address appears on both read and write ports resulting in unknown or corrupted read data. It is suggested to confirm via simulation that an address collision never occurs and if so it is suggested to try and avoid this situation. If address collisions cannot be avoided, the write-mode may be set to READ_FIRST which guarantees that the read data is the prior contents of the memory at the cost of additional power in the design. See the FPGA Memory Resources User Guide for additional information.
@@ -885,8 +884,9 @@ Creating bitstream...
 Writing bitstream ./design_1_wrapper.bit...
 INFO: [Vivado 12-1842] Bitgen Completed Successfully.
 INFO: [Project 1-120] WebTalk data collection is mandatory when using a WebPACK part without a full Vivado license. To see the specific WebTalk data collected for your design, open the usage_statistics_webtalk.html or usage_statistics_webtalk.xml file in the implementation directory.
+INFO: [Common 17-186] '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/impl_1/usage_statistics_webtalk.xml' has been successfully sent to Xilinx on Thu Jan 23 01:43:24 2020. For additional details about this file, please refer to the WebTalk help file at /home/vm/tools/Xilinx/Vivado/2019.2/doc/webtalk_introduction.html.
 INFO: [Common 17-83] Releasing license: Implementation
-213 Infos, 26 Warnings, 0 Critical Warnings and 0 Errors encountered.
+215 Infos, 26 Warnings, 0 Critical Warnings and 0 Errors encountered.
 write_bitstream completed successfully
-write_bitstream: Time (s): cpu = 00:01:50 ; elapsed = 00:01:08 . Memory (MB): peak = 3399.688 ; gain = 284.027 ; free physical = 447 ; free virtual = 1974
-INFO: [Common 17-206] Exiting Vivado at Sun Dec 29 21:10:42 2019...
+write_bitstream: Time (s): cpu = 00:01:34 ; elapsed = 00:00:59 . Memory (MB): peak = 3396.793 ; gain = 276.059 ; free physical = 400 ; free virtual = 1673
+INFO: [Common 17-206] Exiting Vivado at Thu Jan 23 01:43:25 2020...

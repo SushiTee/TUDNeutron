@@ -181,10 +181,9 @@ proc create_root_design { parentCell } {
   set_property -dict [ list \
    CONFIG.FIFO_DEPTH {1024} \
    CONFIG.HAS_RD_DATA_COUNT {1} \
-   CONFIG.HAS_TLAST {1} \
-   CONFIG.HAS_TSTRB {1} \
+   CONFIG.HAS_TKEEP {1} \
+   CONFIG.HAS_TSTRB {0} \
    CONFIG.HAS_WR_DATA_COUNT {1} \
-   CONFIG.TDATA_NUM_BYTES {4} \
  ] $axis_data_fifo_0
 
   # Create instance: signal_detector_0, and set properties
@@ -211,8 +210,8 @@ proc create_root_design { parentCell } {
   connect_bd_net -net axis_data_fifo_0_axis_rd_data_count [get_bd_ports rd_fifo_fill] [get_bd_pins axis_data_fifo_0/axis_rd_data_count]
   connect_bd_net -net axis_data_fifo_0_axis_wr_data_count [get_bd_ports wr_fifo_fill] [get_bd_pins axis_data_fifo_0/axis_wr_data_count]
   connect_bd_net -net axis_data_fifo_0_m_axis_tdata [get_bd_ports data] [get_bd_pins axis_data_fifo_0/m_axis_tdata]
+  connect_bd_net -net axis_data_fifo_0_m_axis_tkeep [get_bd_ports strb] [get_bd_pins axis_data_fifo_0/m_axis_tkeep]
   connect_bd_net -net axis_data_fifo_0_m_axis_tlast [get_bd_ports last] [get_bd_pins axis_data_fifo_0/m_axis_tlast]
-  connect_bd_net -net axis_data_fifo_0_m_axis_tstrb [get_bd_ports strb] [get_bd_pins axis_data_fifo_0/m_axis_tstrb]
   connect_bd_net -net axis_data_fifo_0_m_axis_tvalid [get_bd_ports valid] [get_bd_pins axis_data_fifo_0/m_axis_tvalid]
   connect_bd_net -net clock_1 [get_bd_ports clock] [get_bd_pins axis_data_fifo_0/s_axis_aclk] [get_bd_pins signal_detector_0/m00_axis_aclk]
   connect_bd_net -net enabled_1 [get_bd_ports enabled] [get_bd_pins signal_detector_0/enabled]

@@ -85,3 +85,10 @@
 !*.elf
 !*.bmm
 !*.xmp
+#########
+#vivado user files
+#########
+*.cache/
+*.runs/
+*.jobs*
+*.ip_user_files*

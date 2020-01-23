@@ -21,7 +21,7 @@
         </spirit:portMap>
         <spirit:portMap>
           <spirit:logicalPort>
-            <spirit:name>TSTRB</spirit:name>
+            <spirit:name>TKEEP</spirit:name>
           </spirit:logicalPort>
           <spirit:physicalPort>
             <spirit:name>m00_axis_tkeep</spirit:name>

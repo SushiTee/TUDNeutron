@@ -2,11 +2,11 @@
 # Vivado v2019.2.1 (64-bit)
 # SW Build 2729669 on Thu Dec  5 04:48:12 MST 2019
 # IP Build 2729494 on Thu Dec  5 07:38:25 MST 2019
-# Start of session at: Sun Dec 29 20:34:06 2019
-# Process ID: 13249
-# Current directory: /home/vm/projects/test_detector/test_detector.runs/design_1_signal_detector_0_0_synth_1
+# Start of session at: Thu Jan 23 01:19:50 2020
+# Process ID: 14275
+# Current directory: /home/vm/projects/TUDNeutron/test_detector/test_detector.runs/design_1_signal_detector_0_0_synth_1
 # Command line: vivado -log design_1_signal_detector_0_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source design_1_signal_detector_0_0.tcl
-# Log file: /home/vm/projects/test_detector/test_detector.runs/design_1_signal_detector_0_0_synth_1/design_1_signal_detector_0_0.vds
-# Journal file: /home/vm/projects/test_detector/test_detector.runs/design_1_signal_detector_0_0_synth_1/vivado.jou
+# Log file: /home/vm/projects/TUDNeutron/test_detector/test_detector.runs/design_1_signal_detector_0_0_synth_1/design_1_signal_detector_0_0.vds
+# Journal file: /home/vm/projects/TUDNeutron/test_detector/test_detector.runs/design_1_signal_detector_0_0_synth_1/vivado.jou
 #-----------------------------------------------------------
 source design_1_signal_detector_0_0.tcl -notrace

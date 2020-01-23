@@ -1,4 +1,4 @@
-set_property SRC_FILE_INFO {cfile:/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/constrs_1/imports/project_1.srcs/zedboard_master_XDC_RevC_D_v3.xdc rfile:../../../project_1.srcs/constrs_1/imports/project_1.srcs/zedboard_master_XDC_RevC_D_v3.xdc id:1} [current_design]
+set_property SRC_FILE_INFO {cfile:/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/constrs_1/imports/project_1.srcs/zedboard_master_XDC_RevC_D_v3.xdc rfile:../../../project_1.srcs/constrs_1/imports/project_1.srcs/zedboard_master_XDC_RevC_D_v3.xdc id:1} [current_design]
 set_property src_info {type:XDC file:1 line:81 export:INPUT save:INPUT read:READ} [current_design]
 set_property PACKAGE_PIN U21 [get_ports {leds_8bits1[3]}]
 set_property src_info {type:XDC file:1 line:82 export:INPUT save:INPUT read:READ} [current_design]

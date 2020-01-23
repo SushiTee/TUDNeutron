@@ -131,17 +131,14 @@
           "HAS_RD_DATA_COUNT": {
             "value": "1"
           },
-          "HAS_TLAST": {
+          "HAS_TKEEP": {
             "value": "1"
           },
           "HAS_TSTRB": {
-            "value": "1"
+            "value": "0"
           },
           "HAS_WR_DATA_COUNT": {
             "value": "1"
-          },
-          "TDATA_NUM_BYTES": {
-            "value": "4"
           }
         }
       },
@@ -235,12 +232,6 @@
           "rd_fifo_fill"
         ]
       },
-      "axis_data_fifo_0_m_axis_tstrb": {
-        "ports": [
-          "axis_data_fifo_0/m_axis_tstrb",
-          "strb"
-        ]
-      },
       "reset_1": {
         "ports": [
           "reset",
@@ -292,6 +283,12 @@
           "signal_detector_0/m00_axis_tvalid",
           "detector_tvalid",
           "axis_data_fifo_0/s_axis_tvalid"
+        ]
+      },
+      "axis_data_fifo_0_m_axis_tkeep": {
+        "ports": [
+          "axis_data_fifo_0/m_axis_tkeep",
+          "strb"
         ]
       }
     }

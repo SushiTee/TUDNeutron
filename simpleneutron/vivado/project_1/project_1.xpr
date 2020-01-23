@@ -3,7 +3,7 @@
 <!--                                                         -->
 <!-- Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="44" Path="/home/vm/projects/simpleneutron/vivado/project_1/project_1.xpr">
+<Project Version="7" Minor="44" Path="/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="0da32899a3af4472a7ac664eced09409"/>
@@ -38,13 +38,13 @@
     <Option Name="WTVcsLaunchSim" Val="0"/>
     <Option Name="WTRivieraLaunchSim" Val="0"/>
     <Option Name="WTActivehdlLaunchSim" Val="0"/>
-    <Option Name="WTXSimExportSim" Val="37"/>
-    <Option Name="WTModelSimExportSim" Val="37"/>
-    <Option Name="WTQuestaExportSim" Val="36"/>
-    <Option Name="WTIesExportSim" Val="36"/>
-    <Option Name="WTVcsExportSim" Val="36"/>
-    <Option Name="WTRivieraExportSim" Val="36"/>
-    <Option Name="WTActivehdlExportSim" Val="36"/>
+    <Option Name="WTXSimExportSim" Val="56"/>
+    <Option Name="WTModelSimExportSim" Val="56"/>
+    <Option Name="WTQuestaExportSim" Val="55"/>
+    <Option Name="WTIesExportSim" Val="55"/>
+    <Option Name="WTVcsExportSim" Val="55"/>
+    <Option Name="WTRivieraExportSim" Val="55"/>
+    <Option Name="WTActivehdlExportSim" Val="55"/>
     <Option Name="GenerateIPUpgradeLog" Val="TRUE"/>
     <Option Name="XSimRadix" Val="hex"/>
     <Option Name="XSimTimeUnit" Val="ns"/>
@@ -66,8 +66,8 @@
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_signal_detector_0_2/design_1_signal_detector_0_2.xci">
-          <Proxy FileSetName="design_1_signal_detector_0_2"/>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_signal_detector_6_0/design_1_signal_detector_6_0.xci">
+          <Proxy FileSetName="design_1_signal_detector_6_0"/>
         </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_signal_detector_0_1/design_1_signal_detector_0_1.xci">
           <Proxy FileSetName="design_1_signal_detector_0_1"/>
@@ -75,20 +75,20 @@
         <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_signal_detector_0_0/design_1_signal_detector_0_0.xci">
           <Proxy FileSetName="design_1_signal_detector_0_0"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_signal_detector_0_3/design_1_signal_detector_0_3.xci">
-          <Proxy FileSetName="design_1_signal_detector_0_3"/>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_signal_detector_0_7/design_1_signal_detector_0_7.xci">
+          <Proxy FileSetName="design_1_signal_detector_0_7"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_signal_detector_0_2/design_1_signal_detector_0_2.xci">
+          <Proxy FileSetName="design_1_signal_detector_0_2"/>
         </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_signal_detector_0_4/design_1_signal_detector_0_4.xci">
           <Proxy FileSetName="design_1_signal_detector_0_4"/>
         </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_signal_detector_0_3/design_1_signal_detector_0_3.xci">
+          <Proxy FileSetName="design_1_signal_detector_0_3"/>
+        </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_signal_detector_0_5/design_1_signal_detector_0_5.xci">
           <Proxy FileSetName="design_1_signal_detector_0_5"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_signal_detector_0_6/design_1_signal_detector_0_6.xci">
-          <Proxy FileSetName="design_1_signal_detector_0_6"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_signal_detector_0_7/design_1_signal_detector_0_7.xci">
-          <Proxy FileSetName="design_1_signal_detector_0_7"/>
         </CompFileExtendedInfo>
       </File>
       <File Path="$PSRCDIR/sources_1/bd/design_1/hdl/design_1_wrapper.v">
@@ -176,15 +176,15 @@
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
-    <FileSet Name="design_1_signal_detector_0_6" Type="BlockSrcs" RelSrcDir="$PSRCDIR/design_1_signal_detector_0_6">
-      <Config>
-        <Option Name="TopModule" Val="design_1_signal_detector_0_6"/>
-        <Option Name="UseBlackboxStub" Val="1"/>
-      </Config>
-    </FileSet>
     <FileSet Name="design_1_signal_detector_0_7" Type="BlockSrcs" RelSrcDir="$PSRCDIR/design_1_signal_detector_0_7">
       <Config>
         <Option Name="TopModule" Val="design_1_signal_detector_0_7"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="design_1_signal_detector_6_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/design_1_signal_detector_6_0">
+      <Config>
+        <Option Name="TopModule" Val="design_1_signal_detector_6_0"/>
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
@@ -296,7 +296,7 @@
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
-    <Run Id="design_1_signal_detector_0_6_synth_1" Type="Ft3:Synth" SrcSet="design_1_signal_detector_0_6" Part="xc7z020clg484-1" ConstrsSet="design_1_signal_detector_0_6" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/design_1_signal_detector_0_6_synth_1" IncludeInArchive="true">
+    <Run Id="design_1_signal_detector_0_7_synth_1" Type="Ft3:Synth" SrcSet="design_1_signal_detector_0_7" Part="xc7z020clg484-1" ConstrsSet="design_1_signal_detector_0_7" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/design_1_signal_detector_0_7_synth_1" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2019">
           <Desc>Vivado Synthesis Defaults</Desc>
@@ -308,7 +308,7 @@
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
-    <Run Id="design_1_signal_detector_0_7_synth_1" Type="Ft3:Synth" SrcSet="design_1_signal_detector_0_7" Part="xc7z020clg484-1" ConstrsSet="design_1_signal_detector_0_7" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/design_1_signal_detector_0_7_synth_1" IncludeInArchive="true">
+    <Run Id="design_1_signal_detector_6_0_synth_1" Type="Ft3:Synth" SrcSet="design_1_signal_detector_6_0" Part="xc7z020clg484-1" ConstrsSet="design_1_signal_detector_6_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/design_1_signal_detector_6_0_synth_1" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2019">
           <Desc>Vivado Synthesis Defaults</Desc>
@@ -452,7 +452,7 @@
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
-    <Run Id="design_1_signal_detector_0_6_impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg484-1" ConstrsSet="design_1_signal_detector_0_6" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="design_1_signal_detector_0_6_synth_1" IncludeInArchive="false" GenFullBitstream="true">
+    <Run Id="design_1_signal_detector_0_7_impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg484-1" ConstrsSet="design_1_signal_detector_0_7" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="design_1_signal_detector_0_7_synth_1" IncludeInArchive="false" GenFullBitstream="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2019">
           <Desc>Default settings for Implementation.</Desc>
@@ -471,7 +471,7 @@
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
-    <Run Id="design_1_signal_detector_0_7_impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg484-1" ConstrsSet="design_1_signal_detector_0_7" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="design_1_signal_detector_0_7_synth_1" IncludeInArchive="false" GenFullBitstream="true">
+    <Run Id="design_1_signal_detector_6_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg484-1" ConstrsSet="design_1_signal_detector_6_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="design_1_signal_detector_6_0_synth_1" IncludeInArchive="false" GenFullBitstream="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2019">
           <Desc>Default settings for Implementation.</Desc>

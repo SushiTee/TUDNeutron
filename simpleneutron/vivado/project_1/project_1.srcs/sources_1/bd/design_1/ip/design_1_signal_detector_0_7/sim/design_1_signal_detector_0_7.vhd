@@ -1,4 +1,4 @@
--- (c) Copyright 1995-2019 Xilinx, Inc. All rights reserved.
+-- (c) Copyright 1995-2020 Xilinx, Inc. All rights reserved.
 -- 
 -- This file contains confidential and proprietary information
 -- of Xilinx, Inc. and is protected under U.S. and
@@ -47,7 +47,7 @@
 -- DO NOT MODIFY THIS FILE.
 
 -- IP VLNV: akr.neutron:user:signal_detector:1.0
--- IP Revision: 3
+-- IP Revision: 4
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
@@ -64,7 +64,7 @@ ENTITY design_1_signal_detector_0_7 IS
     m00_axis_aresetn : IN STD_LOGIC;
     m00_axis_tvalid : OUT STD_LOGIC;
     m00_axis_tdata : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-    m00_axis_tstrb : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
+    m00_axis_tkeep : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
     m00_axis_tlast : OUT STD_LOGIC;
     m00_axis_tready : IN STD_LOGIC
   );
@@ -88,7 +88,7 @@ ARCHITECTURE design_1_signal_detector_0_7_arch OF design_1_signal_detector_0_7 I
       m00_axis_aresetn : IN STD_LOGIC;
       m00_axis_tvalid : OUT STD_LOGIC;
       m00_axis_tdata : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-      m00_axis_tstrb : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
+      m00_axis_tkeep : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
       m00_axis_tlast : OUT STD_LOGIC;
       m00_axis_tready : IN STD_LOGIC
     );
@@ -97,9 +97,9 @@ ARCHITECTURE design_1_signal_detector_0_7_arch OF design_1_signal_detector_0_7 I
   ATTRIBUTE X_INTERFACE_PARAMETER : STRING;
   ATTRIBUTE X_INTERFACE_INFO OF m00_axis_tready: SIGNAL IS "xilinx.com:interface:axis:1.0 M00_AXIS TREADY";
   ATTRIBUTE X_INTERFACE_INFO OF m00_axis_tlast: SIGNAL IS "xilinx.com:interface:axis:1.0 M00_AXIS TLAST";
-  ATTRIBUTE X_INTERFACE_INFO OF m00_axis_tstrb: SIGNAL IS "xilinx.com:interface:axis:1.0 M00_AXIS TSTRB";
+  ATTRIBUTE X_INTERFACE_INFO OF m00_axis_tkeep: SIGNAL IS "xilinx.com:interface:axis:1.0 M00_AXIS TKEEP";
   ATTRIBUTE X_INTERFACE_INFO OF m00_axis_tdata: SIGNAL IS "xilinx.com:interface:axis:1.0 M00_AXIS TDATA";
-  ATTRIBUTE X_INTERFACE_PARAMETER OF m00_axis_tvalid: SIGNAL IS "XIL_INTERFACENAME M00_AXIS, WIZ_DATA_WIDTH 32, TDATA_NUM_BYTES 4, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 1, HAS_TKEEP 0, HAS_TLAST 1, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK0, LAYERED_METADATA undef, INSERT_VIP 0";
+  ATTRIBUTE X_INTERFACE_PARAMETER OF m00_axis_tvalid: SIGNAL IS "XIL_INTERFACENAME M00_AXIS, WIZ_DATA_WIDTH 32, TDATA_NUM_BYTES 4, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 1, HAS_TLAST 1, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK0, LAYERED_METADATA undef, INSERT_VIP 0";
   ATTRIBUTE X_INTERFACE_INFO OF m00_axis_tvalid: SIGNAL IS "xilinx.com:interface:axis:1.0 M00_AXIS TVALID";
   ATTRIBUTE X_INTERFACE_PARAMETER OF m00_axis_aresetn: SIGNAL IS "XIL_INTERFACENAME M00_AXIS_RST, POLARITY ACTIVE_LOW, INSERT_VIP 0";
   ATTRIBUTE X_INTERFACE_INFO OF m00_axis_aresetn: SIGNAL IS "xilinx.com:signal:reset:1.0 M00_AXIS_RST RST";
@@ -123,7 +123,7 @@ BEGIN
       m00_axis_aresetn => m00_axis_aresetn,
       m00_axis_tvalid => m00_axis_tvalid,
       m00_axis_tdata => m00_axis_tdata,
-      m00_axis_tstrb => m00_axis_tstrb,
+      m00_axis_tkeep => m00_axis_tkeep,
       m00_axis_tlast => m00_axis_tlast,
       m00_axis_tready => m00_axis_tready
     );

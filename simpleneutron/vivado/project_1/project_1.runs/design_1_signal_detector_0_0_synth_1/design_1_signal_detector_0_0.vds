@@ -2,16 +2,16 @@
 # Vivado v2019.2.1 (64-bit)
 # SW Build 2729669 on Thu Dec  5 04:48:12 MST 2019
 # IP Build 2729494 on Thu Dec  5 07:38:25 MST 2019
-# Start of session at: Sun Dec 29 20:51:27 2019
-# Process ID: 15350
-# Current directory: /home/vm/projects/simpleneutron/vivado/project_1/project_1.runs/design_1_signal_detector_0_0_synth_1
+# Start of session at: Thu Jan 23 01:29:24 2020
+# Process ID: 16191
+# Current directory: /home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/design_1_signal_detector_0_0_synth_1
 # Command line: vivado -log design_1_signal_detector_0_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source design_1_signal_detector_0_0.tcl
-# Log file: /home/vm/projects/simpleneutron/vivado/project_1/project_1.runs/design_1_signal_detector_0_0_synth_1/design_1_signal_detector_0_0.vds
-# Journal file: /home/vm/projects/simpleneutron/vivado/project_1/project_1.runs/design_1_signal_detector_0_0_synth_1/vivado.jou
+# Log file: /home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/design_1_signal_detector_0_0_synth_1/design_1_signal_detector_0_0.vds
+# Journal file: /home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/design_1_signal_detector_0_0_synth_1/vivado.jou
 #-----------------------------------------------------------
 source design_1_signal_detector_0_0.tcl -notrace
 INFO: [IP_Flow 19-234] Refreshing IP repositories
-INFO: [IP_Flow 19-1700] Loaded user IP repository '/home/vm/projects/ipcores/ip_repo'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository '/home/vm/projects/TUDNeutron/ipcores/ip_repo'.
 INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/home/vm/tools/Xilinx/Vivado/2019.2/data/ip'.
 Command: synth_design -top design_1_signal_detector_0_0 -part xc7z020clg484-1 -mode out_of_context
 Starting synth_design
@@ -19,28 +19,29 @@ Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
 INFO: [Device 21-403] Loading part xc7z020clg484-1
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 15402 
+INFO: Helper process launched with PID 16245 
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:13 ; elapsed = 00:00:15 . Memory (MB): peak = 1884.973 ; gain = 203.715 ; free physical = 198 ; free virtual = 2978
+Starting RTL Elaboration : Time (s): cpu = 00:00:09 ; elapsed = 00:00:11 . Memory (MB): peak = 1884.938 ; gain = 203.684 ; free physical = 176 ; free virtual = 2573
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-638] synthesizing module 'design_1_signal_detector_0_0' [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_signal_detector_0_0/synth/design_1_signal_detector_0_0.vhd:73]
+INFO: [Synth 8-638] synthesizing module 'design_1_signal_detector_0_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_signal_detector_0_0/synth/design_1_signal_detector_0_0.vhd:73]
 	Parameter C_M00_AXIS_TDATA_WIDTH bound to: 32 - type: integer 
 	Parameter C_M00_AXIS_START_COUNT bound to: 32 - type: integer 
-INFO: [Synth 8-3491] module 'signal_detector_v1_0' declared at '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ipshared/9f48/hdl/signal_detector_v1_0.vhd:5' bound to instance 'U0' of component 'signal_detector_v1_0' [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_signal_detector_0_0/synth/design_1_signal_detector_0_0.vhd:115]
-INFO: [Synth 8-638] synthesizing module 'signal_detector_v1_0' [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ipshared/9f48/hdl/signal_detector_v1_0.vhd:38]
+INFO: [Synth 8-3491] module 'signal_detector_v1_0' declared at '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ipshared/8804/hdl/signal_detector_v1_0.vhd:5' bound to instance 'U0' of component 'signal_detector_v1_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_signal_detector_0_0/synth/design_1_signal_detector_0_0.vhd:115]
+INFO: [Synth 8-638] synthesizing module 'signal_detector_v1_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ipshared/8804/hdl/signal_detector_v1_0.vhd:38]
 	Parameter C_M00_AXIS_TDATA_WIDTH bound to: 32 - type: integer 
 	Parameter C_M00_AXIS_START_COUNT bound to: 32 - type: integer 
 	Parameter C_M_AXIS_TDATA_WIDTH bound to: 32 - type: integer 
 	Parameter C_M_START_COUNT bound to: 32 - type: integer 
-INFO: [Synth 8-3491] module 'signal_detector_v1_0_M00_AXIS' declared at '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ipshared/9f48/hdl/signal_detector_v1_0_M00_AXIS.vhd:5' bound to instance 'signal_detector_v1_0_M00_AXIS_inst' of component 'signal_detector_v1_0_M00_AXIS' [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ipshared/9f48/hdl/signal_detector_v1_0.vhd:65]
-INFO: [Synth 8-638] synthesizing module 'signal_detector_v1_0_M00_AXIS' [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ipshared/9f48/hdl/signal_detector_v1_0_M00_AXIS.vhd:44]
+INFO: [Synth 8-3491] module 'signal_detector_v1_0_M00_AXIS' declared at '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ipshared/8804/hdl/signal_detector_v1_0_M00_AXIS.vhd:5' bound to instance 'signal_detector_v1_0_M00_AXIS_inst' of component 'signal_detector_v1_0_M00_AXIS' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ipshared/8804/hdl/signal_detector_v1_0.vhd:65]
+INFO: [Synth 8-638] synthesizing module 'signal_detector_v1_0_M00_AXIS' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ipshared/8804/hdl/signal_detector_v1_0_M00_AXIS.vhd:44]
 	Parameter C_M_AXIS_TDATA_WIDTH bound to: 32 - type: integer 
 	Parameter C_M_START_COUNT bound to: 32 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'signal_detector_v1_0_M00_AXIS' (1#1) [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ipshared/9f48/hdl/signal_detector_v1_0_M00_AXIS.vhd:44]
-INFO: [Synth 8-256] done synthesizing module 'signal_detector_v1_0' (2#1) [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ipshared/9f48/hdl/signal_detector_v1_0.vhd:38]
-INFO: [Synth 8-256] done synthesizing module 'design_1_signal_detector_0_0' (3#1) [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_signal_detector_0_0/synth/design_1_signal_detector_0_0.vhd:73]
+INFO: [Synth 8-256] done synthesizing module 'signal_detector_v1_0_M00_AXIS' (1#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ipshared/8804/hdl/signal_detector_v1_0_M00_AXIS.vhd:44]
+INFO: [Synth 8-256] done synthesizing module 'signal_detector_v1_0' (2#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ipshared/8804/hdl/signal_detector_v1_0.vhd:38]
+INFO: [Synth 8-256] done synthesizing module 'design_1_signal_detector_0_0' (3#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_signal_detector_0_0/synth/design_1_signal_detector_0_0.vhd:73]
+WARNING: [Synth 8-3331] design signal_detector_v1_0_M00_AXIS has unconnected port M_AXIS_TREADY
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:18 ; elapsed = 00:00:22 . Memory (MB): peak = 1949.691 ; gain = 268.434 ; free physical = 235 ; free virtual = 3015
+Finished RTL Elaboration : Time (s): cpu = 00:00:13 ; elapsed = 00:00:15 . Memory (MB): peak = 1949.656 ; gain = 268.402 ; free physical = 212 ; free virtual = 2610
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -53,40 +54,40 @@ Report Check Netlist:
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:19 ; elapsed = 00:00:23 . Memory (MB): peak = 1952.660 ; gain = 271.402 ; free physical = 233 ; free virtual = 3013
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:13 ; elapsed = 00:00:16 . Memory (MB): peak = 1952.625 ; gain = 271.371 ; free physical = 206 ; free virtual = 2604
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:19 ; elapsed = 00:00:23 . Memory (MB): peak = 1952.660 ; gain = 271.402 ; free physical = 233 ; free virtual = 3013
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:13 ; elapsed = 00:00:16 . Memory (MB): peak = 1952.625 ; gain = 271.371 ; free physical = 206 ; free virtual = 2604
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 1952.660 ; gain = 0.000 ; free physical = 226 ; free virtual = 3006
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 1952.625 ; gain = 0.000 ; free physical = 199 ; free virtual = 2597
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
 Initializing timing engine
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2062.488 ; gain = 0.000 ; free physical = 141 ; free virtual = 2931
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2086.391 ; gain = 0.000 ; free physical = 121 ; free virtual = 2524
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
 WARNING: [Constraints 18-5210] No constraints selected for write.
 Resolution: This message can indicate that there are no constraints for the design, or it can indicate that the used_in flags are set such that the constraints are ignored. This later case is used when running synth_design to not write synthesis constraints to the resulting checkpoint. Instead, project constraints are read when the synthesized design is opened.
-Constraint Validation Runtime : Time (s): cpu = 00:00:00.25 ; elapsed = 00:00:00.44 . Memory (MB): peak = 2062.488 ; gain = 0.000 ; free physical = 139 ; free virtual = 2930
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.15 ; elapsed = 00:00:00.24 . Memory (MB): peak = 2086.391 ; gain = 0.000 ; free physical = 118 ; free virtual = 2521
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:39 ; elapsed = 00:00:46 . Memory (MB): peak = 2062.488 ; gain = 381.230 ; free physical = 202 ; free virtual = 2992
+Finished Constraint Validation : Time (s): cpu = 00:00:27 ; elapsed = 00:00:31 . Memory (MB): peak = 2086.391 ; gain = 405.137 ; free physical = 178 ; free virtual = 2581
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7z020clg484-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:39 ; elapsed = 00:00:46 . Memory (MB): peak = 2062.488 ; gain = 381.230 ; free physical = 202 ; free virtual = 2992
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:27 ; elapsed = 00:00:31 . Memory (MB): peak = 2086.391 ; gain = 405.137 ; free physical = 178 ; free virtual = 2581
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:39 ; elapsed = 00:00:46 . Memory (MB): peak = 2062.488 ; gain = 381.230 ; free physical = 202 ; free virtual = 2992
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:27 ; elapsed = 00:00:31 . Memory (MB): peak = 2086.391 ; gain = 405.137 ; free physical = 178 ; free virtual = 2581
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'mst_exec_state_reg' in module 'signal_detector_v1_0_M00_AXIS'
 ---------------------------------------------------------------------------------------------------
@@ -98,7 +99,7 @@ INFO: [Synth 8-802] inferred FSM for state register 'mst_exec_state_reg' in modu
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'mst_exec_state_reg' using encoding 'one-hot' in module 'signal_detector_v1_0_M00_AXIS'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:40 ; elapsed = 00:00:47 . Memory (MB): peak = 2062.488 ; gain = 381.230 ; free physical = 194 ; free virtual = 2985
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:27 ; elapsed = 00:00:32 . Memory (MB): peak = 2086.391 ; gain = 405.137 ; free physical = 170 ; free virtual = 2574
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -111,7 +112,6 @@ Start RTL Component Statistics
 ---------------------------------------------------------------------------------
 Detailed RTL Component Info : 
 +---Adders : 
-	   2 Input     32 Bit       Adders := 1     
 	   2 Input     16 Bit       Adders := 1     
 	   2 Input      5 Bit       Adders := 1     
 +---Registers : 
@@ -120,12 +120,10 @@ Detailed RTL Component Info :
 	                5 Bit    Registers := 1     
 	                1 Bit    Registers := 4     
 +---Muxes : 
-	   2 Input     32 Bit        Muxes := 2     
-	   2 Input     16 Bit        Muxes := 1     
+	   2 Input     16 Bit        Muxes := 2     
 	   3 Input      3 Bit        Muxes := 1     
 	   2 Input      3 Bit        Muxes := 1     
-	   2 Input      2 Bit        Muxes := 1     
-	   2 Input      1 Bit        Muxes := 3     
+	   2 Input      1 Bit        Muxes := 8     
 	   3 Input      1 Bit        Muxes := 1     
 ---------------------------------------------------------------------------------
 Finished RTL Component Statistics 
@@ -137,7 +135,6 @@ Hierarchical RTL Component report
 Module signal_detector_v1_0_M00_AXIS 
 Detailed RTL Component Info : 
 +---Adders : 
-	   2 Input     32 Bit       Adders := 1     
 	   2 Input     16 Bit       Adders := 1     
 	   2 Input      5 Bit       Adders := 1     
 +---Registers : 
@@ -146,12 +143,10 @@ Detailed RTL Component Info :
 	                5 Bit    Registers := 1     
 	                1 Bit    Registers := 4     
 +---Muxes : 
-	   2 Input     32 Bit        Muxes := 2     
-	   2 Input     16 Bit        Muxes := 1     
+	   2 Input     16 Bit        Muxes := 2     
 	   3 Input      3 Bit        Muxes := 1     
 	   2 Input      3 Bit        Muxes := 1     
-	   2 Input      2 Bit        Muxes := 1     
-	   2 Input      1 Bit        Muxes := 3     
+	   2 Input      1 Bit        Muxes := 8     
 	   3 Input      1 Bit        Muxes := 1     
 ---------------------------------------------------------------------------------
 Finished RTL Hierarchical Component Statistics
@@ -169,12 +164,13 @@ Finished Part Resource Summary
 Start Cross Boundary and Area Optimization
 ---------------------------------------------------------------------------------
 Warning: Parallel synthesis criteria is not met 
-INFO: [Synth 8-3917] design design_1_signal_detector_0_0 has port m00_axis_tstrb[3] driven by constant 1
-INFO: [Synth 8-3917] design design_1_signal_detector_0_0 has port m00_axis_tstrb[2] driven by constant 1
-INFO: [Synth 8-3917] design design_1_signal_detector_0_0 has port m00_axis_tstrb[1] driven by constant 1
-INFO: [Synth 8-3917] design design_1_signal_detector_0_0 has port m00_axis_tstrb[0] driven by constant 1
+INFO: [Synth 8-3917] design design_1_signal_detector_0_0 has port m00_axis_tkeep[3] driven by constant 1
+INFO: [Synth 8-3917] design design_1_signal_detector_0_0 has port m00_axis_tkeep[2] driven by constant 1
+INFO: [Synth 8-3917] design design_1_signal_detector_0_0 has port m00_axis_tkeep[1] driven by constant 1
+INFO: [Synth 8-3917] design design_1_signal_detector_0_0 has port m00_axis_tkeep[0] driven by constant 1
+WARNING: [Synth 8-3331] design design_1_signal_detector_0_0 has unconnected port m00_axis_tready
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:43 ; elapsed = 00:00:50 . Memory (MB): peak = 2062.488 ; gain = 381.230 ; free physical = 180 ; free virtual = 2975
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:29 ; elapsed = 00:00:34 . Memory (MB): peak = 2086.391 ; gain = 405.137 ; free physical = 155 ; free virtual = 2564
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -186,13 +182,13 @@ Report RTL Partitions:
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:08 ; elapsed = 00:01:19 . Memory (MB): peak = 2062.488 ; gain = 381.230 ; free physical = 104 ; free virtual = 2850
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:46 ; elapsed = 00:00:53 . Memory (MB): peak = 2086.391 ; gain = 405.137 ; free physical = 106 ; free virtual = 2441
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:01:08 ; elapsed = 00:01:19 . Memory (MB): peak = 2062.488 ; gain = 381.230 ; free physical = 104 ; free virtual = 2850
+Finished Timing Optimization : Time (s): cpu = 00:00:46 ; elapsed = 00:00:53 . Memory (MB): peak = 2086.391 ; gain = 405.137 ; free physical = 106 ; free virtual = 2441
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -204,7 +200,7 @@ Report RTL Partitions:
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:01:08 ; elapsed = 00:01:19 . Memory (MB): peak = 2062.488 ; gain = 381.230 ; free physical = 136 ; free virtual = 2848
+Finished Technology Mapping : Time (s): cpu = 00:00:46 ; elapsed = 00:00:53 . Memory (MB): peak = 2086.391 ; gain = 405.137 ; free physical = 121 ; free virtual = 2440
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -228,13 +224,13 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:01:24 ; elapsed = 00:01:35 . Memory (MB): peak = 2062.488 ; gain = 381.230 ; free physical = 136 ; free virtual = 2848
+Finished IO Insertion : Time (s): cpu = 00:00:57 ; elapsed = 00:01:05 . Memory (MB): peak = 2086.391 ; gain = 405.137 ; free physical = 120 ; free virtual = 2439
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:01:24 ; elapsed = 00:01:35 . Memory (MB): peak = 2062.488 ; gain = 381.230 ; free physical = 136 ; free virtual = 2848
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:57 ; elapsed = 00:01:05 . Memory (MB): peak = 2086.391 ; gain = 405.137 ; free physical = 120 ; free virtual = 2439
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -253,25 +249,25 @@ Report Check Netlist:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:24 ; elapsed = 00:01:35 . Memory (MB): peak = 2062.488 ; gain = 381.230 ; free physical = 136 ; free virtual = 2848
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:57 ; elapsed = 00:01:05 . Memory (MB): peak = 2086.391 ; gain = 405.137 ; free physical = 120 ; free virtual = 2439
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:01:24 ; elapsed = 00:01:35 . Memory (MB): peak = 2062.488 ; gain = 381.230 ; free physical = 136 ; free virtual = 2848
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:57 ; elapsed = 00:01:05 . Memory (MB): peak = 2086.391 ; gain = 405.137 ; free physical = 120 ; free virtual = 2439
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:01:24 ; elapsed = 00:01:35 . Memory (MB): peak = 2062.488 ; gain = 381.230 ; free physical = 136 ; free virtual = 2848
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:57 ; elapsed = 00:01:05 . Memory (MB): peak = 2086.391 ; gain = 405.137 ; free physical = 120 ; free virtual = 2439
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:01:24 ; elapsed = 00:01:35 . Memory (MB): peak = 2062.488 ; gain = 381.230 ; free physical = 136 ; free virtual = 2848
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:57 ; elapsed = 00:01:05 . Memory (MB): peak = 2086.391 ; gain = 405.137 ; free physical = 120 ; free virtual = 2439
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -287,55 +283,55 @@ Report Cell Usage:
 +------+-------+------+
 |      |Cell   |Count |
 +------+-------+------+
-|1     |CARRY4 |    16|
-|2     |LUT1   |     2|
+|1     |CARRY4 |    12|
+|2     |LUT1   |    18|
 |3     |LUT2   |     7|
-|4     |LUT3   |    37|
-|5     |LUT4   |    19|
-|6     |LUT5   |     3|
-|7     |LUT6   |     6|
-|8     |FDRE   |    59|
-|9     |FDSE   |     1|
+|4     |LUT3   |     4|
+|5     |LUT4   |    20|
+|6     |LUT5   |     2|
+|7     |LUT6   |     3|
+|8     |FDRE   |    90|
+|9     |FDSE   |     2|
 +------+-------+------+
 
 Report Instance Areas: 
 +------+---------------------------------------+------------------------------+------+
 |      |Instance                               |Module                        |Cells |
 +------+---------------------------------------+------------------------------+------+
-|1     |top                                    |                              |   150|
-|2     |  U0                                   |signal_detector_v1_0          |   150|
-|3     |    signal_detector_v1_0_M00_AXIS_inst |signal_detector_v1_0_M00_AXIS |   150|
+|1     |top                                    |                              |   158|
+|2     |  U0                                   |signal_detector_v1_0          |   158|
+|3     |    signal_detector_v1_0_M00_AXIS_inst |signal_detector_v1_0_M00_AXIS |   158|
 +------+---------------------------------------+------------------------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:01:24 ; elapsed = 00:01:35 . Memory (MB): peak = 2062.488 ; gain = 381.230 ; free physical = 136 ; free virtual = 2848
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:57 ; elapsed = 00:01:05 . Memory (MB): peak = 2086.391 ; gain = 405.137 ; free physical = 120 ; free virtual = 2439
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:01:18 ; elapsed = 00:01:29 . Memory (MB): peak = 2062.488 ; gain = 271.402 ; free physical = 192 ; free virtual = 2904
-Synthesis Optimization Complete : Time (s): cpu = 00:01:24 ; elapsed = 00:01:35 . Memory (MB): peak = 2062.496 ; gain = 381.230 ; free physical = 192 ; free virtual = 2904
+Synthesis finished with 0 errors, 0 critical warnings and 1 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:54 ; elapsed = 00:01:01 . Memory (MB): peak = 2086.391 ; gain = 271.371 ; free physical = 177 ; free virtual = 2496
+Synthesis Optimization Complete : Time (s): cpu = 00:00:58 ; elapsed = 00:01:05 . Memory (MB): peak = 2086.398 ; gain = 405.137 ; free physical = 177 ; free virtual = 2496
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2062.496 ; gain = 0.000 ; free physical = 260 ; free virtual = 2973
-INFO: [Netlist 29-17] Analyzing 16 Unisim elements for replacement
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2086.398 ; gain = 0.000 ; free physical = 246 ; free virtual = 2564
+INFO: [Netlist 29-17] Analyzing 12 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2066.457 ; gain = 0.000 ; free physical = 204 ; free virtual = 2917
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2086.398 ; gain = 0.000 ; free physical = 188 ; free virtual = 2508
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
 INFO: [Common 17-83] Releasing license: Synthesis
-28 Infos, 1 Warnings, 0 Critical Warnings and 0 Errors encountered.
+28 Infos, 3 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:01:43 ; elapsed = 00:01:57 . Memory (MB): peak = 2066.457 ; gain = 594.797 ; free physical = 337 ; free virtual = 3050
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2066.457 ; gain = 0.000 ; free physical = 337 ; free virtual = 3050
+synth_design: Time (s): cpu = 00:01:11 ; elapsed = 00:01:21 . Memory (MB): peak = 2086.398 ; gain = 615.742 ; free physical = 322 ; free virtual = 2641
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2086.398 ; gain = 0.000 ; free physical = 322 ; free virtual = 2641
 WARNING: [Constraints 18-5210] No constraints selected for write.
 Resolution: This message can indicate that there are no constraints for the design, or it can indicate that the used_in flags are set such that the constraints are ignored. This later case is used when running synth_design to not write synthesis constraints to the resulting checkpoint. Instead, project constraints are read when the synthesized design is opened.
-INFO: [Common 17-1381] The checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.runs/design_1_signal_detector_0_0_synth_1/design_1_signal_detector_0_0.dcp' has been generated.
+INFO: [Common 17-1381] The checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/design_1_signal_detector_0_0_synth_1/design_1_signal_detector_0_0.dcp' has been generated.
 WARNING: [Common 17-576] 'use_project_ipc' is deprecated. This option is deprecated and no longer used.
-INFO: [Coretcl 2-1648] Added synthesis output to IP cache for IP design_1_signal_detector_0_0, cache-ID = c3425d32ef62d734
+INFO: [Coretcl 2-1648] Added synthesis output to IP cache for IP design_1_signal_detector_0_0, cache-ID = c418c6e4faef135f
 INFO: [Coretcl 2-1174] Renamed 2 cell refs.
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2090.469 ; gain = 0.000 ; free physical = 334 ; free virtual = 3050
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2110.402 ; gain = 0.000 ; free physical = 321 ; free virtual = 2641
 WARNING: [Constraints 18-5210] No constraints selected for write.
 Resolution: This message can indicate that there are no constraints for the design, or it can indicate that the used_in flags are set such that the constraints are ignored. This later case is used when running synth_design to not write synthesis constraints to the resulting checkpoint. Instead, project constraints are read when the synthesized design is opened.
-INFO: [Common 17-1381] The checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.runs/design_1_signal_detector_0_0_synth_1/design_1_signal_detector_0_0.dcp' has been generated.
+INFO: [Common 17-1381] The checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/design_1_signal_detector_0_0_synth_1/design_1_signal_detector_0_0.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file design_1_signal_detector_0_0_utilization_synth.rpt -pb design_1_signal_detector_0_0_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Sun Dec 29 20:53:50 2019...
+INFO: [Common 17-206] Exiting Vivado at Thu Jan 23 01:31:06 2020...
