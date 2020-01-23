@@ -39,7 +39,7 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-   uint32_t wordLength = 1;
+   uint32_t wordLength = 16;
    wordLengthController.setWordLength(wordLength);
    sensors.deactivateAll();
    sensors.activateSpecific(0b01010101u);
@@ -69,7 +69,8 @@ int main(int argc, char *argv[]) {
          break;
       }
       if (status & ((1 << simpleneutron::components::dma::StatusBit::STATUS_HALTED) | (1 << simpleneutron::components::dma::StatusBit::STATUS_COMPLETE_INTERRUPT) | (1 << simpleneutron::components::dma::StatusBit::STATUS_IDLE))) {
-         std::cout << std::hex << dma.readMemory(i++) << " status: " << std::dec << simpleneutron::components::memorycontrol::MemoryControl::registerRead(lRegister, 0x58u) << std::endl;
+         std::cout << std::hex << dma.readMemory(i) << " status: " << std::dec << simpleneutron::components::memorycontrol::MemoryControl::registerRead(lRegister, 0x58u) << std::endl;
+         i += wordLength;
          //dma.reset();
          //dma.enable();
          if (i >= 0x800000u) {

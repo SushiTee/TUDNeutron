@@ -59,7 +59,7 @@ void Dma::setDestinationAddress(uint32_t offset) {
 }
 
 void Dma::setWordLength(uint32_t length) {
-    MemoryControl::registerWrite(mRegister, DmaOffset::S2MM_LENGTH, length * 4); // packets are always 4 byte
+    MemoryControl::registerWrite(mRegister, DmaOffset::S2MM_LENGTH, length * 4 * 2); // packets are always 4 byte
 }
 
 uint32_t Dma::getStatus() {
