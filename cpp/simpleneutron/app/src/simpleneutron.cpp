@@ -28,6 +28,9 @@ int main(int argc, char *argv[]) {
       return 1;
    }
 
+   uint32_t wordLength = 16;
+   simpleneutron::components::gpio::WordLengthController::setWordLength(wordLength);
+
    auto dma = simpleneutron::components::dma::Dma(DMA_0_MEMORY, DMA_0_REGISTER, mem, DMA_0_UIO_DEVICE);
    if (dma.hasError()) {
       std::cout << "Error creating DMA object" << std::endl;
@@ -40,8 +43,6 @@ int main(int argc, char *argv[]) {
       return 1;
    }
 
-   uint32_t wordLength = 16;
-   simpleneutron::components::gpio::WordLengthController::setWordLength(wordLength);
    simpleneutron::components::gpio::SensorController::deactivateAll();
    simpleneutron::components::gpio::SensorController::activateSpecific(0b01010101u);
 
