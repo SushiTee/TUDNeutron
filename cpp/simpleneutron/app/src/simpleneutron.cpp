@@ -15,7 +15,7 @@ int main(int argc, char *argv[]) {
       return 1;
    }
 
-   auto dma = simpleneutron::components::dma::Dma(DMA_0_MEMORY, DMA_0_REGISTER, mem);
+   auto dma = simpleneutron::components::dma::Dma(DMA_0_MEMORY, DMA_0_REGISTER, mem, DMA_0_UIO_DEVICE);
    if (dma.hasError()) {
       std::cout << "Error creating DMA object" << std::endl;
       return 1;
@@ -60,26 +60,25 @@ int main(int argc, char *argv[]) {
    if (dma.hasStatusError()) {
       std::cout << "Status error" << std::endl;
    }
+   dma.enableInterrupt();
 
    uint32_t i = 0;
    while(true) {
+      dma.waitForData();
       uint32_t status = dma.getStatus();
       
       if (dma.hasStatusError(status)) {
          break;
       }
-      if (status & ((1 << simpleneutron::components::dma::StatusBit::STATUS_HALTED) | (1 << simpleneutron::components::dma::StatusBit::STATUS_COMPLETE_INTERRUPT) | (1 << simpleneutron::components::dma::StatusBit::STATUS_IDLE))) {
+      if (status & ((1 << simpleneutron::components::dma::StatusBit::STATUS_HALTED) | (1 << simpleneutron::components::dma::StatusBit::STATUS_IDLE))) {
          std::cout << std::hex << dma.readMemory(i) << " status: " << std::dec << simpleneutron::components::memorycontrol::MemoryControl::registerRead(lRegister, 0x58u) << std::endl;
          i += wordLength;
-         //dma.reset();
-         //dma.enable();
          if (i >= 0x800000u) {
             i = 0;
          }
          dma.setDestinationAddress(i);
          dma.setWordLength(wordLength);
       }
-      usleep(1);
    }
 
    return 0;

@@ -20,5 +20,14 @@ const uint32_t DMA_5_MEMORY = 0x1a000000;
 const uint32_t DMA_6_MEMORY = 0x1c000000;
 const uint32_t DMA_7_MEMORY = 0x1e000000;
 
+const std::string DMA_0_UIO_DEVICE = "/dev/uio0";
+const std::string DMA_1_UIO_DEVICE = "/dev/uio1";
+const std::string DMA_2_UIO_DEVICE = "/dev/uio2";
+const std::string DMA_3_UIO_DEVICE = "/dev/uio3";
+const std::string DMA_4_UIO_DEVICE = "/dev/uio4";
+const std::string DMA_5_UIO_DEVICE = "/dev/uio5";
+const std::string DMA_6_UIO_DEVICE = "/dev/uio6";
+const std::string DMA_7_UIO_DEVICE = "/dev/uio7";
+
 const uint32_t GPIO_0 = 0x41200000;
 const uint32_t GPIO_1 = 0x41210000;

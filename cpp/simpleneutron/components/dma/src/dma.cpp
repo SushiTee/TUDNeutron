@@ -1,6 +1,8 @@
 #include <iostream>
 #include <sstream>
 #include <sys/mman.h>
+#include <unistd.h>
+#include <fcntl.h>
 #include <dma/dma.h>
 
 namespace simpleneutron {
@@ -24,8 +26,8 @@ enum ControlBit : Bit {
     CONTROL_ERROR_INTERRUPT = 14
 };
 
-Dma::Dma(uint32_t memoryBase, uint32_t registerBase, int mem)
- : MEMORY_BASE(memoryBase), REGISTER_BASE(registerBase), mMem(mem)
+Dma::Dma(uint32_t memoryBase, uint32_t registerBase, int mem, const std::string &device)
+ : MEMORY_BASE(memoryBase), REGISTER_BASE(registerBase), mMem(mem), mDevice(device)
 {
     mRegister = (uint32_t *)mmap(NULL, 128, PROT_READ | PROT_WRITE, MAP_SHARED, mMem, REGISTER_BASE);
     if (mRegister == MAP_FAILED) {
@@ -39,10 +41,43 @@ Dma::Dma(uint32_t memoryBase, uint32_t registerBase, int mem)
         std::cout << "Dma: could not map memory map" << std::endl;
         mHasError = true;
     }
+
+    mUio = open(device.c_str(), O_RDWR);
+    if (mUio < 0) {
+        std::cout << "Dma: could not open UIO Device" << std::endl;
+        mHasError = true;
+    }
+}
+
+Dma::~Dma() {
+    if (mUio >= 0) {
+        mUio = close(mUio);
+        if (mUio < 0) {
+            std::cout << "Dma: could not close UIO Device" << std::endl;
+        }
+    }
 }
 
 void Dma::reset() {
     MemoryControl::registerSetBit(mRegister, DmaOffset::S2MM_CONTROL, CONTROL_RESET, 1);
+}
+
+void Dma::enableInterrupt() {
+    // interrupt is disabled after read. So we have to reenable it by writing to it also reset the interrup bit
+    MemoryControl::registerSetBit(mRegister, DmaOffset::S2MM_STATUS, CONTROL_COMPLETE_INTERRUPT, 1);
+    write(mUio, "1", 4);
+}
+
+void Dma::waitForData() {
+    // read interrupt count to buffer
+    char buf[4];
+    read(mUio, buf, 4); // this blocks until an interrupt occurs. Exactly what we want.
+    uint32_t numberOfInterrupts = static_cast<uint32_t>(*buf);
+    std::cout << "Interrupt occured | Count: " << (numberOfInterrupts - mInterruptCount) << std::endl;
+    mInterruptCount = numberOfInterrupts;
+
+    // interrupt is disabled after read. So we have to reenable it by writing to it
+    enableInterrupt();
 }
 
 void Dma::enable() {
