@@ -4,12 +4,19 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <dma/dma.h>
+#include <gpio/wordlengthcontroller.h>
 
 namespace simpleneutron {
 namespace components {
 namespace dma {
 
 using namespace memorycontrol;
+
+// we need this because we have to send a signal to the dma thread
+// to terminate it while it is blocking 
+constexpr int quitSignal = SIGINT;
+sighandler_t prevSignal;
+Dma *dmaStore = nullptr;
 
 enum DmaOffset : Offset {
     S2MM_CONTROL = 0x30,
@@ -27,7 +34,7 @@ enum ControlBit : Bit {
 };
 
 Dma::Dma(uint32_t memoryBase, uint32_t registerBase, int mem, const std::string &device)
- : MEMORY_BASE(memoryBase), REGISTER_BASE(registerBase), mMem(mem), mDevice(device)
+ : MEMORY_BASE(memoryBase), REGISTER_BASE(registerBase), mMem(mem), mDevice(device), mWordLength(gpio::WordLengthController::getWordLength()), mInterruptCount(0)
 {
     mRegister = (uint32_t *)mmap(NULL, 128, PROT_READ | PROT_WRITE, MAP_SHARED, mMem, REGISTER_BASE);
     if (mRegister == MAP_FAILED) {
@@ -58,6 +65,11 @@ Dma::~Dma() {
     }
 }
 
+void Dma::registerEnable() {
+    uint32_t value = (1 << CONTROL_RUN) | (1 << CONTROL_COMPLETE_INTERRUPT) | (1 << CONTROL_DELAY_INTERRUPT) | (1 << CONTROL_ERROR_INTERRUPT);
+    MemoryControl::registerWrite(mRegister, DmaOffset::S2MM_CONTROL, value);
+}
+
 void Dma::reset() {
     MemoryControl::registerSetBit(mRegister, DmaOffset::S2MM_CONTROL, CONTROL_RESET, 1);
 }
@@ -71,22 +83,115 @@ void Dma::enableInterrupt() {
 void Dma::waitForData() {
     // read interrupt count to buffer
     char buf[4];
-    read(mUio, buf, 4); // this blocks until an interrupt occurs. Exactly what we want.
-    uint32_t numberOfInterrupts = static_cast<uint32_t>(*buf);
-    std::cout << "Interrupt occured | Count: " << (numberOfInterrupts - mInterruptCount) << std::endl;
-    mInterruptCount = numberOfInterrupts;
+    int result = read(mUio, buf, 4); // this blocks until an interrupt occurs. Exactly what we want.
+    if (result == -1) {
+        std::cout << "DMA (" << std::hex << REGISTER_BASE << ") Signal Interrupt occured. No data handling!" << std::endl;
+    } else {
+        uint32_t numberOfInterrupts = static_cast<uint32_t>(*buf);
+        std::cout << "DMA (" << std::hex << REGISTER_BASE << ") Interrupt occured | Count: " << (numberOfInterrupts - mInterruptCount) << std::endl;
+        mInterruptCount = numberOfInterrupts;
 
-    // interrupt is disabled after read. So we have to reenable it by writing to it
-    enableInterrupt();
+        // interrupt is disabled after read. So we have to reenable it by writing to it
+        enableInterrupt();
+    }
 }
 
 void Dma::enable() {
-    uint32_t value = (1 << CONTROL_RUN) | (1 << CONTROL_COMPLETE_INTERRUPT) | (1 << CONTROL_DELAY_INTERRUPT) | (1 << CONTROL_ERROR_INTERRUPT);
-    MemoryControl::registerWrite(mRegister, DmaOffset::S2MM_CONTROL, value);
+    if (mEnabled) {
+        return;
+    }
+
+    mThread = std::make_unique<std::thread>([this](){
+        reset();
+        if (hasStatusError()) {
+            std::cout << "Status error" << std::endl;
+        }
+        registerEnable();
+        if (hasStatusError()) {
+            std::cout << "Status error" << std::endl;
+        }
+        setDestinationAddress(0);
+        if (hasStatusError()) {
+            std::cout << "Status error" << std::endl;
+        }
+        setWordLength(mWordLength);
+        if (hasStatusError()) {
+            std::cout << "Status error" << std::endl;
+        }
+        enableInterrupt();
+
+        uint32_t i = 0;
+        while(!mQuit) {
+            waitForData();
+            // if thread was quit while waiting break here
+            if (mQuit) {
+                break;
+            }
+
+            uint32_t status = getStatus();
+            
+            if (hasStatusError(status)) {
+                break;
+            }
+            if (status & ((1 << simpleneutron::components::dma::StatusBit::STATUS_HALTED) | (1 << simpleneutron::components::dma::StatusBit::STATUS_IDLE))) {
+                std::cout << std::hex << readMemory(i) << " status: " << std::dec << simpleneutron::components::memorycontrol::MemoryControl::registerRead(mRegister, 0x58u) << std::endl;
+                i += mWordLength;
+                if (i >= 0x800000u) {
+                    i = 0;
+                }
+                setDestinationAddress(i);
+                setWordLength(mWordLength);
+            }
+        }
+
+        std::cout << "DMA (" << std::hex << REGISTER_BASE << ") Thraed terminated!" << std::endl;
+    });
+
+    mEnabled = true;
 }
 
 void Dma::disable() {
+    if (!mEnabled) {
+        return;
+    }
+
+    // store current object to global var
+    dmaStore = this;
+
+    // enforce POSIX semantics
+    siginterrupt(quitSignal, true);
+
+    // register signal handler
+    prevSignal = std::signal(quitSignal, [](int) {
+        // use global var here
+        if (dmaStore) {
+            dmaStore->setQuit(true);
+        }
+
+        // reset to previous (original) signal
+        std::signal(quitSignal, prevSignal);
+    });
+
+    // send signal to thread
+    pthread_kill(mThread->native_handle(), quitSignal);
+
+    // wait for thread to finish
+    mThread->join();
+
+    // cleanup
+    dmaStore = nullptr;
+    mThread = nullptr;
+    mQuit = false;
+
+    // unregister signal handler
+    //std::signal(quitSignal, [](int) {
+        // nothing
+    //});
+
+    // turn off hardware
     MemoryControl::registerSetBit(mRegister, DmaOffset::S2MM_CONTROL, CONTROL_RUN, 0);
+
+    mEnabled = false;
 }
 
 void Dma::setDestinationAddress(uint32_t offset) {
@@ -113,34 +218,38 @@ bool Dma::hasStatusError() {
 bool Dma::hasStatusError(uint32_t status) {
     bool hasError = false;
     std::stringstream ss;
-    if (status & (1 << STATUS_HALTED)) ss << "Status: (halted)";
-    if (status & (1 << STATUS_IDLE)) ss << "|(idle)";
+    if (status & (1 << STATUS_HALTED)) ss << "(halted)";
+    if (status & (1 << STATUS_IDLE)) ss << "(idle)";
     if (status & (1 << STATUS_INTERNAL_ERROR)) {
-        ss << "|(internal error)";
+        ss << "(internal error)";
         hasError = true;
     }
     if (status & (1 << STATUS_SLAVE_ERROR)) {
-        ss << "|(slave error)";
+        ss << "(slave error)";
         hasError = true;
     }
     if (status & (1 << STATUS_DECODER_ERROR)) {
-        ss << "|(decoder error)";
+        ss << "(decoder error)";
         hasError = true;
     }
-    if (status & (1 << STATUS_COMPLETE_INTERRUPT)) ss << "|(interrupt completed)";
-    if (status & (1 << STATUS_DELAY_INTERRUPT)) ss << "|(delay interrupt)";
+    if (status & (1 << STATUS_COMPLETE_INTERRUPT)) ss << "(interrupt completed)";
+    if (status & (1 << STATUS_DELAY_INTERRUPT)) ss << "(delay interrupt)";
     if (status & (1 << STATUS_INTERRUPT_ERROR)) {
-        ss << "|(interrupt error)";
+        ss << "(interrupt error)";
         hasError = true;
     }
     if (!ss.str().empty()) {
-        std::cout << ss.str() << std::endl;
+        std::cout << "DMA (" << std::hex << REGISTER_BASE << ") Status: " << ss.str() << std::endl;
     }
     return hasError;
 }
 
 bool Dma::hasError() const {
     return mHasError;
+}
+
+void Dma::setQuit(bool quit) {
+    mQuit = quit;
 }
 
 } // dma    

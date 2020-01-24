@@ -17,14 +17,13 @@ class Gpio {
 protected:
     void setValue(uint32_t value);
     uint32_t getValue();
+    bool hasError() const;
 
 public:
     Gpio() = delete;
     Gpio(const Gpio&) = delete;
     Gpio(uint32_t registerBase, int mem);
     void operator=(const Gpio&) = delete;
-
-    bool hasError() const;
 };
 
 } // gpio    

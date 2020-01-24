@@ -16,7 +16,6 @@ Gpio::Gpio(uint32_t registerBase, int mem)
     if (mRegister == MAP_FAILED) {
         std::cout << "Gpio: could not map register" << std::endl;
         mHasError = true;
-        return;
     }
 }
 

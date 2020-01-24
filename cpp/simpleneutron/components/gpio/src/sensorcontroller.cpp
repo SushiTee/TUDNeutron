@@ -11,19 +11,51 @@ SensorController::SensorController(uint32_t registerBase, int mem)
  : Gpio(registerBase, mem)
 {}
 
+SensorController &SensorController::getInstanceImpl(uint32_t registerBase, int mem) {
+    static SensorController instance(registerBase, mem);
+    return instance;
+}
+
+SensorController &SensorController::getInstance() {
+    return getInstanceImpl();
+}
+
+void SensorController::init(uint32_t registerBase, int mem) {
+    getInstanceImpl(registerBase, mem);
+}
+
 void SensorController::activateAll() {
-    setValue(0xffu);
+    SensorController &ref = SensorController::getInstance();
+    if (ref.mSensorState != 0xffu) {
+        ref.mSensorState = 0xffu;
+        ref.setValue(0xffu);
+    }
 }
 
 void SensorController::deactivateAll() {
-    setValue(0u);
+    SensorController &ref = SensorController::getInstance();
+    if (ref.mSensorState != 0u) {
+        ref.mSensorState = 0u;
+        ref.setValue(0u);;
+    }
 }
 
 void SensorController::activateSpecific(uint8_t value) {
-    setValue(static_cast<uint32_t>(value));
+    SensorController &ref = SensorController::getInstance();
+    if (value != ref.mSensorState) {
+        ref.mSensorState = value;
+        ref.setValue(static_cast<uint32_t>(value));;
+    }
 }
+
 uint8_t SensorController::getStatus() {
-    return static_cast<uint8_t>(getValue());
+    SensorController &ref = SensorController::getInstance();
+    return ref.mSensorState;
+}
+
+bool SensorController::hasError() {
+    SensorController &ref = SensorController::getInstance();
+    return ref.Gpio::hasError();
 }
 
 } // gpio    

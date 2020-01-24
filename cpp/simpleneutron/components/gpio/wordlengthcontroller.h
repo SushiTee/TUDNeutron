@@ -1,5 +1,6 @@
 #pragma once
 
+#include <atomic>
 #include <cstdint>
 #include <gpio/gpio.h>
 
@@ -8,14 +9,20 @@ namespace components {
 namespace gpio {
 
 class WordLengthController : public Gpio {
+    WordLengthController(uint32_t registerBase, int mem);
+    static WordLengthController &getInstanceImpl(uint32_t registerBase = 0, int mem = 0);
+    static WordLengthController &getInstance();
+
+    uint16_t mWordLength = 16u;
 public:
     WordLengthController() = delete;
     WordLengthController(const WordLengthController&) = delete;
-    WordLengthController(uint32_t registerBase, int mem);
     void operator=(const WordLengthController&) = delete;
 
-    void setWordLength(uint32_t length);
-    uint32_t getWordLength();
+    static void init(uint32_t registerBase, int mem);
+    static void setWordLength(uint32_t length);
+    static uint32_t getWordLength();
+    static bool hasError();
 };
 
 } // gpio    

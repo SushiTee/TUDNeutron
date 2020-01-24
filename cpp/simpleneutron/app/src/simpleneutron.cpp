@@ -15,70 +15,49 @@ int main(int argc, char *argv[]) {
       return 1;
    }
 
+   // init this first!
+   simpleneutron::components::gpio::SensorController::init(GPIO_0, mem);
+   if (simpleneutron::components::gpio::SensorController::hasError()) {
+      std::cout << "Error creating Sensors Gpio object" << std::endl;
+      return 1;
+   }
+
+   simpleneutron::components::gpio::WordLengthController::init(GPIO_1, mem);
+   if (simpleneutron::components::gpio::WordLengthController::hasError()) {
+      std::cout << "Error creating Sensors Gpio object" << std::endl;
+      return 1;
+   }
+
    auto dma = simpleneutron::components::dma::Dma(DMA_0_MEMORY, DMA_0_REGISTER, mem, DMA_0_UIO_DEVICE);
    if (dma.hasError()) {
       std::cout << "Error creating DMA object" << std::endl;
       return 1;
    }
 
-   auto sensors = simpleneutron::components::gpio::SensorController(GPIO_0, mem);
-   if (sensors.hasError()) {
-      std::cout << "Error creating Sensors Gpio object" << std::endl;
+   auto dma1 = simpleneutron::components::dma::Dma(DMA_1_MEMORY, DMA_1_REGISTER, mem, DMA_1_UIO_DEVICE);
+   if (dma1.hasError()) {
+      std::cout << "Error creating DMA1 object" << std::endl;
       return 1;
    }
-
-   auto wordLengthController = simpleneutron::components::gpio::WordLengthController(GPIO_1, mem);
-   if (sensors.hasError()) {
-      std::cout << "Error creating Sensors Gpio object" << std::endl;
-      return 1;
-   }
-
-   auto lRegister = (uint32_t *)mmap(NULL, 128, PROT_READ | PROT_WRITE, MAP_SHARED, mem, DMA_0_REGISTER);
-    if (lRegister == MAP_FAILED) {
-        std::cout << "Length Register: could not map register" << std::endl;
-        return 1;
-    }
 
    uint32_t wordLength = 16;
-   wordLengthController.setWordLength(wordLength);
-   sensors.deactivateAll();
-   sensors.activateSpecific(0b01010101u);
+   simpleneutron::components::gpio::WordLengthController::setWordLength(wordLength);
+   simpleneutron::components::gpio::SensorController::deactivateAll();
+   simpleneutron::components::gpio::SensorController::activateSpecific(0b01010101u);
 
-   dma.reset();
-   if (dma.hasStatusError()) {
-      std::cout << "Status error" << std::endl;
-   }
    dma.enable();
-   if (dma.hasStatusError()) {
-      std::cout << "Status error" << std::endl;
-   }
-   dma.setDestinationAddress(0);
-   if (dma.hasStatusError()) {
-      std::cout << "Status error" << std::endl;
-   }
-   dma.setWordLength(wordLength);
-   if (dma.hasStatusError()) {
-      std::cout << "Status error" << std::endl;
-   }
-   dma.enableInterrupt();
+   dma1.enable();
 
-   uint32_t i = 0;
    while(true) {
-      dma.waitForData();
-      uint32_t status = dma.getStatus();
-      
-      if (dma.hasStatusError(status)) {
-         break;
-      }
-      if (status & ((1 << simpleneutron::components::dma::StatusBit::STATUS_HALTED) | (1 << simpleneutron::components::dma::StatusBit::STATUS_IDLE))) {
-         std::cout << std::hex << dma.readMemory(i) << " status: " << std::dec << simpleneutron::components::memorycontrol::MemoryControl::registerRead(lRegister, 0x58u) << std::endl;
-         i += wordLength;
-         if (i >= 0x800000u) {
-            i = 0;
-         }
-         dma.setDestinationAddress(i);
-         dma.setWordLength(wordLength);
-      }
+      // main loop: it does nothing!
+
+      // test stuff to see if threads get terminated correctly
+      usleep(1000000);
+      dma.disable();
+      usleep(1000000);
+      dma1.disable();
+      usleep(1000000);
+      break;
    }
 
    return 0;

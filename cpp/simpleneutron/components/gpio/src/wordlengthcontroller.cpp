@@ -11,12 +11,34 @@ WordLengthController::WordLengthController(uint32_t registerBase, int mem)
  : Gpio(registerBase, mem)
 {}
 
+WordLengthController &WordLengthController::getInstanceImpl(uint32_t registerBase, int mem) {
+    static WordLengthController instance(registerBase, mem);
+    return instance;
+}
+WordLengthController &WordLengthController::getInstance() {
+    return getInstanceImpl();
+}
+
+void WordLengthController::init(uint32_t registerBase, int mem) {
+    getInstanceImpl(registerBase, mem);
+}
+
 void WordLengthController::setWordLength(uint32_t length) {
-    setValue(length);
+    WordLengthController &ref = WordLengthController::getInstance();
+    if (length != ref.mWordLength) {
+        ref.mWordLength = length;
+        ref.setValue(length);
+    }
 }
 
 uint32_t WordLengthController::getWordLength() {
-    return getValue();
+    WordLengthController &ref = WordLengthController::getInstance();
+    return ref.mWordLength;
+}
+
+bool WordLengthController::hasError() {
+    WordLengthController &ref = WordLengthController::getInstance();
+    return ref.Gpio::hasError();
 }
 
 } // gpio    

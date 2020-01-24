@@ -1,5 +1,9 @@
 #pragma once
 
+#include <atomic>
+#include <csignal>
+#include <memory>
+#include <thread>
 #include <cstdint>
 #include <memorycontrol/memorycontrol.h>
 
@@ -22,16 +26,24 @@ class Dma {
     const uint32_t MEMORY_BASE;
     const uint32_t REGISTER_BASE;
 
+    void registerEnable();
+    void setQuit(bool quit);
+
     int mMem;
     int mUio;
     uint32_t *mRegister = 0;
     uint32_t *mMemoryMap = 0;
 
     bool mHasError = false;
+    bool mEnabled = false;
 
     std::string mDevice;
+    std::unique_ptr<std::thread> mThread = nullptr;
 
-    uint32_t mInterruptCount = 0;
+    std::atomic<uint16_t> mWordLength;
+    std::atomic<uint32_t> mInterruptCount;
+    std::sig_atomic_t mQuit = false;
+
 public:
     Dma() = delete;
     Dma(const Dma&) = delete;
