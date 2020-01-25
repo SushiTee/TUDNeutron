@@ -1,6 +1,5 @@
 #pragma once
 
-#include <atomic>
 #include <cstdint>
 #include <hwdevice/hwdevice.h>
 #include <gpio/gpio.h>
