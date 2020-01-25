@@ -8,8 +8,13 @@ namespace components {
 namespace gpio {
 
 SensorController::SensorController(uint32_t registerBase, int mem)
- : Gpio(registerBase, mem)
-{}
+ : Gpio(registerBase, mem) {
+    setValue(0u); // turn off on init 
+}
+
+SensorController::~SensorController() {
+    setValue(0u); // turn off on destroy
+}
 
 SensorController &SensorController::getInstanceImpl(uint32_t registerBase, int mem) {
     static SensorController instance(registerBase, mem);
@@ -36,7 +41,7 @@ void SensorController::deactivateAll() {
     SensorController &ref = SensorController::getInstance();
     if (ref.mSensorState != 0u) {
         ref.mSensorState = 0u;
-        ref.setValue(0u);;
+        ref.setValue(0u);
     }
 }
 

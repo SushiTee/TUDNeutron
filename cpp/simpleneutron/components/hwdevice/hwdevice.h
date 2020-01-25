@@ -31,3 +31,5 @@ const std::string DMA_7_UIO_DEVICE = "/dev/uio7";
 
 const uint32_t GPIO_0 = 0x41200000;
 const uint32_t GPIO_1 = 0x41210000;
+
+const uint16_t DEFAULT_WORD_LENGTH = 0x20u;

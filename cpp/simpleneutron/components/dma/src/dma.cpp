@@ -63,6 +63,10 @@ Dma::~Dma() {
             std::cout << "Dma: could not close UIO Device" << std::endl;
         }
     }
+
+    if (mEnabled) {
+        disable();
+    }
 }
 
 void Dma::registerEnable() {

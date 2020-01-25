@@ -53,12 +53,12 @@ int main(int argc, char *argv[]) {
       // main loop: it does nothing!
 
       // test stuff to see if threads get terminated correctly
-      usleep(1000000);
-      dma.disable();
-      usleep(1000000);
-      dma1.disable();
-      usleep(1000000);
-      break;
+      //usleep(1000000);
+      //dma.disable();
+      //usleep(1000000);
+      //dma1.disable();
+      //usleep(1000000);
+      //break;
    }
 
    return 0;

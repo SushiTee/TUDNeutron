@@ -9,6 +9,7 @@ namespace gpio {
 
 class SensorController : public Gpio {
     SensorController(uint32_t registerBase, int mem);
+    ~SensorController();
     static SensorController &getInstanceImpl(uint32_t registerBase = 0, int mem = 0);
     static SensorController &getInstance();
 

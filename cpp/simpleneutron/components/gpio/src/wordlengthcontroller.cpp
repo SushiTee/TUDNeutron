@@ -8,8 +8,13 @@ namespace components {
 namespace gpio {
 
 WordLengthController::WordLengthController(uint32_t registerBase, int mem)
- : Gpio(registerBase, mem)
-{}
+ : Gpio(registerBase, mem) {
+    setValue(DEFAULT_WORD_LENGTH);
+}
+
+WordLengthController::~WordLengthController() {
+    setValue(DEFAULT_WORD_LENGTH);
+}
 
 WordLengthController &WordLengthController::getInstanceImpl(uint32_t registerBase, int mem) {
     static WordLengthController instance(registerBase, mem);
@@ -33,6 +38,7 @@ void WordLengthController::setWordLength(uint32_t length) {
 
 uint32_t WordLengthController::getWordLength() {
     WordLengthController &ref = WordLengthController::getInstance();
+    std::cout << ref.mWordLength << std::endl;
     return ref.mWordLength;
 }
 
