@@ -38,7 +38,6 @@ void WordLengthController::setWordLength(uint32_t length) {
 
 uint32_t WordLengthController::getWordLength() {
     WordLengthController &ref = WordLengthController::getInstance();
-    std::cout << ref.mWordLength << std::endl;
     return ref.mWordLength;
 }
 
