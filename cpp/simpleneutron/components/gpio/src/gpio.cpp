@@ -1,5 +1,6 @@
 #include <iostream>
 #include <sys/mman.h>
+#include <logger/logger.h>
 #include <memorycontrol/memorycontrol.h>
 #include <gpio/gpio.h>
 
@@ -14,7 +15,7 @@ Gpio::Gpio(uint32_t registerBase, int mem)
 {
     mRegister = (uint32_t *)mmap(NULL, 128, PROT_READ | PROT_WRITE, MAP_SHARED, mMem, REGISTER_BASE);
     if (mRegister == MAP_FAILED) {
-        std::cout << "Gpio: could not map register" << std::endl;
+        LogErr << "Gpio: could not map register" << std::endl;
         mHasError = true;
     }
 }

@@ -3,6 +3,7 @@
 #include <sys/mman.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <logger/logger.h>
 #include <dma/dma.h>
 #include <gpio/wordlengthcontroller.h>
 
@@ -38,20 +39,20 @@ Dma::Dma(uint32_t memoryBase, uint32_t registerBase, int mem, const std::string 
 {
     mRegister = (uint32_t *)mmap(NULL, 128, PROT_READ | PROT_WRITE, MAP_SHARED, mMem, REGISTER_BASE);
     if (mRegister == MAP_FAILED) {
-        std::cout << "Dma: could not map register" << std::endl;
+        LogErr << "Dma: could not map register" << std::endl;
         mHasError = true;
         return;
     }
 
     mMemoryMap = (uint32_t *)mmap(NULL, 0x2000000, PROT_READ | PROT_WRITE, MAP_SHARED, mMem, MEMORY_BASE);
     if (mMemoryMap == MAP_FAILED) {
-        std::cout << "Dma: could not map memory map" << std::endl;
+        LogErr << "Dma: could not map memory map" << std::endl;
         mHasError = true;
     }
 
     mUio = open(device.c_str(), O_RDWR);
     if (mUio < 0) {
-        std::cout << "Dma: could not open UIO Device" << std::endl;
+        LogErr << "Dma: could not open UIO Device" << std::endl;
         mHasError = true;
     }
 }
@@ -60,7 +61,7 @@ Dma::~Dma() {
     if (mUio >= 0) {
         mUio = close(mUio);
         if (mUio < 0) {
-            std::cout << "Dma: could not close UIO Device" << std::endl;
+            LogOut << "Dma: could not close UIO Device" << std::endl;
         }
     }
 
@@ -89,10 +90,10 @@ void Dma::waitForData() {
     char buf[4];
     int result = read(mUio, buf, 4); // this blocks until an interrupt occurs. Exactly what we want.
     if (result != 4) {
-        std::cout << "DMA (" << std::hex << REGISTER_BASE << ") Signal Interrupt occured. No data handling!" << std::endl;
+        LogOut << "DMA (" << std::hex << REGISTER_BASE << ") Signal Interrupt occured. No data handling!" << std::endl;
     } else {
         uint32_t numberOfInterrupts = static_cast<uint32_t>(*buf);
-        std::cout << "DMA (" << std::hex << REGISTER_BASE << ") Interrupt occured | Count: " << (numberOfInterrupts - mInterruptCount) << std::endl;
+        LogOut << "DMA (" << std::hex << REGISTER_BASE << ") Interrupt occured | Count: " << (numberOfInterrupts - mInterruptCount) << std::endl;
         mInterruptCount = numberOfInterrupts;
 
         // interrupt is disabled after read. So we have to reenable it by writing to it
@@ -108,19 +109,19 @@ void Dma::enable() {
     mThread = std::make_unique<std::thread>([this](){
         reset();
         if (hasStatusError()) {
-            std::cout << "Status error" << std::endl;
+            LogOut << "Status error" << std::endl;
         }
         registerEnable();
         if (hasStatusError()) {
-            std::cout << "Status error" << std::endl;
+            LogOut << "Status error" << std::endl;
         }
         setDestinationAddress(0);
         if (hasStatusError()) {
-            std::cout << "Status error" << std::endl;
+            LogOut << "Status error" << std::endl;
         }
         setWordLength(mWordLength);
         if (hasStatusError()) {
-            std::cout << "Status error" << std::endl;
+            LogOut << "Status error" << std::endl;
         }
         enableInterrupt();
 
@@ -138,7 +139,7 @@ void Dma::enable() {
                 break;
             }
             if (status & ((1 << simpleneutron::components::dma::StatusBit::STATUS_HALTED) | (1 << simpleneutron::components::dma::StatusBit::STATUS_IDLE))) {
-                std::cout << std::hex << readMemory(i) << " status: " << std::dec << simpleneutron::components::memorycontrol::MemoryControl::registerRead(mRegister, 0x58u) << std::endl;
+                LogOut << std::hex << readMemory(i) << " status: " << std::dec << simpleneutron::components::memorycontrol::MemoryControl::registerRead(mRegister, 0x58u) << std::endl;
                 i += mWordLength;
                 if (i >= 0x800000u) {
                     i = 0;
@@ -148,7 +149,7 @@ void Dma::enable() {
             }
         }
 
-        std::cout << "DMA (" << std::hex << REGISTER_BASE << ") Thraed terminated!" << std::endl;
+        LogOut << "DMA (" << std::hex << REGISTER_BASE << ") Thraed terminated!" << std::endl;
     });
 
     mEnabled = true;
@@ -243,7 +244,7 @@ bool Dma::hasStatusError(uint32_t status) {
         hasError = true;
     }
     if (!ss.str().empty()) {
-        std::cout << "DMA (" << std::hex << REGISTER_BASE << ") Status: " << ss.str() << std::endl;
+        LogOut << "DMA (" << std::hex << REGISTER_BASE << ") Status: " << ss.str() << std::endl;
     }
     return hasError;
 }
