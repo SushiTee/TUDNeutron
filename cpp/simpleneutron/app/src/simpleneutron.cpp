@@ -1,14 +1,25 @@
 #include <iostream>
 #include <memory>
+#include <chrono>
 #include <fcntl.h>
-#include <unistd.h>
 #include <sys/mman.h>
 #include <dma/dma.h>
 #include <hwdevice/hwdevice.h>
 #include <gpio/sensorcontroller.h>
 #include <gpio/wordlengthcontroller.h>
 
+// to override SIGINT so the proecss is quit correctly and not just stopped
+constexpr int quitSignal = SIGINT;
+bool quit = false;
+
 int main(int argc, char *argv[]) {
+   using namespace std::chrono_literals;
+   // register signal handler
+    std::signal(quitSignal, [](int) {
+        // use global var here
+        quit = true;
+    });
+
    int mem = open("/dev/mem", O_RDWR | O_SYNC);
    if (mem == -1) {
       std::cout << "Error opening /dev/mem" << std::endl;
@@ -43,22 +54,14 @@ int main(int argc, char *argv[]) {
       return 1;
    }
 
-   simpleneutron::components::gpio::SensorController::deactivateAll();
    simpleneutron::components::gpio::SensorController::activateSpecific(0b01010101u);
 
    dma.enable();
    dma1.enable();
 
-   while(true) {
+   while(!quit) {
       // main loop: it does nothing!
-
-      // test stuff to see if threads get terminated correctly
-      //usleep(1000000);
-      //dma.disable();
-      //usleep(1000000);
-      //dma1.disable();
-      //usleep(1000000);
-      //break;
+      std::this_thread::sleep_for(2ms);
    }
 
    return 0;

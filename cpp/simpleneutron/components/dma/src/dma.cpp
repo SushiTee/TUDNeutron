@@ -88,7 +88,7 @@ void Dma::waitForData() {
     // read interrupt count to buffer
     char buf[4];
     int result = read(mUio, buf, 4); // this blocks until an interrupt occurs. Exactly what we want.
-    if (result == -1) {
+    if (result != 4) {
         std::cout << "DMA (" << std::hex << REGISTER_BASE << ") Signal Interrupt occured. No data handling!" << std::endl;
     } else {
         uint32_t numberOfInterrupts = static_cast<uint32_t>(*buf);
