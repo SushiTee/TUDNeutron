@@ -39,20 +39,20 @@ Dma::Dma(uint32_t memoryBase, uint32_t registerBase, int mem, const std::string 
 {
     mRegister = (uint32_t *)mmap(NULL, 128, PROT_READ | PROT_WRITE, MAP_SHARED, mMem, REGISTER_BASE);
     if (mRegister == MAP_FAILED) {
-        LogErr << "Dma: could not map register" << std::endl;
+        LogErr << "DMA (" << std::hex << REGISTER_BASE << "): could not map register" << std::endl;
         mHasError = true;
         return;
     }
 
     mMemoryMap = (uint32_t *)mmap(NULL, 0x2000000, PROT_READ | PROT_WRITE, MAP_SHARED, mMem, MEMORY_BASE);
     if (mMemoryMap == MAP_FAILED) {
-        LogErr << "Dma: could not map memory map" << std::endl;
+        LogErr << "DMA (" << std::hex << REGISTER_BASE << "): could not map memory map" << std::endl;
         mHasError = true;
     }
 
     mUio = open(device.c_str(), O_RDWR);
     if (mUio < 0) {
-        LogErr << "Dma: could not open UIO Device" << std::endl;
+        LogErr << "DMA (" << std::hex << REGISTER_BASE << "): could not open UIO Device" << std::endl;
         mHasError = true;
     }
 }
@@ -61,7 +61,7 @@ Dma::~Dma() {
     if (mUio >= 0) {
         mUio = close(mUio);
         if (mUio < 0) {
-            LogOut << "Dma: could not close UIO Device" << std::endl;
+            LogOut << "DMA (" << std::hex << REGISTER_BASE << "): could not close UIO Device" << std::endl;
         }
     }
 
@@ -131,19 +131,19 @@ void Dma::enable() {
     mThread = std::make_unique<std::thread>([this](){
         reset();
         if (hasStatusError()) {
-            LogOut << "Status error" << std::endl;
+            LogOut << "DMA (" << std::hex << REGISTER_BASE << ") Status error" << std::endl;
         }
         registerEnable();
         if (hasStatusError()) {
-            LogOut << "Status error" << std::endl;
+            LogOut << "DMA (" << std::hex << REGISTER_BASE << ") Status error" << std::endl;
         }
         setDestinationAddress(mWriteAddress);
         if (hasStatusError()) {
-            LogOut << "Status error" << std::endl;
+            LogOut << "DMA (" << std::hex << REGISTER_BASE << ") Status error" << std::endl;
         }
         setWordLength(mWordLength);
         if (hasStatusError()) {
-            LogOut << "Status error" << std::endl;
+            LogOut << "DMA (" << std::hex << REGISTER_BASE << ") Status error" << std::endl;
         }
         enableInterrupt();
 
@@ -160,7 +160,7 @@ void Dma::enable() {
                 break;
             }
             if (status & ((1 << simpleneutron::components::dma::StatusBit::STATUS_HALTED) | (1 << simpleneutron::components::dma::StatusBit::STATUS_IDLE))) {
-                LogOut << std::hex << readMemory(mWriteAddress) << " status: " << std::dec << simpleneutron::components::memorycontrol::MemoryControl::registerRead(mRegister, 0x58u) << std::endl;
+                LogOut << std::hex << readMemory(mWriteAddress) << "DMA (" << std::hex << REGISTER_BASE << ") status: " << std::dec << simpleneutron::components::memorycontrol::MemoryControl::registerRead(mRegister, 0x58u) << std::endl;
                 mWriteAddress += mWordLength;
                 if (mWriteAddress >= mSize) {
                     mWriteAddress = 0;
