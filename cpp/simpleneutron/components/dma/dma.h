@@ -5,6 +5,7 @@
 #include <memory>
 #include <thread>
 #include <cstdint>
+#include <hwdevice/hwdevice.h>
 #include <memorycontrol/memorycontrol.h>
 
 namespace simpleneutron {
@@ -28,11 +29,16 @@ class Dma {
 
     void registerEnable();
     void setQuit(bool quit);
+    uint32_t writeToReadPointerDifference();
+    uint32_t readToWritePointerDifference();
 
     int mMem;
     int mUio;
     uint32_t *mRegister = 0;
     uint32_t *mMemoryMap = 0;
+    uint32_t mSize = DMA_SIZE;
+    uint32_t mReadAddress = 0;
+    uint32_t mWriteAddress = 0;
 
     bool mHasError = false;
     bool mEnabled = false;
@@ -50,6 +56,9 @@ public:
     Dma(uint32_t memoryBase, uint32_t registerBase, int mem, const std::string &device);
     ~Dma();
     void operator=(const Dma&) = delete;
+
+    bool empty();
+    bool full();
 
     void reset();
     void enableInterrupt();

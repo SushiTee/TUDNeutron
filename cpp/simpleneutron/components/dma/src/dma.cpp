@@ -70,12 +70,34 @@ Dma::~Dma() {
     }
 }
 
+uint32_t Dma::writeToReadPointerDifference() {
+    return mWriteAddress < mReadAddress ? mReadAddress - mWriteAddress : (mSize - mWriteAddress) + mReadAddress;
+}
+
+uint32_t Dma::readToWritePointerDifference() {
+    return mReadAddress <= mWriteAddress ? mWriteAddress - mReadAddress : (mSize - mReadAddress) + mWriteAddress;
+}
+
+bool Dma::empty() {
+    return mReadAddress == mWriteAddress;
+}
+
+bool Dma::full() {
+    uint32_t diff = writeToReadPointerDifference();
+    if (diff < mWordLength) {
+        return true;
+    }
+    return false;
+}
+
 void Dma::registerEnable() {
     uint32_t value = (1 << CONTROL_RUN) | (1 << CONTROL_COMPLETE_INTERRUPT) | (1 << CONTROL_DELAY_INTERRUPT) | (1 << CONTROL_ERROR_INTERRUPT);
     MemoryControl::registerWrite(mRegister, DmaOffset::S2MM_CONTROL, value);
 }
 
 void Dma::reset() {
+    mWriteAddress = 0;
+    mReadAddress = 0;
     MemoryControl::registerSetBit(mRegister, DmaOffset::S2MM_CONTROL, CONTROL_RESET, 1);
 }
 
@@ -115,7 +137,7 @@ void Dma::enable() {
         if (hasStatusError()) {
             LogOut << "Status error" << std::endl;
         }
-        setDestinationAddress(0);
+        setDestinationAddress(mWriteAddress);
         if (hasStatusError()) {
             LogOut << "Status error" << std::endl;
         }
@@ -125,7 +147,6 @@ void Dma::enable() {
         }
         enableInterrupt();
 
-        uint32_t i = 0;
         while(!mQuit) {
             waitForData();
             // if thread was quit while waiting break here
@@ -139,12 +160,12 @@ void Dma::enable() {
                 break;
             }
             if (status & ((1 << simpleneutron::components::dma::StatusBit::STATUS_HALTED) | (1 << simpleneutron::components::dma::StatusBit::STATUS_IDLE))) {
-                LogOut << std::hex << readMemory(i) << " status: " << std::dec << simpleneutron::components::memorycontrol::MemoryControl::registerRead(mRegister, 0x58u) << std::endl;
-                i += mWordLength;
-                if (i >= 0x800000u) {
-                    i = 0;
+                LogOut << std::hex << readMemory(mWriteAddress) << " status: " << std::dec << simpleneutron::components::memorycontrol::MemoryControl::registerRead(mRegister, 0x58u) << std::endl;
+                mWriteAddress += mWordLength;
+                if (mWriteAddress >= mSize) {
+                    mWriteAddress = 0;
                 }
-                setDestinationAddress(i);
+                setDestinationAddress(mWriteAddress);
                 setWordLength(mWordLength);
             }
         }
