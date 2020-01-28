@@ -12,6 +12,9 @@ namespace controller {
 constexpr int quitSignal = SIGINT;
 bool quit = false;
 
+Controller::Controller(int mem) : mMem(mem)
+{}
+
 void Controller::run() {
     // enforce POSIX semantics
     siginterrupt(quitSignal, true);
@@ -103,9 +106,18 @@ void Controller::handleData(kn::buffer<1024> &buff, size_t size) {
         LogOut << "Payload: " << str << std::endl;
         switch (type)
         {
-        case MessageType::START_DMA:
+        case MessageType::START_DMA: {
             LogOut << "Handle DMA start" << dataSize << std::endl;
+            auto dma = simpleneutron::components::dma::Dma(0, mMem);
+            if (dma.hasError()) {
+                LogErr << "Error creating DMA object" << std::endl;
+                break;
+            }
+
+            mDmas.push_back(std::move(dma));
+            mDmas[0].enable();
             break;
+        }
         case MessageType::STOP_DMA:
             LogOut << "Handle DMA stop" << dataSize << std::endl;
             break;

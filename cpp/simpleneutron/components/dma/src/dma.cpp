@@ -57,6 +57,22 @@ Dma::Dma(uint8_t id, int mem)
     }
 }
 
+Dma::Dma(Dma&& other) : ID(other.ID), MEMORY_BASE(other.MEMORY_BASE), REGISTER_BASE(other.REGISTER_BASE), mUio(other.mUio), mRegister(other.mRegister),
+        mMemoryMap(other.mMemoryMap), mSize(other.mSize), mReadAddress(other.mReadAddress), mWriteAddress(other.mWriteAddress), mHasError(other.mHasError),
+        mEnabled(other.mEnabled), mWordLength(other.mWordLength.load()), mInterruptCount(other.mInterruptCount.load()), mQuit(other.mQuit) {
+    if (other.mUio >= 0) {
+        other.mUio = close(mUio);
+        if (other.mUio < 0) {
+            LogOut << "DMA (" << std::hex << REGISTER_BASE << "): could not close UIO Device" << std::endl;
+        }
+    }
+    mUio = open(DMAS[ID].mUioDevice.c_str(), O_RDWR);
+    if (mUio < 0) {
+        LogErr << "DMA (" << std::hex << REGISTER_BASE << "): could not open UIO Device" << std::endl;
+        mHasError = true;
+    }
+};
+
 Dma::~Dma() {
     if (mUio >= 0) {
         mUio = close(mUio);

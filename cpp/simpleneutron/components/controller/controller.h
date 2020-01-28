@@ -3,6 +3,7 @@
 #include <memory>
 #include <vector>
 #include <thread>
+#include <dma/dma.h>
 #include <networking/kissnet.hpp>
 
 namespace simpleneutron {
@@ -29,9 +30,12 @@ class Controller {
     const kn::port_t PORT = 22222;
     std::unique_ptr<kn::tcp_socket> mSock = nullptr;
     std::vector<std::byte> mData;
+    int mMem;
+    std::vector<simpleneutron::components::dma::Dma> mDmas;
 
 public:
-    Controller() = default;
+    Controller() = delete;
+    Controller(int mem);
     Controller(const Controller&) = delete;
     void operator=(const Controller&) = delete;
 
