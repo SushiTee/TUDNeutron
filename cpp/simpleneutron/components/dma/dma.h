@@ -24,6 +24,7 @@ enum StatusBit : memorycontrol::Bit {
 };
 
 class Dma {
+    const uint8_t ID;
     const uint32_t MEMORY_BASE;
     const uint32_t REGISTER_BASE;
 
@@ -32,7 +33,6 @@ class Dma {
     uint32_t writeToReadPointerDifference();
     uint32_t readToWritePointerDifference();
 
-    int mMem;
     int mUio;
     uint32_t *mRegister = 0;
     uint32_t *mMemoryMap = 0;
@@ -43,7 +43,6 @@ class Dma {
     bool mHasError = false;
     bool mEnabled = false;
 
-    std::string mDevice;
     std::unique_ptr<std::thread> mThread = nullptr;
 
     std::atomic<uint16_t> mWordLength;
@@ -53,12 +52,14 @@ class Dma {
 public:
     Dma() = delete;
     Dma(const Dma&) = delete;
-    Dma(uint32_t memoryBase, uint32_t registerBase, int mem, const std::string &device);
+    Dma(uint8_t id, int mem);
     ~Dma();
     void operator=(const Dma&) = delete;
 
     bool empty();
     bool full();
+
+    inline uint8_t getID();
 
     void reset();
     void enableInterrupt();

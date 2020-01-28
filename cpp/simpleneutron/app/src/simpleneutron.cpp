@@ -32,13 +32,13 @@ int main(int argc, char *argv[]) {
    uint32_t wordLength = 16;
    simpleneutron::components::gpio::WordLengthController::setWordLength(wordLength);
 
-   auto dma = simpleneutron::components::dma::Dma(DMA_0_MEMORY, DMA_0_REGISTER, mem, DMA_0_UIO_DEVICE);
+   auto dma = simpleneutron::components::dma::Dma(0, mem);
    if (dma.hasError()) {
       LogErr << "Error creating DMA object" << std::endl;
       return 1;
    }
 
-   auto dma1 = simpleneutron::components::dma::Dma(DMA_1_MEMORY, DMA_1_REGISTER, mem, DMA_1_UIO_DEVICE);
+   auto dma1 = simpleneutron::components::dma::Dma(1, mem);
    if (dma1.hasError()) {
       LogErr << "Error creating DMA1 object" << std::endl;
       return 1;
