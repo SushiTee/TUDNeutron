@@ -31,7 +31,7 @@ class Controller {
     std::unique_ptr<kn::tcp_socket> mSock = nullptr;
     std::vector<std::byte> mData;
     int mMem;
-    std::vector<simpleneutron::components::dma::Dma> mDmas;
+    std::vector<std::unique_ptr<simpleneutron::components::dma::Dma>> mDmas;
 
 public:
     Controller() = delete;

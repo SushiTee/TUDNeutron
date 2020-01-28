@@ -108,14 +108,14 @@ void Controller::handleData(kn::buffer<1024> &buff, size_t size) {
         {
         case MessageType::START_DMA: {
             LogOut << "Handle DMA start" << dataSize << std::endl;
-            auto dma = simpleneutron::components::dma::Dma(0, mMem);
-            if (dma.hasError()) {
+            auto dma = std::make_unique<simpleneutron::components::dma::Dma>(0, mMem);
+            if (dma->hasError()) {
                 LogErr << "Error creating DMA object" << std::endl;
                 break;
             }
 
             mDmas.push_back(std::move(dma));
-            mDmas[0].enable();
+            mDmas[0]->enable();
             break;
         }
         case MessageType::STOP_DMA:

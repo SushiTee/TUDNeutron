@@ -52,7 +52,7 @@ class Dma {
 public:
     Dma() = delete;
     Dma(const Dma&) = delete;
-    Dma(Dma&& other);
+    Dma(Dma&& other) = delete;
     Dma(uint8_t id, int mem);
     ~Dma();
     Dma& operator=(const Dma&) = delete;
