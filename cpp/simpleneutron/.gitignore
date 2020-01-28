@@ -4,6 +4,7 @@
 !*.c
 !*.cpp
 !*.h
+!*.hpp
 !*.cmake
 config/config.cmake
 !*.example
