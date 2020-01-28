@@ -62,6 +62,7 @@ void Controller::run() {
         }
 
         mSock->close();
+        mDmas.clear();
         mSock = nullptr;
     }
 
