@@ -44,12 +44,10 @@ void Controller::run() {
         {
             if (auto [size, valid] = mSock->recv(buff); valid)
             {
-                LogOut << "data received!" << std::endl;
                 if (valid.value == kn::socket_status::cleanly_disconnected) {
                     continueReceiving = false;
-                } else {
-                    buff[size] = std::byte{ '\0' };
-                    LogOut << reinterpret_cast<const char*>(buff.data()) << std::endl;
+                } else if (size > 0) {
+                    handleData(buff, size);
                 }
             }
             //If not valid remote host closed conection
@@ -62,6 +60,60 @@ void Controller::run() {
 
         mSock->close();
         mSock = nullptr;
+    }
+
+    listenSock.close();
+}
+
+// package format: [(message type <1byte>)|(payload size <2byte>)|(payload)]
+void Controller::handleData(kn::buffer<1024> &buff, size_t size) {
+    static MessageType type = MessageType::NONE;
+    static uint16_t dataSize = 0;
+    static bool receivedAll = true;
+
+    // put together the data if the message is received in more than one recv call
+    if (mData.empty()) {
+        if (size < 3) {
+            LogErr << "Error: Unplausible data received!" << std::endl;
+            return;
+        }
+        type = static_cast<MessageType>(buff[0]);
+        dataSize = static_cast<uint16_t>(std::to_integer<uint8_t>(buff[1]) | (std::to_integer<uint8_t>(buff[2]) << 8));
+        if (dataSize > 3) {
+            mData = std::vector<std::byte>(buff.begin() + 3, buff.begin() + size);
+            if (mData.size() < static_cast<size_t>(dataSize)) {
+                receivedAll = false;
+                return;
+            } else {
+                receivedAll = true;
+            }
+        } else {
+            receivedAll = true;
+        }
+    } else if (!receivedAll){
+        mData.insert(mData.end(), buff.begin(), buff.begin() + size);
+        if (mData.size() == static_cast<size_t>(dataSize)) {
+            receivedAll = true;
+        }
+    }
+
+    // we got everything. Handle the data!
+    if (receivedAll) {
+        std::string str(reinterpret_cast<const char*>(mData.data() + '\0'));
+        LogOut << "Payload: " << str << std::endl;
+        switch (type)
+        {
+        case MessageType::START_DMA:
+            LogOut << "Handle DMA start" << dataSize << std::endl;
+            break;
+        case MessageType::STOP_DMA:
+            LogOut << "Handle DMA stop" << dataSize << std::endl;
+            break;
+        default:
+            break;
+        }
+
+        mData.clear();
     }
 }
 
