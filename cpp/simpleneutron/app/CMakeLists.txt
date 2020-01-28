@@ -1,6 +1,6 @@
 file(GLOB SOURCES "src/*.cpp")
 add_executable(simpleneutron ${SOURCES})
-target_link_libraries(simpleneutron components)
+target_link_libraries(simpleneutron components external)
 target_compile_features(simpleneutron PRIVATE cxx_std_17)
 
 # copy to nfs folder
