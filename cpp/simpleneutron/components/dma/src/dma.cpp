@@ -119,6 +119,10 @@ void Dma::waitForData() {
         LogOut << "DMA (" << std::hex << REGISTER_BASE << "): Signal Interrupt occured. No data handling!" << std::endl;
     } else {
         uint32_t numberOfInterrupts = static_cast<uint32_t>(*buf);
+        // todo: check if we even have to check the interrupt count as it should be always just one!
+        if (mInterruptCount == 0) { // on very first interrupt after software start set the correct value
+            mInterruptCount = numberOfInterrupts - 1;
+        }
         LogOut << "DMA (" << std::hex << REGISTER_BASE << "): Interrupt occured | Count: " << (numberOfInterrupts - mInterruptCount) << std::endl;
         mInterruptCount = numberOfInterrupts;
 

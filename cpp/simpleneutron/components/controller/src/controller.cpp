@@ -166,7 +166,7 @@ void Controller::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType type, siz
     switch (type)
     {
     case MessageType::START_DMA: {
-        LogOut << "Handle DMA start " << size << std::endl;
+        LogOut << "Handle DMA start " << std::endl;
         auto dma = std::make_unique<simpleneutron::components::dma::Dma>(0, mMem);
         if (dma->hasError()) {
             LogErr << "Error creating DMA object" << std::endl;
