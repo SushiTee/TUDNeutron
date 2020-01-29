@@ -29,6 +29,7 @@ enum class MessageType : uint8_t {
 
 constexpr kn::port_t PORT = 22222;
 constexpr size_t BUFFER_SIZE = 1024;
+constexpr size_t PACKAGE_HEADER_SIZE = 3;
 
 class Controller {
     std::unique_ptr<kn::tcp_socket> mSock = nullptr;

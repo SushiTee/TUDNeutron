@@ -59,6 +59,7 @@ void Controller::run() {
     listenSock.close();
 }
 
+// package format: [(message type <1byte>)|(payload size <2byte>)|(payload)]
 bool Controller::receiveData() {
     // static variables since we need to store them for more calls
     static kn::buffer<BUFFER_SIZE> sBuf;
@@ -88,8 +89,8 @@ bool Controller::receiveData() {
     };
 
     if (!sProcessingPacket) { // get first 3 bytes of packet which is supposed to be the header!
-        std::byte buff[3];
-        if (auto [size, valid] = mSock->recv(buff, 3 - sPacketDataReceived); valid) // C++17 <3
+        std::byte buff[PACKAGE_HEADER_SIZE];
+        if (auto [size, valid] = mSock->recv(buff, PACKAGE_HEADER_SIZE - sPacketDataReceived); valid) // C++17 <3
         {
             if (!isSocketValid(valid.value)) {
                 resetStatics();
@@ -100,11 +101,11 @@ bool Controller::receiveData() {
                 }
                 std::move(std::begin(buff), std::begin(buff) + size, sBuf.begin() + sPacketDataReceived);
                 sPacketDataReceived += size;
-                if (sPacketDataReceived != 3) { // there is still a bit missing!
+                if (sPacketDataReceived != PACKAGE_HEADER_SIZE) { // there is still a bit missing!
                     return true;
                 } else {
                     // we got the first 3 bytes of our package!
-                    // read the type and check its valid
+                    // read the type and check its valid (Byte 0 is the type)
                     MessageType type = static_cast<MessageType>(sBuf[0]);
                     if (!isValidPacketType(type)) {
                         LogErr << "Received invalid Message. Disconnecting!" << std::endl;
@@ -112,8 +113,8 @@ bool Controller::receiveData() {
                         return false;
                     }
                     sMessageType = type;
-                    // type is OK! Get the payload size
-                    auto payloadSize = static_cast<uint16_t>(std::to_integer<uint8_t>(sBuf[1]) | (std::to_integer<uint8_t>(sBuf[2]) << 8));
+                    // type is OK! Get the payload size (Byte [1] and [2] conain the size)
+                    auto payloadSize = * reinterpret_cast<const uint16_t *>(&sBuf[1]);
                     if (payloadSize > BUFFER_SIZE) {
                         LogErr << "Payload too big (given: " << payloadSize << " max: " << BUFFER_SIZE << "). Disconnecting!" << std::endl;
                         resetStatics();
@@ -159,7 +160,6 @@ bool Controller::receiveData() {
     return false;
 }
 
-// package format: [(message type <1byte>)|(payload size <2byte>)|(payload)]
 void Controller::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType type, size_t size) {
     std::string str(reinterpret_cast<char*>(buff.begin()), reinterpret_cast<char*>(buff.begin() + size));
     LogOut << "Message: " << str << std::endl;
