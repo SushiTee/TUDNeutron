@@ -23,15 +23,19 @@ enum class MessageType : uint8_t {
     DMA7,
     START_DMA,
     STOP_DMA,
-    NONE = 0xffu
+
+    NONE // marks the last Type (is used to determine valid types)
 };
 
+constexpr kn::port_t PORT = 22222;
+constexpr size_t BUFFER_SIZE = 1024;
+
 class Controller {
-    const kn::port_t PORT = 22222;
     std::unique_ptr<kn::tcp_socket> mSock = nullptr;
-    std::vector<std::byte> mData;
     int mMem;
     std::vector<std::unique_ptr<simpleneutron::components::dma::Dma>> mDmas;
+
+    bool receiveData();
 
 public:
     Controller() = delete;
@@ -40,7 +44,7 @@ public:
     void operator=(const Controller&) = delete;
 
     void run();
-    void handleData(kn::buffer<1024> &buff, size_t size);
+    void handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType type, size_t size);
 };
 
 } // controller    

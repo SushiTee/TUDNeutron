@@ -50,7 +50,7 @@ Dma::Dma(uint8_t id, int mem)
         mHasError = true;
     }
 
-    mUio = open(DMAS[id].mUioDevice.c_str(), O_RDWR);
+    mUio = open(DMAS[id].mUioDevice, O_RDWR);
     if (mUio < 0) {
         LogErr << "DMA (" << std::hex << REGISTER_BASE << "): could not open UIO Device" << std::endl;
         mHasError = true;

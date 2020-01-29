@@ -5,12 +5,12 @@
 typedef struct {
     uint32_t mRegister;
     uint32_t mMemory;
-    std::string mUioDevice;
+    const char* mUioDevice;
 } DMA_DEVICE;
 
-const uint32_t DMA_SIZE = 0x800000u; // total size / dma count / 4
+constexpr uint32_t DMA_SIZE = 0x800000u; // total size / dma count / 4
 
-const DMA_DEVICE DMAS[8] = {
+constexpr DMA_DEVICE DMAS[8] = {
     {0x40400000u, 0x10000000u, "/dev/uio0"},
     {0x40410000u, 0x12000000u, "/dev/uio1"},
     {0x40420000u, 0x14000000u, "/dev/uio2"},
@@ -21,7 +21,7 @@ const DMA_DEVICE DMAS[8] = {
     {0x40470000u, 0x1e000000u, "/dev/uio7"}
 };
 
-const uint32_t GPIO_0 = 0x41200000u;
-const uint32_t GPIO_1 = 0x41210000u;
+constexpr uint32_t GPIO_0 = 0x41200000u;
+constexpr uint32_t GPIO_1 = 0x41210000u;
 
-const uint16_t DEFAULT_WORD_LENGTH = 0x20u;
+constexpr uint16_t DEFAULT_WORD_LENGTH = 0x20u;
