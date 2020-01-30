@@ -61,7 +61,7 @@ public:
     bool empty();
     bool full();
 
-    inline uint8_t getID();
+    inline uint8_t getID() const { return ID; };
 
     void reset();
     void enableInterrupt();

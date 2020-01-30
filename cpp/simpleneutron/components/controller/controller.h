@@ -38,8 +38,10 @@ class Controller {
 
     bool receiveData();
     bool handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType type, size_t size);
-    bool sendData(MessageType type, const std::string &data);
-    bool isSocketValid(kn::socket_status status);
+    bool sendData(MessageType type, const std::string &data) const;
+    bool isSocketValid(kn::socket_status status) const;
+
+    bool dmaExists(uint8_t id) const;
 
 public:
     Controller() = delete;

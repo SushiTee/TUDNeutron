@@ -89,10 +89,6 @@ bool Dma::full() {
     return false;
 }
 
-uint8_t Dma::getID() {
-    return ID;
-}
-
 void Dma::registerEnable() {
     uint32_t value = (1 << CONTROL_RUN) | (1 << CONTROL_COMPLETE_INTERRUPT) | (1 << CONTROL_DELAY_INTERRUPT) | (1 << CONTROL_ERROR_INTERRUPT);
     MemoryControl::registerWrite(mRegister, DmaOffset::S2MM_CONTROL, value);

@@ -120,7 +120,7 @@ bool Controller::receiveData() {
     return handleData(buff, messageType, payloadSize);
 }
 
-bool Controller::sendData(MessageType type, const std::string &data) {
+bool Controller::sendData(MessageType type, const std::string &data) const {
     // lengthh of data
     auto dataLength = data.length();
 
@@ -171,6 +171,12 @@ bool Controller::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType type, siz
     {
     case MessageType::START_DMA: {
         LogOut << "Handle DMA start " << std::endl;
+
+        if (dmaExists(0)) {
+            networkOK = sendData(MessageType::START_DMA, "{'status':'Error','msg':'DMA already exists.'}");
+            break;
+        }
+
         auto dma = std::make_unique<simpleneutron::components::dma::Dma>(0, mMem);
         if (dma->hasError()) {
             LogErr << "Error creating DMA object" << std::endl;
@@ -199,7 +205,7 @@ bool Controller::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType type, siz
     return networkOK;
 }
 
-bool Controller::isSocketValid(kn::socket_status status) {
+bool Controller::isSocketValid(kn::socket_status status) const {
     if (status == kn::socket_status::cleanly_disconnected) {
         LogOut << "Cleanly disconnected!" << std::endl;
         return false;
@@ -208,6 +214,15 @@ bool Controller::isSocketValid(kn::socket_status status) {
         return false;
     }
     return true;
+}
+
+bool Controller::dmaExists(uint8_t id) const {
+    for (auto &dma : mDmas) {
+        if (dma->getID() == id) {
+            return true;
+        }
+    }
+    return false;
 }
 
 } // controller    
