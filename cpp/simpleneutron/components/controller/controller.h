@@ -37,6 +37,9 @@ class Controller {
     std::vector<std::unique_ptr<simpleneutron::components::dma::Dma>> mDmas;
 
     bool receiveData();
+    bool handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType type, size_t size);
+    bool sendData(MessageType type, const std::string &data);
+    bool isSocketValid(kn::socket_status status);
 
 public:
     Controller() = delete;
@@ -45,7 +48,6 @@ public:
     void operator=(const Controller&) = delete;
 
     void run();
-    void handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType type, size_t size);
 };
 
 } // controller    

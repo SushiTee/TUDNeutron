@@ -41,7 +41,6 @@ Dma::Dma(uint8_t id, int mem)
     if (mRegister == MAP_FAILED) {
         LogErr << "DMA (" << std::hex << REGISTER_BASE << "): could not map register" << std::endl;
         mHasError = true;
-        return;
     }
 
     mMemoryMap = (uint32_t *)mmap(NULL, 0x2000000, PROT_READ | PROT_WRITE, MAP_SHARED, mem, MEMORY_BASE);

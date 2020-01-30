@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include <csignal>
 #include <chrono>
 #include <logger/logger.h>
@@ -11,6 +12,11 @@ namespace controller {
 // to override SIGINT so the proecss is quit correctly and not just stopped
 constexpr int quitSignal = SIGINT;
 bool quit = false;
+
+union payloadSizeConverter {
+    uint8_t bytes[2];
+    uint16_t num;
+};
 
 Controller::Controller(int mem) : mMem(mem)
 {}
@@ -61,23 +67,8 @@ void Controller::run() {
 
 // package format: [(message type <1byte>)|(payload size <2byte>)|(payload)]
 bool Controller::receiveData() {
-    // nested functions to keep at leat a bit "DRY"
-    auto isSocketValid = [](kn::socket_status status) {
-        if (status == kn::socket_status::cleanly_disconnected) {
-            LogOut << "Cleanly disconnected!" << std::endl;
-            return false;
-        } else if (status == kn::socket_status::errored) {
-            LogOut << "disconnected!" << std::endl;
-            return false;
-        }
-        return true;
-    };
-
-    auto isValidPacketType = [](MessageType type) {
-        return type < MessageType::NONE;
-    };
-
-    auto receive = [this, isSocketValid](kn::buffer<BUFFER_SIZE>& buff, size_t maxSize) {
+    // nested function to keep at leat a bit "DRY"
+    auto receive = [this](kn::buffer<BUFFER_SIZE>& buff, size_t maxSize) {
         size_t packetDataReceived = 0;
         while (packetDataReceived < maxSize)
         {
@@ -108,7 +99,7 @@ bool Controller::receiveData() {
     // we got the first 3 bytes of our package!
     // read the type and check its valid (Byte 0 is the type)
     MessageType messageType = static_cast<MessageType>(buff[0]);
-    if (!isValidPacketType(messageType)) {
+    if (messageType >= MessageType::NONE) {
         LogErr << "Received invalid Message. Disconnecting!" << std::endl;
         return false;
     }
@@ -126,13 +117,56 @@ bool Controller::receiveData() {
     }
 
     // everything is there \o/
-    handleData(buff, messageType, payloadSize);
+    return handleData(buff, messageType, payloadSize);
+}
+
+bool Controller::sendData(MessageType type, const std::string &data) {
+    // lengthh of data
+    auto dataLength = data.length();
+
+    // buffer
+    std::array<uint8_t, PACKAGE_HEADER_SIZE> message;
+
+    // write header
+    payloadSizeConverter conv;
+    conv.num = static_cast<uint16_t>(dataLength);
+    message[0] = static_cast<uint8_t>(type);
+    message[1] = conv.bytes[0];
+    message[2] = conv.bytes[1];
+
+    // send header
+    {
+        auto [size, valid] = mSock->send(reinterpret_cast<const std::byte*>(message.data()), PACKAGE_HEADER_SIZE);
+        // check if we got an interrupt
+        if (quit) {
+            return false;
+        }
+
+        // socket might be invalid
+        if (!isSocketValid(valid.value)) {
+            return false;
+        }
+    }
+    
+    // send data
+    {
+        auto [size, valid] = mSock->send(reinterpret_cast<const std::byte*>(data.c_str()), dataLength);
+        // check if we got an interrupt
+        if (quit) {
+            return false;
+        }
+
+        // socket might be invalid
+        if (!isSocketValid(valid.value)) {
+            return false;
+        }
+    }
+
     return true;
 }
 
-void Controller::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType type, size_t size) {
-    std::string str(reinterpret_cast<char*>(buff.begin()), reinterpret_cast<char*>(buff.begin() + size));
-    LogOut << "Message: " << str << std::endl;
+bool Controller::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType type, size_t size) {
+    bool networkOK = true;
     switch (type)
     {
     case MessageType::START_DMA: {
@@ -145,6 +179,14 @@ void Controller::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType type, siz
 
         mDmas.push_back(std::move(dma));
         mDmas[0]->enable();
+
+        if (mDmas[0]->hasError()) {
+            // send answer!
+            networkOK = sendData(MessageType::START_DMA, "{'status':'Error'}");
+        } else {
+            // send answer!
+            networkOK = sendData(MessageType::START_DMA, "{'status':'OK'}");
+        }
         break;
     }
     case MessageType::STOP_DMA:
@@ -153,6 +195,19 @@ void Controller::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType type, siz
     default:
         break;
     }
+
+    return networkOK;
+}
+
+bool Controller::isSocketValid(kn::socket_status status) {
+    if (status == kn::socket_status::cleanly_disconnected) {
+        LogOut << "Cleanly disconnected!" << std::endl;
+        return false;
+    } else if (status == kn::socket_status::errored) {
+        LogOut << "disconnected!" << std::endl;
+        return false;
+    }
+    return true;
 }
 
 } // controller    
