@@ -61,17 +61,13 @@ void Controller::run() {
 
 // package format: [(message type <1byte>)|(payload size <2byte>)|(payload)]
 bool Controller::receiveData() {
-    // static variables since we need to store them for more calls
-    static kn::buffer<BUFFER_SIZE> sBuf;
-    static size_t sPacketDataReceived = 0;
-    static bool sProcessingPacket = false;
-    static MessageType sMessageType = MessageType::NONE;
-    static uint16_t sPayloadSize = 0u;
-
     // nested functions to keep at leat a bit "DRY"
     auto isSocketValid = [](kn::socket_status status) {
         if (status == kn::socket_status::cleanly_disconnected) {
             LogOut << "Cleanly disconnected!" << std::endl;
+            return false;
+        } else if (status == kn::socket_status::errored) {
+            LogOut << "disconnected!" << std::endl;
             return false;
         }
         return true;
@@ -81,83 +77,57 @@ bool Controller::receiveData() {
         return type < MessageType::NONE;
     };
 
-    auto resetStatics = []() {
-        sPacketDataReceived = 0;
-        sProcessingPacket = false;
-        sMessageType = MessageType::NONE;
-        sPayloadSize = 0u;
+    auto receive = [this, isSocketValid](kn::buffer<BUFFER_SIZE>& buff, size_t maxSize) {
+        size_t packetDataReceived = 0;
+        while (packetDataReceived < maxSize)
+        {
+            if (auto [size, valid] = mSock->recv(reinterpret_cast<std::byte *>(buff.data()) + packetDataReceived, maxSize - packetDataReceived); valid) { // C++17 <3
+                // check if we got an interrupt
+                if (quit) {
+                    return false;
+                }
+
+                // socket might be invalid
+                if (!isSocketValid(valid.value)) {
+                    return false;
+                }
+                packetDataReceived += size;
+            }
+        }
+        return true;
     };
 
-    if (!sProcessingPacket) { // get first 3 bytes of packet which is supposed to be the header!
-        std::byte buff[PACKAGE_HEADER_SIZE];
-        if (auto [size, valid] = mSock->recv(buff, PACKAGE_HEADER_SIZE - sPacketDataReceived); valid) // C++17 <3
-        {
-            if (!isSocketValid(valid.value)) {
-                resetStatics();
-                return false;
-            } else {
-                if (!size) { // there is nothing ?!
-                    return true;
-                }
-                std::move(std::begin(buff), std::begin(buff) + size, sBuf.begin() + sPacketDataReceived);
-                sPacketDataReceived += size;
-                if (sPacketDataReceived != PACKAGE_HEADER_SIZE) { // there is still a bit missing!
-                    return true;
-                } else {
-                    // we got the first 3 bytes of our package!
-                    // read the type and check its valid (Byte 0 is the type)
-                    MessageType type = static_cast<MessageType>(sBuf[0]);
-                    if (!isValidPacketType(type)) {
-                        LogErr << "Received invalid Message. Disconnecting!" << std::endl;
-                        resetStatics();
-                        return false;
-                    }
-                    sMessageType = type;
-                    // type is OK! Get the payload size (Byte [1] and [2] conain the size)
-                    auto payloadSize = * reinterpret_cast<const uint16_t *>(&sBuf[1]);
-                    if (payloadSize > BUFFER_SIZE) {
-                        LogErr << "Payload too big (given: " << payloadSize << " max: " << BUFFER_SIZE << "). Disconnecting!" << std::endl;
-                        resetStatics();
-                        return false;
-                    }
+    // reserve buffer
+    kn::buffer<BUFFER_SIZE> buff;
 
-                    // everything is in place to start receiving the payload
-                    sPacketDataReceived = 0;
-                    sPayloadSize = payloadSize;
-                    sProcessingPacket = true;
-                    return true;
-                }
-            }
-        }
-    } else {
-        std::byte buff[BUFFER_SIZE];
-        if (auto [size, valid] = mSock->recv(buff, sPayloadSize - sPacketDataReceived); valid) // C++17 <3
-        {
-            if (!isSocketValid(valid.value)) {
-                resetStatics();
-                return false;
-            } else {
-                if (!size) { // there is nothing ?!
-                    return true;
-                }
-                std::move(std::begin(buff), std::begin(buff) + size, sBuf.begin() + sPacketDataReceived);
-                sPacketDataReceived += size;
-                if (sPacketDataReceived != sPayloadSize) { // there is still a bit missing!
-                    return true;
-                } else {
-                    // everything is there \o/
-                    handleData(sBuf, sMessageType, sPayloadSize);
-                    sMessageType = MessageType::NONE;
-                    sPacketDataReceived = 0;
-                    sPayloadSize = 0;
-                    sProcessingPacket = false;
-                    return true;
-                }
-            }
-        }
+    // get first 3 bytes of packet which is supposed to be the header!
+    if (!receive(buff, PACKAGE_HEADER_SIZE)) {
+        return false;
     }
-    resetStatics();
-    return false;
+
+    // we got the first 3 bytes of our package!
+    // read the type and check its valid (Byte 0 is the type)
+    MessageType messageType = static_cast<MessageType>(buff[0]);
+    if (!isValidPacketType(messageType)) {
+        LogErr << "Received invalid Message. Disconnecting!" << std::endl;
+        return false;
+    }
+
+    // type is OK! Get the payload size (Byte [1] and [2] conain the size)
+    uint16_t payloadSize = * reinterpret_cast<const uint16_t *>(&buff[1]);
+    if (payloadSize > BUFFER_SIZE) {
+        LogErr << "Payload too big (given: " << payloadSize << " max: " << BUFFER_SIZE << "). Disconnecting!" << std::endl;
+        return false;
+    }
+    
+    // header done. Take care of payload
+    if (!receive(buff, payloadSize)) {
+        return false;
+    }
+
+    // everything is there \o/
+    handleData(buff, messageType, payloadSize);
+    return true;
 }
 
 void Controller::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType type, size_t size) {
