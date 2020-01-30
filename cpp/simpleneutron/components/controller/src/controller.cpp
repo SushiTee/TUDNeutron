@@ -173,13 +173,14 @@ bool Controller::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType type, siz
         LogOut << "Handle DMA start " << std::endl;
 
         if (dmaExists(0)) {
-            networkOK = sendData(MessageType::START_DMA, "{'status':'Error','msg':'DMA already exists.'}");
+            networkOK = sendData(MessageType::START_DMA, "{\"status\":\"Error\",\"msg\":\"DMA already exists.\"}");
             break;
         }
 
         auto dma = std::make_unique<simpleneutron::components::dma::Dma>(0, mMem);
         if (dma->hasError()) {
             LogErr << "Error creating DMA object" << std::endl;
+            networkOK = sendData(MessageType::START_DMA, "{\"status\":\"Error\",\"msg\":\"Error creating DMA object.\"}");
             break;
         }
 
@@ -188,10 +189,10 @@ bool Controller::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType type, siz
 
         if (mDmas[0]->hasError()) {
             // send answer!
-            networkOK = sendData(MessageType::START_DMA, "{'status':'Error'}");
+            networkOK = sendData(MessageType::START_DMA, "{\"status\":\"Error\",\"msg\":\"Error enabling the DMA.\"}");
         } else {
             // send answer!
-            networkOK = sendData(MessageType::START_DMA, "{'status':'OK'}");
+            networkOK = sendData(MessageType::START_DMA, "{\"status\":\"OK\"}");
         }
         break;
     }
