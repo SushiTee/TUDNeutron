@@ -81,7 +81,7 @@ bool Controller::receiveData() {
         size_t packetDataReceived = 0;
         while (packetDataReceived < maxSize)
         {
-            if (auto [size, valid] = mSock->recv(reinterpret_cast<std::byte *>(buff.data()) + packetDataReceived, maxSize - packetDataReceived); valid) { // C++17 <3
+            if (auto [size, valid] = mSock->recv(buff.data() + packetDataReceived, maxSize - packetDataReceived); valid) { // C++17 <3
                 // check if we got an interrupt
                 if (quit) {
                     return false;
