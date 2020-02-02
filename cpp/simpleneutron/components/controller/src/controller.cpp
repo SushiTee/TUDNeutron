@@ -83,6 +83,8 @@ bool Controller::receiveData() {
                     return false;
                 }
                 packetDataReceived += size;
+            } else {
+                return false;
             }
         }
         return true;
