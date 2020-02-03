@@ -109,15 +109,10 @@ void NetworkController::connect()
 
     setConnected(ConnectedState::CONNECTING);
 
-    qDebug() << "Meh2";
     m_handler = std::make_unique<NetworkHandler>(this);
-    qDebug() << "Meh2.5";
     m_thread = std::make_unique<QThread>();
-    qDebug() << "Meh2.6";
     m_handler->moveToThread(m_thread.get());
-    qDebug() << "Meh3";
     m_thread->start();
-    qDebug() << "Meh4";
     QMetaObject::invokeMethod(m_handler.get(), "connect", Q_ARG(QString, host()), Q_ARG(int, port()));
 }
 
@@ -129,7 +124,6 @@ void NetworkController::disconnect()
         m_thread->quit();
         m_thread->wait();
         m_thread = nullptr;
-        qDebug() << "Meh";
         setConnected(ConnectedState::DISCONNECTED);
     }
 }

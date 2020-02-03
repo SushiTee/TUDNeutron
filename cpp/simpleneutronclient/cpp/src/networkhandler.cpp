@@ -19,22 +19,16 @@ NetworkHandler::NetworkHandler(NetworkController *parent)
 
 NetworkHandler::~NetworkHandler()
 {
-    qDebug() << "desruct 1";
     if (m_receiveThread && m_receiveThread->joinable()) {
         m_receiveThread->join();
         m_receiveThread = nullptr;
     }
-    qDebug() << "desruct 2";
-
-    qDebug() << "desruct 3";
 }
 
 void NetworkHandler::quit()
 {
-    qDebug() << "quit1";
     m_quit = true;
     m_sock->close();
-    qDebug() << "quit2";
 }
 
 void NetworkHandler::connect(QString host, int port)

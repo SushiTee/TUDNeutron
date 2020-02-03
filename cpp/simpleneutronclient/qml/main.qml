@@ -66,11 +66,24 @@ ApplicationWindow {
         }
     }
 
-    MessageDialog {
+    Dialog {
         id: messageDialog
-        title: "Connection failes"
-        text: "An error occured with the connection to the Zedboard or the connection could not be established.\n\n Check if the Zedboard is turned on and connected to the network."
-        icon: StandardIcon.Warning
+        anchors.centerIn: parent
+        width: parent.width - 20
+        title: "Connection failed"
+        modal: true
+        standardButtons: StandardButton.Ok
+        contentItem: Item {
+            implicitWidth: 400
+            implicitHeight: 100
+            Label {
+                width: parent.width
+                wrapMode: Text.WordWrap
+                text: "An error occured with the connection to the Zedboard or the connection could not be established.\n\nCheck if the Zedboard is turned on and connected to the network."
+                anchors.centerIn: parent
+            }
+        }
+
         onAccepted: {
             messageDialog.close();
         }
