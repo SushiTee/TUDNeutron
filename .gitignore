@@ -92,3 +92,9 @@
 *.runs/
 *.jobs*
 *.ip_user_files*
+
+#########
+#non xilinx stuff
+#########
+!cpp/
+cpp/build*

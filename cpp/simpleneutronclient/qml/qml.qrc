@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>SimpleNeutron/Pages/qmldir</file>
+        <file>SimpleNeutron/Pages/StartPage.qml</file>
+        <file>SimpleNeutron/Components/qmldir</file>
+        <file>SimpleNeutron/Components/Page.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>SimpleNeutron/Pages/SettingsPage.qml</file>
+        <file>SimpleNeutron/Pages/ZedboardPage.qml</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,36 @@
+#pragma once
+
+#include <thread>
+#include <QObject>
+#include <external/networking/kissnet.hpp>
+#include <networkcontroller.h>
+
+namespace kn = kissnet;
+
+constexpr size_t BUFFER_SIZE = 1048576u;
+
+class NetworkHandler : public QObject {
+    Q_OBJECT
+
+    NetworkController *m_controller = nullptr;
+    std::unique_ptr<kn::tcp_socket> m_sock = nullptr;
+    std::unique_ptr<std::thread> m_receiveThread = nullptr;
+    std::atomic<bool> m_quit = false;
+    uint16_t m_packageSize;
+
+    // reserve buffer
+    kn::buffer<BUFFER_SIZE> m_recvBuff;
+
+    bool receiveData();
+    void handleData(kn::buffer<BUFFER_SIZE> &buff, NetworkController::MessageType type, size_t size);
+    bool isSocketValid(kn::socket_status status) const;
+
+public:
+    NetworkHandler(NetworkController *parent);
+    ~NetworkHandler();
+    void quit();
+
+public slots:
+    void connect(QString host, int port);
+    void sendData(NetworkController::MessageType type, QString data) const;
+};
