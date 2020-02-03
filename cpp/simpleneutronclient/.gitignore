@@ -8,6 +8,7 @@
 !qmldir
 !*.qrc
 !*.conf
+!*.pro
 
 *~
 *.autosave
