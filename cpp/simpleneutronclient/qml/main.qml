@@ -3,6 +3,7 @@ import QtQuick.Controls 2.14
 import QtQuick.Dialogs 1.1
 import SimpleNeutron.Pages 1.0
 import SimpleNeutron.Network 1.0
+import QtQuick.LocalStorage 2.12 // needed so the sql plugin is deployed
 
 import "qrc:/js/db.js" as DB
 

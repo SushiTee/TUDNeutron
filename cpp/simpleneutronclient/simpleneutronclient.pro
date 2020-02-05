@@ -31,6 +31,13 @@ RESOURCES += "$$PWD/qml/qml.qrc" \
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH = "$$PWD/qml"
 
+win32 {
+    CONFIG(release, debug|release) {
+        BUILDTYPE = "release"
+        QMAKE_POST_LINK += "$$getenv(QTDIR)/bin/windeployqt --$$BUILDTYPE --no-translations --qmldir $$PWD/qml $$BUILDTYPE/$${TARGET}.exe"
+    }
+}
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
