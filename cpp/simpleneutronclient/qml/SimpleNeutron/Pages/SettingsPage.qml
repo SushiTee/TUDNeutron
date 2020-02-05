@@ -17,15 +17,15 @@ Page {
     onGoBack: {
         if (host !== hostTextField.displayText) {
             DB.setHost(hostTextField.displayText);
-            console.log("Host changed to:", hostTextField.displayText);
+            console.info("Host changed to:", hostTextField.displayText);
         }
         if (port !== portTextField.displayText) {
             DB.setPort(portTextField.displayText);
-            console.log("Port changed to:", portTextField.displayText);
+            console.info("Port changed to:", portTextField.displayText);
         }
-        if (packageSize !== packageSizeBox.currentText) {
-            DB.setPackageSize(packageSizeBox.currentText);
-            console.log("Package size changed to:", packageSizeBox.currentText);
+        if (packageSize !== packageSizeBox.currentIndex.toString()) {
+            DB.setPackageSize(packageSizeBox.currentIndex.toString());
+            console.info("Package size changed to:", 2 ** packageSizeBox.currentIndex);
         }
     }
 
@@ -74,15 +74,10 @@ Page {
 
             ComboBox {
                 id: packageSizeBox
-                model: ["1", "2", "4", "16", "32", "64", "128", "256", "512", "1024", "2048", "4096"]
+                model: [...Array(13).keys()].map(x => 2 ** x)
 
                 Component.onCompleted: {
-                    for (let i = 0; i < model.length; i++) {
-                        if (model[i] === packageSize) {
-                            currentIndex = i;
-                            return;
-                        }
-                    }
+                    currentIndex = Math.min(Math.max(packageSize, 0), model.length);
                 }
             }
         }
