@@ -12,7 +12,7 @@ union payloadSizeConverter {
 };
 
 NetworkHandler::NetworkHandler(NetworkController *parent)
-    : m_controller(parent), m_packageSize(static_cast<uint16_t>(parent->packageSize()))
+    : m_controller(parent), m_packageSize(static_cast<uint8_t>(parent->packageSize()))
 {
 
 }
@@ -28,12 +28,21 @@ NetworkHandler::~NetworkHandler()
 void NetworkHandler::quit()
 {
     m_quit = true;
-    m_sock->close();
+    if (m_sock != nullptr) {
+        m_sock->close();
+    }
 }
 
 void NetworkHandler::connect(QString host, int port)
 {
-    m_sock = std::make_unique<kn::tcp_socket>(kn::endpoint(host.toStdString(), static_cast<kn::port_t>(port)));
+    try {
+        m_sock = std::make_unique<kn::tcp_socket>(kn::endpoint(host.toStdString(), static_cast<kn::port_t>(port)));
+    } catch (const std::exception& e) {
+        qDebug() << "Error creating socket:" << QString::fromStdString(e.what());
+        QMetaObject::invokeMethod(m_controller, "connected", Q_ARG(bool, false));
+        return;
+    }
+
     if (m_sock->connect()) {
         m_receiveThread = std::make_unique<std::thread>([this](){
             bool continueReceiving = true;
@@ -52,6 +61,8 @@ void NetworkHandler::connect(QString host, int port)
             }
         });
         QMetaObject::invokeMethod(m_controller, "connected", Q_ARG(bool, true));
+        // setting package size on connection!
+        sendData(NetworkController::MessageType::SET_PACKET_SIZE, m_packageSize);
     } else {
         QMetaObject::invokeMethod(m_controller, "connected", Q_ARG(bool, false));
     }
@@ -114,6 +125,39 @@ bool NetworkHandler::receiveData() {
     return true;
 }
 
+void NetworkHandler::sendData(const std::byte *header, const std::byte *data, size_t dataLength) const
+{
+    // send header
+    {
+        auto [size, valid] = m_sock->send(header, PACKAGE_HEADER_SIZE);
+        // check if we got an interrupt
+        if (m_quit) {
+            return;
+        }
+
+        // socket might be invalid
+        if (!isSocketValid(valid.value)) {
+            QMetaObject::invokeMethod(m_controller, "sendDataFailed");
+            return;
+        }
+    }
+
+    // send data
+    {
+        auto [size, valid] = m_sock->send(data, dataLength);
+        // check if we got an interrupt
+        if (m_quit) {
+            return;
+        }
+
+        // socket might be invalid
+        if (!isSocketValid(valid.value)) {
+            QMetaObject::invokeMethod(m_controller, "sendDataFailed");
+            return;
+        }
+    }
+}
+
 void NetworkHandler::sendData(NetworkController::MessageType type, QString data) const
 {
     // lengthh of data
@@ -129,43 +173,31 @@ void NetworkHandler::sendData(NetworkController::MessageType type, QString data)
     message[1] = conv.bytes[0];
     message[2] = conv.bytes[1];
 
-    // send header
-    {
-        auto [size, valid] = m_sock->send(reinterpret_cast<const std::byte*>(message.data()), PACKAGE_HEADER_SIZE);
-        // check if we got an interrupt
-        if (m_quit) {
-            return;
-        }
+    sendData(reinterpret_cast<const std::byte*>(message.data()), reinterpret_cast<const std::byte*>(data.data_ptr()), dataLength);
+}
 
-        // socket might be invalid
-        if (!isSocketValid(valid.value)) {
-            QMetaObject::invokeMethod(m_controller, "sendDataFailed");
-            return;
-        }
-    }
+void NetworkHandler::sendData(NetworkController::MessageType type, uint8_t value) const
+{
+    // buffer
+    std::array<uint8_t, PACKAGE_HEADER_SIZE> message;
 
-    // send data
-    {
-        auto [size, valid] = m_sock->send(reinterpret_cast<const std::byte*>(data.data_ptr()), dataLength);
-        // check if we got an interrupt
-        if (m_quit) {
-            return;
-        }
+    // write header
+    payloadSizeConverter conv;
+    conv.num = static_cast<uint16_t>(1);
+    message[0] = static_cast<uint8_t>(type);
+    message[1] = conv.bytes[0];
+    message[2] = conv.bytes[1];
 
-        // socket might be invalid
-        if (!isSocketValid(valid.value)) {
-            QMetaObject::invokeMethod(m_controller, "sendDataFailed");
-            return;
-        }
-    }
+    sendData(reinterpret_cast<const std::byte*>(message.data()), reinterpret_cast<const std::byte*>(&value), 1);
 }
 
 void NetworkHandler::handleData(kn::buffer<BUFFER_SIZE> &buff, NetworkController::MessageType type, size_t size)
 {
+    // todo clean this up
     switch (type)
     {
     case NetworkController::MessageType::START_DMA: {
-        qDebug() << "DMA start response";
+        qInfo() << "DMA start response";
         QJsonDocument doc = QJsonDocument::fromJson(QByteArray::fromRawData(reinterpret_cast<const char *>(buff.data()), static_cast<int>(size)));
         if (!doc.isNull()) {
             QMetaObject::invokeMethod(m_controller, "receiveMessage",
@@ -175,12 +207,26 @@ void NetworkHandler::handleData(kn::buffer<BUFFER_SIZE> &buff, NetworkController
         break;
     }
     case NetworkController::MessageType::STOP_DMA: {
-        qDebug() << "DMA stop response";
+        qInfo() << "DMA stop response";
         QJsonDocument doc = QJsonDocument::fromJson(QByteArray::fromRawData(reinterpret_cast<const char *>(buff.data()), static_cast<int>(size)));
         if (!doc.isNull()) {
             QMetaObject::invokeMethod(m_controller, "receiveMessage",
                                       Q_ARG(int, static_cast<int>(type)),
                                       Q_ARG(QVariant, QVariant::fromValue(doc.object())));
+        }
+        break;
+    }
+    case NetworkController::MessageType::SET_PACKET_SIZE: {
+        qInfo() << "Set package size response";
+        QJsonDocument doc = QJsonDocument::fromJson(QByteArray::fromRawData(reinterpret_cast<const char *>(buff.data()), static_cast<int>(size)));
+        if (!doc.isNull()) {
+            QString status = doc["status"].toString();
+            if (status == "OK") {
+                QMetaObject::invokeMethod(m_controller, "setPackageSizeResult", Q_ARG(bool, true), Q_ARG(QString, ""));
+            } else {
+                QString message = doc["msg"].toString();
+                QMetaObject::invokeMethod(m_controller, "setPackageSizeResult", Q_ARG(bool, false), Q_ARG(QString, message));
+            }
         }
         break;
     }

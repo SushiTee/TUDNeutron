@@ -1,6 +1,7 @@
 .pragma library
 
 .import QtQuick.LocalStorage 2.12 as LS
+.import SimpleNeutron.Network 1.0 as SN
 
 function dbInit() {
     let db = LS.LocalStorage.openDatabaseSync("SimpleNeutron", "", "SimpleNeutron", 1000000);
@@ -61,6 +62,7 @@ function getHost() {
 
 function setHost(host) {
     setSettingsValue('host', host);
+    SN.NetworkController.host = host;
 }
 
 function getPort() {
@@ -71,14 +73,16 @@ function getPort() {
 
 function setPort(port) {
     setSettingsValue('port', port);
+    SN.NetworkController.port = parseInt(port);
 }
 
 function getPackageSize() {
     let result = readSettingsValue('packageSize');
-    if (!result) result = '16'; // default
+    if (!result) result = '4'; // default
     return result;
 }
 
 function setPackageSize(packageSize) {
     setSettingsValue('packageSize', packageSize);
+    SN.NetworkController.packageSize = parseInt(packageSize); // set in network controller too
 }

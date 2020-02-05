@@ -30,7 +30,7 @@ Page {
     BusyIndicator {
         id: busyIndicator
         anchors.centerIn: parent
-        running: NetworkController.connected !== NetworkController.CONNECTED
+        running: NetworkController.connected !== NetworkController.CONNECTED || !NetworkController.packageSizeTransmitted
         visible: running
     }
 

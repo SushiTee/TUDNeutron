@@ -62,13 +62,23 @@ ApplicationWindow {
         onConnectedChanged: {
             if (NetworkController.connected === NetworkController.FAILED) {
                 stackView.reset();
+                messageDialog.message = "An error occured with the connection to the Zedboard or the connection could not be established.\n\nCheck if the Zedboard is turned on and connected to the network."
                 messageDialog.open();
             }
+        }
+
+        onNetworkDataError: { // string message
+            stackView.reset();
+            messageDialog.message = message;
+            messageDialog.open();
         }
     }
 
     Dialog {
         id: messageDialog
+
+        property string message: ""
+
         anchors.centerIn: parent
         width: parent.width - 20
         title: "Connection failed"
@@ -80,7 +90,7 @@ ApplicationWindow {
             Label {
                 width: parent.width
                 wrapMode: Text.WordWrap
-                text: "An error occured with the connection to the Zedboard or the connection could not be established.\n\nCheck if the Zedboard is turned on and connected to the network."
+                text: messageDialog.message
                 anchors.centerIn: parent
             }
         }
@@ -92,5 +102,10 @@ ApplicationWindow {
 
     Component.onCompleted: {
         DB.dbInit();
+
+        // load relevant data from db
+        NetworkController.packageSize = parseInt(DB.getPackageSize());
+        NetworkController.host = DB.getHost();
+        NetworkController.port = parseInt(DB.getPort());
     }
 }

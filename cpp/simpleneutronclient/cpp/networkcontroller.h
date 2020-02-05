@@ -20,6 +20,7 @@ public:
         DMA7,
         START_DMA,
         STOP_DMA,
+        SET_PACKET_SIZE,
 
         NONE // marks the last Type (is used to determine valid types)
     };
@@ -49,10 +50,12 @@ private:
     Q_PROPERTY(QString host READ host WRITE setHost NOTIFY hostChanged)
     Q_PROPERTY(ConnectedState connected READ getConnected NOTIFY connectedChanged)
     Q_PROPERTY(int packageSize READ packageSize WRITE setPackageSize NOTIFY packageSizeChanged)
+    Q_PROPERTY(bool packageSizeTransmitted READ packageSizeTransmitted NOTIFY packageSizeTransmittedChanged)
 
     QString m_host = "zedboard";
     int m_port = 22222;
-    int m_packageSize = 16;
+    int m_packageSize = 4; // 2^m_PackageSize | e.g. 2^4 => 16 | between 1 and 12
+    bool m_packageSizeTransmitted = false;
     ConnectedState m_connected = ConnectedState::DISCONNECTED;
 
     int port() const;
@@ -60,6 +63,8 @@ private:
     QString host() const;
     void setHost(QString host);
     void setPackageSize(int packageSize);
+    bool packageSizeTransmitted() const;
+    void setPackageSizeTransmitted(bool packageSizeTransmitted);
     ConnectedState getConnected();
     void setConnected(ConnectedState connected);
 
@@ -77,12 +82,16 @@ signals:
 
     void connectedChanged(ConnectedState connected);
 
+    void networkDataError(QString message);
+
     // signals called from handler
     void connected(bool success);
     void closedConnection();
     void receiveMessage(int type, QVariant jsonData);
     void packageSizeChanged(int packageSize);
+    void packageSizeTransmittedChanged(bool packageSizeTransmitted);
     void sendDataFailed();
+    void setPackageSizeResult(bool success, QString message);
 };
 
 Q_DECLARE_METATYPE(NetworkController::MessageType)

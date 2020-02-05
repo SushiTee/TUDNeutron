@@ -21,6 +21,14 @@ NetworkController::NetworkController(QString host, int port, QObject *parent) : 
         setConnected(ConnectedState::FAILED);
         this->disconnect();
     });
+    QObject::connect(this, &NetworkController::setPackageSizeResult, this, [this](bool success, QString message){
+        if (success) {
+            setPackageSizeTransmitted(true);
+        } else {
+            emit networkDataError("Could not set package size on Zedboard (" + message + ")");
+            this->disconnect();
+        }
+    });
 }
 
 NetworkController::~NetworkController()
@@ -70,8 +78,24 @@ void NetworkController::setPackageSize(int packageSize)
     if (m_packageSize == packageSize)
         return;
 
+    if (packageSize < 0) packageSize = 0;
+    else if (packageSize > 12) packageSize = 12;
     m_packageSize = packageSize;
     emit packageSizeChanged(m_packageSize);
+}
+
+bool NetworkController::packageSizeTransmitted() const
+{
+    return m_packageSizeTransmitted;
+}
+
+void NetworkController::setPackageSizeTransmitted(bool packageSizeTransmitted)
+{
+    if (m_packageSizeTransmitted == packageSizeTransmitted)
+        return;
+
+    m_packageSizeTransmitted = packageSizeTransmitted;
+    emit packageSizeTransmittedChanged(m_packageSizeTransmitted);
 }
 
 int NetworkController::port() const
@@ -119,6 +143,8 @@ void NetworkController::connect()
 void NetworkController::disconnect()
 {
     if (getConnected() == ConnectedState::DISCONNECTED) return;
+
+    setPackageSizeTransmitted(false);
     if (m_thread != nullptr) {
         m_handler->quit();
         m_thread->quit();

@@ -60,7 +60,8 @@ Page {
             TextField {
                 id: portTextField
                 text: root.port
-                inputMethodHints: Qt.ImhUrlCharactersOnly
+                inputMethodHints: Qt.ImhFormattedNumbersOnly
+                validator: IntValidator{bottom: 1; top: 65535;}
             }
         }
 

@@ -16,12 +16,13 @@ class NetworkHandler : public QObject {
     std::unique_ptr<kn::tcp_socket> m_sock = nullptr;
     std::unique_ptr<std::thread> m_receiveThread = nullptr;
     std::atomic<bool> m_quit = false;
-    uint16_t m_packageSize;
+    uint8_t m_packageSize;
 
     // reserve buffer
     kn::buffer<BUFFER_SIZE> m_recvBuff;
 
     bool receiveData();
+    void sendData(const std::byte *header, const std::byte *data, size_t dataLength) const;
     void handleData(kn::buffer<BUFFER_SIZE> &buff, NetworkController::MessageType type, size_t size);
     bool isSocketValid(kn::socket_status status) const;
 
@@ -33,4 +34,5 @@ public:
 public slots:
     void connect(QString host, int port);
     void sendData(NetworkController::MessageType type, QString data) const;
+    void sendData(NetworkController::MessageType type, uint8_t value) const; // send only one value
 };
