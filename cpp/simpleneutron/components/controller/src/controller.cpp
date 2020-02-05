@@ -3,8 +3,10 @@
 #include <csignal>
 #include <chrono>
 #include <cmath>
+#include <unistd.h>
 #include <logger/logger.h>
 #include <gpio/wordlengthcontroller.h>
+#include <gpio/sensorcontroller.h>
 #include <controller/controller.h>
 
 namespace simpleneutron {
@@ -13,7 +15,9 @@ namespace controller {
 
 // to override SIGINT so the proecss is quit correctly and not just stopped
 constexpr int quitSignal = SIGINT;
+sighandler_t prevSignal;
 bool quit = false;
+bool threadQuit = false;
 
 union payloadSizeConverter {
     uint8_t bytes[2];
@@ -22,6 +26,10 @@ union payloadSizeConverter {
 
 Controller::Controller(int mem) : mMem(mem)
 {}
+
+Controller::~Controller() {
+    destroyThread();
+}
 
 void Controller::run() {
     // enforce POSIX semantics
@@ -42,6 +50,10 @@ void Controller::run() {
         LogOut << "Waiting for a client on port " << PORT << std::endl;
         mSock = std::make_unique<kn::tcp_socket>(listenSock.accept());
         if (quit == true) {
+            destroyThread();
+            mSock->close();
+            mDmas.clear();
+            mSock = nullptr;
             break;
         }
 
@@ -124,7 +136,46 @@ bool Controller::receiveData() {
     return handleData(buff, messageType, payloadSize);
 }
 
-bool Controller::sendData(MessageType type, const std::string &data) const {
+bool Controller::sendDataImpl(const std::byte *header, const std::byte *data, size_t dataLength)
+{
+    // send header
+    {
+        mSendLock.lock();
+        auto [size, valid] = mSock->send(header, PACKAGE_HEADER_SIZE);
+        // check if we got an interrupt
+        if (quit || threadQuit) {
+            mSendLock.unlock();
+            return false;
+        }
+
+        // socket might be invalid
+        if (!isSocketValid(valid.value)) {
+            mSendLock.unlock();
+            return false;
+        }
+    }
+    
+    // send data
+    {
+        auto [size, valid] = mSock->send(data, dataLength);
+        // check if we got an interrupt
+        if (quit || threadQuit) {
+            mSendLock.unlock();
+            return false;
+        }
+
+        // socket might be invalid
+        if (!isSocketValid(valid.value)) {
+            mSendLock.unlock();
+            return false;
+        }
+    }
+
+    mSendLock.unlock();
+    return true;
+}
+
+bool Controller::sendData(MessageType type, const std::string &data) {
     // lengthh of data
     auto dataLength = data.length();
 
@@ -138,35 +189,46 @@ bool Controller::sendData(MessageType type, const std::string &data) const {
     message[1] = conv.bytes[0];
     message[2] = conv.bytes[1];
 
-    // send header
+    return sendDataImpl(reinterpret_cast<const std::byte*>(message.data()), reinterpret_cast<const std::byte*>(data.c_str()), dataLength);
+}
+
+void Controller::sendDmaData() {
+    using namespace std::chrono_literals;
+    while (!threadQuit)
     {
-        auto [size, valid] = mSock->send(reinterpret_cast<const std::byte*>(message.data()), PACKAGE_HEADER_SIZE);
-        // check if we got an interrupt
-        if (quit) {
-            return false;
+        bool dataSend = false;
+        for (auto &dma : mDmas) {
+            if (dma->empty()) {
+                continue;
+            }
+
+            uint32_t size = dma->writeSize();
+            uint32_t offset = dma->readAddress();
+            uint16_t payloadSize = static_cast<uint16_t>(size / dma->getWordLength()); // 0 means max!
+            dma->setReadAddress(size);
+
+            // buffer
+            std::array<uint8_t, PACKAGE_HEADER_SIZE> message;
+
+            // write header
+            payloadSizeConverter conv;
+            conv.num = static_cast<uint16_t>(payloadSize);
+            message[0] = dma->getID();
+            message[1] = conv.bytes[0];
+            message[2] = conv.bytes[1];
+
+            sendDataImpl(reinterpret_cast<const std::byte*>(message.data()), reinterpret_cast<const std::byte*>(dma->memoryMap() + offset), size * 4);
+
+            if (!dataSend) {
+                dataSend = true;
+            }
         }
 
-        // socket might be invalid
-        if (!isSocketValid(valid.value)) {
-            return false;
+        // sleep if there is really nothing!
+        if (!dataSend) {
+            std::this_thread::sleep_for(1ms);
         }
     }
-    
-    // send data
-    {
-        auto [size, valid] = mSock->send(reinterpret_cast<const std::byte*>(data.c_str()), dataLength);
-        // check if we got an interrupt
-        if (quit) {
-            return false;
-        }
-
-        // socket might be invalid
-        if (!isSocketValid(valid.value)) {
-            return false;
-        }
-    }
-
-    return true;
 }
 
 bool Controller::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType type, size_t size) {
@@ -176,32 +238,59 @@ bool Controller::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType type, siz
     case MessageType::START_DMA: {
         LogOut << "Handle DMA start " << std::endl;
 
-        if (dmaExists(0)) {
-            networkOK = sendData(type, "{\"status\":\"Error\",\"msg\":\"DMA already exists.\"}");
+        uint8_t dmas = static_cast<uint8_t>(buff[0]);
+        if (dmas == 0u) {
+            LogErr << "Error no DMA should be activated" << std::endl;
+            networkOK = sendData(type, "{\"status\":\"Error\",\"msg\":\"Error no DMA should be activated.\"}");
             break;
         }
 
-        auto dma = std::make_unique<simpleneutron::components::dma::Dma>(0, mMem);
-        if (dma->hasError()) {
-            LogErr << "Error creating DMA object" << std::endl;
-            networkOK = sendData(type, "{\"status\":\"Error\",\"msg\":\"Error creating DMA object.\"}");
-            break;
+        bool dmaStartFailed = false;
+        for (auto i = 0; i < 8; i++) {
+            if (dmas & (1 << i)) {
+                if (dmaExists(i)) {
+                    LogErr << "Error DMA already exists" << std::endl;
+                    deactivateAll();
+                    networkOK = sendData(type, "{\"status\":\"Error\",\"msg\":\"DMA already exists.\"}");
+                    dmaStartFailed = true;
+                    break;
+                }
+
+                auto dma = std::make_unique<simpleneutron::components::dma::Dma>(i, mMem);
+                if (dma->hasError()) {
+                    LogErr << "Error creating DMA object" << std::endl;
+                    deactivateAll();
+                    networkOK = sendData(type, "{\"status\":\"Error\",\"msg\":\"Error creating DMA object.\"}");
+                    dmaStartFailed = true;
+                    break;
+                }
+
+                mDmas.push_back(std::move(dma));
+                mDmas[mDmas.size() - 1]->enable();
+                if (mDmas[mDmas.size() - 1]->hasError()) {
+                    // send answer!
+                    LogErr << "Error enabling the DMA" << std::endl;
+                    deactivateAll();
+                    networkOK = sendData(type, "{\"status\":\"Error\",\"msg\":\"Error enabling the DMA.\"}");
+                    dmaStartFailed = true;
+                }
+            }
         }
 
-        mDmas.push_back(std::move(dma));
-        mDmas[0]->enable();
-
-        if (mDmas[0]->hasError()) {
-            // send answer!
-            networkOK = sendData(type, "{\"status\":\"Error\",\"msg\":\"Error enabling the DMA.\"}");
-        } else {
-            // send answer!
+        if (!dmaStartFailed) {
+            simpleneutron::components::gpio::SensorController::activateSpecific(dmas);
+            mThread = std::make_unique<std::thread>([this](){
+                sendDmaData();
+            });
             networkOK = sendData(type, "{\"status\":\"OK\"}");
         }
         break;
     }
     case MessageType::STOP_DMA:
         LogOut << "Handle DMA stop " << size << std::endl;
+        destroyThread();
+        deactivateAll();
+        networkOK = sendData(type, "{\"status\":\"OK\"}");
         break;
     case MessageType::SET_PACKET_SIZE: {
         uint8_t packageSizeExp = static_cast<uint8_t>(buff[0]);
@@ -239,6 +328,36 @@ bool Controller::dmaExists(uint8_t id) const {
         }
     }
     return false;
+}
+
+void Controller::deactivateAll() {
+    mDmas.clear();
+    simpleneutron::components::gpio::SensorController::deactivateAll();
+}
+
+void Controller::destroyThread() {
+    if (!mThread) return;
+
+    // enforce POSIX semantics
+    siginterrupt(quitSignal, true);
+
+    // register signal handler
+    prevSignal = std::signal(quitSignal, [](int) {
+        // use global var here
+        threadQuit = true;
+
+        // reset to previous (original) signal
+        std::signal(quitSignal, prevSignal);
+    });
+
+    // send signal to thread
+    pthread_kill(mThread->native_handle(), quitSignal);
+
+    // wait for thread to finish
+    mThread->join();
+
+    mThread = nullptr;
+    threadQuit = false;
 }
 
 } // controller    

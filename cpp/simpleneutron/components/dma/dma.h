@@ -37,8 +37,8 @@ class Dma {
     uint32_t *mRegister = 0;
     uint32_t *mMemoryMap = 0;
     uint32_t mSize = DMA_SIZE;
-    uint32_t mReadAddress = 0;
-    uint32_t mWriteAddress = 0;
+    std::atomic<uint32_t> mReadAddress = 0;
+    std::atomic<uint32_t> mWriteAddress = 0;
 
     bool mHasError = false;
     bool mEnabled = false;
@@ -69,12 +69,18 @@ public:
     void enable();
     void disable();
     void setDestinationAddress(uint32_t address);
+    uint16_t getWordLength();
     void setWordLength(uint32_t length);
     uint32_t getStatus();
     uint32_t readMemory(uint32_t offset);
     bool hasStatusError();
     bool hasStatusError(uint32_t status);
     bool hasError() const;
+
+    uint32_t *memoryMap() const;
+    uint32_t writeSize() const;
+    uint32_t readAddress() const;
+    void setReadAddress(uint32_t lastSize);
 };
 
 } // dma    

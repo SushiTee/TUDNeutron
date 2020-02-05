@@ -20,7 +20,6 @@ public:
     void operator=(const SensorController&) = delete;
 
     static void init(uint32_t registerBase, int mem);
-    static void activateAll();
     static void deactivateAll();
     static void activateSpecific(uint8_t value);
     static uint8_t getStatus();

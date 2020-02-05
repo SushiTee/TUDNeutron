@@ -212,11 +212,6 @@ void Dma::disable() {
     mThread = nullptr;
     mQuit = false;
 
-    // unregister signal handler
-    //std::signal(quitSignal, [](int) {
-        // nothing
-    //});
-
     // turn off hardware
     MemoryControl::registerSetBit(mRegister, DmaOffset::S2MM_CONTROL, CONTROL_RUN, 0);
 
@@ -225,6 +220,10 @@ void Dma::disable() {
 
 void Dma::setDestinationAddress(uint32_t offset) {
     MemoryControl::registerWrite(mRegister, DmaOffset::S2MM_DESTINATION, MEMORY_BASE + offset * 4);
+}
+
+uint16_t Dma::getWordLength() {
+    return mWordLength;
 }
 
 void Dma::setWordLength(uint32_t length) {
@@ -279,6 +278,42 @@ bool Dma::hasError() const {
 
 void Dma::setQuit(bool quit) {
     mQuit = quit;
+}
+
+uint32_t *Dma::memoryMap() const {
+    return mMemoryMap;
+}
+
+uint32_t Dma::writeSize() const {
+    uint32_t size = 0;
+    uint32_t writeAddress = mWriteAddress;
+    if (writeAddress > mReadAddress) {
+        size = writeAddress - mReadAddress;
+    } else {
+        size = mSize - mReadAddress;
+    }
+
+    if (mWordLength < 4) {
+        if (size / mWordLength > 0x10000u) {
+            return 0x10000u / mWordLength;
+        }
+    } else {
+        if (size * 4 > 0x100000u) {
+            return 0x100000u / 4;
+        }
+    }
+    return size;
+}
+
+uint32_t Dma::readAddress() const {
+    return mReadAddress;
+}
+
+void Dma::setReadAddress(uint32_t lastSize) {
+    mReadAddress += lastSize;
+    if (mReadAddress >= mSize) {
+        mReadAddress = 0;
+    }
 }
 
 } // dma    

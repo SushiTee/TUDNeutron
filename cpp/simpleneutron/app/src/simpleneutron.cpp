@@ -32,8 +32,6 @@ int main(int argc, char *argv[]) {
    uint32_t wordLength = 16;
    simpleneutron::components::gpio::WordLengthController::setWordLength(wordLength);
 
-   simpleneutron::components::gpio::SensorController::activateSpecific(0b01010101u);
-
    auto controller = simpleneutron::components::controller::Controller(mem);
    controller.run();
 

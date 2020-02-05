@@ -29,14 +29,6 @@ void SensorController::init(uint32_t registerBase, int mem) {
     getInstanceImpl(registerBase, mem);
 }
 
-void SensorController::activateAll() {
-    SensorController &ref = SensorController::getInstance();
-    if (ref.mSensorState != 0xffu) {
-        ref.mSensorState = 0xffu;
-        ref.setValue(0xffu);
-    }
-}
-
 void SensorController::deactivateAll() {
     SensorController &ref = SensorController::getInstance();
     if (ref.mSensorState != 0u) {
