@@ -3,6 +3,7 @@
 #include <networkhandler.h>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QElapsedTimer>
 
 constexpr size_t PACKAGE_HEADER_SIZE = 3;
 
@@ -12,7 +13,7 @@ union payloadSizeConverter {
 };
 
 NetworkHandler::NetworkHandler(NetworkController *parent)
-    : m_controller(parent), m_packageSize(static_cast<uint8_t>(parent->packageSize()))
+    : m_controller(parent), m_packageSizeIndex(static_cast<uint8_t>(parent->packageSize())), m_packageSize(static_cast<uint16_t>(std::pow(2, parent->packageSize()))), m_sensorDataCount(8)
 {
 
 }
@@ -62,7 +63,8 @@ void NetworkHandler::connect(QString host, int port)
         });
         QMetaObject::invokeMethod(m_controller, "connected", Q_ARG(bool, true));
         // setting package size on connection!
-        sendData(NetworkController::MessageType::SET_PACKET_SIZE, m_packageSize);
+        sendData(NetworkController::MessageType::SET_PACKET_SIZE, m_packageSizeIndex);
+        sendData(NetworkController::MessageType::STOP_DMA, m_packageSizeIndex);
     } else {
         QMetaObject::invokeMethod(m_controller, "connected", Q_ARG(bool, false));
     }
@@ -101,7 +103,7 @@ bool NetworkHandler::receiveData() {
     // read the type and check its valid (Byte 0 is the type)
     NetworkController::MessageType messageType = static_cast<NetworkController::MessageType>(m_recvBuff[0]);
     if (messageType >= NetworkController::MessageType::NONE) {
-        qCritical() << "Received invalid Message. Disconnecting!";
+        qCritical() << "Received invalid Message. Disconnecting!" << messageType;
         return false;
     }
 
@@ -193,44 +195,53 @@ void NetworkHandler::sendData(NetworkController::MessageType type, uint8_t value
 
 void NetworkHandler::handleData(kn::buffer<BUFFER_SIZE> &buff, NetworkController::MessageType type, size_t size)
 {
-    // todo clean this up
+    static QElapsedTimer timer;
     switch (type)
     {
-    case NetworkController::MessageType::START_DMA: {
-        qInfo() << "DMA start response";
-        QJsonDocument doc = QJsonDocument::fromJson(QByteArray::fromRawData(reinterpret_cast<const char *>(buff.data()), static_cast<int>(size)));
-        if (!doc.isNull()) {
-            QMetaObject::invokeMethod(m_controller, "receiveMessage",
-                                      Q_ARG(int, static_cast<int>(type)),
-                                      Q_ARG(QVariant, QVariant::fromValue(doc.object())));
+    case NetworkController::MessageType::DMA0:
+    case NetworkController::MessageType::DMA1:
+    case NetworkController::MessageType::DMA2:
+    case NetworkController::MessageType::DMA3:
+    case NetworkController::MessageType::DMA4:
+    case NetworkController::MessageType::DMA5:
+    case NetworkController::MessageType::DMA6:
+    case NetworkController::MessageType::DMA7: {
+        if (!size) {
+            size = 0x10000u;
         }
-        break;
-    }
-    case NetworkController::MessageType::STOP_DMA: {
-        qInfo() << "DMA stop response";
-        QJsonDocument doc = QJsonDocument::fromJson(QByteArray::fromRawData(reinterpret_cast<const char *>(buff.data()), static_cast<int>(size)));
-        if (!doc.isNull()) {
-            QMetaObject::invokeMethod(m_controller, "receiveMessage",
-                                      Q_ARG(int, static_cast<int>(type)),
-                                      Q_ARG(QVariant, QVariant::fromValue(doc.object())));
-        }
-        break;
-    }
-    case NetworkController::MessageType::SET_PACKET_SIZE: {
-        qInfo() << "Set package size response";
-        QJsonDocument doc = QJsonDocument::fromJson(QByteArray::fromRawData(reinterpret_cast<const char *>(buff.data()), static_cast<int>(size)));
-        if (!doc.isNull()) {
-            QString status = doc["status"].toString();
-            if (status == "OK") {
-                QMetaObject::invokeMethod(m_controller, "setPackageSizeResult", Q_ARG(bool, true), Q_ARG(QString, ""));
-            } else {
-                QString message = doc["msg"].toString();
-                QMetaObject::invokeMethod(m_controller, "setPackageSizeResult", Q_ARG(bool, false), Q_ARG(QString, message));
+        uint64_t dataSize = size * m_packageSize;
+        m_sensorDataCount[static_cast<int>(type)] += dataSize;
+        if (!timer.isValid()) {
+            timer.start();
+            QMetaObject::invokeMethod(m_controller, "sensorResult", Q_ARG(QVector<uint64_t>, m_sensorDataCount));
+        } else {
+            if (timer.elapsed() > 1000) {
+                timer.invalidate();
             }
         }
         break;
     }
-    default:
+    case NetworkController::MessageType::START_DMA:
+    case NetworkController::MessageType::STOP_DMA:
+    case NetworkController::MessageType::SET_PACKET_SIZE: {
+        QJsonDocument doc = QJsonDocument::fromJson(QByteArray::fromRawData(reinterpret_cast<const char *>(buff.data()), static_cast<int>(size)));
+        if (!doc.isNull()) {
+            QString status = doc["status"].toString();
+            if (status == "OK") {
+                QMetaObject::invokeMethod(m_controller, "messageResult", Q_ARG(NetworkController::MessageType, type), Q_ARG(bool, true), Q_ARG(QString, ""));
+                return;
+            } else {
+                QString message = doc["msg"].toString();
+                if (!message.isNull()) {
+                    QMetaObject::invokeMethod(m_controller, "messageResult", Q_ARG(NetworkController::MessageType, type), Q_ARG(bool, false), Q_ARG(QString, message));
+                    return;
+                }
+            }
+        }
+        QMetaObject::invokeMethod(m_controller, "messageResult", Q_ARG(NetworkController::MessageType, type), Q_ARG(bool, false), Q_ARG(QString, "Unexpected message from server"));
+        break;
+    }
+    case NetworkController::MessageType::NONE:
         break;
     }
 }

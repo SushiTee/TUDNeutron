@@ -16,10 +16,12 @@ class NetworkHandler : public QObject {
     std::unique_ptr<kn::tcp_socket> m_sock = nullptr;
     std::unique_ptr<std::thread> m_receiveThread = nullptr;
     std::atomic<bool> m_quit = false;
-    uint8_t m_packageSize;
+    uint8_t m_packageSizeIndex;
+    uint16_t m_packageSize;
 
     // reserve buffer
     kn::buffer<BUFFER_SIZE> m_recvBuff;
+    QVector<uint64_t> m_sensorDataCount;
 
     bool receiveData();
     void sendData(const std::byte *header, const std::byte *data, size_t dataLength) const;

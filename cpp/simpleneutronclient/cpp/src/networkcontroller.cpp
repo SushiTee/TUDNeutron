@@ -21,12 +21,35 @@ NetworkController::NetworkController(QString host, int port, QObject *parent) : 
         setConnected(ConnectedState::FAILED);
         this->disconnect();
     });
-    QObject::connect(this, &NetworkController::setPackageSizeResult, this, [this](bool success, QString message){
-        if (success) {
-            setPackageSizeTransmitted(true);
-        } else {
-            emit networkDataError("Could not set package size on Zedboard (" + message + ")");
-            this->disconnect();
+    QObject::connect(this, &NetworkController::messageResult, this, [this](NetworkController::MessageType type, bool success, QString message){
+        switch (type) {
+        case NetworkController::MessageType::START_DMA: {
+            if (success) {
+                setSensorsActive(true);
+            } else {
+                emit networkDataError("Could not activate sensors on Zedboard (" + message + ")");
+                this->disconnect();
+            }
+            break;
+        }
+        case NetworkController::MessageType::STOP_DMA: {
+            if (success) {
+                setSensorsActive(false);
+            } else {
+                emit networkDataError("Could not deactivate sensors on Zedboard (" + message + ")");
+                this->disconnect();
+            }
+            break;
+        }
+        case NetworkController::MessageType::SET_PACKET_SIZE: {
+            if (success) {
+                setPackageSizeTransmitted(true);
+            } else {
+                emit networkDataError("Could not set package size on Zedboard (" + message + ")");
+                this->disconnect();
+            }
+            break;
+        }
         }
     });
 }
@@ -98,6 +121,20 @@ void NetworkController::setPackageSizeTransmitted(bool packageSizeTransmitted)
     emit packageSizeTransmittedChanged(m_packageSizeTransmitted);
 }
 
+bool NetworkController::sensorsActive() const
+{
+    return m_sensorsActive;
+}
+
+void NetworkController::setSensorsActive(bool sensorsActive)
+{
+    if (m_sensorsActive == sensorsActive)
+        return;
+
+    m_sensorsActive = sensorsActive;
+    emit sensorsActiveChanged(m_sensorsActive);
+}
+
 int NetworkController::port() const
 {
     return m_port;
@@ -145,6 +182,7 @@ void NetworkController::disconnect()
     if (getConnected() == ConnectedState::DISCONNECTED) return;
 
     setPackageSizeTransmitted(false);
+    setSensorsActive(false);
     if (m_thread != nullptr) {
         m_handler->quit();
         m_thread->quit();
@@ -154,7 +192,18 @@ void NetworkController::disconnect()
     }
 }
 
-void NetworkController::sendMessage(MessageType type, QString message)
+void NetworkController::activateSensors(QList<bool> list)
 {
-    QMetaObject::invokeMethod(m_handler.get(), "sendData", Q_ARG(NetworkController::MessageType, type), Q_ARG(QString, message));
+    uint8_t sensorsBinary = 0;
+    for (int i = 0; i < list.size(); i++) {
+        if (list[i]) {
+            sensorsBinary |= (1 << i);
+        }
+    }
+    QMetaObject::invokeMethod(m_handler.get(), "sendData", Q_ARG(NetworkController::MessageType, NetworkController::MessageType::START_DMA), Q_ARG(uint8_t, sensorsBinary));
+}
+
+void NetworkController::deactivateSensors()
+{
+    QMetaObject::invokeMethod(m_handler.get(), "sendData", Q_ARG(NetworkController::MessageType, NetworkController::MessageType::STOP_DMA), Q_ARG(uint8_t, 0));
 }

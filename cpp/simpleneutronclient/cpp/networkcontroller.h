@@ -51,11 +51,13 @@ private:
     Q_PROPERTY(ConnectedState connected READ getConnected NOTIFY connectedChanged)
     Q_PROPERTY(int packageSize READ packageSize WRITE setPackageSize NOTIFY packageSizeChanged)
     Q_PROPERTY(bool packageSizeTransmitted READ packageSizeTransmitted NOTIFY packageSizeTransmittedChanged)
+    Q_PROPERTY(bool sensorsActive READ sensorsActive NOTIFY sensorsActiveChanged)
 
     QString m_host = "zedboard";
     int m_port = 22222;
     int m_packageSize = 4; // 2^m_PackageSize | e.g. 2^4 => 16 | between 1 and 12
     bool m_packageSizeTransmitted = false;
+    bool m_sensorsActive = false;
     ConnectedState m_connected = ConnectedState::DISCONNECTED;
 
     int port() const;
@@ -65,6 +67,8 @@ private:
     void setPackageSize(int packageSize);
     bool packageSizeTransmitted() const;
     void setPackageSizeTransmitted(bool packageSizeTransmitted);
+    bool sensorsActive() const;
+    void setSensorsActive(bool packageSizeTransmitted);
     ConnectedState getConnected();
     void setConnected(ConnectedState connected);
 
@@ -74,7 +78,8 @@ private:
 public slots:
     void connect();
     void disconnect();
-    void sendMessage(MessageType type, QString message);
+    void activateSensors(QList<bool> list);
+    void deactivateSensors();
 
 signals:
     void hostChanged(QString host);
@@ -87,11 +92,14 @@ signals:
     // signals called from handler
     void connected(bool success);
     void closedConnection();
-    void receiveMessage(int type, QVariant jsonData);
     void packageSizeChanged(int packageSize);
     void packageSizeTransmittedChanged(bool packageSizeTransmitted);
+    void sensorsActiveChanged(bool sensorsActive);
     void sendDataFailed();
-    void setPackageSizeResult(bool success, QString message);
+    void messageResult(NetworkController::MessageType type, bool success, QString message);
+    void sensorResult(QVector<uint64_t> sensorData);
 };
 
 Q_DECLARE_METATYPE(NetworkController::MessageType)
+Q_DECLARE_METATYPE(uint8_t)
+Q_DECLARE_METATYPE(QVector<uint64_t>)
