@@ -23,6 +23,7 @@ enum class MessageType : uint8_t {
     DMA7,
     START_DMA,
     STOP_DMA,
+    SET_PACKET_SIZE,
 
     NONE // marks the last Type (is used to determine valid types)
 };

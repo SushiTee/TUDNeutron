@@ -2,7 +2,9 @@
 #include <string>
 #include <csignal>
 #include <chrono>
+#include <cmath>
 #include <logger/logger.h>
+#include <gpio/wordlengthcontroller.h>
 #include <controller/controller.h>
 
 namespace simpleneutron {
@@ -175,14 +177,14 @@ bool Controller::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType type, siz
         LogOut << "Handle DMA start " << std::endl;
 
         if (dmaExists(0)) {
-            networkOK = sendData(MessageType::START_DMA, "{\"status\":\"Error\",\"msg\":\"DMA already exists.\"}");
+            networkOK = sendData(type, "{\"status\":\"Error\",\"msg\":\"DMA already exists.\"}");
             break;
         }
 
         auto dma = std::make_unique<simpleneutron::components::dma::Dma>(0, mMem);
         if (dma->hasError()) {
             LogErr << "Error creating DMA object" << std::endl;
-            networkOK = sendData(MessageType::START_DMA, "{\"status\":\"Error\",\"msg\":\"Error creating DMA object.\"}");
+            networkOK = sendData(type, "{\"status\":\"Error\",\"msg\":\"Error creating DMA object.\"}");
             break;
         }
 
@@ -191,16 +193,27 @@ bool Controller::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType type, siz
 
         if (mDmas[0]->hasError()) {
             // send answer!
-            networkOK = sendData(MessageType::START_DMA, "{\"status\":\"Error\",\"msg\":\"Error enabling the DMA.\"}");
+            networkOK = sendData(type, "{\"status\":\"Error\",\"msg\":\"Error enabling the DMA.\"}");
         } else {
             // send answer!
-            networkOK = sendData(MessageType::START_DMA, "{\"status\":\"OK\"}");
+            networkOK = sendData(type, "{\"status\":\"OK\"}");
         }
         break;
     }
     case MessageType::STOP_DMA:
         LogOut << "Handle DMA stop " << size << std::endl;
         break;
+    case MessageType::SET_PACKET_SIZE: {
+        uint8_t packageSizeExp = static_cast<uint8_t>(buff[0]);
+        if (packageSizeExp > 12) {
+            networkOK = sendData(type, "{\"status\":\"Error\",\"msg\":\"Value must be between 0 and 12\"}");
+        } else {
+            LogOut << "Use packet size: " << static_cast<uint16_t>(std::pow(2, packageSizeExp)) << std::endl;
+            simpleneutron::components::gpio::WordLengthController::setWordLength(static_cast<uint16_t>(std::pow(2, packageSizeExp)));
+            networkOK = sendData(type, "{\"status\":\"OK\"}");
+        }
+        break;
+    }
     default:
         break;
     }
