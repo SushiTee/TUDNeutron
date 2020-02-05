@@ -19,8 +19,11 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QS
     }
     auto doubleDotIndex = function.lastIndexOf("::");
     if (braceIndex != -1) {
-        auto spaceIndex = function.indexOf(" ");
-        function = function.left(spaceIndex+1) + function.right(function.length()-doubleDotIndex-2);
+        function = function.right(function.length()-doubleDotIndex-2);
+    }
+    auto spaceIndex = function.lastIndexOf(" ");
+    if (spaceIndex != -1) {
+        function = function.right(function.length()-spaceIndex-1);
     }
     switch (type) {
     case QtDebugMsg:
