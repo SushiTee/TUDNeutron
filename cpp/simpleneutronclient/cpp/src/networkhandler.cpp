@@ -54,7 +54,7 @@ void NetworkHandler::connect(QString host, int port)
 
                 continueReceiving = receiveData();
                 if (!continueReceiving) {
-                    qDebug() << "Remote closed connected or a signal interrupt occured" << m_quit;
+                    qDebug() << "Remote closed connected or disconnect";
                 }
             }
             if (!m_quit) {
