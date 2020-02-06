@@ -1,6 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <external/networking/kissnet.hpp>
+#include <messagetype.h>
 #include <networkcontroller.h>
 
 namespace kn = kissnet;
@@ -52,6 +53,7 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
+    MessageType::declareQML();
     qmlRegisterSingletonType<NetworkController>("SimpleNeutron.Network", 1, 0, "NetworkController", &NetworkController::instance);
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

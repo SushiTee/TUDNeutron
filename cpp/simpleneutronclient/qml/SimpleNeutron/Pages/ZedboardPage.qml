@@ -2,6 +2,7 @@ import QtQuick 2.14
 import QtQuick.Controls 2.14
 import SimpleNeutron.Components 1.0
 import SimpleNeutron.Network 1.0
+import SimpleNeutron.MessageType 1.0
 
 import "qrc:/js/db.js" as DB
 
@@ -12,8 +13,8 @@ Page {
     width: parent ? parent.width : 0
     height: parent ? parent.height : 0
     title: {
-        if (NetworkController.connected === NetworkController.CONNECTING) return `Connecting to Zedboard (Host: ${NetworkController.host}:${NetworkController.port})`;
-        if (NetworkController.connected === NetworkController.CONNECTED) return `Connected to Zedboard (Host: ${NetworkController.host}:${NetworkController.port})`;
+        if (NetworkController.connected === MessageType.CONNECTING) return `Connecting to Zedboard (Host: ${NetworkController.host}:${NetworkController.port})`;
+        if (NetworkController.connected === MessageType.CONNECTED) return `Connected to Zedboard (Host: ${NetworkController.host}:${NetworkController.port})`;
         return "";
     }
 
@@ -24,7 +25,7 @@ Page {
     BusyIndicator {
         id: busyIndicator
         anchors.centerIn: parent
-        running: NetworkController.connected !== NetworkController.CONNECTED || !NetworkController.packageSizeTransmitted
+        running: NetworkController.connected !== MessageType.CONNECTED || !NetworkController.packageSizeTransmitted
         visible: running
     }
 
@@ -43,7 +44,7 @@ Page {
         onSensorResult: { // list sensorData
             console.info("Sensordata:", sensorData);
             for (let i = 0; i < listModel.count; i++) {
-                listModel.get(i).count = sensorData[i];
+                listModel.get(i).count = parseInt(sensorData[i]);
             }
         }
     }

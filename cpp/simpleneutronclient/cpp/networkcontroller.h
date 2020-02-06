@@ -1,39 +1,20 @@
 #pragma once
 
+#include <memory>
 #include <QObject>
+#include <QThread>
 #include <QQmlEngine>
 #include <external/networking/kissnet.hpp>
+#include <messagetype.h>
+#include <networkhandler.h>
 
 namespace kn = kissnet;
+
+class NetworkHandler;
 
 class NetworkController : public QObject {
     Q_OBJECT
 public:
-    enum MessageType : uint8_t {
-        DMA0 = 0,
-        DMA1,
-        DMA2,
-        DMA3,
-        DMA4,
-        DMA5,
-        DMA6,
-        DMA7,
-        START_DMA,
-        STOP_DMA,
-        SET_PACKET_SIZE,
-
-        NONE // marks the last Type (is used to determine valid types)
-    };
-    Q_ENUM(MessageType)
-
-    enum ConnectedState : uint8_t {
-        CONNECTING = 0,
-        CONNECTED,
-        DISCONNECTED,
-        FAILED
-    };
-    Q_ENUM(ConnectedState)
-
     NetworkController() = delete;
     explicit NetworkController(QString host, int port, QObject *parent);
     ~NetworkController();
@@ -48,7 +29,7 @@ public:
 private:
     Q_PROPERTY(int port READ port WRITE setPort NOTIFY portChanged)
     Q_PROPERTY(QString host READ host WRITE setHost NOTIFY hostChanged)
-    Q_PROPERTY(ConnectedState connected READ getConnected NOTIFY connectedChanged)
+    Q_PROPERTY(MessageType::ConnectedState connected READ getConnected NOTIFY connectedChanged)
     Q_PROPERTY(int packageSize READ packageSize WRITE setPackageSize NOTIFY packageSizeChanged)
     Q_PROPERTY(bool packageSizeTransmitted READ packageSizeTransmitted NOTIFY packageSizeTransmittedChanged)
     Q_PROPERTY(bool sensorsActive READ sensorsActive NOTIFY sensorsActiveChanged)
@@ -58,7 +39,7 @@ private:
     int m_packageSize = 4; // 2^m_PackageSize | e.g. 2^4 => 16 | between 1 and 12
     bool m_packageSizeTransmitted = false;
     bool m_sensorsActive = false;
-    ConnectedState m_connected = ConnectedState::DISCONNECTED;
+    MessageType::ConnectedState m_connected = MessageType::ConnectedState::DISCONNECTED;
 
     int port() const;
     void setPort(int port);
@@ -69,10 +50,10 @@ private:
     void setPackageSizeTransmitted(bool packageSizeTransmitted);
     bool sensorsActive() const;
     void setSensorsActive(bool packageSizeTransmitted);
-    ConnectedState getConnected();
-    void setConnected(ConnectedState connected);
+    MessageType::ConnectedState getConnected();
+    void setConnected(MessageType::ConnectedState connected);
 
-    std::unique_ptr<class NetworkHandler> m_handler = nullptr;
+    std::unique_ptr<NetworkHandler> m_handler = nullptr;
     std::unique_ptr<QThread> m_thread = nullptr;
 
 public slots:
@@ -85,7 +66,7 @@ signals:
     void hostChanged(QString host);
     void portChanged(int port);
 
-    void connectedChanged(ConnectedState connected);
+    void connectedChanged(MessageType::ConnectedState connected);
 
     void networkDataError(QString message);
 
@@ -96,10 +77,6 @@ signals:
     void packageSizeTransmittedChanged(bool packageSizeTransmitted);
     void sensorsActiveChanged(bool sensorsActive);
     void sendDataFailed();
-    void messageResult(NetworkController::MessageType type, bool success, QString message);
+    void messageResult(MessageType::Message type, bool success, QString message);
     void sensorResult(QVector<uint64_t> sensorData);
 };
-
-Q_DECLARE_METATYPE(NetworkController::MessageType)
-Q_DECLARE_METATYPE(uint8_t)
-Q_DECLARE_METATYPE(QVector<uint64_t>)

@@ -3,12 +3,13 @@
 #include <thread>
 #include <QObject>
 #include <external/networking/kissnet.hpp>
-#include <networkcontroller.h>
+#include <messagetype.h>
 
 namespace kn = kissnet;
 
 constexpr size_t BUFFER_SIZE = 1048576u;
 
+class NetworkController;
 class NetworkHandler : public QObject {
     Q_OBJECT
 
@@ -25,7 +26,7 @@ class NetworkHandler : public QObject {
 
     bool receiveData();
     void sendData(const std::byte *header, const std::byte *data, size_t dataLength) const;
-    void handleData(kn::buffer<BUFFER_SIZE> &buff, NetworkController::MessageType type, size_t size);
+    void handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType::Message type, size_t size);
     bool isSocketValid(kn::socket_status status) const;
 
 public:
@@ -35,6 +36,6 @@ public:
 
 public slots:
     void connect(QString host, int port);
-    void sendData(NetworkController::MessageType type, QString data) const;
-    void sendData(NetworkController::MessageType type, uint8_t value) const; // send only one value
+    void sendData(MessageType::Message type, QString data) const;
+    void sendData(MessageType::Message type, uint8_t value) const; // send only one value
 };

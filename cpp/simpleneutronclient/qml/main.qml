@@ -3,6 +3,7 @@ import QtQuick.Controls 2.14
 import QtQuick.Dialogs 1.1
 import SimpleNeutron.Pages 1.0
 import SimpleNeutron.Network 1.0
+import SimpleNeutron.MessageType 1.0
 import QtQuick.LocalStorage 2.12 // needed so the sql plugin is deployed
 
 import "qrc:/js/db.js" as DB
@@ -60,7 +61,7 @@ ApplicationWindow {
         target: NetworkController
 
         onConnectedChanged: {
-            if (NetworkController.connected === NetworkController.FAILED) {
+            if (NetworkController.connected === MessageType.FAILED) {
                 stackView.reset();
                 messageDialog.message = "An error occured with the connection to the Zedboard or the connection could not be established.\n\nCheck if the Zedboard is turned on and connected to the network."
                 messageDialog.open();

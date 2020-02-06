@@ -23,7 +23,8 @@ SOURCES += \
 
 HEADERS += \
         "$$PWD/cpp/networkcontroller.h" \
-        "$$PWD/cpp/networkhandler.h"
+        "$$PWD/cpp/networkhandler.h" \
+        cpp/messagetype.h
 
 RESOURCES += "$$PWD/qml/qml.qrc" \
         "$$PWD/js/js.qrc"

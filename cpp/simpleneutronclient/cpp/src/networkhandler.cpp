@@ -1,9 +1,10 @@
-#include <WinSock2.h>
+#include <cmath>
 #include <QDebug>
 #include <networkhandler.h>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QElapsedTimer>
+#include <networkcontroller.h>
 
 constexpr size_t PACKAGE_HEADER_SIZE = 3;
 
@@ -63,8 +64,8 @@ void NetworkHandler::connect(QString host, int port)
         });
         QMetaObject::invokeMethod(m_controller, "connected", Q_ARG(bool, true));
         // setting package size on connection!
-        sendData(NetworkController::MessageType::SET_PACKET_SIZE, m_packageSizeIndex);
-        sendData(NetworkController::MessageType::STOP_DMA, m_packageSizeIndex);
+        sendData(MessageType::Message::SET_PACKET_SIZE, m_packageSizeIndex);
+        sendData(MessageType::Message::STOP_DMA, m_packageSizeIndex);
     } else {
         QMetaObject::invokeMethod(m_controller, "connected", Q_ARG(bool, false));
     }
@@ -101,15 +102,15 @@ bool NetworkHandler::receiveData() {
 
     // we got the first 3 bytes of our package!
     // read the type and check its valid (Byte 0 is the type)
-    NetworkController::MessageType messageType = static_cast<NetworkController::MessageType>(m_recvBuff[0]);
-    if (messageType >= NetworkController::MessageType::NONE) {
+    MessageType::Message messageType = static_cast<MessageType::Message>(m_recvBuff[0]);
+    if (messageType >= MessageType::Message::NONE) {
         qCritical() << "Received invalid Message. Disconnecting!" << messageType;
         return false;
     }
 
     // type is OK! Get the payload size (Byte [1] and [2] conain the size)
     uint16_t payloadSize = * reinterpret_cast<const uint16_t *>(&m_recvBuff[1]);
-    uint32_t byteSize = (messageType < NetworkController::MessageType::START_DMA)
+    uint32_t byteSize = (messageType < MessageType::Message::START_DMA)
             ? static_cast<uint32_t>(payloadSize) * 4 * static_cast<uint32_t>(m_packageSize)
             : static_cast<uint32_t>(payloadSize);
     if (byteSize > BUFFER_SIZE) {
@@ -160,7 +161,7 @@ void NetworkHandler::sendData(const std::byte *header, const std::byte *data, si
     }
 }
 
-void NetworkHandler::sendData(NetworkController::MessageType type, QString data) const
+void NetworkHandler::sendData(MessageType::Message type, QString data) const
 {
     // lengthh of data
     auto dataLength = static_cast<size_t>(data.length());
@@ -178,7 +179,7 @@ void NetworkHandler::sendData(NetworkController::MessageType type, QString data)
     sendData(reinterpret_cast<const std::byte*>(message.data()), reinterpret_cast<const std::byte*>(data.data_ptr()), dataLength);
 }
 
-void NetworkHandler::sendData(NetworkController::MessageType type, uint8_t value) const
+void NetworkHandler::sendData(MessageType::Message type, uint8_t value) const
 {
     // buffer
     std::array<uint8_t, PACKAGE_HEADER_SIZE> message;
@@ -193,19 +194,19 @@ void NetworkHandler::sendData(NetworkController::MessageType type, uint8_t value
     sendData(reinterpret_cast<const std::byte*>(message.data()), reinterpret_cast<const std::byte*>(&value), 1);
 }
 
-void NetworkHandler::handleData(kn::buffer<BUFFER_SIZE> &buff, NetworkController::MessageType type, size_t size)
+void NetworkHandler::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType::Message type, size_t size)
 {
     static QElapsedTimer timer;
     switch (type)
     {
-    case NetworkController::MessageType::DMA0:
-    case NetworkController::MessageType::DMA1:
-    case NetworkController::MessageType::DMA2:
-    case NetworkController::MessageType::DMA3:
-    case NetworkController::MessageType::DMA4:
-    case NetworkController::MessageType::DMA5:
-    case NetworkController::MessageType::DMA6:
-    case NetworkController::MessageType::DMA7: {
+    case MessageType::Message::DMA0:
+    case MessageType::Message::DMA1:
+    case MessageType::Message::DMA2:
+    case MessageType::Message::DMA3:
+    case MessageType::Message::DMA4:
+    case MessageType::Message::DMA5:
+    case MessageType::Message::DMA6:
+    case MessageType::Message::DMA7: {
         if (!size) {
             size = 0x10000u;
         }
@@ -221,27 +222,27 @@ void NetworkHandler::handleData(kn::buffer<BUFFER_SIZE> &buff, NetworkController
         }
         break;
     }
-    case NetworkController::MessageType::START_DMA:
-    case NetworkController::MessageType::STOP_DMA:
-    case NetworkController::MessageType::SET_PACKET_SIZE: {
+    case MessageType::Message::START_DMA:
+    case MessageType::Message::STOP_DMA:
+    case MessageType::Message::SET_PACKET_SIZE: {
         QJsonDocument doc = QJsonDocument::fromJson(QByteArray::fromRawData(reinterpret_cast<const char *>(buff.data()), static_cast<int>(size)));
         if (!doc.isNull()) {
             QString status = doc["status"].toString();
             if (status == "OK") {
-                QMetaObject::invokeMethod(m_controller, "messageResult", Q_ARG(NetworkController::MessageType, type), Q_ARG(bool, true), Q_ARG(QString, ""));
+                QMetaObject::invokeMethod(m_controller, "messageResult", Q_ARG(MessageType::Message, type), Q_ARG(bool, true), Q_ARG(QString, ""));
                 return;
             } else {
                 QString message = doc["msg"].toString();
                 if (!message.isNull()) {
-                    QMetaObject::invokeMethod(m_controller, "messageResult", Q_ARG(NetworkController::MessageType, type), Q_ARG(bool, false), Q_ARG(QString, message));
+                    QMetaObject::invokeMethod(m_controller, "messageResult", Q_ARG(MessageType::Message, type), Q_ARG(bool, false), Q_ARG(QString, message));
                     return;
                 }
             }
         }
-        QMetaObject::invokeMethod(m_controller, "messageResult", Q_ARG(NetworkController::MessageType, type), Q_ARG(bool, false), Q_ARG(QString, "Unexpected message from server"));
+        QMetaObject::invokeMethod(m_controller, "messageResult", Q_ARG(MessageType::Message, type), Q_ARG(bool, false), Q_ARG(QString, "Unexpected message from server"));
         break;
     }
-    case NetworkController::MessageType::NONE:
+    case MessageType::Message::NONE:
         break;
     }
 }
