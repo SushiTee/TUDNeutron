@@ -1,7 +1,7 @@
 // Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2019.2.1 (lin64) Build 2729669 Thu Dec  5 04:48:12 MST 2019
-// Date        : Wed Dec 25 17:14:23 2019
+// Date        : Fri Feb  7 00:11:32 2020
 // Host        : vm-VirtualBox running 64-bit Ubuntu 18.04.3 LTS
 // Command     : write_verilog -force -mode synth_stub -rename_top design_1_axi_dma_0_5 -prefix
 //               design_1_axi_dma_0_5_ design_1_axi_dma_0_0_stub.v

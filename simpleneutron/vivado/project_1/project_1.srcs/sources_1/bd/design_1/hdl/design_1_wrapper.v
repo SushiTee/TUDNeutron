@@ -1,7 +1,7 @@
 //Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2019.2.1 (lin64) Build 2729669 Thu Dec  5 04:48:12 MST 2019
-//Date        : Thu Jan 23 01:26:06 2020
+//Date        : Thu Feb  6 23:56:38 2020
 //Host        : vm-VirtualBox running 64-bit Ubuntu 18.04.3 LTS
 //Command     : generate_target design_1_wrapper.bd
 //Design      : design_1_wrapper
@@ -34,7 +34,9 @@ module design_1_wrapper
     btnc,
     leds_8bits1,
     pmod_input,
-    sws_8bits);
+    sws_8bits,
+    trigger_input,
+    trigger_out);
   inout [14:0]DDR_addr;
   inout [2:0]DDR_ba;
   inout DDR_cas_n;
@@ -60,6 +62,8 @@ module design_1_wrapper
   output [7:0]leds_8bits1;
   input [7:0]pmod_input;
   input [7:0]sws_8bits;
+  input trigger_input;
+  output trigger_out;
 
   wire [14:0]DDR_addr;
   wire [2:0]DDR_ba;
@@ -86,6 +90,8 @@ module design_1_wrapper
   wire [7:0]leds_8bits1;
   wire [7:0]pmod_input;
   wire [7:0]sws_8bits;
+  wire trigger_input;
+  wire trigger_out;
 
   design_1 design_1_i
        (.DDR_addr(DDR_addr),
@@ -112,5 +118,7 @@ module design_1_wrapper
         .btnc(btnc),
         .leds_8bits1(leds_8bits1),
         .pmod_input(pmod_input),
-        .sws_8bits(sws_8bits));
+        .sws_8bits(sws_8bits),
+        .trigger_input(trigger_input),
+        .trigger_out(trigger_out));
 endmodule

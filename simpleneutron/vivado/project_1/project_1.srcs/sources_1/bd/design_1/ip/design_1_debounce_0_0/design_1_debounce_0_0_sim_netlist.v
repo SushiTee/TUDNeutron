@@ -1,10 +1,10 @@
 // Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2019.2.1 (lin64) Build 2729669 Thu Dec  5 04:48:12 MST 2019
-// Date        : Thu Jan 23 00:50:36 2020
+// Date        : Fri Feb  7 00:29:26 2020
 // Host        : vm-VirtualBox running 64-bit Ubuntu 18.04.3 LTS
-// Command     : write_verilog -force -mode funcsim -rename_top design_1_debounce_0_0 -prefix
-//               design_1_debounce_0_0_ design_1_debounce_0_0_sim_netlist.v
+// Command     : write_verilog -force -mode funcsim
+//               /home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_debounce_0_0/design_1_debounce_0_0_sim_netlist.v
 // Design      : design_1_debounce_0_0
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -12,6 +12,31 @@
 // --------------------------------------------------------------------------------
 `timescale 1 ps / 1 ps
 
+(* CHECK_LICENSE_TYPE = "design_1_debounce_0_0,debounce_v1_0,{}" *) (* downgradeipidentifiedwarnings = "yes" *) (* x_core_info = "debounce_v1_0,Vivado 2019.2.1" *) 
+(* NotValidForBitStream *)
+module design_1_debounce_0_0
+   (signal_in,
+    signal_out,
+    m00_axis_aclk,
+    m00_axis_aresetn);
+  input signal_in;
+  output signal_out;
+  input m00_axis_aclk;
+  input m00_axis_aresetn;
+
+  wire m00_axis_aclk;
+  wire m00_axis_aresetn;
+  wire signal_in;
+  wire signal_out;
+
+  design_1_debounce_0_0_debounce_v1_0 U0
+       (.m00_axis_aclk(m00_axis_aclk),
+        .m00_axis_aresetn(m00_axis_aresetn),
+        .signal_in(signal_in),
+        .signal_out(signal_out));
+endmodule
+
+(* ORIG_REF_NAME = "debounce_v1_0" *) 
 module design_1_debounce_0_0_debounce_v1_0
    (signal_out,
     m00_axis_aresetn,
@@ -586,30 +611,6 @@ module design_1_debounce_0_0_debounce_v1_0
         .D(state_i_1_n_0),
         .Q(state_reg_n_0),
         .R(1'b0));
-endmodule
-
-(* CHECK_LICENSE_TYPE = "design_1_debounce_0_0,debounce_v1_0,{}" *) (* downgradeipidentifiedwarnings = "yes" *) (* x_core_info = "debounce_v1_0,Vivado 2019.2.1" *) 
-(* NotValidForBitStream *)
-module design_1_debounce_0_0
-   (signal_in,
-    signal_out,
-    m00_axis_aclk,
-    m00_axis_aresetn);
-  input signal_in;
-  output signal_out;
-  input m00_axis_aclk;
-  input m00_axis_aresetn;
-
-  wire m00_axis_aclk;
-  wire m00_axis_aresetn;
-  wire signal_in;
-  wire signal_out;
-
-  design_1_debounce_0_0_debounce_v1_0 U0
-       (.m00_axis_aclk(m00_axis_aclk),
-        .m00_axis_aresetn(m00_axis_aresetn),
-        .signal_in(signal_in),
-        .signal_out(signal_out));
 endmodule
 `ifndef GLBL
 `define GLBL

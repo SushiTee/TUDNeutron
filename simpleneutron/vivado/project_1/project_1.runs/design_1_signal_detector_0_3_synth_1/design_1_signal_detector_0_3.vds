@@ -2,8 +2,8 @@
 # Vivado v2019.2.1 (64-bit)
 # SW Build 2729669 on Thu Dec  5 04:48:12 MST 2019
 # IP Build 2729494 on Thu Dec  5 07:38:25 MST 2019
-# Start of session at: Thu Jan 23 01:31:34 2020
-# Process ID: 16660
+# Start of session at: Fri Feb  7 00:02:02 2020
+# Process ID: 24508
 # Current directory: /home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/design_1_signal_detector_0_3_synth_1
 # Command line: vivado -log design_1_signal_detector_0_3.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source design_1_signal_detector_0_3.tcl
 # Log file: /home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/design_1_signal_detector_0_3_synth_1/design_1_signal_detector_0_3.vds
@@ -13,5 +13,5 @@ source design_1_signal_detector_0_3.tcl -notrace
 INFO: [IP_Flow 19-234] Refreshing IP repositories
 INFO: [IP_Flow 19-1700] Loaded user IP repository '/home/vm/projects/TUDNeutron/ipcores/ip_repo'.
 INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/home/vm/tools/Xilinx/Vivado/2019.2/data/ip'.
-INFO: [IP_Flow 19-4838] Using cached IP synthesis design for IP design_1_signal_detector_0_3, cache-ID = c418c6e4faef135f.
-INFO: [Common 17-206] Exiting Vivado at Thu Jan 23 01:31:53 2020...
+INFO: [IP_Flow 19-4838] Using cached IP synthesis design for IP design_1_signal_detector_0_3, cache-ID = f3e2ddd8b7c1ccbb.
+INFO: [Common 17-206] Exiting Vivado at Fri Feb  7 00:02:24 2020...

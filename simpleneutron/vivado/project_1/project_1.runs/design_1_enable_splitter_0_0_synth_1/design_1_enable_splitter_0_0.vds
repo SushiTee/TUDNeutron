@@ -1,17 +1,17 @@
 #-----------------------------------------------------------
-# Vivado v2019.2 (64-bit)
-# SW Build 2700185 on Thu Oct 24 18:45:48 MDT 2019
-# IP Build 2699827 on Thu Oct 24 21:16:38 MDT 2019
-# Start of session at: Wed Dec 18 18:50:37 2019
-# Process ID: 1058
-# Current directory: /home/vm/projects/simpleneutron/vivado/project_1/project_1.runs/design_1_enable_splitter_0_0_synth_1
+# Vivado v2019.2.1 (64-bit)
+# SW Build 2729669 on Thu Dec  5 04:48:12 MST 2019
+# IP Build 2729494 on Thu Dec  5 07:38:25 MST 2019
+# Start of session at: Fri Feb  7 00:16:34 2020
+# Process ID: 29316
+# Current directory: /home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/design_1_enable_splitter_0_0_synth_1
 # Command line: vivado -log design_1_enable_splitter_0_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source design_1_enable_splitter_0_0.tcl
-# Log file: /home/vm/projects/simpleneutron/vivado/project_1/project_1.runs/design_1_enable_splitter_0_0_synth_1/design_1_enable_splitter_0_0.vds
-# Journal file: /home/vm/projects/simpleneutron/vivado/project_1/project_1.runs/design_1_enable_splitter_0_0_synth_1/vivado.jou
+# Log file: /home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/design_1_enable_splitter_0_0_synth_1/design_1_enable_splitter_0_0.vds
+# Journal file: /home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/design_1_enable_splitter_0_0_synth_1/vivado.jou
 #-----------------------------------------------------------
 source design_1_enable_splitter_0_0.tcl -notrace
 INFO: [IP_Flow 19-234] Refreshing IP repositories
-INFO: [IP_Flow 19-1700] Loaded user IP repository '/home/vm/projects/ipcores/ip_repo'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository '/home/vm/projects/TUDNeutron/ipcores/ip_repo'.
 INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/home/vm/tools/Xilinx/Vivado/2019.2/data/ip'.
 Command: synth_design -top design_1_enable_splitter_0_0 -part xc7z020clg484-1 -mode out_of_context
 Starting synth_design
@@ -19,17 +19,17 @@ Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
 INFO: [Device 21-403] Loading part xc7z020clg484-1
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 1086 
+INFO: Helper process launched with PID 29361 
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:13 ; elapsed = 00:00:15 . Memory (MB): peak = 1862.645 ; gain = 202.715 ; free physical = 364 ; free virtual = 2010
+Starting RTL Elaboration : Time (s): cpu = 00:00:11 ; elapsed = 00:00:14 . Memory (MB): peak = 1882.973 ; gain = 202.715 ; free physical = 245 ; free virtual = 1639
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-638] synthesizing module 'design_1_enable_splitter_0_0' [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_enable_splitter_0_0/synth/design_1_enable_splitter_0_0.vhd:71]
-INFO: [Synth 8-3491] module 'enable_splitter_v1_0' declared at '/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ipshared/10ca/hdl/enable_splitter_v1_0.vhd:5' bound to instance 'U0' of component 'enable_splitter_v1_0' [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_enable_splitter_0_0/synth/design_1_enable_splitter_0_0.vhd:93]
-INFO: [Synth 8-638] synthesizing module 'enable_splitter_v1_0' [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ipshared/10ca/hdl/enable_splitter_v1_0.vhd:21]
-INFO: [Synth 8-256] done synthesizing module 'enable_splitter_v1_0' (1#1) [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ipshared/10ca/hdl/enable_splitter_v1_0.vhd:21]
-INFO: [Synth 8-256] done synthesizing module 'design_1_enable_splitter_0_0' (2#1) [/home/vm/projects/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_enable_splitter_0_0/synth/design_1_enable_splitter_0_0.vhd:71]
+INFO: [Synth 8-638] synthesizing module 'design_1_enable_splitter_0_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_enable_splitter_0_0/synth/design_1_enable_splitter_0_0.vhd:71]
+INFO: [Synth 8-3491] module 'enable_splitter_v1_0' declared at '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ipshared/10ca/hdl/enable_splitter_v1_0.vhd:5' bound to instance 'U0' of component 'enable_splitter_v1_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_enable_splitter_0_0/synth/design_1_enable_splitter_0_0.vhd:93]
+INFO: [Synth 8-638] synthesizing module 'enable_splitter_v1_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ipshared/10ca/hdl/enable_splitter_v1_0.vhd:21]
+INFO: [Synth 8-256] done synthesizing module 'enable_splitter_v1_0' (1#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ipshared/10ca/hdl/enable_splitter_v1_0.vhd:21]
+INFO: [Synth 8-256] done synthesizing module 'design_1_enable_splitter_0_0' (2#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_enable_splitter_0_0/synth/design_1_enable_splitter_0_0.vhd:71]
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:17 ; elapsed = 00:00:20 . Memory (MB): peak = 1928.363 ; gain = 268.434 ; free physical = 332 ; free virtual = 1980
+Finished RTL Elaboration : Time (s): cpu = 00:00:15 ; elapsed = 00:00:19 . Memory (MB): peak = 1948.691 ; gain = 268.434 ; free physical = 306 ; free virtual = 1683
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -42,43 +42,43 @@ Report Check Netlist:
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:17 ; elapsed = 00:00:21 . Memory (MB): peak = 1928.363 ; gain = 268.434 ; free physical = 427 ; free virtual = 2076
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:16 ; elapsed = 00:00:20 . Memory (MB): peak = 1948.691 ; gain = 268.434 ; free physical = 282 ; free virtual = 1659
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:17 ; elapsed = 00:00:21 . Memory (MB): peak = 1928.363 ; gain = 268.434 ; free physical = 427 ; free virtual = 2076
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:16 ; elapsed = 00:00:20 . Memory (MB): peak = 1948.691 ; gain = 268.434 ; free physical = 282 ; free virtual = 1659
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1928.363 ; gain = 0.000 ; free physical = 420 ; free virtual = 2070
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1948.691 ; gain = 0.000 ; free physical = 275 ; free virtual = 1652
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
 Initializing timing engine
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2018.129 ; gain = 0.000 ; free physical = 326 ; free virtual = 1976
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2036.488 ; gain = 0.000 ; free physical = 180 ; free virtual = 1557
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
 WARNING: [Constraints 18-5210] No constraints selected for write.
 Resolution: This message can indicate that there are no constraints for the design, or it can indicate that the used_in flags are set such that the constraints are ignored. This later case is used when running synth_design to not write synthesis constraints to the resulting checkpoint. Instead, project constraints are read when the synthesized design is opened.
-Constraint Validation Runtime : Time (s): cpu = 00:00:00.20 ; elapsed = 00:00:00.31 . Memory (MB): peak = 2018.129 ; gain = 0.000 ; free physical = 322 ; free virtual = 1973
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.17 ; elapsed = 00:00:00.28 . Memory (MB): peak = 2036.488 ; gain = 0.000 ; free physical = 219 ; free virtual = 1596
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:33 ; elapsed = 00:00:39 . Memory (MB): peak = 2018.129 ; gain = 358.199 ; free physical = 351 ; free virtual = 2002
+Finished Constraint Validation : Time (s): cpu = 00:00:33 ; elapsed = 00:00:39 . Memory (MB): peak = 2036.488 ; gain = 356.230 ; free physical = 261 ; free virtual = 1645
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7z020clg484-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:33 ; elapsed = 00:00:39 . Memory (MB): peak = 2018.129 ; gain = 358.199 ; free physical = 351 ; free virtual = 2002
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:33 ; elapsed = 00:00:39 . Memory (MB): peak = 2036.488 ; gain = 356.230 ; free physical = 261 ; free virtual = 1645
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:33 ; elapsed = 00:00:39 . Memory (MB): peak = 2018.129 ; gain = 358.199 ; free physical = 350 ; free virtual = 2002
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:33 ; elapsed = 00:00:39 . Memory (MB): peak = 2036.488 ; gain = 356.230 ; free physical = 261 ; free virtual = 1645
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:34 ; elapsed = 00:00:40 . Memory (MB): peak = 2018.129 ; gain = 358.199 ; free physical = 337 ; free virtual = 1989
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:33 ; elapsed = 00:00:40 . Memory (MB): peak = 2036.488 ; gain = 356.230 ; free physical = 262 ; free virtual = 1647
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -114,7 +114,7 @@ Start Cross Boundary and Area Optimization
 ---------------------------------------------------------------------------------
 Warning: Parallel synthesis criteria is not met 
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:36 ; elapsed = 00:00:42 . Memory (MB): peak = 2018.129 ; gain = 358.199 ; free physical = 328 ; free virtual = 1982
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:35 ; elapsed = 00:00:42 . Memory (MB): peak = 2036.488 ; gain = 356.230 ; free physical = 248 ; free virtual = 1635
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -126,13 +126,13 @@ Report RTL Partitions:
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:56 ; elapsed = 00:01:06 . Memory (MB): peak = 2018.129 ; gain = 358.199 ; free physical = 149 ; free virtual = 1813
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:57 ; elapsed = 00:01:06 . Memory (MB): peak = 2036.488 ; gain = 356.230 ; free physical = 103 ; free virtual = 1440
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:56 ; elapsed = 00:01:06 . Memory (MB): peak = 2018.129 ; gain = 358.199 ; free physical = 149 ; free virtual = 1813
+Finished Timing Optimization : Time (s): cpu = 00:00:57 ; elapsed = 00:01:06 . Memory (MB): peak = 2036.488 ; gain = 356.230 ; free physical = 104 ; free virtual = 1441
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -144,7 +144,7 @@ Report RTL Partitions:
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:56 ; elapsed = 00:01:06 . Memory (MB): peak = 2018.129 ; gain = 358.199 ; free physical = 148 ; free virtual = 1812
+Finished Technology Mapping : Time (s): cpu = 00:00:57 ; elapsed = 00:01:06 . Memory (MB): peak = 2036.488 ; gain = 356.230 ; free physical = 116 ; free virtual = 1440
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -168,13 +168,13 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:01:10 ; elapsed = 00:01:20 . Memory (MB): peak = 2027.035 ; gain = 367.105 ; free physical = 140 ; free virtual = 1754
+Finished IO Insertion : Time (s): cpu = 00:01:11 ; elapsed = 00:01:20 . Memory (MB): peak = 2046.395 ; gain = 366.137 ; free physical = 126 ; free virtual = 1359
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:01:10 ; elapsed = 00:01:20 . Memory (MB): peak = 2027.035 ; gain = 367.105 ; free physical = 140 ; free virtual = 1754
+Finished Renaming Generated Instances : Time (s): cpu = 00:01:11 ; elapsed = 00:01:20 . Memory (MB): peak = 2046.395 ; gain = 366.137 ; free physical = 126 ; free virtual = 1359
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -193,25 +193,25 @@ Report Check Netlist:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:10 ; elapsed = 00:01:20 . Memory (MB): peak = 2027.035 ; gain = 367.105 ; free physical = 140 ; free virtual = 1754
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:11 ; elapsed = 00:01:20 . Memory (MB): peak = 2046.395 ; gain = 366.137 ; free physical = 126 ; free virtual = 1359
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:01:10 ; elapsed = 00:01:20 . Memory (MB): peak = 2027.035 ; gain = 367.105 ; free physical = 140 ; free virtual = 1754
+Finished Renaming Generated Ports : Time (s): cpu = 00:01:11 ; elapsed = 00:01:20 . Memory (MB): peak = 2046.395 ; gain = 366.137 ; free physical = 126 ; free virtual = 1359
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:01:10 ; elapsed = 00:01:20 . Memory (MB): peak = 2027.035 ; gain = 367.105 ; free physical = 140 ; free virtual = 1754
+Finished Handling Custom Attributes : Time (s): cpu = 00:01:11 ; elapsed = 00:01:20 . Memory (MB): peak = 2046.395 ; gain = 366.137 ; free physical = 126 ; free virtual = 1359
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:01:10 ; elapsed = 00:01:20 . Memory (MB): peak = 2027.035 ; gain = 367.105 ; free physical = 140 ; free virtual = 1754
+Finished Renaming Generated Nets : Time (s): cpu = 00:01:11 ; elapsed = 00:01:20 . Memory (MB): peak = 2046.395 ; gain = 366.137 ; free physical = 126 ; free virtual = 1359
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -237,32 +237,32 @@ Report Instance Areas:
 |1     |top      |       |     8|
 +------+---------+-------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:01:10 ; elapsed = 00:01:20 . Memory (MB): peak = 2027.035 ; gain = 367.105 ; free physical = 140 ; free virtual = 1754
+Finished Writing Synthesis Report : Time (s): cpu = 00:01:11 ; elapsed = 00:01:20 . Memory (MB): peak = 2046.395 ; gain = 366.137 ; free physical = 126 ; free virtual = 1359
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:01:06 ; elapsed = 00:01:15 . Memory (MB): peak = 2027.035 ; gain = 277.340 ; free physical = 198 ; free virtual = 1812
-Synthesis Optimization Complete : Time (s): cpu = 00:01:11 ; elapsed = 00:01:20 . Memory (MB): peak = 2027.043 ; gain = 367.105 ; free physical = 198 ; free virtual = 1812
+Synthesis Optimization Runtime : Time (s): cpu = 00:01:06 ; elapsed = 00:01:15 . Memory (MB): peak = 2046.395 ; gain = 278.340 ; free physical = 183 ; free virtual = 1415
+Synthesis Optimization Complete : Time (s): cpu = 00:01:11 ; elapsed = 00:01:20 . Memory (MB): peak = 2046.402 ; gain = 366.137 ; free physical = 183 ; free virtual = 1415
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2027.043 ; gain = 0.000 ; free physical = 266 ; free virtual = 1881
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2046.402 ; gain = 0.000 ; free physical = 250 ; free virtual = 1484
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2034.973 ; gain = 0.000 ; free physical = 205 ; free virtual = 1820
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2056.301 ; gain = 0.000 ; free physical = 185 ; free virtual = 1419
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
 INFO: [Common 17-83] Releasing license: Synthesis
 17 Infos, 1 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:01:28 ; elapsed = 00:01:40 . Memory (MB): peak = 2034.973 ; gain = 563.492 ; free physical = 332 ; free virtual = 1946
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2034.973 ; gain = 0.000 ; free physical = 332 ; free virtual = 1946
+synth_design: Time (s): cpu = 00:01:27 ; elapsed = 00:01:39 . Memory (MB): peak = 2056.301 ; gain = 584.641 ; free physical = 311 ; free virtual = 1545
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2056.301 ; gain = 0.000 ; free physical = 311 ; free virtual = 1545
 WARNING: [Constraints 18-5210] No constraints selected for write.
 Resolution: This message can indicate that there are no constraints for the design, or it can indicate that the used_in flags are set such that the constraints are ignored. This later case is used when running synth_design to not write synthesis constraints to the resulting checkpoint. Instead, project constraints are read when the synthesized design is opened.
-INFO: [Common 17-1381] The checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.runs/design_1_enable_splitter_0_0_synth_1/design_1_enable_splitter_0_0.dcp' has been generated.
+INFO: [Common 17-1381] The checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/design_1_enable_splitter_0_0_synth_1/design_1_enable_splitter_0_0.dcp' has been generated.
 WARNING: [Common 17-576] 'use_project_ipc' is deprecated. This option is deprecated and no longer used.
-INFO: [Coretcl 2-1648] Added synthesis output to IP cache for IP design_1_enable_splitter_0_0, cache-ID = 4564b0acfa0f5ad0
-Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 2034.973 ; gain = 0.000 ; free physical = 328 ; free virtual = 1946
+INFO: [Coretcl 2-1648] Added synthesis output to IP cache for IP design_1_enable_splitter_0_0, cache-ID = 864c1d0232becc5e
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2056.301 ; gain = 0.000 ; free physical = 306 ; free virtual = 1547
 WARNING: [Constraints 18-5210] No constraints selected for write.
 Resolution: This message can indicate that there are no constraints for the design, or it can indicate that the used_in flags are set such that the constraints are ignored. This later case is used when running synth_design to not write synthesis constraints to the resulting checkpoint. Instead, project constraints are read when the synthesized design is opened.
-INFO: [Common 17-1381] The checkpoint '/home/vm/projects/simpleneutron/vivado/project_1/project_1.runs/design_1_enable_splitter_0_0_synth_1/design_1_enable_splitter_0_0.dcp' has been generated.
+INFO: [Common 17-1381] The checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/design_1_enable_splitter_0_0_synth_1/design_1_enable_splitter_0_0.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file design_1_enable_splitter_0_0_utilization_synth.rpt -pb design_1_enable_splitter_0_0_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Wed Dec 18 18:52:37 2019...
+INFO: [Common 17-206] Exiting Vivado at Fri Feb  7 00:18:34 2020...

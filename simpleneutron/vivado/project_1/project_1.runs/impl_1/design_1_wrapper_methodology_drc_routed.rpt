@@ -1,7 +1,7 @@
 Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2019.2.1 (lin64) Build 2729669 Thu Dec  5 04:48:12 MST 2019
-| Date         : Thu Jan 23 01:42:03 2020
+| Date         : Fri Feb  7 00:50:34 2020
 | Host         : vm-VirtualBox running 64-bit Ubuntu 18.04.3 LTS
 | Command      : report_methodology -file design_1_wrapper_methodology_drc_routed.rpt -pb design_1_wrapper_methodology_drc_routed.pb -rpx design_1_wrapper_methodology_drc_routed.rpx
 | Design       : design_1_wrapper
@@ -23,12 +23,12 @@ Table of Contents
           Floorplan: design_1
       Design limits: <entire design considered>
              Max violations: <unlimited>
-             Violations found: 28
+             Violations found: 30
 +-----------+----------+-------------------------------+------------+
 | Rule      | Severity | Description                   | Violations |
 +-----------+----------+-------------------------------+------------+
 | LUTAR-1   | Warning  | LUT drives async reset alert  | 3          |
-| TIMING-18 | Warning  | Missing input or output delay | 25         |
+| TIMING-18 | Warning  | Missing input or output delay | 27         |
 +-----------+----------+-------------------------------+------------+
 
 2. REPORT DETAILS
@@ -135,42 +135,52 @@ Related violations: <none>
 
 TIMING-18#18 Warning
 Missing input or output delay  
-An output delay is missing on leds_8bits1[0] relative to clock(s) clk_fpga_0
+An input delay is missing on trigger_input relative to clock(s) clk_fpga_0
 Related violations: <none>
 
 TIMING-18#19 Warning
 Missing input or output delay  
-An output delay is missing on leds_8bits1[1] relative to clock(s) clk_fpga_0
+An output delay is missing on leds_8bits1[0] relative to clock(s) clk_fpga_0
 Related violations: <none>
 
 TIMING-18#20 Warning
 Missing input or output delay  
-An output delay is missing on leds_8bits1[2] relative to clock(s) clk_fpga_0
+An output delay is missing on leds_8bits1[1] relative to clock(s) clk_fpga_0
 Related violations: <none>
 
 TIMING-18#21 Warning
 Missing input or output delay  
-An output delay is missing on leds_8bits1[3] relative to clock(s) clk_fpga_0
+An output delay is missing on leds_8bits1[2] relative to clock(s) clk_fpga_0
 Related violations: <none>
 
 TIMING-18#22 Warning
 Missing input or output delay  
-An output delay is missing on leds_8bits1[4] relative to clock(s) clk_fpga_0
+An output delay is missing on leds_8bits1[3] relative to clock(s) clk_fpga_0
 Related violations: <none>
 
 TIMING-18#23 Warning
 Missing input or output delay  
-An output delay is missing on leds_8bits1[5] relative to clock(s) clk_fpga_0
+An output delay is missing on leds_8bits1[4] relative to clock(s) clk_fpga_0
 Related violations: <none>
 
 TIMING-18#24 Warning
 Missing input or output delay  
-An output delay is missing on leds_8bits1[6] relative to clock(s) clk_fpga_0
+An output delay is missing on leds_8bits1[5] relative to clock(s) clk_fpga_0
 Related violations: <none>
 
 TIMING-18#25 Warning
 Missing input or output delay  
+An output delay is missing on leds_8bits1[6] relative to clock(s) clk_fpga_0
+Related violations: <none>
+
+TIMING-18#26 Warning
+Missing input or output delay  
 An output delay is missing on leds_8bits1[7] relative to clock(s) clk_fpga_0
+Related violations: <none>
+
+TIMING-18#27 Warning
+Missing input or output delay  
+An output delay is missing on trigger_out relative to clock(s) clk_fpga_0
 Related violations: <none>
 
 

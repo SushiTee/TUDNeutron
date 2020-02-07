@@ -1,11 +1,11 @@
 // Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2019.2.1 (lin64) Build 2729669 Thu Dec  5 04:48:12 MST 2019
-// Date        : Wed Dec 25 17:14:23 2019
+// Date        : Fri Feb  7 00:11:37 2020
 // Host        : vm-VirtualBox running 64-bit Ubuntu 18.04.3 LTS
-// Command     : write_verilog -force -mode synth_stub -rename_top design_1_axi_dma_0_6 -prefix
-//               design_1_axi_dma_0_6_ design_1_axi_dma_0_0_stub.v
-// Design      : design_1_axi_dma_0_0
+// Command     : write_verilog -force -mode synth_stub
+//               /home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_dma_0_6/design_1_axi_dma_0_6_stub.v
+// Design      : design_1_axi_dma_0_6
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7z020clg484-1
 // --------------------------------------------------------------------------------

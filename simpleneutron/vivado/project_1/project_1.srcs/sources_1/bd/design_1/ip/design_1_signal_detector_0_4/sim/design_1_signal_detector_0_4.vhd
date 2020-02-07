@@ -47,7 +47,7 @@
 -- DO NOT MODIFY THIS FILE.
 
 -- IP VLNV: akr.neutron:user:signal_detector:1.0
--- IP Revision: 4
+-- IP Revision: 5
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
@@ -60,6 +60,7 @@ ENTITY design_1_signal_detector_0_4 IS
     signal_state : OUT STD_LOGIC;
     fifo_reset : OUT STD_LOGIC;
     number_words : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+    trigger_input : IN STD_LOGIC;
     m00_axis_aclk : IN STD_LOGIC;
     m00_axis_aresetn : IN STD_LOGIC;
     m00_axis_tvalid : OUT STD_LOGIC;
@@ -84,6 +85,7 @@ ARCHITECTURE design_1_signal_detector_0_4_arch OF design_1_signal_detector_0_4 I
       signal_state : OUT STD_LOGIC;
       fifo_reset : OUT STD_LOGIC;
       number_words : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+      trigger_input : IN STD_LOGIC;
       m00_axis_aclk : IN STD_LOGIC;
       m00_axis_aresetn : IN STD_LOGIC;
       m00_axis_tvalid : OUT STD_LOGIC;
@@ -119,6 +121,7 @@ BEGIN
       signal_state => signal_state,
       fifo_reset => fifo_reset,
       number_words => number_words,
+      trigger_input => trigger_input,
       m00_axis_aclk => m00_axis_aclk,
       m00_axis_aresetn => m00_axis_aresetn,
       m00_axis_tvalid => m00_axis_tvalid,
