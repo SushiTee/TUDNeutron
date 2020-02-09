@@ -23,7 +23,7 @@ enum class MessageType : uint8_t {
     DMA7,
     START_DMA,
     STOP_DMA,
-    SET_PACKET_SIZE,
+    CONNECT,
 
     NONE // marks the last Type (is used to determine valid types)
 };
@@ -38,6 +38,7 @@ class Controller {
     std::vector<std::unique_ptr<simpleneutron::components::dma::Dma>> mDmas;
     std::unique_ptr<std::thread> mThread = nullptr;
     std::mutex mSendLock;
+    uint8_t mSwitchState = 0;
 
     bool receiveData();
     bool handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType type, size_t size);

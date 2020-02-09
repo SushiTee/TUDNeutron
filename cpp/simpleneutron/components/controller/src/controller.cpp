@@ -4,9 +4,13 @@
 #include <chrono>
 #include <cmath>
 #include <unistd.h>
+#include <bitset>
 #include <logger/logger.h>
 #include <gpio/wordlengthcontroller.h>
 #include <gpio/sensorcontroller.h>
+#include <gpio/switches.h>
+#include <gpio/testgenerator.h>
+#include <gpio/triggerinput.h>
 #include <controller/controller.h>
 
 namespace simpleneutron {
@@ -51,13 +55,14 @@ void Controller::run() {
         mSock = std::make_unique<kn::tcp_socket>(listenSock.accept());
         if (quit == true) {
             destroyThread();
+            deactivateAll();
             mSock->close();
-            mDmas.clear();
             mSock = nullptr;
             break;
         }
 
-        //mSock->get_bind_loc();
+        mSwitchState = gpio::Switches::getStatus();
+        LogOut << "Switch state: " << std::bitset<8>(mSwitchState) << std::endl;
 
         bool continueReceiving = true;
         // do this loop here since only one connection is allowed anyways
@@ -71,8 +76,9 @@ void Controller::run() {
             }
         }
 
+        destroyThread();
+        deactivateAll();
         mSock->close();
-        mDmas.clear();
         mSock = nullptr;
     }
 
@@ -154,7 +160,7 @@ bool Controller::sendDataImpl(const std::byte *header, const std::byte *data, si
             return false;
         }
     }
-    
+
     // send data
     {
         auto [size, valid] = mSock->send(data, dataLength);
@@ -238,6 +244,12 @@ bool Controller::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType type, siz
     case MessageType::START_DMA: {
         LogOut << "Handle DMA start " << std::endl;
 
+        if (size != 1) {
+            LogErr << "Received unexpected payload" << std::endl;
+            networkOK = sendData(type, "{\"status\":\"Error\",\"msg\":\"Received unexpected payload.\"}");
+            break;
+        } 
+
         uint8_t dmas = static_cast<uint8_t>(buff[0]);
         if (dmas == 0u) {
             LogErr << "Error no DMA should be activated" << std::endl;
@@ -256,7 +268,7 @@ bool Controller::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType type, siz
                     break;
                 }
 
-                auto dma = std::make_unique<simpleneutron::components::dma::Dma>(i, mMem);
+                auto dma = std::make_unique<dma::Dma>(i, mMem);
                 if (dma->hasError()) {
                     LogErr << "Error creating DMA object" << std::endl;
                     deactivateAll();
@@ -278,7 +290,18 @@ bool Controller::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType type, siz
         }
 
         if (!dmaStartFailed) {
-            simpleneutron::components::gpio::SensorController::activateSpecific(dmas);
+            // do busy wait until all Dmas are started
+            bool allDmaRunning = false;
+            while (!allDmaRunning) {
+                allDmaRunning = true;
+                for (auto &ref : mDmas) {
+                    if (!ref->isRunning()) {
+                        allDmaRunning = false;
+                        break;
+                    }
+                }
+            }
+            gpio::SensorController::activateSpecific(dmas);
             mThread = std::make_unique<std::thread>([this](){
                 sendDmaData();
             });
@@ -292,15 +315,65 @@ bool Controller::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType type, siz
         deactivateAll();
         networkOK = sendData(type, "{\"status\":\"OK\"}");
         break;
-    case MessageType::SET_PACKET_SIZE: {
-        uint8_t packageSizeExp = static_cast<uint8_t>(buff[0]);
-        if (packageSizeExp > 12) {
-            networkOK = sendData(type, "{\"status\":\"Error\",\"msg\":\"Value must be between 0 and 12\"}");
+    case MessageType::CONNECT: {
+        // stop everything
+        destroyThread();
+        deactivateAll();
+
+        // check payload size
+        if (size != 4) {
+            LogErr << "Received unexpected payload" << std::endl;
+            networkOK = sendData(type, "{\"status\":\"Error\",\"msg\":\"Received unexpected payload.\"}");
+            break;
+        } 
+
+        // setting package size
+        uint8_t value = static_cast<uint8_t>(buff[0]);
+        if (value > 12) {
+            networkOK = sendData(type, "{\"status\":\"Error\",\"msg\":\"Value for package size must be between 0 and 12\"}");
         } else {
-            LogOut << "Use packet size: " << static_cast<uint16_t>(std::pow(2, packageSizeExp)) << std::endl;
-            simpleneutron::components::gpio::WordLengthController::setWordLength(static_cast<uint16_t>(std::pow(2, packageSizeExp)));
-            networkOK = sendData(type, "{\"status\":\"OK\"}");
+            LogOut << "Use packet size: " << static_cast<uint16_t>(std::pow(2, value)) << std::endl;
+            gpio::WordLengthController::setWordLength(static_cast<uint16_t>(std::pow(2, value)));
         }
+
+        // setting test generator
+        value = static_cast<uint8_t>(buff[1]);
+        if (value & 1) {
+            gpio::TestGenerator::activate();
+        } else {
+            gpio::TestGenerator::deactivate();
+        }
+
+        // setting trigger input
+        value = static_cast<uint8_t>(buff[2]);
+        if (value & 1) {
+            gpio::TriggerInput::activate();
+        } else {
+            gpio::TriggerInput::deactivate();
+        }
+
+        // setting test generator signal count
+        gpio::TestGenerator::setSignalCount(static_cast<uint8_t>(buff[3]));
+
+        bool oneActive = false;
+        std::string switchState = "[";
+        for (auto i = 0; i < 8; i++) {
+            if (mSwitchState & (1 << i)) {
+                switchState += "true";
+                oneActive = true; 
+            } else {
+                switchState += "false"; 
+            }
+            if (i < 7) {
+                switchState += ',';
+            }
+        }
+        if (!oneActive) {
+            switchState = "false";
+        } else {
+            switchState += "]";
+        }
+        networkOK = sendData(type, "{\"status\":\"OK\",\"switchState\":" + switchState + "}"); // todo: fill with data
         break;
     }
     default:
@@ -332,7 +405,7 @@ bool Controller::dmaExists(uint8_t id) const {
 
 void Controller::deactivateAll() {
     mDmas.clear();
-    simpleneutron::components::gpio::SensorController::deactivateAll();
+    gpio::SensorController::deactivateAll();
 }
 
 void Controller::destroyThread() {
@@ -357,6 +430,7 @@ void Controller::destroyThread() {
     mThread->join();
 
     mThread = nullptr;
+
     threadQuit = false;
 }
 

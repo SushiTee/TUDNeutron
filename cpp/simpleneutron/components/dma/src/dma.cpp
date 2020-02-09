@@ -41,18 +41,21 @@ Dma::Dma(uint8_t id, int mem)
     if (mRegister == MAP_FAILED) {
         LogErr << "DMA (" << std::hex << REGISTER_BASE << "): could not map register" << std::endl;
         mHasError = true;
+        return;
     }
 
     mMemoryMap = (uint32_t *)mmap(NULL, 0x2000000, PROT_READ | PROT_WRITE, MAP_SHARED, mem, MEMORY_BASE);
     if (mMemoryMap == MAP_FAILED) {
         LogErr << "DMA (" << std::hex << REGISTER_BASE << "): could not map memory map" << std::endl;
         mHasError = true;
+        return;
     }
 
     mUio = open(DMAS[id].mUioDevice, O_RDWR);
     if (mUio < 0) {
         LogErr << "DMA (" << std::hex << REGISTER_BASE << "): could not open UIO Device" << std::endl;
         mHasError = true;
+        return;
     }
 }
 
@@ -64,9 +67,7 @@ Dma::~Dma() {
         }
     }
 
-    if (mEnabled) {
-        disable();
-    }
+    disable();
 }
 
 uint32_t Dma::writeToReadPointerDifference() {
@@ -131,24 +132,31 @@ void Dma::enable() {
         return;
     }
 
+    mEnabled = true;
     mThread = std::make_unique<std::thread>([this](){
         reset();
+        enableInterrupt();
         if (hasStatusError()) {
             LogOut << "DMA (" << std::hex << REGISTER_BASE << "): Status error" << std::endl;
+            return;
         }
         registerEnable();
         if (hasStatusError()) {
             LogOut << "DMA (" << std::hex << REGISTER_BASE << "): Status error" << std::endl;
+            return;
         }
         setDestinationAddress(mWriteAddress);
         if (hasStatusError()) {
             LogOut << "DMA (" << std::hex << REGISTER_BASE << "): Status error" << std::endl;
+            return;
         }
         setWordLength(mWordLength);
         if (hasStatusError()) {
             LogOut << "DMA (" << std::hex << REGISTER_BASE << "): Status error" << std::endl;
+            return;
         }
-        enableInterrupt();
+
+        mRunning = true;
 
         while(!mQuit) {
             waitForData();
@@ -173,10 +181,10 @@ void Dma::enable() {
             }
         }
 
+        mRunning = false;
+
         LogOut << "DMA (" << std::hex << REGISTER_BASE << ") Thraed terminated!" << std::endl;
     });
-
-    mEnabled = true;
 }
 
 void Dma::disable() {
@@ -274,6 +282,10 @@ bool Dma::hasStatusError(uint32_t status) {
 
 bool Dma::hasError() const {
     return mHasError;
+}
+
+bool Dma::isRunning() const {
+    return mRunning;
 }
 
 void Dma::setQuit(bool quit) {

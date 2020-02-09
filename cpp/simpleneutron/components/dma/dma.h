@@ -41,7 +41,8 @@ class Dma {
     std::atomic<uint32_t> mWriteAddress = 0;
 
     bool mHasError = false;
-    bool mEnabled = false;
+    std::atomic<bool> mEnabled = false;
+    std::atomic<bool> mRunning = false;
 
     std::unique_ptr<std::thread> mThread = nullptr;
 
@@ -76,6 +77,7 @@ public:
     bool hasStatusError();
     bool hasStatusError(uint32_t status);
     bool hasError() const;
+    bool isRunning() const;
 
     uint32_t *memoryMap() const;
     uint32_t writeSize() const;

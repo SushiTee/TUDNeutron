@@ -8,6 +8,9 @@
 #include <hwdevice/hwdevice.h>
 #include <gpio/sensorcontroller.h>
 #include <gpio/wordlengthcontroller.h>
+#include <gpio/switches.h>
+#include <gpio/triggerinput.h>
+#include <gpio/testgenerator.h>
 
 int main(int argc, char *argv[]) {
    int mem = open("/dev/mem", O_RDWR | O_SYNC);
@@ -25,7 +28,25 @@ int main(int argc, char *argv[]) {
 
    simpleneutron::components::gpio::WordLengthController::init(GPIO_1, mem);
    if (simpleneutron::components::gpio::WordLengthController::hasError()) {
-      LogErr << "Error creating Sensors Gpio object" << std::endl;
+      LogErr << "Error creating WordLength Gpio object" << std::endl;
+      return 1;
+   }
+
+   simpleneutron::components::gpio::Switches::init(GPIO_2, mem);
+   if (simpleneutron::components::gpio::SensorController::hasError()) {
+      LogErr << "Error creating Switches Gpio object" << std::endl;
+      return 1;
+   }
+
+   simpleneutron::components::gpio::TestGenerator::init(GPIO_3, mem);
+   if (simpleneutron::components::gpio::TestGenerator::hasError()) {
+      LogErr << "Error creating TestGenerator Gpio object" << std::endl;
+      return 1;
+   }
+
+   simpleneutron::components::gpio::TriggerInput::init(GPIO_4, mem);
+   if (simpleneutron::components::gpio::TriggerInput::hasError()) {
+      LogErr << "Error creating TriggerInput Gpio object" << std::endl;
       return 1;
    }
 
