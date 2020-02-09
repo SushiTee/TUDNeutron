@@ -19,22 +19,40 @@ Page {
     }
 
     onGoBack: {
-        NetworkController.disconnect();
+        NetworkController.networkDisconnect();
+    }
+
+    function getActiveSensors() {
+        for (let i = 0; i < NetworkController.sensors.length; i++) {
+            if (NetworkController.sensors[i] === true) {
+                listModel.append({num: i, name: `Sensor ${i+1}`, selected: false, count: 0});
+            }
+        }
+    }
+
+    function setSensorData(sensorData) {
+        console.info("Sensordata:", sensorData);
+        for (let i = 0; i < sensorData.length; i++) {
+            for (let j = 0; j < listModel.count; j++) {
+                if (listModel.get(j).num === i) {
+                    listModel.get(j).count = parseInt(sensorData[i]);
+                    break;
+                }
+            }
+        }
     }
 
     BusyIndicator {
         id: busyIndicator
         anchors.centerIn: parent
-        running: NetworkController.connected !== MessageType.CONNECTED || !NetworkController.packageSizeTransmitted
+        running: NetworkController.connected !== MessageType.CONNECTED
         visible: running
     }
 
     ListModel {
         id: listModel
         Component.onCompleted: {
-            for (let i = 0; i < 8; i++) {
-                listModel.append({name: `Sensor ${i+1}`, selected: false, count: 0});
-            }
+            getActiveSensors();
         }
     }
 
@@ -42,10 +60,15 @@ Page {
         target: NetworkController
 
         onSensorResult: { // list sensorData
-            console.info("Sensordata:", sensorData);
-            for (let i = 0; i < listModel.count; i++) {
-                listModel.get(i).count = parseInt(sensorData[i]);
+            setSensorData(sensorData);
+        }
+
+        onSensorsChanged: { // list sensors
+            if (listModel.count > 0) {
+                listModel.clear();
             }
+
+            getActiveSensors()
         }
     }
 
@@ -86,6 +109,7 @@ Page {
                     anchors.top: parent.top
                     checked: model.selected
                     text: model.name
+                    enabled: !NetworkController.sensorsActive
 
                     onCheckedChanged: {
                         model.selected = checked;
@@ -128,11 +152,18 @@ Page {
                     if (!NetworkController.sensorsActive) {
                         let list = Array(8).fill(false);
                         for (let i = 0; i < list.length; i++) {
-                            list[i] = listModel.get(i).selected;
+                            list[i] = false;
+                            for (let j = 0; j < listModel.count; j++) {
+                                if (listModel.get(j).num === i && listModel.get(j).selected) {
+                                    list[i] = listModel.get(j).selected;
+                                    break;
+                                }
+                            }
                         }
                         NetworkController.activateSensors(list);
                     } else {
                         NetworkController.deactivateSensors();
+                        setSensorData(NetworkController.getSensorData());
                     }
                 }
             }
@@ -142,6 +173,6 @@ Page {
     Component.onCompleted: {
         NetworkController.host = DB.getHost();
         NetworkController.port = DB.getPort();
-        NetworkController.connect();
+        NetworkController.networkConnect();
     }
 }

@@ -12,6 +12,12 @@ function dbInit() {
     } catch (err) {
         console.log("Error creating table in database: " + err);
     };
+    SN.NetworkController.packageSize = parseInt(getPackageSize());
+    SN.NetworkController.host = getHost();
+    SN.NetworkController.port = parseInt(getPort());
+    SN.NetworkController.testGenerator = getTestGenerator();
+    SN.NetworkController.inputTrigger = getInputTrigger();
+    SN.NetworkController.testSignalCount = getTestSignalCount();
 }
 
 function dbGetHandle() {
@@ -85,4 +91,37 @@ function getPackageSize() {
 function setPackageSize(packageSize) {
     setSettingsValue('packageSize', packageSize);
     SN.NetworkController.packageSize = parseInt(packageSize); // set in network controller too
+}
+
+function getTestGenerator() {
+    let result = readSettingsValue('testGenerator') === "true";
+    if (!result) result = false; // default
+    return result;
+}
+
+function setTestGenerator(testGenerator) {
+    setSettingsValue('testGenerator', testGenerator.toString());
+    SN.NetworkController.testGenerator = testGenerator; // set in network controller too
+}
+
+function getInputTrigger() {
+    let result = readSettingsValue('inputTrigger') === "true";
+    if (!result) result = false; // default
+    return result;
+}
+
+function setInputTrigger(inputTrigger) {
+    setSettingsValue('inputTrigger', inputTrigger.toString());
+    SN.NetworkController.inputTrigger = inputTrigger; // set in network controller too
+}
+
+function getTestSignalCount() {
+    let result = readSettingsValue('testSignalCount');
+    if (!result) result = '1'; // default
+    return result;
+}
+
+function setTestSignalCount(testSignalCount) {
+    setSettingsValue('testSignalCount', testSignalCount);
+    SN.NetworkController.testSignalCount = parseInt(testSignalCount);
 }

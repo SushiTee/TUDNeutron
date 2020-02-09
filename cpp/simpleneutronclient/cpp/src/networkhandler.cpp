@@ -14,9 +14,14 @@ union payloadSizeConverter {
 };
 
 NetworkHandler::NetworkHandler(NetworkController *parent)
-    : m_controller(parent), m_packageSizeIndex(static_cast<uint8_t>(parent->packageSize())), m_packageSize(static_cast<uint16_t>(std::pow(2, parent->packageSize()))), m_sensorDataCount(8)
+    : m_controller(parent),
+      m_packageSizeIndex(static_cast<uint8_t>(parent->packageSize())),
+      m_packageSize(static_cast<uint16_t>(std::pow(2, parent->packageSize()))),
+      m_inputTrigger(parent->inputTrigger() ? 1u : 0u),
+      m_testGenerator(parent->testGenerator() ? 1u : 0u),
+      m_testSignalCount(static_cast<uint8_t>(parent->testSignalCount())),
+      m_sensorDataCount(8)
 {
-
 }
 
 NetworkHandler::~NetworkHandler()
@@ -25,6 +30,7 @@ NetworkHandler::~NetworkHandler()
         m_receiveThread->join();
         m_receiveThread = nullptr;
     }
+    m_stream.close();
 }
 
 void NetworkHandler::quit()
@@ -35,17 +41,18 @@ void NetworkHandler::quit()
     }
 }
 
-void NetworkHandler::connect(QString host, int port)
+void NetworkHandler::networkConnect(QString host, int port)
 {
     try {
         m_sock = std::make_unique<kn::tcp_socket>(kn::endpoint(host.toStdString(), static_cast<kn::port_t>(port)));
     } catch (const std::exception& e) {
         qDebug() << "Error creating socket:" << QString::fromStdString(e.what());
-        QMetaObject::invokeMethod(m_controller, "connected", Q_ARG(bool, false));
+        QMetaObject::invokeMethod(m_controller, "connected", Q_ARG(bool, false), Q_ARG(QJsonDocument, QJsonDocument()));
         return;
     }
 
     if (m_sock->connect()) {
+        m_stream.open("file.bin", std::ios::out | std::ios::binary);
         m_receiveThread = std::make_unique<std::thread>([this](){
             bool continueReceiving = true;
             while (!m_quit && continueReceiving) {
@@ -61,13 +68,18 @@ void NetworkHandler::connect(QString host, int port)
             if (!m_quit) {
                 QMetaObject::invokeMethod(m_controller, "closedConnection");
             }
+            m_stream.flush();
+            m_stream.close();
         });
-        QMetaObject::invokeMethod(m_controller, "connected", Q_ARG(bool, true));
-        // setting package size on connection!
-        sendData(MessageType::Message::SET_PACKET_SIZE, m_packageSizeIndex);
-        sendData(MessageType::Message::STOP_DMA, m_packageSizeIndex);
+        // setting settings on connection! Order is important!
+        kn::buffer<4> buff;
+        buff[0] = static_cast<std::byte>(m_packageSizeIndex);
+        buff[1] = static_cast<std::byte>(m_testGenerator);
+        buff[2] = static_cast<std::byte>(m_inputTrigger);
+        buff[3] = static_cast<std::byte>(m_testSignalCount);
+        sendData(MessageType::Message::CONNECT, buff.data(), buff.size());
     } else {
-        QMetaObject::invokeMethod(m_controller, "connected", Q_ARG(bool, false));
+        QMetaObject::invokeMethod(m_controller, "connected", Q_ARG(bool, false), Q_ARG(QJsonDocument, QJsonDocument()));
     }
 }
 
@@ -179,6 +191,21 @@ void NetworkHandler::sendData(MessageType::Message type, QString data) const
     sendData(reinterpret_cast<const std::byte*>(message.data()), reinterpret_cast<const std::byte*>(data.data_ptr()), dataLength);
 }
 
+void NetworkHandler::sendData(MessageType::Message type, const std::byte* data, size_t length) const
+{
+    // buffer
+    std::array<uint8_t, PACKAGE_HEADER_SIZE> message;
+
+    // write header
+    payloadSizeConverter conv;
+    conv.num = static_cast<uint16_t>(length);
+    message[0] = static_cast<uint8_t>(type);
+    message[1] = conv.bytes[0];
+    message[2] = conv.bytes[1];
+
+    sendData(reinterpret_cast<const std::byte*>(message.data()), data, length);
+}
+
 void NetworkHandler::sendData(MessageType::Message type, uint8_t value) const
 {
     // buffer
@@ -194,9 +221,22 @@ void NetworkHandler::sendData(MessageType::Message type, uint8_t value) const
     sendData(reinterpret_cast<const std::byte*>(message.data()), reinterpret_cast<const std::byte*>(&value), 1);
 }
 
+QVector<uint64_t> NetworkHandler::getSensorData()
+{
+    return m_sensorDataCount;
+}
+
 void NetworkHandler::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType::Message type, size_t size)
 {
     static QElapsedTimer timer;
+    if (!timer.isValid()) {
+        timer.start();
+        QMetaObject::invokeMethod(m_controller, "sensorResult", Q_ARG(QVector<uint64_t>, m_sensorDataCount));
+    } else {
+        if (timer.elapsed() > 1000) {
+            timer.invalidate();
+        }
+    }
     switch (type)
     {
     case MessageType::Message::DMA0:
@@ -212,19 +252,11 @@ void NetworkHandler::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType::Mess
         }
         uint64_t dataSize = size * m_packageSize;
         m_sensorDataCount[static_cast<int>(type)] += dataSize;
-        if (!timer.isValid()) {
-            timer.start();
-            QMetaObject::invokeMethod(m_controller, "sensorResult", Q_ARG(QVector<uint64_t>, m_sensorDataCount));
-        } else {
-            if (timer.elapsed() > 1000) {
-                timer.invalidate();
-            }
-        }
+        m_stream.write(reinterpret_cast<const char*>(buff.data()), static_cast<std::streamsize>(dataSize * 4));
         break;
     }
     case MessageType::Message::START_DMA:
-    case MessageType::Message::STOP_DMA:
-    case MessageType::Message::SET_PACKET_SIZE: {
+    case MessageType::Message::STOP_DMA: {
         QJsonDocument doc = QJsonDocument::fromJson(QByteArray::fromRawData(reinterpret_cast<const char *>(buff.data()), static_cast<int>(size)));
         if (!doc.isNull()) {
             QString status = doc["status"].toString();
@@ -240,6 +272,24 @@ void NetworkHandler::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType::Mess
             }
         }
         QMetaObject::invokeMethod(m_controller, "messageResult", Q_ARG(MessageType::Message, type), Q_ARG(bool, false), Q_ARG(QString, "Unexpected message from server"));
+        break;
+    }
+    case MessageType::Message::CONNECT: {
+        QJsonDocument doc = QJsonDocument::fromJson(QByteArray::fromRawData(reinterpret_cast<const char *>(buff.data()), static_cast<int>(size)));
+        if (!doc.isNull()) {
+            QString status = doc["status"].toString();
+            if (status == "OK") {
+                QMetaObject::invokeMethod(m_controller, "connected", Q_ARG(bool, true), Q_ARG(QJsonDocument, doc));
+                return;
+            } else {
+                QString message = doc["msg"].toString();
+                if (!message.isNull()) {
+                    QMetaObject::invokeMethod(m_controller, "connected", Q_ARG(MessageType::Message, type), Q_ARG(bool, false), Q_ARG(QJsonDocument, doc));
+                    return;
+                }
+            }
+        }
+        QMetaObject::invokeMethod(m_controller, "connected", Q_ARG(MessageType::Message, type), Q_ARG(bool, false), Q_ARG(QJsonDocument, doc));
         break;
     }
     case MessageType::Message::NONE:

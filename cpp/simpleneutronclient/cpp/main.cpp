@@ -1,6 +1,8 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <external/networking/kissnet.hpp>
+#include <QDir>
+#include <QStandardPaths>
 #include <messagetype.h>
 #include <networkcontroller.h>
 
@@ -51,6 +53,8 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QGuiApplication app(argc, argv);
+
+    QDir::setCurrent(QStandardPaths::writableLocation(QStandardPaths::DownloadLocation));
 
     QQmlApplicationEngine engine;
     MessageType::declareQML();

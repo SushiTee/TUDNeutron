@@ -1,8 +1,8 @@
 #include <QDebug>
 #include <QThread>
+#include <QJsonArray>
 #include <networkhandler.h>
 #include <networkcontroller.h>
-
 
 NetworkController::~NetworkController()
 {
@@ -16,20 +16,53 @@ NetworkController::~NetworkController()
 
 NetworkController::NetworkController(QString host, int port, QObject *parent) : QObject(parent), m_host(host), m_port(port)
 {
-    QObject::connect(this, &NetworkController::connected, this, [this](bool success){
-        if (success) {
-            setConnected(MessageType::ConnectedState::CONNECTED);
-        } else if (getConnected() != MessageType::ConnectedState::DISCONNECTED){
+    QObject::connect(this, &NetworkController::connected, this, [this](bool success, QJsonDocument doc){
+        auto failed = [this](QString message) {
             setConnected(MessageType::ConnectedState::FAILED);
+            emit networkDataError("Could not connect to Zedboard (" + message + ")");
+            networkDisconnect();
+        };
+
+        if (success) {
+            QJsonValue::Type type = doc["switchState"].type();
+            if (type == QJsonValue::Array) {
+                QJsonArray switches = doc["switchState"].toArray();
+                bool oneEnabled = false;
+                for (auto val : switches) {
+                    if (val.isBool() && val.toBool()) {
+                        oneEnabled = true;
+                        break;
+                    }
+                }
+                if (!oneEnabled) {
+                    failed("All sensors turned off by switch");
+                } else {
+                    setSensors(switches.toVariantList());
+                    setConnected(MessageType::ConnectedState::CONNECTED);
+                }
+            } else if (type != QJsonValue::Undefined) {
+                failed("All sensors turned off by switch");
+            } else {
+                failed("Available sensors not received");
+            }
+        } else if (getConnected() != MessageType::ConnectedState::DISCONNECTED){
+            QString message = doc["msg"].toString();
+            if (!message.isNull()) {
+                failed(message);
+            } else {
+                failed("Not reachable");
+            }
         }
     });
     QObject::connect(this, &NetworkController::closedConnection, this, [this](){
+        qDebug() << "huh?";
         setConnected(MessageType::ConnectedState::FAILED);
-        this->disconnect();
+        networkDisconnect();
     });
     QObject::connect(this, &NetworkController::sendDataFailed, this, [this](){
+        qDebug() << "huh?2";
         setConnected(MessageType::ConnectedState::FAILED);
-        this->disconnect();
+        networkDisconnect();
     });
     QObject::connect(this, &NetworkController::messageResult, this, [this](MessageType::Message type, bool success, QString message){
         switch (type) {
@@ -38,7 +71,7 @@ NetworkController::NetworkController(QString host, int port, QObject *parent) : 
                 setSensorsActive(true);
             } else {
                 emit networkDataError("Could not activate sensors on Zedboard (" + message + ")");
-                this->disconnect();
+                networkDisconnect();
             }
             break;
         }
@@ -47,16 +80,7 @@ NetworkController::NetworkController(QString host, int port, QObject *parent) : 
                 setSensorsActive(false);
             } else {
                 emit networkDataError("Could not deactivate sensors on Zedboard (" + message + ")");
-                this->disconnect();
-            }
-            break;
-        }
-        case MessageType::Message::SET_PACKET_SIZE: {
-            if (success) {
-                setPackageSizeTransmitted(true);
-            } else {
-                emit networkDataError("Could not set package size on Zedboard (" + message + ")");
-                this->disconnect();
+                networkDisconnect();
             }
             break;
         }
@@ -107,18 +131,55 @@ void NetworkController::setPackageSize(int packageSize)
     emit packageSizeChanged(m_packageSize);
 }
 
-bool NetworkController::packageSizeTransmitted() const
+int NetworkController::testGenerator() const
 {
-    return m_packageSizeTransmitted;
+    return m_testGenerator;
 }
 
-void NetworkController::setPackageSizeTransmitted(bool packageSizeTransmitted)
+void NetworkController::setTestGenerator(int testGenerator)
 {
-    if (m_packageSizeTransmitted == packageSizeTransmitted)
+    if (m_testGenerator == testGenerator)
         return;
 
-    m_packageSizeTransmitted = packageSizeTransmitted;
-    emit packageSizeTransmittedChanged(m_packageSizeTransmitted);
+    m_testGenerator = testGenerator;
+    emit testGeneratorChanged(m_testGenerator);
+}
+
+int NetworkController::inputTrigger() const
+{
+    return m_inputTrigger;
+}
+
+void NetworkController::setInputTrigger(int inputTrigger)
+{
+    if (m_inputTrigger == inputTrigger)
+        return;
+
+    m_inputTrigger = inputTrigger;
+    emit inputTriggerChanged(m_inputTrigger);
+}
+
+int NetworkController::testSignalCount() const
+{
+    return m_testSignalCount;
+}
+
+void NetworkController::setTestSignalCount(int testSignalCount)
+{
+    if (m_testSignalCount == testSignalCount)
+        return;
+
+    m_testSignalCount = testSignalCount;
+    emit testSignalCountChanged(m_testSignalCount);
+}
+
+void NetworkController::setSensors(QVariantList sensors)
+{
+    if (m_sensors == sensors)
+        return;
+
+    m_sensors = sensors;
+    emit sensorsChanged(m_sensors);
 }
 
 bool NetworkController::sensorsActive() const
@@ -164,7 +225,7 @@ void NetworkController::setConnected(MessageType::ConnectedState connected)
     emit connectedChanged(m_connected);
 }
 
-void NetworkController::connect()
+void NetworkController::networkConnect()
 {
     if (getConnected() == MessageType::ConnectedState::CONNECTED || getConnected() == MessageType::ConnectedState::CONNECTING) return;
 
@@ -174,14 +235,14 @@ void NetworkController::connect()
     m_thread = std::make_unique<QThread>();
     m_handler->moveToThread(m_thread.get());
     m_thread->start();
-    QMetaObject::invokeMethod(m_handler.get(), "connect", Q_ARG(QString, host()), Q_ARG(int, port()));
+    QMetaObject::invokeMethod(m_handler.get(), "networkConnect", Q_ARG(QString, host()), Q_ARG(int, port()));
 }
 
-void NetworkController::disconnect()
+void NetworkController::networkDisconnect()
 {
     if (getConnected() == MessageType::ConnectedState::DISCONNECTED) return;
 
-    setPackageSizeTransmitted(false);
+    setSensors(QVariantList());
     setSensorsActive(false);
     if (m_thread != nullptr) {
         m_handler->quit();
@@ -206,4 +267,14 @@ void NetworkController::activateSensors(QList<bool> list)
 void NetworkController::deactivateSensors()
 {
     QMetaObject::invokeMethod(m_handler.get(), "sendData", Q_ARG(MessageType::Message, MessageType::Message::STOP_DMA), Q_ARG(uint8_t, 0));
+}
+
+QVariantList NetworkController::sensors()
+{
+    return m_sensors;
+}
+
+QVector<uint64_t> NetworkController::getSensorData()
+{
+    return m_handler->getSensorData();
 }

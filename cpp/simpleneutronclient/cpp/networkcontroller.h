@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QThread>
 #include <QQmlEngine>
+#include <QJsonDocument>
+#include <QVariantList>
 #include <external/networking/kissnet.hpp>
 #include <messagetype.h>
 #include <networkhandler.h>
@@ -25,20 +27,29 @@ public:
     static QObject *getInstanceImpl(QString host = "zedboard", int port = 22222, QObject *parent = nullptr);
 
     int packageSize() const;
+    int testGenerator() const;
+    int inputTrigger() const;
+    int testSignalCount() const;
 
 private:
     Q_PROPERTY(int port READ port WRITE setPort NOTIFY portChanged)
     Q_PROPERTY(QString host READ host WRITE setHost NOTIFY hostChanged)
     Q_PROPERTY(MessageType::ConnectedState connected READ getConnected NOTIFY connectedChanged)
     Q_PROPERTY(int packageSize READ packageSize WRITE setPackageSize NOTIFY packageSizeChanged)
-    Q_PROPERTY(bool packageSizeTransmitted READ packageSizeTransmitted NOTIFY packageSizeTransmittedChanged)
     Q_PROPERTY(bool sensorsActive READ sensorsActive NOTIFY sensorsActiveChanged)
+    Q_PROPERTY(int testGenerator READ testGenerator WRITE setTestGenerator NOTIFY testGeneratorChanged)
+    Q_PROPERTY(int inputTrigger READ inputTrigger WRITE setInputTrigger NOTIFY inputTriggerChanged)
+    Q_PROPERTY(int testSignalCount READ testSignalCount WRITE setTestSignalCount NOTIFY testSignalCountChanged)
+    Q_PROPERTY(QVariantList sensors READ sensors NOTIFY sensorsChanged)
 
     QString m_host = "zedboard";
     int m_port = 22222;
     int m_packageSize = 4; // 2^m_PackageSize | e.g. 2^4 => 16 | between 1 and 12
-    bool m_packageSizeTransmitted = false;
     bool m_sensorsActive = false;
+    int m_testGenerator = false;
+    int m_inputTrigger = false;
+    int m_testSignalCount = 1;
+    QVariantList m_sensors = {};
     MessageType::ConnectedState m_connected = MessageType::ConnectedState::DISCONNECTED;
 
     int port() const;
@@ -46,10 +57,12 @@ private:
     QString host() const;
     void setHost(QString host);
     void setPackageSize(int packageSize);
-    bool packageSizeTransmitted() const;
-    void setPackageSizeTransmitted(bool packageSizeTransmitted);
+    void setTestGenerator(int testGenerator);
+    void setInputTrigger(int inputTrigger);
+    void setTestSignalCount(int testSignalCount);
+    void setSensors(QVariantList sensors);
     bool sensorsActive() const;
-    void setSensorsActive(bool packageSizeTransmitted);
+    void setSensorsActive(bool sensorsActive);
     MessageType::ConnectedState getConnected();
     void setConnected(MessageType::ConnectedState connected);
 
@@ -57,10 +70,12 @@ private:
     std::unique_ptr<QThread> m_thread = nullptr;
 
 public slots:
-    void connect();
-    void disconnect();
+    void networkConnect();
+    void networkDisconnect();
     void activateSensors(QList<bool> list);
     void deactivateSensors();
+    QVariantList sensors();
+    QVector<uint64_t> getSensorData();
 
 signals:
     void hostChanged(QString host);
@@ -71,12 +86,15 @@ signals:
     void networkDataError(QString message);
 
     // signals called from handler
-    void connected(bool success);
+    void connected(bool success, QJsonDocument doc);
     void closedConnection();
     void packageSizeChanged(int packageSize);
-    void packageSizeTransmittedChanged(bool packageSizeTransmitted);
+    void sensorsChanged(QVariantList sensors);
     void sensorsActiveChanged(bool sensorsActive);
     void sendDataFailed();
     void messageResult(MessageType::Message type, bool success, QString message);
     void sensorResult(QVector<uint64_t> sensorData);
+    void testGeneratorChanged(int testGenerator);
+    void inputTriggerChanged(int inputTrigger);
+    void testSignalCountChanged(int testSignalCount);
 };

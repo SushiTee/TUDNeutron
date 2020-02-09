@@ -19,11 +19,13 @@ INCLUDEPATH += \
 SOURCES += \
         "$$PWD/cpp/src/networkcontroller.cpp" \
         "$$PWD/cpp/src/networkhandler.cpp" \
+        "$$PWD/cpp/src/messagetype.cpp" \
         "$$PWD/cpp/main.cpp"
 
 HEADERS += \
         "$$PWD/cpp/networkcontroller.h" \
         "$$PWD/cpp/networkhandler.h" \
+        "$$PWD/cpp/messagetype.h" \
         cpp/messagetype.h
 
 RESOURCES += "$$PWD/qml/qml.qrc" \

@@ -103,10 +103,5 @@ ApplicationWindow {
 
     Component.onCompleted: {
         DB.dbInit();
-
-        // load relevant data from db
-        NetworkController.packageSize = parseInt(DB.getPackageSize());
-        NetworkController.host = DB.getHost();
-        NetworkController.port = parseInt(DB.getPort());
     }
 }

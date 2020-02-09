@@ -19,7 +19,7 @@ public:
         DMA7,
         START_DMA,
         STOP_DMA,
-        SET_PACKET_SIZE,
+        CONNECT,
 
         NONE // marks the last Type (is used to determine valid types)
     };
@@ -33,10 +33,7 @@ public:
     };
     Q_ENUM(ConnectedState)
 
-    // Do not forget to declare your class to the QML system.
-    static void declareQML() {
-        qmlRegisterType<MessageType>("SimpleNeutron.MessageType", 1, 0, "MessageType");
-    }
+    static void declareQML();
 };
 
 Q_DECLARE_METATYPE(uint8_t)
