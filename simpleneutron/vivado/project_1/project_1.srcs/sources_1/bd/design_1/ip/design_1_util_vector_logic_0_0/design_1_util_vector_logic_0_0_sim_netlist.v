@@ -1,10 +1,10 @@
 // Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2019.2.1 (lin64) Build 2729669 Thu Dec  5 04:48:12 MST 2019
-// Date        : Fri Feb  7 00:22:53 2020
+// Date        : Fri Feb  7 00:22:52 2020
 // Host        : vm-VirtualBox running 64-bit Ubuntu 18.04.3 LTS
-// Command     : write_verilog -force -mode funcsim
-//               /home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_util_vector_logic_0_0/design_1_util_vector_logic_0_0_sim_netlist.v
+// Command     : write_verilog -force -mode funcsim -rename_top design_1_util_vector_logic_0_0 -prefix
+//               design_1_util_vector_logic_0_0_ design_1_util_vector_logic_0_0_sim_netlist.v
 // Design      : design_1_util_vector_logic_0_0
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.

@@ -18,7 +18,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>c41e8e1e</spirit:value>
+            <spirit:value>9ff2b9b4</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -34,7 +34,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>c41e8e1e</spirit:value>
+            <spirit:value>9ff2b9b4</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -193,7 +193,7 @@
       <spirit:file>
         <spirit:name>hdl/or_v1_0.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_c41e8e1e</spirit:userFileType>
+        <spirit:userFileType>CHECKSUM_9ff2b9b4</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
@@ -236,8 +236,8 @@
         <xilinx:taxonomy>AXI_Peripheral</xilinx:taxonomy>
       </xilinx:taxonomies>
       <xilinx:displayName>or_v1.0</xilinx:displayName>
-      <xilinx:coreRevision>2</xilinx:coreRevision>
-      <xilinx:coreCreationDateTime>2020-02-06T22:00:46Z</xilinx:coreCreationDateTime>
+      <xilinx:coreRevision>3</xilinx:coreRevision>
+      <xilinx:coreCreationDateTime>2020-02-08T15:06:30Z</xilinx:coreCreationDateTime>
       <xilinx:tags>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@7437d7f8_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/or_1.0</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@2bf34adc_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/or_1.0</xilinx:tag>
@@ -255,11 +255,21 @@
         <xilinx:tag xilinx:name="ui.data.coregen.dd@7d0e964e_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/or_1.0</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@7bb9edc7_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/or_1.0</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@668db13_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/or_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@600dd39a_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/or_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2810430_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/or_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@60715486_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/or_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@296a4f09_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/or_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@30a9f39f_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/or_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3d92ca1a_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/or_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@19e50f72_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/or_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@22434ddf_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/or_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6f2917bf_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/or_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7d9e50f2_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/or_1.0</xilinx:tag>
       </xilinx:tags>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2019.2.1</xilinx:xilinxVersion>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="a5ab08d2"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="f75dd63a"/>
       <xilinx:checksum xilinx:scope="ports" xilinx:value="75529bde"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="e062eddf"/>
     </xilinx:packagingInfo>

@@ -2,8 +2,8 @@
 # Vivado v2019.2.1 (64-bit)
 # SW Build 2729669 on Thu Dec  5 04:48:12 MST 2019
 # IP Build 2729494 on Thu Dec  5 07:38:25 MST 2019
-# Start of session at: Fri Feb  7 00:35:17 2020
-# Process ID: 1438
+# Start of session at: Sun Feb  9 20:29:54 2020
+# Process ID: 3713
 # Current directory: /home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1
 # Command line: vivado -log design_1_wrapper.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source design_1_wrapper.tcl
 # Log file: /home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/design_1_wrapper.vds
@@ -13,209 +13,219 @@ source design_1_wrapper.tcl -notrace
 INFO: [IP_Flow 19-234] Refreshing IP repositories
 INFO: [IP_Flow 19-1700] Loaded user IP repository '/home/vm/projects/TUDNeutron/ipcores/ip_repo'.
 INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/home/vm/tools/Xilinx/Vivado/2019.2/data/ip'.
-add_files: Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 1471.656 ; gain = 0.000 ; free physical = 1574 ; free virtual = 2861
+add_files: Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 1471.660 ; gain = 0.000 ; free physical = 718 ; free virtual = 3538
 Command: synth_design -top design_1_wrapper -part xc7z020clg484-1
 Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
 INFO: [Device 21-403] Loading part xc7z020clg484-1
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 1548 
+INFO: Helper process launched with PID 3762 
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:09 ; elapsed = 00:00:11 . Memory (MB): peak = 1911.938 ; gain = 203.715 ; free physical = 1032 ; free virtual = 2323
+Starting RTL Elaboration : Time (s): cpu = 00:00:09 ; elapsed = 00:00:11 . Memory (MB): peak = 1917.973 ; gain = 202.715 ; free physical = 174 ; free virtual = 2994
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'design_1_wrapper' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/hdl/design_1_wrapper.v:12]
 INFO: [Synth 8-6157] synthesizing module 'design_1' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:13]
-INFO: [Synth 8-6157] synthesizing module 'design_1_axi_dma_0_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axi_dma_0_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_axi_dma_0_0' (1#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axi_dma_0_0_stub.v:6]
-WARNING: [Synth 8-7023] instance 'axi_dma_0' of module 'design_1_axi_dma_0_0' has 43 connections declared, but only 41 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:689]
-INFO: [Synth 8-6157] synthesizing module 'design_1_axi_dma_0_1' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axi_dma_0_1_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_axi_dma_0_1' (2#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axi_dma_0_1_stub.v:6]
-WARNING: [Synth 8-7023] instance 'axi_dma_1' of module 'design_1_axi_dma_0_1' has 43 connections declared, but only 41 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:731]
-INFO: [Synth 8-6157] synthesizing module 'design_1_axi_dma_0_2' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axi_dma_0_2_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_axi_dma_0_2' (3#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axi_dma_0_2_stub.v:6]
-WARNING: [Synth 8-7023] instance 'axi_dma_2' of module 'design_1_axi_dma_0_2' has 43 connections declared, but only 41 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:773]
-INFO: [Synth 8-6157] synthesizing module 'design_1_axi_dma_0_3' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axi_dma_0_3_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_axi_dma_0_3' (4#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axi_dma_0_3_stub.v:6]
-WARNING: [Synth 8-7023] instance 'axi_dma_3' of module 'design_1_axi_dma_0_3' has 43 connections declared, but only 41 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:815]
-INFO: [Synth 8-6157] synthesizing module 'design_1_axi_dma_0_4' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axi_dma_0_4_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_axi_dma_0_4' (5#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axi_dma_0_4_stub.v:6]
-WARNING: [Synth 8-7023] instance 'axi_dma_4' of module 'design_1_axi_dma_0_4' has 43 connections declared, but only 41 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:857]
-INFO: [Synth 8-6157] synthesizing module 'design_1_axi_dma_0_5' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axi_dma_0_5_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_axi_dma_0_5' (6#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axi_dma_0_5_stub.v:6]
-WARNING: [Synth 8-7023] instance 'axi_dma_5' of module 'design_1_axi_dma_0_5' has 43 connections declared, but only 41 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:899]
-INFO: [Synth 8-6157] synthesizing module 'design_1_axi_dma_0_6' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axi_dma_0_6_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_axi_dma_0_6' (7#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axi_dma_0_6_stub.v:6]
-WARNING: [Synth 8-7023] instance 'axi_dma_6' of module 'design_1_axi_dma_0_6' has 43 connections declared, but only 41 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:941]
-INFO: [Synth 8-6157] synthesizing module 'design_1_axi_dma_0_7' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axi_dma_0_7_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_axi_dma_0_7' (8#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axi_dma_0_7_stub.v:6]
-WARNING: [Synth 8-7023] instance 'axi_dma_7' of module 'design_1_axi_dma_0_7' has 43 connections declared, but only 41 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:983]
-INFO: [Synth 8-6157] synthesizing module 'design_1_axi_gpio_0_1' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axi_gpio_0_1_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_axi_gpio_0_1' (9#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axi_gpio_0_1_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'design_1_axi_gpio_1_1' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axi_gpio_1_1_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_axi_gpio_1_1' (10#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axi_gpio_1_1_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'design_1_axi_gpio_2_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axi_gpio_2_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_axi_gpio_2_0' (11#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axi_gpio_2_0_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'design_1_axi_gpio_3_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axi_gpio_3_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_axi_gpio_3_0' (12#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axi_gpio_3_0_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'design_1_axi_gpio_4_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axi_gpio_4_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_axi_gpio_4_0' (13#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axi_gpio_4_0_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'design_1_axi_mem_intercon_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:2088]
-INFO: [Synth 8-6157] synthesizing module 'm00_couplers_imp_1R706YB' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:5473]
-INFO: [Synth 8-6157] synthesizing module 'design_1_auto_pc_1' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_auto_pc_1_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_auto_pc_1' (14#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_auto_pc_1_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'm00_couplers_imp_1R706YB' (15#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:5473]
-INFO: [Synth 8-6157] synthesizing module 's00_couplers_imp_7HNO1D' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:7413]
-INFO: [Synth 8-6157] synthesizing module 'design_1_auto_us_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_auto_us_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_auto_us_0' (16#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_auto_us_0_stub.v:6]
-WARNING: [Synth 8-7023] instance 'auto_us' of module 'design_1_auto_us_0' has 40 connections declared, but only 39 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:7564]
-INFO: [Synth 8-6155] done synthesizing module 's00_couplers_imp_7HNO1D' (17#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:7413]
-INFO: [Synth 8-6157] synthesizing module 's01_couplers_imp_1W60HW0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:7911]
-INFO: [Synth 8-6157] synthesizing module 'design_1_auto_us_1' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_auto_us_1_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_auto_us_1' (18#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_auto_us_1_stub.v:6]
-WARNING: [Synth 8-7023] instance 'auto_us' of module 'design_1_auto_us_1' has 40 connections declared, but only 39 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:8062]
-INFO: [Synth 8-6155] done synthesizing module 's01_couplers_imp_1W60HW0' (19#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:7911]
-INFO: [Synth 8-6157] synthesizing module 's02_couplers_imp_8NCF02' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:8104]
-INFO: [Synth 8-6157] synthesizing module 'design_1_auto_us_2' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_auto_us_2_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_auto_us_2' (20#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_auto_us_2_stub.v:6]
-WARNING: [Synth 8-7023] instance 'auto_us' of module 'design_1_auto_us_2' has 40 connections declared, but only 39 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:8255]
-INFO: [Synth 8-6155] done synthesizing module 's02_couplers_imp_8NCF02' (21#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:8104]
-INFO: [Synth 8-6157] synthesizing module 's03_couplers_imp_1UQ1PUB' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:8297]
-INFO: [Synth 8-6157] synthesizing module 'design_1_auto_us_3' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_auto_us_3_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_auto_us_3' (22#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_auto_us_3_stub.v:6]
-WARNING: [Synth 8-7023] instance 'auto_us' of module 'design_1_auto_us_3' has 40 connections declared, but only 39 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:8448]
-INFO: [Synth 8-6155] done synthesizing module 's03_couplers_imp_1UQ1PUB' (23#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:8297]
-INFO: [Synth 8-6157] synthesizing module 's04_couplers_imp_4T8GAF' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:8490]
-INFO: [Synth 8-6157] synthesizing module 'design_1_auto_us_4' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_auto_us_4_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_auto_us_4' (24#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_auto_us_4_stub.v:6]
-WARNING: [Synth 8-7023] instance 'auto_us' of module 'design_1_auto_us_4' has 40 connections declared, but only 39 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:8641]
-INFO: [Synth 8-6155] done synthesizing module 's04_couplers_imp_4T8GAF' (25#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:8490]
-INFO: [Synth 8-6157] synthesizing module 's05_couplers_imp_1YHCGIE' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:8683]
-INFO: [Synth 8-6157] synthesizing module 'design_1_auto_us_5' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_auto_us_5_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_auto_us_5' (26#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_auto_us_5_stub.v:6]
-WARNING: [Synth 8-7023] instance 'auto_us' of module 'design_1_auto_us_5' has 40 connections declared, but only 39 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:8834]
-INFO: [Synth 8-6155] done synthesizing module 's05_couplers_imp_1YHCGIE' (27#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:8683]
-INFO: [Synth 8-6157] synthesizing module 's06_couplers_imp_5OWWZ8' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:8876]
-INFO: [Synth 8-6157] synthesizing module 'design_1_auto_us_6' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_auto_us_6_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_auto_us_6' (28#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_auto_us_6_stub.v:6]
-WARNING: [Synth 8-7023] instance 'auto_us' of module 'design_1_auto_us_6' has 40 connections declared, but only 39 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:9027]
-INFO: [Synth 8-6155] done synthesizing module 's06_couplers_imp_5OWWZ8' (29#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:8876]
-INFO: [Synth 8-6157] synthesizing module 's07_couplers_imp_1XVBQ51' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:9069]
-INFO: [Synth 8-6157] synthesizing module 'design_1_auto_us_7' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_auto_us_7_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_auto_us_7' (30#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_auto_us_7_stub.v:6]
-WARNING: [Synth 8-7023] instance 'auto_us' of module 'design_1_auto_us_7' has 40 connections declared, but only 39 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:9220]
-INFO: [Synth 8-6155] done synthesizing module 's07_couplers_imp_1XVBQ51' (31#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:9069]
-INFO: [Synth 8-6157] synthesizing module 'design_1_xbar_1' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_xbar_1_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_xbar_1' (32#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_xbar_1_stub.v:6]
-WARNING: [Synth 8-7023] instance 'xbar' of module 'design_1_xbar_1' has 78 connections declared, but only 71 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:3376]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_axi_mem_intercon_0' (33#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:2088]
-INFO: [Synth 8-6157] synthesizing module 'design_1_axis_data_fifo_0_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axis_data_fifo_0_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_axis_data_fifo_0_0' (34#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axis_data_fifo_0_0_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'design_1_axis_data_fifo_0_1' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axis_data_fifo_0_1_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_axis_data_fifo_0_1' (35#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axis_data_fifo_0_1_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'design_1_axis_data_fifo_0_2' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axis_data_fifo_0_2_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_axis_data_fifo_0_2' (36#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axis_data_fifo_0_2_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'design_1_axis_data_fifo_0_3' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axis_data_fifo_0_3_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_axis_data_fifo_0_3' (37#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axis_data_fifo_0_3_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'design_1_axis_data_fifo_0_4' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axis_data_fifo_0_4_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_axis_data_fifo_0_4' (38#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axis_data_fifo_0_4_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'design_1_axis_data_fifo_0_5' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axis_data_fifo_0_5_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_axis_data_fifo_0_5' (39#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axis_data_fifo_0_5_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'design_1_axis_data_fifo_0_6' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axis_data_fifo_0_6_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_axis_data_fifo_0_6' (40#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axis_data_fifo_0_6_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'design_1_axis_data_fifo_0_7' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axis_data_fifo_0_7_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_axis_data_fifo_0_7' (41#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_axis_data_fifo_0_7_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'design_1_debounce_0_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_debounce_0_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_debounce_0_0' (42#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_debounce_0_0_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'design_1_enable_splitter_0_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_enable_splitter_0_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_enable_splitter_0_0' (43#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_enable_splitter_0_0_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'design_1_input_selector_0_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_input_selector_0_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_input_selector_0_0' (44#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_input_selector_0_0_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'design_1_input_trigger_0_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_input_trigger_0_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_input_trigger_0_0' (45#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_input_trigger_0_0_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'design_1_or_0_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_or_0_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_or_0_0' (46#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_or_0_0_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'design_1_processing_system7_0_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_processing_system7_0_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_processing_system7_0_0' (47#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_processing_system7_0_0_stub.v:6]
-WARNING: [Synth 8-7023] instance 'processing_system7_0' of module 'design_1_processing_system7_0_0' has 114 connections declared, but only 105 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:1489]
-INFO: [Synth 8-6157] synthesizing module 'design_1_ps7_0_axi_periph_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:3450]
-INFO: [Synth 8-6157] synthesizing module 'm00_couplers_imp_15SPJYW' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:5348]
-INFO: [Synth 8-6155] done synthesizing module 'm00_couplers_imp_15SPJYW' (48#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:5348]
-INFO: [Synth 8-6157] synthesizing module 'm01_couplers_imp_XU9C55' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:5878]
-INFO: [Synth 8-6155] done synthesizing module 'm01_couplers_imp_XU9C55' (49#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:5878]
-INFO: [Synth 8-6157] synthesizing module 'm02_couplers_imp_14WQB4R' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:6003]
-INFO: [Synth 8-6155] done synthesizing module 'm02_couplers_imp_14WQB4R' (50#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:6003]
-INFO: [Synth 8-6157] synthesizing module 'm03_couplers_imp_YFYJ3U' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:6128]
-INFO: [Synth 8-6155] done synthesizing module 'm03_couplers_imp_YFYJ3U' (51#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:6128]
-INFO: [Synth 8-6157] synthesizing module 'm04_couplers_imp_17KQ732' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:6253]
-INFO: [Synth 8-6155] done synthesizing module 'm04_couplers_imp_17KQ732' (52#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:6253]
-INFO: [Synth 8-6157] synthesizing module 'm05_couplers_imp_VQEDA7' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:6378]
-INFO: [Synth 8-6155] done synthesizing module 'm05_couplers_imp_VQEDA7' (53#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:6378]
-INFO: [Synth 8-6157] synthesizing module 'm06_couplers_imp_16EQN6L' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:6503]
-INFO: [Synth 8-6155] done synthesizing module 'm06_couplers_imp_16EQN6L' (54#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:6503]
-INFO: [Synth 8-6157] synthesizing module 'm07_couplers_imp_X61OAK' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:6628]
-INFO: [Synth 8-6155] done synthesizing module 'm07_couplers_imp_X61OAK' (55#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:6628]
-INFO: [Synth 8-6157] synthesizing module 'm08_couplers_imp_1024TAS' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:6753]
-INFO: [Synth 8-6155] done synthesizing module 'm08_couplers_imp_1024TAS' (56#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:6753]
-INFO: [Synth 8-6157] synthesizing module 'm09_couplers_imp_UP9YUT' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:6885]
-INFO: [Synth 8-6155] done synthesizing module 'm09_couplers_imp_UP9YUT' (57#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:6885]
-INFO: [Synth 8-6157] synthesizing module 'm10_couplers_imp_I40Q9S' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:7017]
-INFO: [Synth 8-6155] done synthesizing module 'm10_couplers_imp_I40Q9S' (58#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:7017]
-INFO: [Synth 8-6157] synthesizing module 'm11_couplers_imp_1CATNTT' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:7149]
-INFO: [Synth 8-6155] done synthesizing module 'm11_couplers_imp_1CATNTT' (59#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:7149]
-INFO: [Synth 8-6157] synthesizing module 'm12_couplers_imp_J0YUF7' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:7281]
-INFO: [Synth 8-6155] done synthesizing module 'm12_couplers_imp_J0YUF7' (60#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:7281]
-INFO: [Synth 8-6157] synthesizing module 's00_couplers_imp_UYSKKA' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:7606]
-INFO: [Synth 8-6157] synthesizing module 'design_1_auto_pc_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_auto_pc_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_auto_pc_0' (61#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_auto_pc_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 's00_couplers_imp_UYSKKA' (62#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:7606]
-INFO: [Synth 8-6157] synthesizing module 'design_1_xbar_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_xbar_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_xbar_0' (63#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_xbar_0_stub.v:6]
-WARNING: [Synth 8-7023] instance 'xbar' of module 'design_1_xbar_0' has 40 connections declared, but only 38 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:5307]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_ps7_0_axi_periph_0' (64#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:3450]
-INFO: [Synth 8-6157] synthesizing module 'design_1_rst_ps7_0_100M_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_rst_ps7_0_100M_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_rst_ps7_0_100M_0' (65#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_rst_ps7_0_100M_0_stub.v:6]
-WARNING: [Synth 8-7023] instance 'rst_ps7_0_100M' of module 'design_1_rst_ps7_0_100M_0' has 10 connections declared, but only 6 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:1877]
-INFO: [Synth 8-6157] synthesizing module 'design_1_signal_detector_0_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_signal_detector_0_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_signal_detector_0_0' (66#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_signal_detector_0_0_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'design_1_signal_detector_0_1' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_signal_detector_0_1_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_signal_detector_0_1' (67#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_signal_detector_0_1_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'design_1_signal_detector_0_2' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_signal_detector_0_2_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_signal_detector_0_2' (68#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_signal_detector_0_2_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'design_1_signal_detector_0_3' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_signal_detector_0_3_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_signal_detector_0_3' (69#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_signal_detector_0_3_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'design_1_signal_detector_0_4' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_signal_detector_0_4_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_signal_detector_0_4' (70#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_signal_detector_0_4_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'design_1_signal_detector_0_5' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_signal_detector_0_5_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_signal_detector_0_5' (71#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_signal_detector_0_5_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'design_1_signal_detector_6_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_signal_detector_6_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_signal_detector_6_0' (72#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_signal_detector_6_0_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'design_1_signal_detector_0_7' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_signal_detector_0_7_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_signal_detector_0_7' (73#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_signal_detector_0_7_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'design_1_signal_generator_0_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_signal_generator_0_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_signal_generator_0_0' (74#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_signal_generator_0_0_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'design_1_signal_input_0_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_signal_input_0_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_signal_input_0_0' (75#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_signal_input_0_0_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'design_1_util_vector_logic_0_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_util_vector_logic_0_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_util_vector_logic_0_0' (76#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_util_vector_logic_0_0_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'design_1_util_vector_logic_1_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_util_vector_logic_1_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_util_vector_logic_1_0' (77#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_util_vector_logic_1_0_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'design_1_util_vector_logic_1_1' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_util_vector_logic_1_1_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_util_vector_logic_1_1' (78#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_util_vector_logic_1_1_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'design_1_util_vector_logic_1_2' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_util_vector_logic_1_2_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_util_vector_logic_1_2' (79#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_util_vector_logic_1_2_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'design_1_util_vector_logic_1_3' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_util_vector_logic_1_3_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_util_vector_logic_1_3' (80#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_util_vector_logic_1_3_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'design_1_util_vector_logic_1_4' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_util_vector_logic_1_4_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_util_vector_logic_1_4' (81#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_util_vector_logic_1_4_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'design_1_util_vector_logic_1_5' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_util_vector_logic_1_5_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_util_vector_logic_1_5' (82#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_util_vector_logic_1_5_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'design_1_util_vector_logic_1_6' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_util_vector_logic_1_6_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_util_vector_logic_1_6' (83#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_util_vector_logic_1_6_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'design_1_util_vector_logic_1_7' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_util_vector_logic_1_7_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_util_vector_logic_1_7' (84#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_util_vector_logic_1_7_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'design_1_util_vector_logic_9_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_util_vector_logic_9_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_util_vector_logic_9_0' (85#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-1438-vm-VirtualBox/realtime/design_1_util_vector_logic_9_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'design_1_axi_dma_0_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_axi_dma_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_axi_dma_0_0' (1#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_axi_dma_0_0_stub.v:6]
+WARNING: [Synth 8-7023] instance 'axi_dma_0' of module 'design_1_axi_dma_0_0' has 43 connections declared, but only 41 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:691]
+INFO: [Synth 8-6157] synthesizing module 'design_1_axi_dma_0_1' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_axi_dma_0_1_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_axi_dma_0_1' (2#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_axi_dma_0_1_stub.v:6]
+WARNING: [Synth 8-7023] instance 'axi_dma_1' of module 'design_1_axi_dma_0_1' has 43 connections declared, but only 41 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:733]
+INFO: [Synth 8-6157] synthesizing module 'design_1_axi_dma_0_2' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_axi_dma_0_2_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_axi_dma_0_2' (3#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_axi_dma_0_2_stub.v:6]
+WARNING: [Synth 8-7023] instance 'axi_dma_2' of module 'design_1_axi_dma_0_2' has 43 connections declared, but only 41 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:775]
+INFO: [Synth 8-6157] synthesizing module 'design_1_axi_dma_0_3' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_axi_dma_0_3_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_axi_dma_0_3' (4#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_axi_dma_0_3_stub.v:6]
+WARNING: [Synth 8-7023] instance 'axi_dma_3' of module 'design_1_axi_dma_0_3' has 43 connections declared, but only 41 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:817]
+INFO: [Synth 8-6157] synthesizing module 'design_1_axi_dma_0_4' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_axi_dma_0_4_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_axi_dma_0_4' (5#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_axi_dma_0_4_stub.v:6]
+WARNING: [Synth 8-7023] instance 'axi_dma_4' of module 'design_1_axi_dma_0_4' has 43 connections declared, but only 41 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:859]
+INFO: [Synth 8-6157] synthesizing module 'design_1_axi_dma_0_5' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_axi_dma_0_5_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_axi_dma_0_5' (6#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_axi_dma_0_5_stub.v:6]
+WARNING: [Synth 8-7023] instance 'axi_dma_5' of module 'design_1_axi_dma_0_5' has 43 connections declared, but only 41 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:901]
+INFO: [Synth 8-6157] synthesizing module 'design_1_axi_dma_0_6' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_axi_dma_0_6_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_axi_dma_0_6' (7#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_axi_dma_0_6_stub.v:6]
+WARNING: [Synth 8-7023] instance 'axi_dma_6' of module 'design_1_axi_dma_0_6' has 43 connections declared, but only 41 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:943]
+INFO: [Synth 8-6157] synthesizing module 'design_1_axi_dma_0_7' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_axi_dma_0_7_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_axi_dma_0_7' (8#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_axi_dma_0_7_stub.v:6]
+WARNING: [Synth 8-7023] instance 'axi_dma_7' of module 'design_1_axi_dma_0_7' has 43 connections declared, but only 41 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:985]
+INFO: [Synth 8-6157] synthesizing module 'design_1_axi_gpio_0_1' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_axi_gpio_0_1_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_axi_gpio_0_1' (9#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_axi_gpio_0_1_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'design_1_axi_gpio_1_1' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_axi_gpio_1_1_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_axi_gpio_1_1' (10#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_axi_gpio_1_1_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'design_1_axi_gpio_2_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_axi_gpio_2_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_axi_gpio_2_0' (11#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_axi_gpio_2_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'design_1_axi_gpio_3_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_axi_gpio_3_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_axi_gpio_3_0' (12#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_axi_gpio_3_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'design_1_axi_gpio_4_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_axi_gpio_4_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_axi_gpio_4_0' (13#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_axi_gpio_4_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'design_1_axi_mem_intercon_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:2095]
+INFO: [Synth 8-6157] synthesizing module 'm00_couplers_imp_1R706YB' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:5480]
+INFO: [Synth 8-6157] synthesizing module 'design_1_auto_pc_1' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_auto_pc_1_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_auto_pc_1' (14#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_auto_pc_1_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'm00_couplers_imp_1R706YB' (15#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:5480]
+INFO: [Synth 8-6157] synthesizing module 's00_couplers_imp_7HNO1D' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:7420]
+INFO: [Synth 8-6157] synthesizing module 'design_1_auto_us_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_auto_us_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_auto_us_0' (16#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_auto_us_0_stub.v:6]
+WARNING: [Synth 8-7023] instance 'auto_us' of module 'design_1_auto_us_0' has 40 connections declared, but only 39 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:7571]
+INFO: [Synth 8-6155] done synthesizing module 's00_couplers_imp_7HNO1D' (17#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:7420]
+INFO: [Synth 8-6157] synthesizing module 's01_couplers_imp_1W60HW0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:7918]
+INFO: [Synth 8-6157] synthesizing module 'design_1_auto_us_1' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_auto_us_1_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_auto_us_1' (18#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_auto_us_1_stub.v:6]
+WARNING: [Synth 8-7023] instance 'auto_us' of module 'design_1_auto_us_1' has 40 connections declared, but only 39 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:8069]
+INFO: [Synth 8-6155] done synthesizing module 's01_couplers_imp_1W60HW0' (19#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:7918]
+INFO: [Synth 8-6157] synthesizing module 's02_couplers_imp_8NCF02' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:8111]
+INFO: [Synth 8-6157] synthesizing module 'design_1_auto_us_2' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_auto_us_2_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_auto_us_2' (20#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_auto_us_2_stub.v:6]
+WARNING: [Synth 8-7023] instance 'auto_us' of module 'design_1_auto_us_2' has 40 connections declared, but only 39 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:8262]
+INFO: [Synth 8-6155] done synthesizing module 's02_couplers_imp_8NCF02' (21#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:8111]
+INFO: [Synth 8-6157] synthesizing module 's03_couplers_imp_1UQ1PUB' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:8304]
+INFO: [Synth 8-6157] synthesizing module 'design_1_auto_us_3' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_auto_us_3_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_auto_us_3' (22#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_auto_us_3_stub.v:6]
+WARNING: [Synth 8-7023] instance 'auto_us' of module 'design_1_auto_us_3' has 40 connections declared, but only 39 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:8455]
+INFO: [Synth 8-6155] done synthesizing module 's03_couplers_imp_1UQ1PUB' (23#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:8304]
+INFO: [Synth 8-6157] synthesizing module 's04_couplers_imp_4T8GAF' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:8497]
+INFO: [Synth 8-6157] synthesizing module 'design_1_auto_us_4' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_auto_us_4_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_auto_us_4' (24#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_auto_us_4_stub.v:6]
+WARNING: [Synth 8-7023] instance 'auto_us' of module 'design_1_auto_us_4' has 40 connections declared, but only 39 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:8648]
+INFO: [Synth 8-6155] done synthesizing module 's04_couplers_imp_4T8GAF' (25#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:8497]
+INFO: [Synth 8-6157] synthesizing module 's05_couplers_imp_1YHCGIE' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:8690]
+INFO: [Synth 8-6157] synthesizing module 'design_1_auto_us_5' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_auto_us_5_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_auto_us_5' (26#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_auto_us_5_stub.v:6]
+WARNING: [Synth 8-7023] instance 'auto_us' of module 'design_1_auto_us_5' has 40 connections declared, but only 39 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:8841]
+INFO: [Synth 8-6155] done synthesizing module 's05_couplers_imp_1YHCGIE' (27#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:8690]
+INFO: [Synth 8-6157] synthesizing module 's06_couplers_imp_5OWWZ8' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:8883]
+INFO: [Synth 8-6157] synthesizing module 'design_1_auto_us_6' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_auto_us_6_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_auto_us_6' (28#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_auto_us_6_stub.v:6]
+WARNING: [Synth 8-7023] instance 'auto_us' of module 'design_1_auto_us_6' has 40 connections declared, but only 39 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:9034]
+INFO: [Synth 8-6155] done synthesizing module 's06_couplers_imp_5OWWZ8' (29#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:8883]
+INFO: [Synth 8-6157] synthesizing module 's07_couplers_imp_1XVBQ51' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:9076]
+INFO: [Synth 8-6157] synthesizing module 'design_1_auto_us_7' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_auto_us_7_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_auto_us_7' (30#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_auto_us_7_stub.v:6]
+WARNING: [Synth 8-7023] instance 'auto_us' of module 'design_1_auto_us_7' has 40 connections declared, but only 39 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:9227]
+INFO: [Synth 8-6155] done synthesizing module 's07_couplers_imp_1XVBQ51' (31#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:9076]
+INFO: [Synth 8-6157] synthesizing module 'design_1_xbar_1' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_xbar_1_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_xbar_1' (32#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_xbar_1_stub.v:6]
+WARNING: [Synth 8-7023] instance 'xbar' of module 'design_1_xbar_1' has 78 connections declared, but only 71 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:3383]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_axi_mem_intercon_0' (33#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:2095]
+INFO: [Synth 8-6157] synthesizing module 'design_1_enable_splitter_0_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_enable_splitter_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_enable_splitter_0_0' (34#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_enable_splitter_0_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'design_1_fifo_generator_0_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_fifo_generator_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_fifo_generator_0_0' (35#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_fifo_generator_0_0_stub.v:6]
+WARNING: [Synth 8-7023] instance 'fifo_generator_0' of module 'design_1_fifo_generator_0_0' has 15 connections declared, but only 13 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:1330]
+INFO: [Synth 8-6157] synthesizing module 'design_1_fifo_generator_0_1' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_fifo_generator_0_1_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_fifo_generator_0_1' (36#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_fifo_generator_0_1_stub.v:6]
+WARNING: [Synth 8-7023] instance 'fifo_generator_1' of module 'design_1_fifo_generator_0_1' has 15 connections declared, but only 13 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:1344]
+INFO: [Synth 8-6157] synthesizing module 'design_1_fifo_generator_0_2' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_fifo_generator_0_2_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_fifo_generator_0_2' (37#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_fifo_generator_0_2_stub.v:6]
+WARNING: [Synth 8-7023] instance 'fifo_generator_2' of module 'design_1_fifo_generator_0_2' has 15 connections declared, but only 13 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:1358]
+INFO: [Synth 8-6157] synthesizing module 'design_1_fifo_generator_0_3' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_fifo_generator_0_3_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_fifo_generator_0_3' (38#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_fifo_generator_0_3_stub.v:6]
+WARNING: [Synth 8-7023] instance 'fifo_generator_3' of module 'design_1_fifo_generator_0_3' has 15 connections declared, but only 13 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:1372]
+INFO: [Synth 8-6157] synthesizing module 'design_1_fifo_generator_0_4' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_fifo_generator_0_4_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_fifo_generator_0_4' (39#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_fifo_generator_0_4_stub.v:6]
+WARNING: [Synth 8-7023] instance 'fifo_generator_4' of module 'design_1_fifo_generator_0_4' has 15 connections declared, but only 13 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:1386]
+INFO: [Synth 8-6157] synthesizing module 'design_1_fifo_generator_0_5' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_fifo_generator_0_5_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_fifo_generator_0_5' (40#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_fifo_generator_0_5_stub.v:6]
+WARNING: [Synth 8-7023] instance 'fifo_generator_5' of module 'design_1_fifo_generator_0_5' has 15 connections declared, but only 13 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:1400]
+INFO: [Synth 8-6157] synthesizing module 'design_1_fifo_generator_0_6' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_fifo_generator_0_6_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_fifo_generator_0_6' (41#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_fifo_generator_0_6_stub.v:6]
+WARNING: [Synth 8-7023] instance 'fifo_generator_6' of module 'design_1_fifo_generator_0_6' has 15 connections declared, but only 13 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:1414]
+INFO: [Synth 8-6157] synthesizing module 'design_1_fifo_generator_0_7' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_fifo_generator_0_7_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_fifo_generator_0_7' (42#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_fifo_generator_0_7_stub.v:6]
+WARNING: [Synth 8-7023] instance 'fifo_generator_7' of module 'design_1_fifo_generator_0_7' has 15 connections declared, but only 13 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:1428]
+INFO: [Synth 8-6157] synthesizing module 'design_1_input_selector_0_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_input_selector_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_input_selector_0_0' (43#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_input_selector_0_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'design_1_input_trigger_0_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_input_trigger_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_input_trigger_0_0' (44#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_input_trigger_0_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'design_1_ip_8_to_1_and_7_0_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_ip_8_to_1_and_7_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_ip_8_to_1_and_7_0_0' (45#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_ip_8_to_1_and_7_0_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'design_1_or_0_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_or_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_or_0_0' (46#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_or_0_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'design_1_processing_system7_0_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_processing_system7_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_processing_system7_0_0' (47#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_processing_system7_0_0_stub.v:6]
+WARNING: [Synth 8-7023] instance 'processing_system7_0' of module 'design_1_processing_system7_0_0' has 114 connections declared, but only 105 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:1490]
+INFO: [Synth 8-6157] synthesizing module 'design_1_ps7_0_axi_periph_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:3457]
+INFO: [Synth 8-6157] synthesizing module 'm00_couplers_imp_15SPJYW' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:5355]
+INFO: [Synth 8-6155] done synthesizing module 'm00_couplers_imp_15SPJYW' (48#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:5355]
+INFO: [Synth 8-6157] synthesizing module 'm01_couplers_imp_XU9C55' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:5885]
+INFO: [Synth 8-6155] done synthesizing module 'm01_couplers_imp_XU9C55' (49#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:5885]
+INFO: [Synth 8-6157] synthesizing module 'm02_couplers_imp_14WQB4R' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:6010]
+INFO: [Synth 8-6155] done synthesizing module 'm02_couplers_imp_14WQB4R' (50#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:6010]
+INFO: [Synth 8-6157] synthesizing module 'm03_couplers_imp_YFYJ3U' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:6135]
+INFO: [Synth 8-6155] done synthesizing module 'm03_couplers_imp_YFYJ3U' (51#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:6135]
+INFO: [Synth 8-6157] synthesizing module 'm04_couplers_imp_17KQ732' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:6260]
+INFO: [Synth 8-6155] done synthesizing module 'm04_couplers_imp_17KQ732' (52#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:6260]
+INFO: [Synth 8-6157] synthesizing module 'm05_couplers_imp_VQEDA7' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:6385]
+INFO: [Synth 8-6155] done synthesizing module 'm05_couplers_imp_VQEDA7' (53#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:6385]
+INFO: [Synth 8-6157] synthesizing module 'm06_couplers_imp_16EQN6L' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:6510]
+INFO: [Synth 8-6155] done synthesizing module 'm06_couplers_imp_16EQN6L' (54#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:6510]
+INFO: [Synth 8-6157] synthesizing module 'm07_couplers_imp_X61OAK' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:6635]
+INFO: [Synth 8-6155] done synthesizing module 'm07_couplers_imp_X61OAK' (55#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:6635]
+INFO: [Synth 8-6157] synthesizing module 'm08_couplers_imp_1024TAS' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:6760]
+INFO: [Synth 8-6155] done synthesizing module 'm08_couplers_imp_1024TAS' (56#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:6760]
+INFO: [Synth 8-6157] synthesizing module 'm09_couplers_imp_UP9YUT' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:6892]
+INFO: [Synth 8-6155] done synthesizing module 'm09_couplers_imp_UP9YUT' (57#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:6892]
+INFO: [Synth 8-6157] synthesizing module 'm10_couplers_imp_I40Q9S' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:7024]
+INFO: [Synth 8-6155] done synthesizing module 'm10_couplers_imp_I40Q9S' (58#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:7024]
+INFO: [Synth 8-6157] synthesizing module 'm11_couplers_imp_1CATNTT' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:7156]
+INFO: [Synth 8-6155] done synthesizing module 'm11_couplers_imp_1CATNTT' (59#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:7156]
+INFO: [Synth 8-6157] synthesizing module 'm12_couplers_imp_J0YUF7' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:7288]
+INFO: [Synth 8-6155] done synthesizing module 'm12_couplers_imp_J0YUF7' (60#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:7288]
+INFO: [Synth 8-6157] synthesizing module 's00_couplers_imp_UYSKKA' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:7613]
+INFO: [Synth 8-6157] synthesizing module 'design_1_auto_pc_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_auto_pc_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_auto_pc_0' (61#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_auto_pc_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 's00_couplers_imp_UYSKKA' (62#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:7613]
+INFO: [Synth 8-6157] synthesizing module 'design_1_xbar_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_xbar_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_xbar_0' (63#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_xbar_0_stub.v:6]
+WARNING: [Synth 8-7023] instance 'xbar' of module 'design_1_xbar_0' has 40 connections declared, but only 38 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:5314]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_ps7_0_axi_periph_0' (64#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:3457]
+INFO: [Synth 8-6157] synthesizing module 'design_1_rst_ps7_0_100M_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_rst_ps7_0_100M_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_rst_ps7_0_100M_0' (65#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_rst_ps7_0_100M_0_stub.v:6]
+WARNING: [Synth 8-7023] instance 'rst_ps7_0_100M' of module 'design_1_rst_ps7_0_100M_0' has 10 connections declared, but only 6 given [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:1878]
+INFO: [Synth 8-6157] synthesizing module 'design_1_signal_detector_0_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_signal_detector_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_signal_detector_0_0' (66#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_signal_detector_0_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'design_1_signal_detector_0_1' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_signal_detector_0_1_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_signal_detector_0_1' (67#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_signal_detector_0_1_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'design_1_signal_detector_0_2' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_signal_detector_0_2_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_signal_detector_0_2' (68#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_signal_detector_0_2_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'design_1_signal_detector_0_3' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_signal_detector_0_3_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_signal_detector_0_3' (69#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_signal_detector_0_3_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'design_1_signal_detector_0_4' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_signal_detector_0_4_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_signal_detector_0_4' (70#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_signal_detector_0_4_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'design_1_signal_detector_0_5' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_signal_detector_0_5_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_signal_detector_0_5' (71#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_signal_detector_0_5_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'design_1_signal_detector_6_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_signal_detector_6_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_signal_detector_6_0' (72#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_signal_detector_6_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'design_1_signal_detector_0_7' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_signal_detector_0_7_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_signal_detector_0_7' (73#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_signal_detector_0_7_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'design_1_signal_generator_0_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_signal_generator_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_signal_generator_0_0' (74#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_signal_generator_0_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'design_1_signal_input_0_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_signal_input_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_signal_input_0_0' (75#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_signal_input_0_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'design_1_util_vector_logic_0_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_util_vector_logic_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_util_vector_logic_0_0' (76#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_util_vector_logic_0_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'design_1_util_vector_logic_1_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_util_vector_logic_1_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_util_vector_logic_1_0' (77#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_util_vector_logic_1_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'design_1_util_vector_logic_10_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_util_vector_logic_10_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_util_vector_logic_10_0' (78#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_util_vector_logic_10_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'design_1_util_vector_logic_1_1' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_util_vector_logic_1_1_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_util_vector_logic_1_1' (79#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_util_vector_logic_1_1_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'design_1_util_vector_logic_1_2' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_util_vector_logic_1_2_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_util_vector_logic_1_2' (80#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_util_vector_logic_1_2_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'design_1_util_vector_logic_1_3' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_util_vector_logic_1_3_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_util_vector_logic_1_3' (81#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_util_vector_logic_1_3_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'design_1_util_vector_logic_1_4' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_util_vector_logic_1_4_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_util_vector_logic_1_4' (82#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_util_vector_logic_1_4_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'design_1_util_vector_logic_1_5' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_util_vector_logic_1_5_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_util_vector_logic_1_5' (83#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_util_vector_logic_1_5_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'design_1_util_vector_logic_1_6' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_util_vector_logic_1_6_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_util_vector_logic_1_6' (84#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_util_vector_logic_1_6_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'design_1_util_vector_logic_1_7' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_util_vector_logic_1_7_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_util_vector_logic_1_7' (85#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_util_vector_logic_1_7_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'design_1_util_vector_logic_9_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_util_vector_logic_9_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_util_vector_logic_9_0' (86#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/.Xil/Vivado-3713-vm-VirtualBox/realtime/design_1_util_vector_logic_9_0_stub.v:6]
 INFO: [Synth 8-6157] synthesizing module 'design_1_xlconcat_0_0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_xlconcat_0_0/synth/design_1_xlconcat_0_0.v:58]
 INFO: [Synth 8-6157] synthesizing module 'xlconcat_v2_1_3_xlconcat' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ipshared/442e/hdl/xlconcat_v2_1_vl_rfs.v:14]
 	Parameter IN0_WIDTH bound to: 1 - type: integer 
@@ -252,8 +262,8 @@ INFO: [Synth 8-6157] synthesizing module 'xlconcat_v2_1_3_xlconcat' [/home/vm/pr
 	Parameter IN31_WIDTH bound to: 1 - type: integer 
 	Parameter dout_width bound to: 16 - type: integer 
 	Parameter NUM_PORTS bound to: 16 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'xlconcat_v2_1_3_xlconcat' (86#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ipshared/442e/hdl/xlconcat_v2_1_vl_rfs.v:14]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_xlconcat_0_0' (87#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_xlconcat_0_0/synth/design_1_xlconcat_0_0.v:58]
+INFO: [Synth 8-6155] done synthesizing module 'xlconcat_v2_1_3_xlconcat' (87#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ipshared/442e/hdl/xlconcat_v2_1_vl_rfs.v:14]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_xlconcat_0_0' (88#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_xlconcat_0_0/synth/design_1_xlconcat_0_0.v:58]
 INFO: [Synth 8-6157] synthesizing module 'design_1_xlconcat_0_1' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_xlconcat_0_1/synth/design_1_xlconcat_0_1.v:58]
 INFO: [Synth 8-6157] synthesizing module 'xlconcat_v2_1_3_xlconcat__parameterized0' [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ipshared/442e/hdl/xlconcat_v2_1_vl_rfs.v:14]
 	Parameter IN0_WIDTH bound to: 1 - type: integer 
@@ -290,10 +300,10 @@ INFO: [Synth 8-6157] synthesizing module 'xlconcat_v2_1_3_xlconcat__parameterize
 	Parameter IN31_WIDTH bound to: 1 - type: integer 
 	Parameter dout_width bound to: 8 - type: integer 
 	Parameter NUM_PORTS bound to: 8 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'xlconcat_v2_1_3_xlconcat__parameterized0' (87#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ipshared/442e/hdl/xlconcat_v2_1_vl_rfs.v:14]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_xlconcat_0_1' (88#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_xlconcat_0_1/synth/design_1_xlconcat_0_1.v:58]
-INFO: [Synth 8-6155] done synthesizing module 'design_1' (89#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:13]
-INFO: [Synth 8-6155] done synthesizing module 'design_1_wrapper' (90#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/hdl/design_1_wrapper.v:12]
+INFO: [Synth 8-6155] done synthesizing module 'xlconcat_v2_1_3_xlconcat__parameterized0' (88#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ipshared/442e/hdl/xlconcat_v2_1_vl_rfs.v:14]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_xlconcat_0_1' (89#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_xlconcat_0_1/synth/design_1_xlconcat_0_1.v:58]
+INFO: [Synth 8-6155] done synthesizing module 'design_1' (90#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/synth/design_1.v:13]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_wrapper' (91#1) [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/hdl/design_1_wrapper.v:12]
 WARNING: [Synth 8-3331] design xlconcat_v2_1_3_xlconcat__parameterized0 has unconnected port In8[0]
 WARNING: [Synth 8-3331] design xlconcat_v2_1_3_xlconcat__parameterized0 has unconnected port In9[0]
 WARNING: [Synth 8-3331] design xlconcat_v2_1_3_xlconcat__parameterized0 has unconnected port In10[0]
@@ -396,7 +406,7 @@ WARNING: [Synth 8-3331] design design_1_ps7_0_axi_periph_0 has unconnected port 
 WARNING: [Synth 8-3331] design design_1_ps7_0_axi_periph_0 has unconnected port M02_ARESETN
 INFO: [Common 17-14] Message 'Synth 8-3331' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:14 ; elapsed = 00:00:16 . Memory (MB): peak = 1985.625 ; gain = 277.402 ; free physical = 1061 ; free virtual = 2354
+Finished RTL Elaboration : Time (s): cpu = 00:00:14 ; elapsed = 00:00:16 . Memory (MB): peak = 1991.660 ; gain = 276.402 ; free physical = 218 ; free virtual = 3031
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -409,12 +419,12 @@ Report Check Netlist:
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:15 ; elapsed = 00:00:18 . Memory (MB): peak = 1988.594 ; gain = 280.371 ; free physical = 1062 ; free virtual = 2354
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:15 ; elapsed = 00:00:18 . Memory (MB): peak = 1994.629 ; gain = 279.371 ; free physical = 219 ; free virtual = 3031
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:15 ; elapsed = 00:00:18 . Memory (MB): peak = 1988.594 ; gain = 280.371 ; free physical = 1062 ; free virtual = 2354
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:15 ; elapsed = 00:00:18 . Memory (MB): peak = 1994.629 ; gain = 279.371 ; free physical = 219 ; free virtual = 3031
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00.25 ; elapsed = 00:00:00.26 . Memory (MB): peak = 1988.594 ; gain = 0.000 ; free physical = 1053 ; free virtual = 2346
+Netlist sorting complete. Time (s): cpu = 00:00:00.26 ; elapsed = 00:00:00.26 . Memory (MB): peak = 1994.629 ; gain = 0.000 ; free physical = 210 ; free virtual = 3022
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
@@ -465,22 +475,6 @@ Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/pr
 Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_signal_input_0_0/design_1_signal_input_0_0/design_1_signal_input_0_0_in_context.xdc] for cell 'design_1_i/signal_input_0'
 Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_util_vector_logic_0_0/design_1_util_vector_logic_0_0/design_1_util_vector_logic_0_0_in_context.xdc] for cell 'design_1_i/util_vector_logic_0'
 Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_util_vector_logic_0_0/design_1_util_vector_logic_0_0/design_1_util_vector_logic_0_0_in_context.xdc] for cell 'design_1_i/util_vector_logic_0'
-Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_0/design_1_axis_data_fifo_0_0/design_1_axis_data_fifo_0_0_in_context.xdc] for cell 'design_1_i/axis_data_fifo_0'
-Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_0/design_1_axis_data_fifo_0_0/design_1_axis_data_fifo_0_0_in_context.xdc] for cell 'design_1_i/axis_data_fifo_0'
-Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_1/design_1_axis_data_fifo_0_1/design_1_axis_data_fifo_0_0_in_context.xdc] for cell 'design_1_i/axis_data_fifo_1'
-Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_1/design_1_axis_data_fifo_0_1/design_1_axis_data_fifo_0_0_in_context.xdc] for cell 'design_1_i/axis_data_fifo_1'
-Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_2/design_1_axis_data_fifo_0_2/design_1_axis_data_fifo_0_0_in_context.xdc] for cell 'design_1_i/axis_data_fifo_2'
-Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_2/design_1_axis_data_fifo_0_2/design_1_axis_data_fifo_0_0_in_context.xdc] for cell 'design_1_i/axis_data_fifo_2'
-Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_3/design_1_axis_data_fifo_0_3/design_1_axis_data_fifo_0_0_in_context.xdc] for cell 'design_1_i/axis_data_fifo_3'
-Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_3/design_1_axis_data_fifo_0_3/design_1_axis_data_fifo_0_0_in_context.xdc] for cell 'design_1_i/axis_data_fifo_3'
-Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_4/design_1_axis_data_fifo_0_4/design_1_axis_data_fifo_0_0_in_context.xdc] for cell 'design_1_i/axis_data_fifo_4'
-Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_4/design_1_axis_data_fifo_0_4/design_1_axis_data_fifo_0_0_in_context.xdc] for cell 'design_1_i/axis_data_fifo_4'
-Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_5/design_1_axis_data_fifo_0_5/design_1_axis_data_fifo_0_0_in_context.xdc] for cell 'design_1_i/axis_data_fifo_5'
-Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_5/design_1_axis_data_fifo_0_5/design_1_axis_data_fifo_0_0_in_context.xdc] for cell 'design_1_i/axis_data_fifo_5'
-Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_6/design_1_axis_data_fifo_0_6/design_1_axis_data_fifo_0_0_in_context.xdc] for cell 'design_1_i/axis_data_fifo_6'
-Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_6/design_1_axis_data_fifo_0_6/design_1_axis_data_fifo_0_0_in_context.xdc] for cell 'design_1_i/axis_data_fifo_6'
-Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_7/design_1_axis_data_fifo_0_7/design_1_axis_data_fifo_0_0_in_context.xdc] for cell 'design_1_i/axis_data_fifo_7'
-Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axis_data_fifo_0_7/design_1_axis_data_fifo_0_7/design_1_axis_data_fifo_0_0_in_context.xdc] for cell 'design_1_i/axis_data_fifo_7'
 Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_util_vector_logic_1_0/design_1_util_vector_logic_1_0/design_1_util_vector_logic_1_0_in_context.xdc] for cell 'design_1_i/util_vector_logic_1'
 Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_util_vector_logic_1_0/design_1_util_vector_logic_1_0/design_1_util_vector_logic_1_0_in_context.xdc] for cell 'design_1_i/util_vector_logic_1'
 Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_util_vector_logic_1_1/design_1_util_vector_logic_1_1/design_1_util_vector_logic_1_0_in_context.xdc] for cell 'design_1_i/util_vector_logic_2'
@@ -501,8 +495,6 @@ Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/pr
 Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_1_1/design_1_axi_gpio_1_1/design_1_axi_gpio_1_1_in_context.xdc] for cell 'design_1_i/axi_gpio_1'
 Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_signal_detector_6_0/design_1_signal_detector_6_0/design_1_signal_detector_0_0_in_context.xdc] for cell 'design_1_i/signal_detector_6'
 Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_signal_detector_6_0/design_1_signal_detector_6_0/design_1_signal_detector_0_0_in_context.xdc] for cell 'design_1_i/signal_detector_6'
-Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_debounce_0_0/design_1_debounce_0_0/design_1_debounce_0_0_in_context.xdc] for cell 'design_1_i/debounce_0'
-Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_debounce_0_0/design_1_debounce_0_0/design_1_debounce_0_0_in_context.xdc] for cell 'design_1_i/debounce_0'
 Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_2_0/design_1_axi_gpio_2_0/design_1_axi_gpio_2_0_in_context.xdc] for cell 'design_1_i/axi_gpio_2'
 Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_2_0/design_1_axi_gpio_2_0/design_1_axi_gpio_2_0_in_context.xdc] for cell 'design_1_i/axi_gpio_2'
 Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_signal_generator_0_0/design_1_signal_generator_0_0/design_1_signal_generator_0_0_in_context.xdc] for cell 'design_1_i/signal_generator_0'
@@ -511,8 +503,34 @@ Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/pr
 Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_input_selector_0_0/design_1_input_selector_0_0/design_1_input_selector_0_0_in_context.xdc] for cell 'design_1_i/input_selector_0'
 Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_util_vector_logic_9_0/design_1_util_vector_logic_9_0/design_1_util_vector_logic_1_0_in_context.xdc] for cell 'design_1_i/util_vector_logic_9'
 Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_util_vector_logic_9_0/design_1_util_vector_logic_9_0/design_1_util_vector_logic_1_0_in_context.xdc] for cell 'design_1_i/util_vector_logic_9'
-Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_3_0/design_1_axi_gpio_3_0/design_1_axi_gpio_3_0_in_context.xdc] for cell 'design_1_i/axi_gpio_3'
-Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_3_0/design_1_axi_gpio_3_0/design_1_axi_gpio_3_0_in_context.xdc] for cell 'design_1_i/axi_gpio_3'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_3_0/design_1_axi_gpio_3_0/design_1_axi_gpio_0_1_in_context.xdc] for cell 'design_1_i/axi_gpio_3'
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_3_0/design_1_axi_gpio_3_0/design_1_axi_gpio_0_1_in_context.xdc] for cell 'design_1_i/axi_gpio_3'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_or_0_0/design_1_or_0_0/design_1_or_0_0_in_context.xdc] for cell 'design_1_i/or_0'
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_or_0_0/design_1_or_0_0/design_1_or_0_0_in_context.xdc] for cell 'design_1_i/or_0'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_input_trigger_0_0/design_1_input_trigger_0_0/design_1_input_trigger_0_0_in_context.xdc] for cell 'design_1_i/input_trigger_0'
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_input_trigger_0_0/design_1_input_trigger_0_0/design_1_input_trigger_0_0_in_context.xdc] for cell 'design_1_i/input_trigger_0'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_4_0/design_1_axi_gpio_4_0/design_1_axi_gpio_3_0_in_context.xdc] for cell 'design_1_i/axi_gpio_4'
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_4_0/design_1_axi_gpio_4_0/design_1_axi_gpio_3_0_in_context.xdc] for cell 'design_1_i/axi_gpio_4'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_ip_8_to_1_and_7_0_0/design_1_ip_8_to_1_and_7_0_0/design_1_ip_8_to_1_and_7_0_0_in_context.xdc] for cell 'design_1_i/ip_8_to_1_and_7_0'
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_ip_8_to_1_and_7_0_0/design_1_ip_8_to_1_and_7_0_0/design_1_ip_8_to_1_and_7_0_0_in_context.xdc] for cell 'design_1_i/ip_8_to_1_and_7_0'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_util_vector_logic_10_0/design_1_util_vector_logic_10_0/design_1_util_vector_logic_0_0_in_context.xdc] for cell 'design_1_i/util_vector_logic_10'
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_util_vector_logic_10_0/design_1_util_vector_logic_10_0/design_1_util_vector_logic_0_0_in_context.xdc] for cell 'design_1_i/util_vector_logic_10'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_fifo_generator_0_0/design_1_fifo_generator_0_0/design_1_fifo_generator_0_0_in_context.xdc] for cell 'design_1_i/fifo_generator_0'
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_fifo_generator_0_0/design_1_fifo_generator_0_0/design_1_fifo_generator_0_0_in_context.xdc] for cell 'design_1_i/fifo_generator_0'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_fifo_generator_0_1/design_1_fifo_generator_0_1/design_1_fifo_generator_0_0_in_context.xdc] for cell 'design_1_i/fifo_generator_1'
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_fifo_generator_0_1/design_1_fifo_generator_0_1/design_1_fifo_generator_0_0_in_context.xdc] for cell 'design_1_i/fifo_generator_1'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_fifo_generator_0_2/design_1_fifo_generator_0_2/design_1_fifo_generator_0_0_in_context.xdc] for cell 'design_1_i/fifo_generator_2'
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_fifo_generator_0_2/design_1_fifo_generator_0_2/design_1_fifo_generator_0_0_in_context.xdc] for cell 'design_1_i/fifo_generator_2'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_fifo_generator_0_3/design_1_fifo_generator_0_3/design_1_fifo_generator_0_0_in_context.xdc] for cell 'design_1_i/fifo_generator_3'
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_fifo_generator_0_3/design_1_fifo_generator_0_3/design_1_fifo_generator_0_0_in_context.xdc] for cell 'design_1_i/fifo_generator_3'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_fifo_generator_0_4/design_1_fifo_generator_0_4/design_1_fifo_generator_0_0_in_context.xdc] for cell 'design_1_i/fifo_generator_4'
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_fifo_generator_0_4/design_1_fifo_generator_0_4/design_1_fifo_generator_0_0_in_context.xdc] for cell 'design_1_i/fifo_generator_4'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_fifo_generator_0_5/design_1_fifo_generator_0_5/design_1_fifo_generator_0_0_in_context.xdc] for cell 'design_1_i/fifo_generator_5'
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_fifo_generator_0_5/design_1_fifo_generator_0_5/design_1_fifo_generator_0_0_in_context.xdc] for cell 'design_1_i/fifo_generator_5'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_fifo_generator_0_6/design_1_fifo_generator_0_6/design_1_fifo_generator_0_0_in_context.xdc] for cell 'design_1_i/fifo_generator_6'
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_fifo_generator_0_6/design_1_fifo_generator_0_6/design_1_fifo_generator_0_0_in_context.xdc] for cell 'design_1_i/fifo_generator_6'
+Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_fifo_generator_0_7/design_1_fifo_generator_0_7/design_1_fifo_generator_0_0_in_context.xdc] for cell 'design_1_i/fifo_generator_7'
+Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_fifo_generator_0_7/design_1_fifo_generator_0_7/design_1_fifo_generator_0_0_in_context.xdc] for cell 'design_1_i/fifo_generator_7'
 Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_pc_0/design_1_auto_pc_0/design_1_auto_pc_0_in_context.xdc] for cell 'design_1_i/ps7_0_axi_periph/s00_couplers/auto_pc'
 Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_pc_0/design_1_auto_pc_0/design_1_auto_pc_0_in_context.xdc] for cell 'design_1_i/ps7_0_axi_periph/s00_couplers/auto_pc'
 Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_0/design_1_auto_us_0/design_1_auto_us_2_in_context.xdc] for cell 'design_1_i/axi_mem_intercon/s00_couplers/auto_us'
@@ -533,12 +551,6 @@ Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/pr
 Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_us_7/design_1_auto_us_7/design_1_auto_us_2_in_context.xdc] for cell 'design_1_i/axi_mem_intercon/s07_couplers/auto_us'
 Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_pc_1/design_1_auto_pc_1/design_1_auto_pc_1_in_context.xdc] for cell 'design_1_i/axi_mem_intercon/m00_couplers/auto_pc'
 Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_auto_pc_1/design_1_auto_pc_1/design_1_auto_pc_1_in_context.xdc] for cell 'design_1_i/axi_mem_intercon/m00_couplers/auto_pc'
-Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_or_0_0/design_1_or_0_0/design_1_or_0_0_in_context.xdc] for cell 'design_1_i/or_0'
-Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_or_0_0/design_1_or_0_0/design_1_or_0_0_in_context.xdc] for cell 'design_1_i/or_0'
-Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_input_trigger_0_0/design_1_input_trigger_0_0/design_1_input_trigger_0_0_in_context.xdc] for cell 'design_1_i/input_trigger_0'
-Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_input_trigger_0_0/design_1_input_trigger_0_0/design_1_input_trigger_0_0_in_context.xdc] for cell 'design_1_i/input_trigger_0'
-Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_4_0/design_1_axi_gpio_4_0/design_1_axi_gpio_3_0_in_context.xdc] for cell 'design_1_i/axi_gpio_4'
-Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_gpio_4_0/design_1_axi_gpio_4_0/design_1_axi_gpio_3_0_in_context.xdc] for cell 'design_1_i/axi_gpio_4'
 Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/constrs_1/imports/project_1.srcs/zedboard_master_XDC_RevC_D_v3.xdc]
 Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/constrs_1/imports/project_1.srcs/zedboard_master_XDC_RevC_D_v3.xdc]
 INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/constrs_1/imports/project_1.srcs/zedboard_master_XDC_RevC_D_v3.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/design_1_wrapper_propImpl.xdc].
@@ -547,20 +559,20 @@ Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/pr
 Finished Parsing XDC File [/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/dont_touch.xdc]
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2105.234 ; gain = 0.000 ; free physical = 945 ; free virtual = 2240
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2110.270 ; gain = 0.000 ; free physical = 127 ; free virtual = 2917
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00.03 ; elapsed = 00:00:00.03 . Memory (MB): peak = 2105.234 ; gain = 0.000 ; free physical = 945 ; free virtual = 2239
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.04 ; elapsed = 00:00:00.04 . Memory (MB): peak = 2110.270 ; gain = 0.000 ; free physical = 127 ; free virtual = 2917
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:32 ; elapsed = 00:00:37 . Memory (MB): peak = 2105.234 ; gain = 397.012 ; free physical = 1032 ; free virtual = 2327
+Finished Constraint Validation : Time (s): cpu = 00:00:32 ; elapsed = 00:00:37 . Memory (MB): peak = 2110.270 ; gain = 395.012 ; free physical = 208 ; free virtual = 2998
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7z020clg484-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:32 ; elapsed = 00:00:37 . Memory (MB): peak = 2105.234 ; gain = 397.012 ; free physical = 1032 ; free virtual = 2327
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:32 ; elapsed = 00:00:37 . Memory (MB): peak = 2110.270 ; gain = 395.012 ; free physical = 208 ; free virtual = 2998
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
@@ -853,14 +865,6 @@ Applied set_property DONT_TOUCH = true for design_1_i/enable_splitter_0. (constr
 Applied set_property DONT_TOUCH = true for design_1_i/axi_gpio_0. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for design_1_i/signal_input_0. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for design_1_i/util_vector_logic_0. (constraint file  auto generated constraint, line ).
-Applied set_property DONT_TOUCH = true for design_1_i/axis_data_fifo_0. (constraint file  auto generated constraint, line ).
-Applied set_property DONT_TOUCH = true for design_1_i/axis_data_fifo_1. (constraint file  auto generated constraint, line ).
-Applied set_property DONT_TOUCH = true for design_1_i/axis_data_fifo_2. (constraint file  auto generated constraint, line ).
-Applied set_property DONT_TOUCH = true for design_1_i/axis_data_fifo_3. (constraint file  auto generated constraint, line ).
-Applied set_property DONT_TOUCH = true for design_1_i/axis_data_fifo_4. (constraint file  auto generated constraint, line ).
-Applied set_property DONT_TOUCH = true for design_1_i/axis_data_fifo_5. (constraint file  auto generated constraint, line ).
-Applied set_property DONT_TOUCH = true for design_1_i/axis_data_fifo_6. (constraint file  auto generated constraint, line ).
-Applied set_property DONT_TOUCH = true for design_1_i/axis_data_fifo_7. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for design_1_i/util_vector_logic_1. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for design_1_i/util_vector_logic_2. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for design_1_i/util_vector_logic_3. (constraint file  auto generated constraint, line ).
@@ -871,12 +875,24 @@ Applied set_property DONT_TOUCH = true for design_1_i/util_vector_logic_7. (cons
 Applied set_property DONT_TOUCH = true for design_1_i/util_vector_logic_8. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for design_1_i/axi_gpio_1. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for design_1_i/signal_detector_6. (constraint file  auto generated constraint, line ).
-Applied set_property DONT_TOUCH = true for design_1_i/debounce_0. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for design_1_i/axi_gpio_2. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for design_1_i/signal_generator_0. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for design_1_i/input_selector_0. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for design_1_i/util_vector_logic_9. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for design_1_i/axi_gpio_3. (constraint file  auto generated constraint, line ).
+Applied set_property DONT_TOUCH = true for design_1_i/or_0. (constraint file  auto generated constraint, line ).
+Applied set_property DONT_TOUCH = true for design_1_i/input_trigger_0. (constraint file  auto generated constraint, line ).
+Applied set_property DONT_TOUCH = true for design_1_i/axi_gpio_4. (constraint file  auto generated constraint, line ).
+Applied set_property DONT_TOUCH = true for design_1_i/ip_8_to_1_and_7_0. (constraint file  auto generated constraint, line ).
+Applied set_property DONT_TOUCH = true for design_1_i/util_vector_logic_10. (constraint file  auto generated constraint, line ).
+Applied set_property DONT_TOUCH = true for design_1_i/fifo_generator_0. (constraint file  auto generated constraint, line ).
+Applied set_property DONT_TOUCH = true for design_1_i/fifo_generator_1. (constraint file  auto generated constraint, line ).
+Applied set_property DONT_TOUCH = true for design_1_i/fifo_generator_2. (constraint file  auto generated constraint, line ).
+Applied set_property DONT_TOUCH = true for design_1_i/fifo_generator_3. (constraint file  auto generated constraint, line ).
+Applied set_property DONT_TOUCH = true for design_1_i/fifo_generator_4. (constraint file  auto generated constraint, line ).
+Applied set_property DONT_TOUCH = true for design_1_i/fifo_generator_5. (constraint file  auto generated constraint, line ).
+Applied set_property DONT_TOUCH = true for design_1_i/fifo_generator_6. (constraint file  auto generated constraint, line ).
+Applied set_property DONT_TOUCH = true for design_1_i/fifo_generator_7. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for design_1_i/ps7_0_axi_periph/s00_couplers/auto_pc. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for design_1_i/axi_mem_intercon/s00_couplers/auto_us. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for design_1_i/axi_mem_intercon/s01_couplers/auto_us. (constraint file  auto generated constraint, line ).
@@ -887,14 +903,11 @@ Applied set_property DONT_TOUCH = true for design_1_i/axi_mem_intercon/s05_coupl
 Applied set_property DONT_TOUCH = true for design_1_i/axi_mem_intercon/s06_couplers/auto_us. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for design_1_i/axi_mem_intercon/s07_couplers/auto_us. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for design_1_i/axi_mem_intercon/m00_couplers/auto_pc. (constraint file  auto generated constraint, line ).
-Applied set_property DONT_TOUCH = true for design_1_i/or_0. (constraint file  auto generated constraint, line ).
-Applied set_property DONT_TOUCH = true for design_1_i/input_trigger_0. (constraint file  auto generated constraint, line ).
-Applied set_property DONT_TOUCH = true for design_1_i/axi_gpio_4. (constraint file  auto generated constraint, line ).
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:33 ; elapsed = 00:00:38 . Memory (MB): peak = 2105.234 ; gain = 397.012 ; free physical = 1032 ; free virtual = 2327
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:33 ; elapsed = 00:00:39 . Memory (MB): peak = 2110.270 ; gain = 395.012 ; free physical = 214 ; free virtual = 3004
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:34 ; elapsed = 00:00:39 . Memory (MB): peak = 2105.234 ; gain = 397.012 ; free physical = 1034 ; free virtual = 2330
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:34 ; elapsed = 00:00:39 . Memory (MB): peak = 2110.270 ; gain = 395.012 ; free physical = 217 ; free virtual = 3007
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -930,7 +943,7 @@ Start Cross Boundary and Area Optimization
 ---------------------------------------------------------------------------------
 Warning: Parallel synthesis criteria is not met 
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:36 ; elapsed = 00:00:41 . Memory (MB): peak = 2105.234 ; gain = 397.012 ; free physical = 1019 ; free virtual = 2320
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:37 ; elapsed = 00:00:42 . Memory (MB): peak = 2110.270 ; gain = 395.012 ; free physical = 202 ; free virtual = 2997
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -942,13 +955,13 @@ Report RTL Partitions:
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:54 ; elapsed = 00:01:01 . Memory (MB): peak = 2105.234 ; gain = 397.012 ; free physical = 897 ; free virtual = 2198
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:55 ; elapsed = 00:01:03 . Memory (MB): peak = 2110.270 ; gain = 395.012 ; free physical = 111 ; free virtual = 2877
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:54 ; elapsed = 00:01:01 . Memory (MB): peak = 2105.234 ; gain = 397.012 ; free physical = 897 ; free virtual = 2198
+Finished Timing Optimization : Time (s): cpu = 00:00:55 ; elapsed = 00:01:03 . Memory (MB): peak = 2110.270 ; gain = 395.012 ; free physical = 111 ; free virtual = 2877
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -960,7 +973,7 @@ Report RTL Partitions:
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:54 ; elapsed = 00:01:02 . Memory (MB): peak = 2105.234 ; gain = 397.012 ; free physical = 895 ; free virtual = 2196
+Finished Technology Mapping : Time (s): cpu = 00:00:56 ; elapsed = 00:01:04 . Memory (MB): peak = 2110.270 ; gain = 395.012 ; free physical = 109 ; free virtual = 2875
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -984,13 +997,13 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:01:06 ; elapsed = 00:01:14 . Memory (MB): peak = 2105.234 ; gain = 397.012 ; free physical = 885 ; free virtual = 2189
+Finished IO Insertion : Time (s): cpu = 00:01:08 ; elapsed = 00:01:16 . Memory (MB): peak = 2110.270 ; gain = 395.012 ; free physical = 109 ; free virtual = 2875
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:01:06 ; elapsed = 00:01:14 . Memory (MB): peak = 2105.234 ; gain = 397.012 ; free physical = 885 ; free virtual = 2189
+Finished Renaming Generated Instances : Time (s): cpu = 00:01:08 ; elapsed = 00:01:16 . Memory (MB): peak = 2110.270 ; gain = 395.012 ; free physical = 109 ; free virtual = 2875
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -1009,25 +1022,25 @@ Report Check Netlist:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:06 ; elapsed = 00:01:14 . Memory (MB): peak = 2105.234 ; gain = 397.012 ; free physical = 885 ; free virtual = 2189
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:08 ; elapsed = 00:01:16 . Memory (MB): peak = 2110.270 ; gain = 395.012 ; free physical = 109 ; free virtual = 2875
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:01:06 ; elapsed = 00:01:14 . Memory (MB): peak = 2105.234 ; gain = 397.012 ; free physical = 885 ; free virtual = 2189
+Finished Renaming Generated Ports : Time (s): cpu = 00:01:08 ; elapsed = 00:01:16 . Memory (MB): peak = 2110.270 ; gain = 395.012 ; free physical = 109 ; free virtual = 2875
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:01:06 ; elapsed = 00:01:14 . Memory (MB): peak = 2105.234 ; gain = 397.012 ; free physical = 885 ; free virtual = 2189
+Finished Handling Custom Attributes : Time (s): cpu = 00:01:08 ; elapsed = 00:01:16 . Memory (MB): peak = 2110.270 ; gain = 395.012 ; free physical = 109 ; free virtual = 2875
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:01:06 ; elapsed = 00:01:14 . Memory (MB): peak = 2105.234 ; gain = 397.012 ; free physical = 885 ; free virtual = 2189
+Finished Renaming Generated Nets : Time (s): cpu = 00:01:08 ; elapsed = 00:01:16 . Memory (MB): peak = 2110.270 ; gain = 395.012 ; free physical = 109 ; free virtual = 2875
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -1062,18 +1075,18 @@ Report BlackBoxes:
 |23    |design_1_axi_gpio_2_0           |         1|
 |24    |design_1_axi_gpio_3_0           |         1|
 |25    |design_1_axi_gpio_4_0           |         1|
-|26    |design_1_axis_data_fifo_0_0     |         1|
-|27    |design_1_axis_data_fifo_0_1     |         1|
-|28    |design_1_axis_data_fifo_0_2     |         1|
-|29    |design_1_axis_data_fifo_0_3     |         1|
-|30    |design_1_axis_data_fifo_0_4     |         1|
-|31    |design_1_axis_data_fifo_0_5     |         1|
-|32    |design_1_axis_data_fifo_0_6     |         1|
-|33    |design_1_axis_data_fifo_0_7     |         1|
-|34    |design_1_debounce_0_0           |         1|
-|35    |design_1_enable_splitter_0_0    |         1|
-|36    |design_1_input_selector_0_0     |         1|
-|37    |design_1_input_trigger_0_0      |         1|
+|26    |design_1_enable_splitter_0_0    |         1|
+|27    |design_1_fifo_generator_0_0     |         1|
+|28    |design_1_fifo_generator_0_1     |         1|
+|29    |design_1_fifo_generator_0_2     |         1|
+|30    |design_1_fifo_generator_0_3     |         1|
+|31    |design_1_fifo_generator_0_4     |         1|
+|32    |design_1_fifo_generator_0_5     |         1|
+|33    |design_1_fifo_generator_0_6     |         1|
+|34    |design_1_fifo_generator_0_7     |         1|
+|35    |design_1_input_selector_0_0     |         1|
+|36    |design_1_input_trigger_0_0      |         1|
+|37    |design_1_ip_8_to_1_and_7_0_0    |         1|
 |38    |design_1_or_0_0                 |         1|
 |39    |design_1_processing_system7_0_0 |         1|
 |40    |design_1_rst_ps7_0_100M_0       |         1|
@@ -1089,14 +1102,15 @@ Report BlackBoxes:
 |50    |design_1_signal_input_0_0       |         1|
 |51    |design_1_util_vector_logic_0_0  |         1|
 |52    |design_1_util_vector_logic_1_0  |         1|
-|53    |design_1_util_vector_logic_1_1  |         1|
-|54    |design_1_util_vector_logic_1_2  |         1|
-|55    |design_1_util_vector_logic_1_3  |         1|
-|56    |design_1_util_vector_logic_1_4  |         1|
-|57    |design_1_util_vector_logic_1_5  |         1|
-|58    |design_1_util_vector_logic_1_6  |         1|
-|59    |design_1_util_vector_logic_1_7  |         1|
-|60    |design_1_util_vector_logic_9_0  |         1|
+|53    |design_1_util_vector_logic_10_0 |         1|
+|54    |design_1_util_vector_logic_1_1  |         1|
+|55    |design_1_util_vector_logic_1_2  |         1|
+|56    |design_1_util_vector_logic_1_3  |         1|
+|57    |design_1_util_vector_logic_1_4  |         1|
+|58    |design_1_util_vector_logic_1_5  |         1|
+|59    |design_1_util_vector_logic_1_6  |         1|
+|60    |design_1_util_vector_logic_1_7  |         1|
+|61    |design_1_util_vector_logic_9_0  |         1|
 +------+--------------------------------+----------+
 
 Report Cell Usage: 
@@ -1126,18 +1140,18 @@ Report Cell Usage:
 |21    |design_1_axi_gpio_2_0           |     1|
 |22    |design_1_axi_gpio_3_0           |     1|
 |23    |design_1_axi_gpio_4_0           |     1|
-|24    |design_1_axis_data_fifo_0_0     |     1|
-|25    |design_1_axis_data_fifo_0_1     |     1|
-|26    |design_1_axis_data_fifo_0_2     |     1|
-|27    |design_1_axis_data_fifo_0_3     |     1|
-|28    |design_1_axis_data_fifo_0_4     |     1|
-|29    |design_1_axis_data_fifo_0_5     |     1|
-|30    |design_1_axis_data_fifo_0_6     |     1|
-|31    |design_1_axis_data_fifo_0_7     |     1|
-|32    |design_1_debounce_0_0           |     1|
-|33    |design_1_enable_splitter_0_0    |     1|
-|34    |design_1_input_selector_0_0     |     1|
-|35    |design_1_input_trigger_0_0      |     1|
+|24    |design_1_enable_splitter_0_0    |     1|
+|25    |design_1_fifo_generator_0_0     |     1|
+|26    |design_1_fifo_generator_0_1     |     1|
+|27    |design_1_fifo_generator_0_2     |     1|
+|28    |design_1_fifo_generator_0_3     |     1|
+|29    |design_1_fifo_generator_0_4     |     1|
+|30    |design_1_fifo_generator_0_5     |     1|
+|31    |design_1_fifo_generator_0_6     |     1|
+|32    |design_1_fifo_generator_0_7     |     1|
+|33    |design_1_input_selector_0_0     |     1|
+|34    |design_1_input_trigger_0_0      |     1|
+|35    |design_1_ip_8_to_1_and_7_0_0    |     1|
 |36    |design_1_or_0_0                 |     1|
 |37    |design_1_processing_system7_0_0 |     1|
 |38    |design_1_rst_ps7_0_100M_0       |     1|
@@ -1152,27 +1166,28 @@ Report Cell Usage:
 |47    |design_1_signal_generator_0_0   |     1|
 |48    |design_1_signal_input_0_0       |     1|
 |49    |design_1_util_vector_logic_0_0  |     1|
-|50    |design_1_util_vector_logic_1_0  |     1|
-|51    |design_1_util_vector_logic_1_1  |     1|
-|52    |design_1_util_vector_logic_1_2  |     1|
-|53    |design_1_util_vector_logic_1_3  |     1|
-|54    |design_1_util_vector_logic_1_4  |     1|
-|55    |design_1_util_vector_logic_1_5  |     1|
-|56    |design_1_util_vector_logic_1_6  |     1|
-|57    |design_1_util_vector_logic_1_7  |     1|
-|58    |design_1_util_vector_logic_9_0  |     1|
-|59    |design_1_xbar_0                 |     1|
-|60    |design_1_xbar_1                 |     1|
-|61    |IBUF                            |    18|
-|62    |OBUF                            |     9|
+|50    |design_1_util_vector_logic_10_0 |     1|
+|51    |design_1_util_vector_logic_1_0  |     1|
+|52    |design_1_util_vector_logic_1_1  |     1|
+|53    |design_1_util_vector_logic_1_2  |     1|
+|54    |design_1_util_vector_logic_1_3  |     1|
+|55    |design_1_util_vector_logic_1_4  |     1|
+|56    |design_1_util_vector_logic_1_5  |     1|
+|57    |design_1_util_vector_logic_1_6  |     1|
+|58    |design_1_util_vector_logic_1_7  |     1|
+|59    |design_1_util_vector_logic_9_0  |     1|
+|60    |design_1_xbar_0                 |     1|
+|61    |design_1_xbar_1                 |     1|
+|62    |IBUF                            |    18|
+|63    |OBUF                            |     9|
 +------+--------------------------------+------+
 
 Report Instance Areas: 
 +------+---------------------+----------------------------+------+
 |      |Instance             |Module                      |Cells |
 +------+---------------------+----------------------------+------+
-|1     |top                  |                            |  6588|
-|2     |  design_1_i         |design_1                    |  6561|
+|1     |top                  |                            |  6619|
+|2     |  design_1_i         |design_1                    |  6592|
 |3     |    axi_mem_intercon |design_1_axi_mem_intercon_0 |  2257|
 |4     |      m00_couplers   |m00_couplers_imp_1R706YB    |   275|
 |5     |      s00_couplers   |s00_couplers_imp_7HNO1D     |   142|
@@ -1189,26 +1204,26 @@ Report Instance Areas:
 |16    |    xlconcat_1       |design_1_xlconcat_0_1       |     0|
 +------+---------------------+----------------------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:01:06 ; elapsed = 00:01:14 . Memory (MB): peak = 2105.234 ; gain = 397.012 ; free physical = 885 ; free virtual = 2189
+Finished Writing Synthesis Report : Time (s): cpu = 00:01:08 ; elapsed = 00:01:16 . Memory (MB): peak = 2110.270 ; gain = 395.012 ; free physical = 109 ; free virtual = 2875
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 52 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:59 ; elapsed = 00:01:06 . Memory (MB): peak = 2105.234 ; gain = 280.371 ; free physical = 940 ; free virtual = 2245
-Synthesis Optimization Complete : Time (s): cpu = 00:01:06 ; elapsed = 00:01:14 . Memory (MB): peak = 2105.242 ; gain = 397.012 ; free physical = 940 ; free virtual = 2245
+Synthesis Optimization Runtime : Time (s): cpu = 00:01:00 ; elapsed = 00:01:08 . Memory (MB): peak = 2110.270 ; gain = 279.371 ; free physical = 165 ; free virtual = 2930
+Synthesis Optimization Complete : Time (s): cpu = 00:01:08 ; elapsed = 00:01:16 . Memory (MB): peak = 2110.277 ; gain = 395.012 ; free physical = 165 ; free virtual = 2930
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00.19 ; elapsed = 00:00:00.20 . Memory (MB): peak = 2105.242 ; gain = 0.000 ; free physical = 1012 ; free virtual = 2316
+Netlist sorting complete. Time (s): cpu = 00:00:00.20 ; elapsed = 00:00:00.21 . Memory (MB): peak = 2110.277 ; gain = 0.000 ; free physical = 232 ; free virtual = 2998
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2105.242 ; gain = 0.000 ; free physical = 951 ; free virtual = 2256
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2110.277 ; gain = 0.000 ; free physical = 175 ; free virtual = 2941
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
 INFO: [Common 17-83] Releasing license: Synthesis
-196 Infos, 120 Warnings, 0 Critical Warnings and 0 Errors encountered.
+198 Infos, 128 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:01:21 ; elapsed = 00:01:32 . Memory (MB): peak = 2105.242 ; gain = 633.586 ; free physical = 1075 ; free virtual = 2380
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2105.242 ; gain = 0.000 ; free physical = 1075 ; free virtual = 2380
+synth_design: Time (s): cpu = 00:01:23 ; elapsed = 00:01:34 . Memory (MB): peak = 2110.277 ; gain = 638.617 ; free physical = 300 ; free virtual = 3066
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2110.277 ; gain = 0.000 ; free physical = 300 ; free virtual = 3066
 WARNING: [Constraints 18-5210] No constraints selected for write.
 Resolution: This message can indicate that there are no constraints for the design, or it can indicate that the used_in flags are set such that the constraints are ignored. This later case is used when running synth_design to not write synthesis constraints to the resulting checkpoint. Instead, project constraints are read when the synthesized design is opened.
 INFO: [Common 17-1381] The checkpoint '/home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.runs/synth_1/design_1_wrapper.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file design_1_wrapper_utilization_synth.rpt -pb design_1_wrapper_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Fri Feb  7 00:37:17 2020...
+INFO: [Common 17-206] Exiting Vivado at Sun Feb  9 20:31:57 2020...

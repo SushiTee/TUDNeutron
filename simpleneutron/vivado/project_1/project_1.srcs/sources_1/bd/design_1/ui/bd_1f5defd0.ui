@@ -1,218 +1,221 @@
 {
    "ActiveEmotionalView":"Default View",
-   "Default View_ScaleFactor":"1.28215",
-   "Default View_TopLeft":"3005,0",
+   "Default View_ScaleFactor":"1.0975",
+   "Default View_TopLeft":"1400,1523",
    "ExpandedHierarchyInLayout":"",
    "PinnedBlocks":"",
    "PinnedPorts":"",
    "guistr":"# # String gsaved with Nlview 7.0.21  2019-05-29 bk=1.5064 VDI=41 GEI=36 GUI=JA:9.0 TLS
 #  -string -flagsOSRD
-preplace port DDR -pg 1 -lvl 10 -x 4550 -y 2670 -defaultsOSRD
-preplace port FIXED_IO -pg 1 -lvl 10 -x 4550 -y 2690 -defaultsOSRD
-preplace port trigger_out -pg 1 -lvl 10 -x 4550 -y 440 -defaultsOSRD
-preplace port trigger_input -pg 1 -lvl 0 -x 0 -y 1380 -defaultsOSRD
-preplace portBus leds_8bits1 -pg 1 -lvl 10 -x 4550 -y 680 -defaultsOSRD
-preplace portBus sws_8bits -pg 1 -lvl 0 -x 0 -y 1530 -defaultsOSRD
-preplace portBus pmod_input -pg 1 -lvl 0 -x 0 -y 1130 -defaultsOSRD
-preplace portBus btnc -pg 1 -lvl 0 -x 0 -y 1670 -defaultsOSRD
-preplace inst processing_system7_0 -pg 1 -lvl 9 -x 4280 -y 2750 -defaultsOSRD
-preplace inst axi_dma_0 -pg 1 -lvl 7 -x 3230 -y 2130 -defaultsOSRD
-preplace inst axi_dma_1 -pg 1 -lvl 7 -x 3230 -y 1360 -defaultsOSRD
-preplace inst axi_dma_2 -pg 1 -lvl 7 -x 3230 -y 1540 -defaultsOSRD
-preplace inst axi_dma_3 -pg 1 -lvl 7 -x 3230 -y 1720 -defaultsOSRD
-preplace inst axi_dma_4 -pg 1 -lvl 7 -x 3230 -y 2330 -defaultsOSRD
-preplace inst axi_dma_5 -pg 1 -lvl 7 -x 3230 -y 2720 -defaultsOSRD
-preplace inst axi_dma_6 -pg 1 -lvl 7 -x 3230 -y 2930 -defaultsOSRD
-preplace inst axi_dma_7 -pg 1 -lvl 7 -x 3230 -y 1920 -defaultsOSRD
-preplace inst ps7_0_axi_periph -pg 1 -lvl 6 -x 2670 -y 1640 -defaultsOSRD
-preplace inst rst_ps7_0_100M -pg 1 -lvl 2 -x 530 -y 2030 -defaultsOSRD
-preplace inst axi_mem_intercon -pg 1 -lvl 8 -x 3800 -y 2280 -defaultsOSRD
-preplace inst xlconcat_0 -pg 1 -lvl 8 -x 3800 -y 1760 -defaultsOSRD
-preplace inst xlconcat_1 -pg 1 -lvl 9 -x 4280 -y 680 -defaultsOSRD
-preplace inst enable_splitter_0 -pg 1 -lvl 1 -x 150 -y 1540 -defaultsOSRD
-preplace inst axi_gpio_0 -pg 1 -lvl 7 -x 3230 -y 750 -defaultsOSRD
-preplace inst signal_input_0 -pg 1 -lvl 2 -x 530 -y 1130 -defaultsOSRD
-preplace inst util_vector_logic_0 -pg 1 -lvl 4 -x 1520 -y 1710 -defaultsOSRD
-preplace inst axis_data_fifo_0 -pg 1 -lvl 6 -x 2670 -y 2090 -defaultsOSRD
-preplace inst axis_data_fifo_1 -pg 1 -lvl 6 -x 2670 -y 730 -defaultsOSRD
-preplace inst axis_data_fifo_2 -pg 1 -lvl 6 -x 2670 -y 890 -defaultsOSRD
-preplace inst axis_data_fifo_3 -pg 1 -lvl 6 -x 2670 -y 1120 -defaultsOSRD
-preplace inst axis_data_fifo_4 -pg 1 -lvl 6 -x 2670 -y 2370 -defaultsOSRD
-preplace inst axis_data_fifo_5 -pg 1 -lvl 6 -x 2670 -y 2230 -defaultsOSRD
-preplace inst axis_data_fifo_6 -pg 1 -lvl 6 -x 2670 -y 2530 -defaultsOSRD
-preplace inst axis_data_fifo_7 -pg 1 -lvl 6 -x 2670 -y 480 -defaultsOSRD
-preplace inst util_vector_logic_1 -pg 1 -lvl 5 -x 2050 -y 2200 -defaultsOSRD
-preplace inst util_vector_logic_2 -pg 1 -lvl 5 -x 2050 -y 70 -defaultsOSRD
-preplace inst util_vector_logic_3 -pg 1 -lvl 5 -x 2050 -y 190 -defaultsOSRD
-preplace inst util_vector_logic_4 -pg 1 -lvl 5 -x 2050 -y 940 -defaultsOSRD
-preplace inst util_vector_logic_5 -pg 1 -lvl 5 -x 2050 -y 2620 -defaultsOSRD
-preplace inst util_vector_logic_6 -pg 1 -lvl 5 -x 2050 -y 2340 -defaultsOSRD
-preplace inst util_vector_logic_7 -pg 1 -lvl 5 -x 2050 -y 2500 -defaultsOSRD
-preplace inst util_vector_logic_8 -pg 1 -lvl 5 -x 2050 -y 800 -defaultsOSRD
-preplace inst axi_gpio_1 -pg 1 -lvl 7 -x 3230 -y 2510 -defaultsOSRD
-preplace inst debounce_0 -pg 1 -lvl 3 -x 1030 -y 1690 -defaultsOSRD
-preplace inst axi_gpio_2 -pg 1 -lvl 7 -x 3230 -y 920 -defaultsOSRD
-preplace inst signal_generator_0 -pg 1 -lvl 3 -x 1030 -y 680 -defaultsOSRD
-preplace inst util_vector_logic_9 -pg 1 -lvl 2 -x 530 -y 800 -defaultsOSRD
-preplace inst input_selector_0 -pg 1 -lvl 4 -x 1520 -y 740 -defaultsOSRD
-preplace inst axi_gpio_3 -pg 1 -lvl 7 -x 3230 -y 1060 -defaultsOSRD
-preplace inst signal_detector_0 -pg 1 -lvl 5 -x 2050 -y 1810 -defaultsOSRD
-preplace inst signal_detector_1 -pg 1 -lvl 5 -x 2050 -y 380 -defaultsOSRD
-preplace inst signal_detector_2 -pg 1 -lvl 5 -x 2050 -y 580 -defaultsOSRD
-preplace inst signal_detector_3 -pg 1 -lvl 5 -x 2050 -y 1120 -defaultsOSRD
-preplace inst signal_detector_4 -pg 1 -lvl 5 -x 2050 -y 1360 -defaultsOSRD
-preplace inst signal_detector_5 -pg 1 -lvl 5 -x 2050 -y 1580 -defaultsOSRD
-preplace inst signal_detector_7 -pg 1 -lvl 3 -x 1030 -y 920 -defaultsOSRD
-preplace inst signal_detector_6 -pg 1 -lvl 5 -x 2050 -y 2040 -defaultsOSRD
-preplace inst or_0 -pg 1 -lvl 9 -x 4280 -y 440 -defaultsOSRD
-preplace inst input_trigger_0 -pg 1 -lvl 2 -x 530 -y 1390 -defaultsOSRD
-preplace inst axi_gpio_4 -pg 1 -lvl 7 -x 3230 -y 1200 -defaultsOSRD
-preplace netloc processing_system7_0_FCLK_CLK0 1 1 9 340 1690 790 500 NJ 500 1830 1920 2400 260 2980 2820 3630 2750 4050 2890 4510
-preplace netloc processing_system7_0_FCLK_RESET0_N 1 1 9 340 2410 NJ 2410 NJ 2410 NJ 2410 2260J 2620 NJ 2620 3620J 2610 NJ 2610 4520
-preplace netloc rst_ps7_0_100M_peripheral_aresetn 1 2 6 800 510 NJ 510 1790 1930 2510 1280 3010 2830 3650
-preplace netloc axi_dma_7_s2mm_introut 1 7 1 3430 1750n
-preplace netloc axi_dma_6_s2mm_introut 1 7 1 3590 1730n
-preplace netloc axi_dma_5_s2mm_introut 1 7 1 3510 1710n
-preplace netloc axi_dma_0_s2mm_introut 1 7 1 3420 1610n
-preplace netloc axi_dma_4_s2mm_introut 1 7 1 3470 1690n
-preplace netloc axi_dma_3_s2mm_introut 1 7 1 3410 1670n
-preplace netloc axi_dma_2_s2mm_introut 1 7 1 3510 1560n
-preplace netloc axi_dma_1_s2mm_introut 1 7 1 3570 1380n
-preplace netloc xlconcat_0_dout 1 8 1 4020 1760n
-preplace netloc signal_detector_5_signal_state 1 5 4 2370J 310 NJ 310 NJ 310 3970
-preplace netloc signal_detector_0_signal_state 1 5 4 2470 610 NJ 610 NJ 610 NJ
-preplace netloc signal_detector_4_signal_state 1 5 4 2330J 300 NJ 300 NJ 300 4010
-preplace netloc signal_detector_3_signal_state 1 5 4 2320J 320 3020J 660 NJ 660 3960
-preplace netloc signal_detector_2_signal_state 1 5 4 2250 340 3030J 640 NJ 640 3980J
-preplace netloc signal_detector_1_signal_state 1 5 4 2440 630 NJ 630 NJ 630 NJ
-preplace netloc xlconcat_1_dout 1 9 1 NJ 680
-preplace netloc enable_splitter_0_out7 1 1 2 300 870 NJ
-preplace netloc enable_splitter_0_out5 1 1 4 N 1570 NJ 1570 NJ 1570 1800J
-preplace netloc enable_splitter_0_out4 1 1 4 320 1260 730J 1300 1220J 1310 NJ
-preplace netloc enable_splitter_0_out3 1 1 4 310 1000 810J 1070 NJ 1070 NJ
-preplace netloc enable_splitter_0_out2 1 1 4 280 490 NJ 490 NJ 490 1880J
-preplace netloc enable_splitter_0_out1 1 1 4 270 330 NJ 330 NJ 330 NJ
-preplace netloc sws_8bits_1 1 0 8 20 270 NJ 270 NJ 270 NJ 270 NJ 270 2220J 250 NJ 250 3500
-preplace netloc axi_gpio_0_gpio_io_o 1 0 8 30 260 NJ 260 NJ 260 NJ 260 NJ 260 2210J 210 NJ 210 3560
-preplace netloc signal_input_0_out1 1 2 3 710J 450 NJ 450 1770
-preplace netloc signal_input_0_out2 1 2 3 740J 530 NJ 530 1850
-preplace netloc signal_input_0_out3 1 2 3 NJ 1120 NJ 1120 1800
-preplace netloc signal_input_0_out4 1 2 3 810 1270 NJ 1270 1800J
-preplace netloc signal_input_0_out5 1 2 3 780 1280 NJ 1280 1760J
-preplace netloc signal_input_0_out7 1 2 1 770 890n
-preplace netloc pmod_input_1 1 0 2 NJ 1130 NJ
-preplace netloc enable_splitter_0_out0 1 1 4 290 990 840J 1050 NJ 1050 1770J
-preplace netloc signal_input_0_out0 1 2 2 N 1060 1230J
-preplace netloc util_vector_logic_0_Res 1 4 1 1720 1710n
-preplace netloc axis_data_fifo_7_prog_full 1 6 2 3010J 500 3580
-preplace netloc axis_data_fifo_6_prog_full 1 6 2 2830J 2610 3600
-preplace netloc axis_data_fifo_5_prog_full 1 6 2 3050 2230 3520J
-preplace netloc axis_data_fifo_4_prog_full 1 6 2 2870 2430 3550J
-preplace netloc axis_data_fifo_3_prog_full 1 6 2 2910J 2600 3540
-preplace netloc axis_data_fifo_2_prog_full 1 6 2 2900J 1820 3440
-preplace netloc axis_data_fifo_1_prog_full 1 6 2 3030J 2020 3460
-preplace netloc axis_data_fifo_0_prog_full 1 6 2 3050 2030 3450J
-preplace netloc signal_detector_0_fifo_reset 1 4 2 1900 1700 2200
-preplace netloc signal_detector_2_fifo_reset 1 4 2 1900 870 2210
-preplace netloc signal_detector_3_fifo_reset 1 4 2 1900 1470 2210
-preplace netloc signal_detector_4_fifo_reset 1 4 2 1890 1690 2200
-preplace netloc signal_detector_5_fifo_reset 1 4 2 1900 2270 2210
-preplace netloc signal_detector_1_fifo_reset 1 4 2 1890 1240 2220
-preplace netloc util_vector_logic_2_Res 1 5 4 2460 200 NJ 200 NJ 200 4050J
-preplace netloc util_vector_logic_7_Res 1 5 4 2480 350 3040J 490 NJ 490 NJ
-preplace netloc util_vector_logic_8_Res 1 5 4 2230 230 NJ 230 NJ 230 4030
-preplace netloc util_vector_logic_4_Res 1 5 4 2510 640 2900J 460 NJ 460 3950
-preplace netloc util_vector_logic_6_Res 1 5 4 2500 650 2940J 480 NJ 480 4020J
-preplace netloc util_vector_logic_5_Res 1 5 4 2250 620 2910J 470 NJ 470 4000
-preplace netloc util_vector_logic_3_Res 1 5 4 2430 220 NJ 220 NJ 220 4040J
-preplace netloc util_vector_logic_1_Res 1 5 4 2420 330 NJ 330 NJ 330 4020J
-preplace netloc axi_gpio_1_gpio_io_o 1 2 6 830 470 NJ 470 1810 2430 2270J 2450 2850J 2590 3420
-preplace netloc signal_detector_6_signal_state 1 5 4 2290 240 NJ 240 NJ 240 3990J
-preplace netloc signal_detector_6_fifo_reset 1 4 2 1900 2420 2200
-preplace netloc enable_splitter_0_out6 1 1 4 NJ 1590 NJ 1590 NJ 1590 1710
-preplace netloc signal_input_0_out6 1 2 3 760 1290 NJ 1290 1730J
-preplace netloc btnc_1 1 0 3 NJ 1670 NJ 1670 NJ
-preplace netloc debounce_0_signal_out 1 3 1 1220 1690n
-preplace netloc util_vector_logic_9_Res 1 2 1 730 650n
-preplace netloc Net 1 1 7 340 550 NJ 550 1240 1300 1880J 1250 2490J 810 3040J 830 3420
-preplace netloc signal_detector_7_m00_axis_tdata 1 3 1 1290 710n
-preplace netloc signal_detector_7_m00_axis_tkeep 1 3 1 1300 730n
-preplace netloc signal_detector_7_m00_axis_tlast 1 3 1 1310 750n
-preplace netloc signal_detector_7_m00_axis_tvalid 1 3 1 1320 770n
-preplace netloc input_selector_0_m00_axis_tvalid 1 4 2 N 710 2380J
-preplace netloc input_selector_0_m00_axis_tdata 1 4 2 N 730 2340J
-preplace netloc input_selector_0_m00_axis_tkeep 1 4 2 1800 720 2350J
-preplace netloc input_selector_0_m00_axis_tlast 1 4 2 1880 1010 2390J
-preplace netloc axis_data_fifo_7_s_axis_tready 1 3 3 1330 540 1840J 700 2360
-preplace netloc input_selector_0_s01_axis_tready 1 3 2 NJ 950 1770
-preplace netloc input_selector_0_s00_axis_tready 1 3 2 1250 550 1770
-preplace netloc signal_generator_0_m00_axis_tdata 1 3 1 N 630
-preplace netloc signal_generator_0_m00_axis_tlast 1 3 1 1270 650n
-preplace netloc signal_generator_0_m00_axis_tvalid 1 3 1 1260 670n
-preplace netloc signal_generator_0_m00_axis_tkeep 1 3 1 1280 650n
-preplace netloc input_selector_0_fifo_reset 1 4 1 N 810
-preplace netloc signal_generator_0_fifo_reset 1 3 1 1220 730n
-preplace netloc signal_detector_7_fifo_reset 1 3 1 1340 870n
-preplace netloc signal_generator_0_signal_state 1 3 1 1230 710n
-preplace netloc input_selector_0_signal_state 1 4 5 1780J 1230 2280J 270 3050J 650 NJ 650 3950
-preplace netloc signal_detector_7_signal_state 1 3 1 1330 830n
-preplace netloc or_0_out0 1 9 1 NJ 440
-preplace netloc input_trigger_0_trigger_out2 1 2 3 750J 520 NJ 520 1860
-preplace netloc input_trigger_0_trigger_out3 1 2 3 820J 1260 NJ 1260 1820
-preplace netloc input_trigger_0_trigger_out7 1 2 1 830 930n
-preplace netloc input_trigger_0_trigger_out4 1 2 3 840 1370 NJ 1370 NJ
-preplace netloc input_trigger_0_trigger_out1 1 2 3 720J 460 NJ 460 1780
-preplace netloc input_trigger_0_trigger_out5 1 2 3 750 1550 NJ 1550 1750J
-preplace netloc input_trigger_0_trigger_out0 1 2 3 770 1360 NJ 1360 1740J
-preplace netloc input_trigger_0_trigger_out6 1 2 3 720 1560 NJ 1560 1700J
-preplace netloc axi_gpio_4_gpio_io_o 1 1 7 330 480 NJ 480 NJ 480 1870J 690 2240J 290 NJ 290 3570
-preplace netloc trigger_input_1 1 0 2 NJ 1380 NJ
-preplace netloc axi_dma_0_M_AXI_S2MM 1 7 1 3530 2010n
-preplace netloc ps7_0_axi_periph_M08_AXI 1 6 1 2940 730n
-preplace netloc ps7_0_axi_periph_M04_AXI 1 6 1 2920 1600n
-preplace netloc axis_data_fifo_3_M_AXIS 1 6 1 3020 1110n
-preplace netloc signal_detector_1_M00_AXIS 1 5 1 2450 360n
-preplace netloc signal_detector_2_M00_AXIS 1 5 1 2410 560n
-preplace netloc ps7_0_axi_periph_M00_AXI 1 6 1 2950 1520n
-preplace netloc ps7_0_axi_periph_M01_AXI 1 6 1 2970 1320n
-preplace netloc axis_data_fifo_2_M_AXIS 1 6 1 3040 880n
-preplace netloc axi_dma_2_M_AXI_S2MM 1 7 1 3500 1520n
-preplace netloc processing_system7_0_FIXED_IO 1 9 1 NJ 2690
-preplace netloc processing_system7_0_DDR 1 9 1 NJ 2670
-preplace netloc ps7_0_axi_periph_M06_AXI 1 6 1 2860 1640n
-preplace netloc signal_detector_4_M00_AXIS 1 5 1 2320 1340n
-preplace netloc axis_data_fifo_7_M_AXIS 1 6 1 2840 470n
-preplace netloc ps7_0_axi_periph_M03_AXI 1 6 1 2990 1580n
-preplace netloc axi_dma_1_M_AXI_S2MM 1 7 1 3560 1340n
-preplace netloc axi_dma_7_M_AXI_S2MM 1 7 1 3480 1900n
-preplace netloc axi_mem_intercon_M00_AXI 1 8 1 3970 2280n
-preplace netloc signal_detector_5_M00_AXIS 1 5 1 2310 1560n
-preplace netloc signal_detector_3_M00_AXIS 1 5 1 N 1100
-preplace netloc ps7_0_axi_periph_M10_AXI 1 6 1 2960 900n
-preplace netloc signal_detector_0_M00_AXIS 1 5 1 2300 1790n
-preplace netloc processing_system7_0_M_AXI_GP0 1 5 5 2520 280 NJ 280 NJ 280 NJ 280 4530
-preplace netloc axis_data_fifo_5_M_AXIS 1 6 1 2840 2220n
-preplace netloc ps7_0_axi_periph_M02_AXI 1 6 1 2860 1500n
-preplace netloc axi_dma_4_M_AXI_S2MM 1 7 1 3580 2090n
-preplace netloc axi_dma_6_M_AXI_S2MM 1 7 1 3640 2130n
-preplace netloc ps7_0_axi_periph_M05_AXI 1 6 1 2880 1620n
-preplace netloc axis_data_fifo_4_M_AXIS 1 6 1 3050 2310n
-preplace netloc ps7_0_axi_periph_M07_AXI 1 6 1 2930 1660n
-preplace netloc axis_data_fifo_1_M_AXIS 1 6 1 3050 720n
-preplace netloc axi_dma_3_M_AXI_S2MM 1 7 1 3490 1700n
-preplace netloc signal_detector_6_M00_AXIS 1 5 1 2280 2020n
-preplace netloc axis_data_fifo_0_M_AXIS 1 6 1 2900 2080n
-preplace netloc ps7_0_axi_periph_M09_AXI 1 6 1 2890 1700n
-preplace netloc axis_data_fifo_6_M_AXIS 1 6 1 2820 2520n
-preplace netloc axi_dma_5_M_AXI_S2MM 1 7 1 3610 2110n
-preplace netloc ps7_0_axi_periph_M11_AXI 1 6 1 2850 1040n
-preplace netloc ps7_0_axi_periph_M12_AXI 1 6 1 3000 1180n
-levelinfo -pg 1 0 150 530 1030 1520 2050 2670 3230 3800 4280 4550
-pagesize -pg 1 -db -bbox -sgen -170 0 4720 3030
+preplace port DDR -pg 1 -lvl 10 -x 4680 -y 2290 -defaultsOSRD
+preplace port FIXED_IO -pg 1 -lvl 10 -x 4680 -y 2310 -defaultsOSRD
+preplace port trigger_out -pg 1 -lvl 10 -x 4680 -y 130 -defaultsOSRD
+preplace port trigger_input -pg 1 -lvl 0 -x 0 -y 1090 -defaultsOSRD
+preplace portBus leds_8bits1 -pg 1 -lvl 10 -x 4680 -y 370 -defaultsOSRD
+preplace portBus sws_8bits -pg 1 -lvl 0 -x 0 -y 1330 -defaultsOSRD
+preplace portBus pmod_input -pg 1 -lvl 0 -x 0 -y 960 -defaultsOSRD
+preplace portBus btnc -pg 1 -lvl 0 -x 0 -y 570 -defaultsOSRD
+preplace inst processing_system7_0 -pg 1 -lvl 9 -x 4420 -y 2370 -defaultsOSRD
+preplace inst axi_dma_0 -pg 1 -lvl 7 -x 3450 -y 1570 -defaultsOSRD
+preplace inst axi_dma_1 -pg 1 -lvl 7 -x 3450 -y 1010 -defaultsOSRD
+preplace inst axi_dma_2 -pg 1 -lvl 7 -x 3450 -y 1190 -defaultsOSRD
+preplace inst axi_dma_3 -pg 1 -lvl 7 -x 3450 -y 2360 -defaultsOSRD
+preplace inst axi_dma_4 -pg 1 -lvl 7 -x 3450 -y 1750 -defaultsOSRD
+preplace inst axi_dma_5 -pg 1 -lvl 7 -x 3450 -y 1980 -defaultsOSRD
+preplace inst axi_dma_6 -pg 1 -lvl 7 -x 3450 -y 2180 -defaultsOSRD
+preplace inst axi_dma_7 -pg 1 -lvl 7 -x 3450 -y 1390 -defaultsOSRD
+preplace inst ps7_0_axi_periph -pg 1 -lvl 6 -x 2820 -y 1200 -defaultsOSRD
+preplace inst rst_ps7_0_100M -pg 1 -lvl 2 -x 630 -y 860 -defaultsOSRD
+preplace inst axi_mem_intercon -pg 1 -lvl 8 -x 3960 -y 1500 -defaultsOSRD
+preplace inst xlconcat_0 -pg 1 -lvl 8 -x 3960 -y 2020 -defaultsOSRD
+preplace inst xlconcat_1 -pg 1 -lvl 9 -x 4420 -y 370 -defaultsOSRD
+preplace inst enable_splitter_0 -pg 1 -lvl 1 -x 160 -y 1340 -defaultsOSRD
+preplace inst axi_gpio_0 -pg 1 -lvl 7 -x 3450 -y 340 -defaultsOSRD
+preplace inst signal_input_0 -pg 1 -lvl 1 -x 160 -y 960 -defaultsOSRD
+preplace inst util_vector_logic_0 -pg 1 -lvl 4 -x 1590 -y 1020 -defaultsOSRD
+preplace inst util_vector_logic_1 -pg 1 -lvl 5 -x 2180 -y 2220 -defaultsOSRD
+preplace inst util_vector_logic_2 -pg 1 -lvl 5 -x 2180 -y 2100 -defaultsOSRD
+preplace inst util_vector_logic_3 -pg 1 -lvl 5 -x 2180 -y 900 -defaultsOSRD
+preplace inst util_vector_logic_4 -pg 1 -lvl 5 -x 2180 -y 2480 -defaultsOSRD
+preplace inst util_vector_logic_5 -pg 1 -lvl 5 -x 2180 -y 2340 -defaultsOSRD
+preplace inst util_vector_logic_6 -pg 1 -lvl 5 -x 2180 -y 2600 -defaultsOSRD
+preplace inst util_vector_logic_7 -pg 1 -lvl 5 -x 2180 -y 2720 -defaultsOSRD
+preplace inst util_vector_logic_8 -pg 1 -lvl 5 -x 2180 -y 1950 -defaultsOSRD
+preplace inst axi_gpio_1 -pg 1 -lvl 7 -x 3450 -y 510 -defaultsOSRD
+preplace inst axi_gpio_2 -pg 1 -lvl 7 -x 3450 -y 2540 -defaultsOSRD
+preplace inst util_vector_logic_9 -pg 1 -lvl 2 -x 630 -y 1330 -defaultsOSRD
+preplace inst input_selector_0 -pg 1 -lvl 4 -x 1590 -y 710 -defaultsOSRD
+preplace inst axi_gpio_3 -pg 1 -lvl 7 -x 3450 -y 670 -defaultsOSRD
+preplace inst input_trigger_0 -pg 1 -lvl 2 -x 630 -y 1100 -defaultsOSRD
+preplace inst axi_gpio_4 -pg 1 -lvl 7 -x 3450 -y 830 -defaultsOSRD
+preplace inst or_0 -pg 1 -lvl 9 -x 4420 -y 130 -defaultsOSRD
+preplace inst ip_8_to_1_and_7_0 -pg 1 -lvl 1 -x 160 -y 1160 -defaultsOSRD
+preplace inst util_vector_logic_10 -pg 1 -lvl 2 -x 630 -y 560 -defaultsOSRD
+preplace inst fifo_generator_0 -pg 1 -lvl 6 -x 2820 -y 1790 -defaultsOSRD
+preplace inst fifo_generator_1 -pg 1 -lvl 6 -x 2820 -y 1630 -defaultsOSRD
+preplace inst fifo_generator_2 -pg 1 -lvl 6 -x 2820 -y 660 -defaultsOSRD
+preplace inst fifo_generator_3 -pg 1 -lvl 6 -x 2820 -y 2310 -defaultsOSRD
+preplace inst fifo_generator_4 -pg 1 -lvl 6 -x 2820 -y 1970 -defaultsOSRD
+preplace inst fifo_generator_5 -pg 1 -lvl 6 -x 2820 -y 2150 -defaultsOSRD
+preplace inst fifo_generator_6 -pg 1 -lvl 6 -x 2820 -y 2490 -defaultsOSRD
+preplace inst fifo_generator_7 -pg 1 -lvl 6 -x 2820 -y 460 -defaultsOSRD
+preplace inst signal_detector_0 -pg 1 -lvl 5 -x 2180 -y 260 -defaultsOSRD
+preplace inst signal_detector_1 -pg 1 -lvl 5 -x 2180 -y 460 -defaultsOSRD
+preplace inst signal_detector_2 -pg 1 -lvl 5 -x 2180 -y 660 -defaultsOSRD
+preplace inst signal_detector_3 -pg 1 -lvl 5 -x 2180 -y 1060 -defaultsOSRD
+preplace inst signal_detector_4 -pg 1 -lvl 5 -x 2180 -y 1260 -defaultsOSRD
+preplace inst signal_detector_5 -pg 1 -lvl 5 -x 2180 -y 1490 -defaultsOSRD
+preplace inst signal_detector_7 -pg 1 -lvl 3 -x 1130 -y 790 -defaultsOSRD
+preplace inst signal_detector_6 -pg 1 -lvl 5 -x 2180 -y 1710 -defaultsOSRD
+preplace inst signal_generator_0 -pg 1 -lvl 3 -x 1130 -y 550 -defaultsOSRD
+preplace netloc processing_system7_0_FCLK_CLK0 1 1 9 450 700 930 410 NJ 410 1910 130 2420 330 3200 1290 3690 2230 4180 2230 4650
+preplace netloc processing_system7_0_FCLK_RESET0_N 1 1 9 450 2790 NJ 2790 NJ 2790 NJ 2790 NJ 2790 NJ 2790 NJ 2790 NJ 2790 4650
+preplace netloc rst_ps7_0_100M_peripheral_aresetn 1 2 6 860 420 NJ 420 1930 830 2530 830 3070 1850 3720
+preplace netloc axi_dma_7_s2mm_introut 1 7 1 3650 1410n
+preplace netloc axi_dma_6_s2mm_introut 1 7 1 3790 1990n
+preplace netloc axi_dma_5_s2mm_introut 1 7 1 3760 1970n
+preplace netloc axi_dma_0_s2mm_introut 1 7 1 3670 1590n
+preplace netloc axi_dma_4_s2mm_introut 1 7 1 3680 1770n
+preplace netloc axi_dma_3_s2mm_introut 1 7 1 3780 1930n
+preplace netloc axi_dma_2_s2mm_introut 1 7 1 3780 1210n
+preplace netloc axi_dma_1_s2mm_introut 1 7 1 3790 1030n
+preplace netloc xlconcat_0_dout 1 8 1 4130 2020n
+preplace netloc signal_detector_5_signal_state 1 5 4 2460 240 NJ 240 NJ 240 4180
+preplace netloc signal_detector_0_signal_state 1 5 4 N 260 NJ 260 NJ 260 4140
+preplace netloc signal_detector_4_signal_state 1 5 4 2440 230 NJ 230 NJ 230 4170
+preplace netloc signal_detector_3_signal_state 1 5 4 2390 220 NJ 220 NJ 220 4160
+preplace netloc signal_detector_2_signal_state 1 5 4 2380 210 NJ 210 NJ 210 4150
+preplace netloc signal_detector_1_signal_state 1 5 4 2370 200 NJ 200 NJ 200 4110
+preplace netloc xlconcat_1_dout 1 9 1 NJ 370
+preplace netloc enable_splitter_0_out7 1 1 2 410 730 890
+preplace netloc enable_splitter_0_out5 1 1 4 430J 1250 NJ 1250 NJ 1250 1790
+preplace netloc enable_splitter_0_out4 1 1 4 420J 1240 940J 1220 NJ 1220 1960
+preplace netloc enable_splitter_0_out3 1 1 4 380J 720 880J 920 NJ 920 1890
+preplace netloc enable_splitter_0_out2 1 1 4 400J 1230 NJ 1230 NJ 1230 1820
+preplace netloc enable_splitter_0_out1 1 1 4 310J 340 NJ 340 NJ 340 1980
+preplace netloc sws_8bits_1 1 0 8 20 80 NJ 80 NJ 80 NJ 80 NJ 80 2530J 180 NJ 180 3640
+preplace netloc axi_gpio_0_gpio_io_o 1 0 8 30 30 NJ 30 NJ 30 NJ 30 NJ 30 NJ 30 NJ 30 3690
+preplace netloc signal_input_0_out1 1 1 4 290J 390 NJ 390 NJ 390 1950
+preplace netloc signal_input_0_out2 1 1 4 280J 350 NJ 350 NJ 350 1970
+preplace netloc signal_input_0_out3 1 1 4 370 960 NJ 960 1400J 930 1870J
+preplace netloc signal_input_0_out4 1 1 4 N 970 NJ 970 1410J 950 1850J
+preplace netloc signal_input_0_out5 1 1 4 360 760 820J 930 1390J 910 1860J
+preplace netloc signal_input_0_out7 1 1 2 330 710 900J
+preplace netloc pmod_input_1 1 0 1 NJ 960
+preplace netloc enable_splitter_0_out0 1 1 4 300J 320 NJ 320 NJ 320 1820
+preplace netloc signal_input_0_out0 1 1 3 320 740 840J 1010 NJ
+preplace netloc util_vector_logic_0_Res 1 4 1 1880 230n
+preplace netloc signal_detector_0_fifo_reset 1 4 2 1990 120 2350
+preplace netloc signal_detector_2_fifo_reset 1 4 2 2030 150 2330
+preplace netloc signal_detector_3_fifo_reset 1 4 2 2000 1370 2350
+preplace netloc signal_detector_4_fifo_reset 1 4 2 2030 1380 2330
+preplace netloc signal_detector_5_fifo_reset 1 4 2 2030 2410 2350
+preplace netloc signal_detector_1_fifo_reset 1 4 2 2020 140 2340
+preplace netloc axi_gpio_1_gpio_io_o 1 2 6 940 310 NJ 310 1900 50 NJ 50 NJ 50 3630
+preplace netloc signal_detector_6_signal_state 1 5 4 2480 250 NJ 250 NJ 250 4190
+preplace netloc signal_detector_6_fifo_reset 1 4 2 2010 1600 2330
+preplace netloc enable_splitter_0_out6 1 1 4 440 1260 NJ 1260 NJ 1260 1780J
+preplace netloc signal_input_0_out6 1 1 4 350 750 830J 940 NJ 940 1810J
+preplace netloc util_vector_logic_9_Res 1 2 1 910 500n
+preplace netloc signal_detector_7_m00_axis_tdata 1 3 1 1320 680n
+preplace netloc signal_detector_7_m00_axis_tkeep 1 3 1 1330 700n
+preplace netloc signal_detector_7_m00_axis_tlast 1 3 1 1350 720n
+preplace netloc signal_detector_7_m00_axis_tvalid 1 3 1 1370 740n
+preplace netloc input_selector_0_s01_axis_tready 1 3 2 1320J 900 1770
+preplace netloc input_selector_0_s00_axis_tready 1 3 2 1360J 520 1770
+preplace netloc signal_generator_0_m00_axis_tdata 1 3 1 1390 500n
+preplace netloc signal_generator_0_m00_axis_tlast 1 3 1 1320 520n
+preplace netloc signal_generator_0_m00_axis_tvalid 1 3 1 1370 540n
+preplace netloc signal_generator_0_m00_axis_tkeep 1 3 1 N 620
+preplace netloc input_selector_0_fifo_reset 1 4 1 1830 780n
+preplace netloc signal_generator_0_fifo_reset 1 3 1 1340 600n
+preplace netloc signal_detector_7_fifo_reset 1 3 1 1410 840n
+preplace netloc signal_generator_0_signal_state 1 3 1 1360 580n
+preplace netloc input_selector_0_signal_state 1 4 5 1810 90 2510J 190 NJ 190 NJ 190 4120
+preplace netloc signal_detector_7_signal_state 1 3 1 1400 800n
+preplace netloc input_trigger_0_trigger_out2 1 2 3 870J 380 NJ 380 1940
+preplace netloc input_trigger_0_trigger_out3 1 2 3 NJ 1090 NJ 1090 1800
+preplace netloc input_trigger_0_trigger_out7 1 2 1 920 800n
+preplace netloc input_trigger_0_trigger_out4 1 2 3 NJ 1110 NJ 1110 1840
+preplace netloc input_trigger_0_trigger_out1 1 2 3 850J 370 NJ 370 1960
+preplace netloc input_trigger_0_trigger_out5 1 2 3 NJ 1130 NJ 1130 1800
+preplace netloc input_trigger_0_trigger_out0 1 2 3 810J 330 NJ 330 1860
+preplace netloc input_trigger_0_trigger_out6 1 2 3 NJ 1150 NJ 1150 1770
+preplace netloc axi_gpio_4_gpio_io_o 1 1 7 440 60 NJ 60 NJ 60 NJ 60 NJ 60 NJ 60 3670
+preplace netloc trigger_input_1 1 0 2 NJ 1090 NJ
+preplace netloc or_0_out0 1 9 1 NJ 130
+preplace netloc axi_gpio_3_gpio_io_o 1 0 8 40 40 NJ 40 NJ 40 NJ 40 NJ 40 NJ 40 NJ 40 3710
+preplace netloc btnc_1 1 0 4 NJ 570 340 360 NJ 360 1380J
+preplace netloc ip_8_to_1_and_7_0_out0 1 1 3 390 400 NJ 400 1400
+preplace netloc ip_8_to_1_and_7_0_out1 1 1 2 340 630 900J
+preplace netloc util_vector_logic_10_Res 1 2 1 N 560
+preplace netloc fifo_generator_7_s_axis_tready 1 3 3 1410 70 NJ 70 2520J
+preplace netloc input_selector_0_m00_axis_tvalid 1 4 2 1800J 100 2490
+preplace netloc input_selector_0_m00_axis_tdata 1 4 2 1980J 770 2400
+preplace netloc input_selector_0_m00_axis_tkeep 1 4 2 1920J 780 2450
+preplace netloc input_selector_0_m00_axis_tlast 1 4 2 1830J 110 2500
+preplace netloc fifo_generator_7_axis_overflow 1 6 2 3040J 430 3750
+preplace netloc fifo_generator_0_axis_overflow 1 6 2 3130J 1870 3660
+preplace netloc fifo_generator_2_axis_overflow 1 6 2 3060J 590 3770
+preplace netloc fifo_generator_4_axis_overflow 1 6 2 3170 1880 3670J
+preplace netloc fifo_generator_5_axis_overflow 1 6 2 3110J 2460 3800
+preplace netloc fifo_generator_6_axis_overflow 1 6 2 3030J 2620 3810
+preplace netloc fifo_generator_3_axis_overflow 1 6 2 3080J 2080 3660
+preplace netloc fifo_generator_1_axis_overflow 1 6 2 3140 1860 3700J
+preplace netloc util_vector_logic_8_Res 1 5 1 2340 530n
+preplace netloc util_vector_logic_7_Res 1 5 1 2540 2510n
+preplace netloc util_vector_logic_6_Res 1 5 1 2530 2170n
+preplace netloc util_vector_logic_5_Res 1 5 1 2520 1990n
+preplace netloc util_vector_logic_4_Res 1 5 1 2540 2330n
+preplace netloc util_vector_logic_1_Res 1 5 1 2510 1810n
+preplace netloc util_vector_logic_3_Res 1 5 1 2520 680n
+preplace netloc util_vector_logic_2_Res 1 5 1 2500 1650n
+preplace netloc processing_system7_0_DDR 1 9 1 NJ 2290
+preplace netloc ps7_0_axi_periph_M06_AXI 1 6 1 3150 1200n
+preplace netloc signal_detector_5_M00_AXIS 1 5 1 2370 1470n
+preplace netloc ps7_0_axi_periph_M11_AXI 1 6 1 3140 650n
+preplace netloc ps7_0_axi_periph_M05_AXI 1 6 1 3180 1180n
+preplace netloc ps7_0_axi_periph_M10_AXI 1 6 1 3120 1280n
+preplace netloc axi_dma_6_M_AXI_S2MM 1 7 1 3740 1350n
+preplace netloc signal_detector_2_M00_AXIS 1 5 1 N 640
+preplace netloc signal_detector_4_M00_AXIS 1 5 1 2410 1240n
+preplace netloc signal_detector_6_M00_AXIS 1 5 1 2360 1690n
+preplace netloc fifo_generator_1_M_AXIS 1 6 1 3210 990n
+preplace netloc axi_dma_4_M_AXI_S2MM 1 7 1 3680 1310n
+preplace netloc axi_dma_2_M_AXI_S2MM 1 7 1 3800 1170n
+preplace netloc axi_dma_7_M_AXI_S2MM 1 7 1 N 1370
+preplace netloc axi_dma_3_M_AXI_S2MM 1 7 1 3730 1290n
+preplace netloc axi_dma_1_M_AXI_S2MM 1 7 1 3810 990n
+preplace netloc processing_system7_0_M_AXI_GP0 1 5 5 2540 170 NJ 170 NJ 170 4130J 500 4660
+preplace netloc axi_dma_5_M_AXI_S2MM 1 7 1 3710 1330n
+preplace netloc ps7_0_axi_periph_M02_AXI 1 6 1 3250 1120n
+preplace netloc processing_system7_0_FIXED_IO 1 9 1 NJ 2310
+preplace netloc ps7_0_axi_periph_M03_AXI 1 6 1 3190 1140n
+preplace netloc ps7_0_axi_periph_M01_AXI 1 6 1 3120 970n
+preplace netloc ps7_0_axi_periph_M09_AXI 1 6 1 3080 490n
+preplace netloc fifo_generator_4_M_AXIS 1 6 1 3160 1730n
+preplace netloc ps7_0_axi_periph_M07_AXI 1 6 1 3220 1220n
+preplace netloc fifo_generator_7_M_AXIS 1 6 1 3030 430n
+preplace netloc axi_dma_0_M_AXI_S2MM 1 7 1 3670 1230n
+preplace netloc signal_detector_3_M00_AXIS 1 5 1 2400 1040n
+preplace netloc fifo_generator_0_M_AXIS 1 6 1 3220 1550n
+preplace netloc fifo_generator_3_M_AXIS 1 6 1 3100 2280n
+preplace netloc signal_detector_0_M00_AXIS 1 5 1 2430 240n
+preplace netloc signal_detector_1_M00_AXIS 1 5 1 2470 440n
+preplace netloc ps7_0_axi_periph_M00_AXI 1 6 1 3240 1080n
+preplace netloc fifo_generator_2_M_AXIS 1 6 1 3260 630n
+preplace netloc ps7_0_axi_periph_M08_AXI 1 6 1 3050 320n
+preplace netloc fifo_generator_6_M_AXIS 1 6 1 3090 2160n
+preplace netloc fifo_generator_5_M_AXIS 1 6 1 3260 1960n
+preplace netloc ps7_0_axi_periph_M04_AXI 1 6 1 3230 1160n
+preplace netloc ps7_0_axi_periph_M12_AXI 1 6 1 3160 810n
+preplace netloc axi_mem_intercon_M00_AXI 1 8 1 4160 1500n
+levelinfo -pg 1 0 160 630 1130 1590 2180 2820 3450 3960 4420 4680
+pagesize -pg 1 -db -bbox -sgen -170 0 4850 2800
 "
 }
 {
    "da_axi4_cnt":"22",
-   "da_clkrst_cnt":"24",
+   "da_clkrst_cnt":"31",
    "da_ps7_cnt":"1"
 }

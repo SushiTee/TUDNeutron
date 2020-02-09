@@ -1,8 +1,8 @@
 // Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2019.2.1 (lin64) Build 2729669 Thu Dec  5 04:48:12 MST 2019
-// Date        : Fri Feb  7 00:01:24 2020
-// Host        : vm-VirtualBox running 64-bit Ubuntu 18.04.3 LTS
+// Date        : Sun Feb  9 18:11:04 2020
+// Host        : vm-VirtualBox running 64-bit Ubuntu 18.04.4 LTS
 // Command     : write_verilog -force -mode funcsim -rename_top design_1_signal_detector_0_1 -prefix
 //               design_1_signal_detector_0_1_ design_1_signal_detector_0_0_sim_netlist.v
 // Design      : design_1_signal_detector_0_0
@@ -49,6 +49,7 @@ module design_1_signal_detector_0_1
   wire m00_axis_aresetn;
   wire [31:0]m00_axis_tdata;
   wire m00_axis_tlast;
+  wire m00_axis_tready;
   wire m00_axis_tvalid;
   wire [15:0]number_words;
   wire signal_input;
@@ -66,6 +67,7 @@ module design_1_signal_detector_0_1
         .m00_axis_aresetn(m00_axis_aresetn),
         .m00_axis_tdata(m00_axis_tdata),
         .m00_axis_tlast(m00_axis_tlast),
+        .m00_axis_tready(m00_axis_tready),
         .m00_axis_tvalid(m00_axis_tvalid),
         .number_words(number_words),
         .signal_input(signal_input),
@@ -78,26 +80,28 @@ endmodule
 module design_1_signal_detector_0_1_signal_detector_v1_0
    (fifo_reset,
     m00_axis_tdata,
-    m00_axis_tlast,
     signal_state,
+    m00_axis_tlast,
     m00_axis_tvalid,
-    signal_input,
-    trigger_input,
     m00_axis_aclk,
+    trigger_input,
+    number_words,
+    m00_axis_tready,
+    signal_input,
     m00_axis_aresetn,
-    enabled,
-    number_words);
+    enabled);
   output fifo_reset;
   output [31:0]m00_axis_tdata;
-  output m00_axis_tlast;
   output signal_state;
+  output m00_axis_tlast;
   output m00_axis_tvalid;
-  input signal_input;
-  input trigger_input;
   input m00_axis_aclk;
+  input trigger_input;
+  input [15:0]number_words;
+  input m00_axis_tready;
+  input signal_input;
   input m00_axis_aresetn;
   input enabled;
-  input [15:0]number_words;
 
   wire enabled;
   wire fifo_reset;
@@ -105,6 +109,7 @@ module design_1_signal_detector_0_1_signal_detector_v1_0
   wire m00_axis_aresetn;
   wire [31:0]m00_axis_tdata;
   wire m00_axis_tlast;
+  wire m00_axis_tready;
   wire m00_axis_tvalid;
   wire [15:0]number_words;
   wire signal_input;
@@ -118,59 +123,59 @@ module design_1_signal_detector_0_1_signal_detector_v1_0
         .m00_axis_aresetn(m00_axis_aresetn),
         .m00_axis_tdata(m00_axis_tdata),
         .m00_axis_tlast(m00_axis_tlast),
+        .m00_axis_tready(m00_axis_tready),
         .m00_axis_tvalid(m00_axis_tvalid),
+        .\mst_exec_state_reg[0]_0 (signal_state),
         .number_words(number_words),
         .signal_input(signal_input),
-        .signal_state(signal_state),
         .trigger_input(trigger_input));
 endmodule
 
 module design_1_signal_detector_0_1_signal_detector_v1_0_M00_AXIS
    (fifo_reset,
     m00_axis_tdata,
+    \mst_exec_state_reg[0]_0 ,
     m00_axis_tlast,
-    signal_state,
     m00_axis_tvalid,
-    signal_input,
-    trigger_input,
     m00_axis_aclk,
+    trigger_input,
+    number_words,
+    m00_axis_tready,
+    signal_input,
     m00_axis_aresetn,
-    enabled,
-    number_words);
+    enabled);
   output fifo_reset;
   output [31:0]m00_axis_tdata;
+  output \mst_exec_state_reg[0]_0 ;
   output m00_axis_tlast;
-  output signal_state;
   output m00_axis_tvalid;
-  input signal_input;
-  input trigger_input;
   input m00_axis_aclk;
+  input trigger_input;
+  input [15:0]number_words;
+  input m00_axis_tready;
+  input signal_input;
   input m00_axis_aresetn;
   input enabled;
-  input [15:0]number_words;
 
-  wire \FSM_onehot_mst_exec_state[1]_i_1_n_0 ;
-  wire \FSM_onehot_mst_exec_state[1]_i_2_n_0 ;
-  wire \FSM_onehot_mst_exec_state[2]_i_1_n_0 ;
-  wire \FSM_onehot_mst_exec_state_reg_n_0_[0] ;
-  wire \FSM_onehot_mst_exec_state_reg_n_0_[2] ;
-  wire axis_tlast0__13;
+  wire \FSM_sequential_mst_exec_state[1]_i_2_n_0 ;
+  wire axis_tlast;
   wire axis_tlast_i_1_n_0;
+  wire axis_tlast_i_2_n_0;
   wire axis_tlast_i_3_n_0;
   wire axis_tlast_i_4_n_0;
   wire axis_tlast_i_5_n_0;
+  wire axis_tlast_i_6_n_0;
   wire axis_tvalid_i_1_n_0;
-  wire \clock_counter[0]_i_1_n_0 ;
-  wire \clock_counter[0]_i_4_n_0 ;
+  wire \clock_counter[0]_i_3_n_0 ;
   wire [31:0]clock_counter_reg;
-  wire \clock_counter_reg[0]_i_3_n_0 ;
-  wire \clock_counter_reg[0]_i_3_n_1 ;
-  wire \clock_counter_reg[0]_i_3_n_2 ;
-  wire \clock_counter_reg[0]_i_3_n_3 ;
-  wire \clock_counter_reg[0]_i_3_n_4 ;
-  wire \clock_counter_reg[0]_i_3_n_5 ;
-  wire \clock_counter_reg[0]_i_3_n_6 ;
-  wire \clock_counter_reg[0]_i_3_n_7 ;
+  wire \clock_counter_reg[0]_i_2_n_0 ;
+  wire \clock_counter_reg[0]_i_2_n_1 ;
+  wire \clock_counter_reg[0]_i_2_n_2 ;
+  wire \clock_counter_reg[0]_i_2_n_3 ;
+  wire \clock_counter_reg[0]_i_2_n_4 ;
+  wire \clock_counter_reg[0]_i_2_n_5 ;
+  wire \clock_counter_reg[0]_i_2_n_6 ;
+  wire \clock_counter_reg[0]_i_2_n_7 ;
   wire \clock_counter_reg[12]_i_1_n_0 ;
   wire \clock_counter_reg[12]_i_1_n_1 ;
   wire \clock_counter_reg[12]_i_1_n_2 ;
@@ -228,17 +233,26 @@ module design_1_signal_detector_0_1_signal_detector_v1_0_M00_AXIS
   wire \clock_counter_reg[8]_i_1_n_7 ;
   wire enabled;
   wire fifo_reset;
+  wire fifo_reset_internal;
   wire fifo_reset_internal_i_1_n_0;
+  wire init_counter;
+  wire \init_counter[0]_i_1_n_0 ;
+  wire \init_counter[1]_i_1_n_0 ;
   wire \init_counter[2]_i_1_n_0 ;
-  wire \init_counter[4]_i_1_n_0 ;
-  wire [4:0]init_counter_reg;
+  wire \init_counter[3]_i_1_n_0 ;
+  wire \init_counter[4]_i_2_n_0 ;
+  wire \init_counter_reg_n_0_[0] ;
+  wire \init_counter_reg_n_0_[1] ;
+  wire \init_counter_reg_n_0_[2] ;
+  wire \init_counter_reg_n_0_[3] ;
+  wire \init_counter_reg_n_0_[4] ;
   wire last_signal_input;
-  wire last_signal_input1;
-  wire last_signal_input_0;
+  wire last_signal_input_i_1_n_0;
   wire m00_axis_aclk;
   wire m00_axis_aresetn;
   wire [31:0]m00_axis_tdata;
   wire m00_axis_tlast;
+  wire m00_axis_tready;
   wire m00_axis_tvalid;
   wire [15:1]minusOp;
   wire minusOp_carry__0_i_1_n_0;
@@ -270,13 +284,18 @@ module design_1_signal_detector_0_1_signal_detector_v1_0_M00_AXIS
   wire minusOp_carry_n_1;
   wire minusOp_carry_n_2;
   wire minusOp_carry_n_3;
-  wire mst_exec_state;
+  wire \mst_exec_state[0]_i_1_n_0 ;
+  wire \mst_exec_state[1]_i_1_n_0 ;
+  wire [0:0]mst_exec_state__0;
+  wire [1:0]mst_exec_state__1;
+  wire \mst_exec_state_reg[0]_0 ;
   wire [15:0]number_words;
   wire p_0_in;
+  wire [1:0]p_0_in_0;
   wire [15:0]p_1_in;
-  wire [4:0]plusOp;
   wire signal_input;
-  wire signal_state;
+  wire signal_inut_internal;
+  wire signal_inut_internal_reg_n_0;
   wire stream_data_out0;
   wire trigger_input;
   wire [15:0]word_counter;
@@ -285,100 +304,96 @@ module design_1_signal_detector_0_1_signal_detector_v1_0_M00_AXIS
   wire [3:2]NLW_minusOp_carry__2_CO_UNCONNECTED;
   wire [3:3]NLW_minusOp_carry__2_O_UNCONNECTED;
 
-  LUT6 #(
-    .INIT(64'hAEAAAAAAAAAAAAAA)) 
-    \FSM_onehot_mst_exec_state[1]_i_1 
-       (.I0(mst_exec_state),
-        .I1(init_counter_reg[3]),
-        .I2(\FSM_onehot_mst_exec_state[1]_i_2_n_0 ),
-        .I3(init_counter_reg[4]),
-        .I4(init_counter_reg[2]),
-        .I5(\FSM_onehot_mst_exec_state_reg_n_0_[2] ),
-        .O(\FSM_onehot_mst_exec_state[1]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair3" *) 
-  LUT2 #(
-    .INIT(4'h7)) 
-    \FSM_onehot_mst_exec_state[1]_i_2 
-       (.I0(init_counter_reg[1]),
-        .I1(init_counter_reg[0]),
-        .O(\FSM_onehot_mst_exec_state[1]_i_2_n_0 ));
-  LUT2 #(
-    .INIT(4'hE)) 
-    \FSM_onehot_mst_exec_state[2]_i_1 
-       (.I0(\FSM_onehot_mst_exec_state_reg_n_0_[0] ),
-        .I1(\init_counter[4]_i_1_n_0 ),
-        .O(\FSM_onehot_mst_exec_state[2]_i_1_n_0 ));
-  (* FSM_ENCODED_STATES = "state_idle:001,state_init_counter:100,state_send_stream:010" *) 
-  FDSE #(
-    .INIT(1'b1)) 
-    \FSM_onehot_mst_exec_state_reg[0] 
+  (* SOFT_HLUTNM = "soft_lutpair4" *) 
+  LUT4 #(
+    .INIT(16'hBDAD)) 
+    \FSM_sequential_mst_exec_state[0]_i_1 
+       (.I0(mst_exec_state__0),
+        .I1(\FSM_sequential_mst_exec_state[1]_i_2_n_0 ),
+        .I2(fifo_reset_internal),
+        .I3(m00_axis_tready),
+        .O(mst_exec_state__1[0]));
+  (* SOFT_HLUTNM = "soft_lutpair4" *) 
+  LUT3 #(
+    .INIT(8'hAE)) 
+    \FSM_sequential_mst_exec_state[1]_i_1 
+       (.I0(fifo_reset_internal),
+        .I1(mst_exec_state__0),
+        .I2(\FSM_sequential_mst_exec_state[1]_i_2_n_0 ),
+        .O(mst_exec_state__1[1]));
+  (* SOFT_HLUTNM = "soft_lutpair0" *) 
+  LUT5 #(
+    .INIT(32'h7FFFFFFF)) 
+    \FSM_sequential_mst_exec_state[1]_i_2 
+       (.I0(\init_counter_reg_n_0_[3] ),
+        .I1(\init_counter_reg_n_0_[0] ),
+        .I2(\init_counter_reg_n_0_[1] ),
+        .I3(\init_counter_reg_n_0_[2] ),
+        .I4(\init_counter_reg_n_0_[4] ),
+        .O(\FSM_sequential_mst_exec_state[1]_i_2_n_0 ));
+  (* FSM_ENCODED_STATES = "state_idle:00,state_init_counter:01,state_wait_fifo:10,state_send_stream:11" *) 
+  FDRE \FSM_sequential_mst_exec_state_reg[0] 
        (.C(m00_axis_aclk),
         .CE(1'b1),
-        .D(1'b0),
-        .Q(\FSM_onehot_mst_exec_state_reg_n_0_[0] ),
-        .S(fifo_reset_internal_i_1_n_0));
-  (* FSM_ENCODED_STATES = "state_idle:001,state_init_counter:100,state_send_stream:010" *) 
-  FDRE #(
-    .INIT(1'b0)) 
-    \FSM_onehot_mst_exec_state_reg[1] 
-       (.C(m00_axis_aclk),
-        .CE(1'b1),
-        .D(\FSM_onehot_mst_exec_state[1]_i_1_n_0 ),
-        .Q(mst_exec_state),
+        .D(mst_exec_state__1[0]),
+        .Q(mst_exec_state__0),
         .R(fifo_reset_internal_i_1_n_0));
-  (* FSM_ENCODED_STATES = "state_idle:001,state_init_counter:100,state_send_stream:010" *) 
-  FDRE #(
-    .INIT(1'b0)) 
-    \FSM_onehot_mst_exec_state_reg[2] 
+  (* FSM_ENCODED_STATES = "state_idle:00,state_init_counter:01,state_wait_fifo:10,state_send_stream:11" *) 
+  FDRE \FSM_sequential_mst_exec_state_reg[1] 
        (.C(m00_axis_aclk),
         .CE(1'b1),
-        .D(\FSM_onehot_mst_exec_state[2]_i_1_n_0 ),
-        .Q(\FSM_onehot_mst_exec_state_reg_n_0_[2] ),
+        .D(mst_exec_state__1[1]),
+        .Q(fifo_reset_internal),
         .R(fifo_reset_internal_i_1_n_0));
-  LUT6 #(
-    .INIT(64'h808000808080C080)) 
+  LUT5 #(
+    .INIT(32'hFB000800)) 
     axis_tlast_i_1
-       (.I0(m00_axis_tlast),
-        .I1(mst_exec_state),
-        .I2(trigger_input),
-        .I3(signal_input),
-        .I4(last_signal_input),
-        .I5(axis_tlast0__13),
+       (.I0(axis_tlast_i_2_n_0),
+        .I1(signal_inut_internal_reg_n_0),
+        .I2(last_signal_input),
+        .I3(\mst_exec_state_reg[0]_0 ),
+        .I4(m00_axis_tlast),
         .O(axis_tlast_i_1_n_0));
-  LUT6 #(
-    .INIT(64'hFFFFFFFFFFFFFFFE)) 
+  LUT5 #(
+    .INIT(32'h0001FFFF)) 
     axis_tlast_i_2
        (.I0(axis_tlast_i_3_n_0),
-        .I1(word_counter[1]),
-        .I2(word_counter[3]),
-        .I3(word_counter[2]),
-        .I4(axis_tlast_i_4_n_0),
-        .I5(axis_tlast_i_5_n_0),
-        .O(axis_tlast0__13));
+        .I1(axis_tlast_i_4_n_0),
+        .I2(axis_tlast_i_5_n_0),
+        .I3(axis_tlast_i_6_n_0),
+        .I4(\mst_exec_state_reg[0]_0 ),
+        .O(axis_tlast_i_2_n_0));
   LUT4 #(
     .INIT(16'hFFFE)) 
     axis_tlast_i_3
-       (.I0(word_counter[5]),
-        .I1(word_counter[4]),
-        .I2(word_counter[7]),
-        .I3(word_counter[6]),
+       (.I0(word_counter[4]),
+        .I1(word_counter[7]),
+        .I2(word_counter[1]),
+        .I3(word_counter[5]),
         .O(axis_tlast_i_3_n_0));
-  LUT4 #(
-    .INIT(16'hFFFE)) 
+  LUT3 #(
+    .INIT(8'hFE)) 
     axis_tlast_i_4
-       (.I0(word_counter[13]),
-        .I1(word_counter[12]),
-        .I2(word_counter[15]),
-        .I3(word_counter[14]),
+       (.I0(word_counter[3]),
+        .I1(word_counter[2]),
+        .I2(word_counter[14]),
         .O(axis_tlast_i_4_n_0));
   LUT4 #(
     .INIT(16'hFFFE)) 
     axis_tlast_i_5
-       (.I0(word_counter[9]),
-        .I1(word_counter[8]),
-        .I2(word_counter[11]),
-        .I3(word_counter[10]),
+       (.I0(word_counter[12]),
+        .I1(word_counter[15]),
+        .I2(word_counter[10]),
+        .I3(word_counter[13]),
         .O(axis_tlast_i_5_n_0));
+  LUT4 #(
+    .INIT(16'hFFFE)) 
+    axis_tlast_i_6
+       (.I0(word_counter[8]),
+        .I1(word_counter[11]),
+        .I2(word_counter[6]),
+        .I3(word_counter[9]),
+        .O(axis_tlast_i_6_n_0));
   FDRE #(
     .INIT(1'b0)) 
     axis_tlast_reg
@@ -388,13 +403,14 @@ module design_1_signal_detector_0_1_signal_detector_v1_0_M00_AXIS
         .Q(m00_axis_tlast),
         .R(1'b0));
   (* SOFT_HLUTNM = "soft_lutpair1" *) 
-  LUT4 #(
-    .INIT(16'h2000)) 
+  LUT5 #(
+    .INIT(32'h04000000)) 
     axis_tvalid_i_1
-       (.I0(signal_input),
-        .I1(last_signal_input),
-        .I2(trigger_input),
-        .I3(mst_exec_state),
+       (.I0(last_signal_input),
+        .I1(signal_inut_internal_reg_n_0),
+        .I2(p_0_in_0[0]),
+        .I3(p_0_in_0[1]),
+        .I4(trigger_input),
         .O(axis_tvalid_i_1_n_0));
   FDRE #(
     .INIT(1'b0)) 
@@ -404,64 +420,59 @@ module design_1_signal_detector_0_1_signal_detector_v1_0_M00_AXIS
         .D(axis_tvalid_i_1_n_0),
         .Q(m00_axis_tvalid),
         .R(1'b0));
-  LUT4 #(
-    .INIT(16'h0080)) 
+  LUT5 #(
+    .INIT(32'h00000800)) 
     \clock_counter[0]_i_1 
-       (.I0(mst_exec_state),
-        .I1(trigger_input),
-        .I2(signal_input),
-        .I3(last_signal_input),
-        .O(\clock_counter[0]_i_1_n_0 ));
-  LUT2 #(
-    .INIT(4'h8)) 
-    \clock_counter[0]_i_2 
        (.I0(trigger_input),
-        .I1(mst_exec_state),
-        .O(last_signal_input1));
+        .I1(p_0_in_0[1]),
+        .I2(p_0_in_0[0]),
+        .I3(signal_inut_internal_reg_n_0),
+        .I4(last_signal_input),
+        .O(axis_tlast));
   LUT1 #(
     .INIT(2'h1)) 
-    \clock_counter[0]_i_4 
+    \clock_counter[0]_i_3 
        (.I0(clock_counter_reg[0]),
-        .O(\clock_counter[0]_i_4_n_0 ));
+        .O(\clock_counter[0]_i_3_n_0 ));
   FDSE #(
     .INIT(1'b0)) 
     \clock_counter_reg[0] 
        (.C(m00_axis_aclk),
-        .CE(last_signal_input1),
-        .D(\clock_counter_reg[0]_i_3_n_7 ),
+        .CE(\mst_exec_state_reg[0]_0 ),
+        .D(\clock_counter_reg[0]_i_2_n_7 ),
         .Q(clock_counter_reg[0]),
-        .S(\clock_counter[0]_i_1_n_0 ));
-  CARRY4 \clock_counter_reg[0]_i_3 
+        .S(axis_tlast));
+  CARRY4 \clock_counter_reg[0]_i_2 
        (.CI(1'b0),
-        .CO({\clock_counter_reg[0]_i_3_n_0 ,\clock_counter_reg[0]_i_3_n_1 ,\clock_counter_reg[0]_i_3_n_2 ,\clock_counter_reg[0]_i_3_n_3 }),
+        .CO({\clock_counter_reg[0]_i_2_n_0 ,\clock_counter_reg[0]_i_2_n_1 ,\clock_counter_reg[0]_i_2_n_2 ,\clock_counter_reg[0]_i_2_n_3 }),
         .CYINIT(1'b0),
         .DI({1'b0,1'b0,1'b0,1'b1}),
-        .O({\clock_counter_reg[0]_i_3_n_4 ,\clock_counter_reg[0]_i_3_n_5 ,\clock_counter_reg[0]_i_3_n_6 ,\clock_counter_reg[0]_i_3_n_7 }),
-        .S({clock_counter_reg[3:1],\clock_counter[0]_i_4_n_0 }));
+        .O({\clock_counter_reg[0]_i_2_n_4 ,\clock_counter_reg[0]_i_2_n_5 ,\clock_counter_reg[0]_i_2_n_6 ,\clock_counter_reg[0]_i_2_n_7 }),
+        .S({clock_counter_reg[3:1],\clock_counter[0]_i_3_n_0 }));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[10] 
        (.C(m00_axis_aclk),
-        .CE(last_signal_input1),
+        .CE(\mst_exec_state_reg[0]_0 ),
         .D(\clock_counter_reg[8]_i_1_n_5 ),
         .Q(clock_counter_reg[10]),
-        .R(\clock_counter[0]_i_1_n_0 ));
+        .R(axis_tlast));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[11] 
        (.C(m00_axis_aclk),
-        .CE(last_signal_input1),
+        .CE(\mst_exec_state_reg[0]_0 ),
         .D(\clock_counter_reg[8]_i_1_n_4 ),
         .Q(clock_counter_reg[11]),
-        .R(\clock_counter[0]_i_1_n_0 ));
+        .R(axis_tlast));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[12] 
        (.C(m00_axis_aclk),
-        .CE(last_signal_input1),
+        .CE(\mst_exec_state_reg[0]_0 ),
         .D(\clock_counter_reg[12]_i_1_n_7 ),
         .Q(clock_counter_reg[12]),
-        .R(\clock_counter[0]_i_1_n_0 ));
+        .R(axis_tlast));
   CARRY4 \clock_counter_reg[12]_i_1 
        (.CI(\clock_counter_reg[8]_i_1_n_0 ),
         .CO({\clock_counter_reg[12]_i_1_n_0 ,\clock_counter_reg[12]_i_1_n_1 ,\clock_counter_reg[12]_i_1_n_2 ,\clock_counter_reg[12]_i_1_n_3 }),
@@ -473,34 +484,34 @@ module design_1_signal_detector_0_1_signal_detector_v1_0_M00_AXIS
     .INIT(1'b0)) 
     \clock_counter_reg[13] 
        (.C(m00_axis_aclk),
-        .CE(last_signal_input1),
+        .CE(\mst_exec_state_reg[0]_0 ),
         .D(\clock_counter_reg[12]_i_1_n_6 ),
         .Q(clock_counter_reg[13]),
-        .R(\clock_counter[0]_i_1_n_0 ));
+        .R(axis_tlast));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[14] 
        (.C(m00_axis_aclk),
-        .CE(last_signal_input1),
+        .CE(\mst_exec_state_reg[0]_0 ),
         .D(\clock_counter_reg[12]_i_1_n_5 ),
         .Q(clock_counter_reg[14]),
-        .R(\clock_counter[0]_i_1_n_0 ));
+        .R(axis_tlast));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[15] 
        (.C(m00_axis_aclk),
-        .CE(last_signal_input1),
+        .CE(\mst_exec_state_reg[0]_0 ),
         .D(\clock_counter_reg[12]_i_1_n_4 ),
         .Q(clock_counter_reg[15]),
-        .R(\clock_counter[0]_i_1_n_0 ));
+        .R(axis_tlast));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[16] 
        (.C(m00_axis_aclk),
-        .CE(last_signal_input1),
+        .CE(\mst_exec_state_reg[0]_0 ),
         .D(\clock_counter_reg[16]_i_1_n_7 ),
         .Q(clock_counter_reg[16]),
-        .R(\clock_counter[0]_i_1_n_0 ));
+        .R(axis_tlast));
   CARRY4 \clock_counter_reg[16]_i_1 
        (.CI(\clock_counter_reg[12]_i_1_n_0 ),
         .CO({\clock_counter_reg[16]_i_1_n_0 ,\clock_counter_reg[16]_i_1_n_1 ,\clock_counter_reg[16]_i_1_n_2 ,\clock_counter_reg[16]_i_1_n_3 }),
@@ -512,42 +523,42 @@ module design_1_signal_detector_0_1_signal_detector_v1_0_M00_AXIS
     .INIT(1'b0)) 
     \clock_counter_reg[17] 
        (.C(m00_axis_aclk),
-        .CE(last_signal_input1),
+        .CE(\mst_exec_state_reg[0]_0 ),
         .D(\clock_counter_reg[16]_i_1_n_6 ),
         .Q(clock_counter_reg[17]),
-        .R(\clock_counter[0]_i_1_n_0 ));
+        .R(axis_tlast));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[18] 
        (.C(m00_axis_aclk),
-        .CE(last_signal_input1),
+        .CE(\mst_exec_state_reg[0]_0 ),
         .D(\clock_counter_reg[16]_i_1_n_5 ),
         .Q(clock_counter_reg[18]),
-        .R(\clock_counter[0]_i_1_n_0 ));
+        .R(axis_tlast));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[19] 
        (.C(m00_axis_aclk),
-        .CE(last_signal_input1),
+        .CE(\mst_exec_state_reg[0]_0 ),
         .D(\clock_counter_reg[16]_i_1_n_4 ),
         .Q(clock_counter_reg[19]),
-        .R(\clock_counter[0]_i_1_n_0 ));
+        .R(axis_tlast));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[1] 
        (.C(m00_axis_aclk),
-        .CE(last_signal_input1),
-        .D(\clock_counter_reg[0]_i_3_n_6 ),
+        .CE(\mst_exec_state_reg[0]_0 ),
+        .D(\clock_counter_reg[0]_i_2_n_6 ),
         .Q(clock_counter_reg[1]),
-        .R(\clock_counter[0]_i_1_n_0 ));
+        .R(axis_tlast));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[20] 
        (.C(m00_axis_aclk),
-        .CE(last_signal_input1),
+        .CE(\mst_exec_state_reg[0]_0 ),
         .D(\clock_counter_reg[20]_i_1_n_7 ),
         .Q(clock_counter_reg[20]),
-        .R(\clock_counter[0]_i_1_n_0 ));
+        .R(axis_tlast));
   CARRY4 \clock_counter_reg[20]_i_1 
        (.CI(\clock_counter_reg[16]_i_1_n_0 ),
         .CO({\clock_counter_reg[20]_i_1_n_0 ,\clock_counter_reg[20]_i_1_n_1 ,\clock_counter_reg[20]_i_1_n_2 ,\clock_counter_reg[20]_i_1_n_3 }),
@@ -559,34 +570,34 @@ module design_1_signal_detector_0_1_signal_detector_v1_0_M00_AXIS
     .INIT(1'b0)) 
     \clock_counter_reg[21] 
        (.C(m00_axis_aclk),
-        .CE(last_signal_input1),
+        .CE(\mst_exec_state_reg[0]_0 ),
         .D(\clock_counter_reg[20]_i_1_n_6 ),
         .Q(clock_counter_reg[21]),
-        .R(\clock_counter[0]_i_1_n_0 ));
+        .R(axis_tlast));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[22] 
        (.C(m00_axis_aclk),
-        .CE(last_signal_input1),
+        .CE(\mst_exec_state_reg[0]_0 ),
         .D(\clock_counter_reg[20]_i_1_n_5 ),
         .Q(clock_counter_reg[22]),
-        .R(\clock_counter[0]_i_1_n_0 ));
+        .R(axis_tlast));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[23] 
        (.C(m00_axis_aclk),
-        .CE(last_signal_input1),
+        .CE(\mst_exec_state_reg[0]_0 ),
         .D(\clock_counter_reg[20]_i_1_n_4 ),
         .Q(clock_counter_reg[23]),
-        .R(\clock_counter[0]_i_1_n_0 ));
+        .R(axis_tlast));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[24] 
        (.C(m00_axis_aclk),
-        .CE(last_signal_input1),
+        .CE(\mst_exec_state_reg[0]_0 ),
         .D(\clock_counter_reg[24]_i_1_n_7 ),
         .Q(clock_counter_reg[24]),
-        .R(\clock_counter[0]_i_1_n_0 ));
+        .R(axis_tlast));
   CARRY4 \clock_counter_reg[24]_i_1 
        (.CI(\clock_counter_reg[20]_i_1_n_0 ),
         .CO({\clock_counter_reg[24]_i_1_n_0 ,\clock_counter_reg[24]_i_1_n_1 ,\clock_counter_reg[24]_i_1_n_2 ,\clock_counter_reg[24]_i_1_n_3 }),
@@ -598,34 +609,34 @@ module design_1_signal_detector_0_1_signal_detector_v1_0_M00_AXIS
     .INIT(1'b0)) 
     \clock_counter_reg[25] 
        (.C(m00_axis_aclk),
-        .CE(last_signal_input1),
+        .CE(\mst_exec_state_reg[0]_0 ),
         .D(\clock_counter_reg[24]_i_1_n_6 ),
         .Q(clock_counter_reg[25]),
-        .R(\clock_counter[0]_i_1_n_0 ));
+        .R(axis_tlast));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[26] 
        (.C(m00_axis_aclk),
-        .CE(last_signal_input1),
+        .CE(\mst_exec_state_reg[0]_0 ),
         .D(\clock_counter_reg[24]_i_1_n_5 ),
         .Q(clock_counter_reg[26]),
-        .R(\clock_counter[0]_i_1_n_0 ));
+        .R(axis_tlast));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[27] 
        (.C(m00_axis_aclk),
-        .CE(last_signal_input1),
+        .CE(\mst_exec_state_reg[0]_0 ),
         .D(\clock_counter_reg[24]_i_1_n_4 ),
         .Q(clock_counter_reg[27]),
-        .R(\clock_counter[0]_i_1_n_0 ));
+        .R(axis_tlast));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[28] 
        (.C(m00_axis_aclk),
-        .CE(last_signal_input1),
+        .CE(\mst_exec_state_reg[0]_0 ),
         .D(\clock_counter_reg[28]_i_1_n_7 ),
         .Q(clock_counter_reg[28]),
-        .R(\clock_counter[0]_i_1_n_0 ));
+        .R(axis_tlast));
   CARRY4 \clock_counter_reg[28]_i_1 
        (.CI(\clock_counter_reg[24]_i_1_n_0 ),
         .CO({\NLW_clock_counter_reg[28]_i_1_CO_UNCONNECTED [3],\clock_counter_reg[28]_i_1_n_1 ,\clock_counter_reg[28]_i_1_n_2 ,\clock_counter_reg[28]_i_1_n_3 }),
@@ -637,52 +648,52 @@ module design_1_signal_detector_0_1_signal_detector_v1_0_M00_AXIS
     .INIT(1'b0)) 
     \clock_counter_reg[29] 
        (.C(m00_axis_aclk),
-        .CE(last_signal_input1),
+        .CE(\mst_exec_state_reg[0]_0 ),
         .D(\clock_counter_reg[28]_i_1_n_6 ),
         .Q(clock_counter_reg[29]),
-        .R(\clock_counter[0]_i_1_n_0 ));
+        .R(axis_tlast));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[2] 
        (.C(m00_axis_aclk),
-        .CE(last_signal_input1),
-        .D(\clock_counter_reg[0]_i_3_n_5 ),
+        .CE(\mst_exec_state_reg[0]_0 ),
+        .D(\clock_counter_reg[0]_i_2_n_5 ),
         .Q(clock_counter_reg[2]),
-        .R(\clock_counter[0]_i_1_n_0 ));
+        .R(axis_tlast));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[30] 
        (.C(m00_axis_aclk),
-        .CE(last_signal_input1),
+        .CE(\mst_exec_state_reg[0]_0 ),
         .D(\clock_counter_reg[28]_i_1_n_5 ),
         .Q(clock_counter_reg[30]),
-        .R(\clock_counter[0]_i_1_n_0 ));
+        .R(axis_tlast));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[31] 
        (.C(m00_axis_aclk),
-        .CE(last_signal_input1),
+        .CE(\mst_exec_state_reg[0]_0 ),
         .D(\clock_counter_reg[28]_i_1_n_4 ),
         .Q(clock_counter_reg[31]),
-        .R(\clock_counter[0]_i_1_n_0 ));
+        .R(axis_tlast));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[3] 
        (.C(m00_axis_aclk),
-        .CE(last_signal_input1),
-        .D(\clock_counter_reg[0]_i_3_n_4 ),
+        .CE(\mst_exec_state_reg[0]_0 ),
+        .D(\clock_counter_reg[0]_i_2_n_4 ),
         .Q(clock_counter_reg[3]),
-        .R(\clock_counter[0]_i_1_n_0 ));
+        .R(axis_tlast));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[4] 
        (.C(m00_axis_aclk),
-        .CE(last_signal_input1),
+        .CE(\mst_exec_state_reg[0]_0 ),
         .D(\clock_counter_reg[4]_i_1_n_7 ),
         .Q(clock_counter_reg[4]),
-        .R(\clock_counter[0]_i_1_n_0 ));
+        .R(axis_tlast));
   CARRY4 \clock_counter_reg[4]_i_1 
-       (.CI(\clock_counter_reg[0]_i_3_n_0 ),
+       (.CI(\clock_counter_reg[0]_i_2_n_0 ),
         .CO({\clock_counter_reg[4]_i_1_n_0 ,\clock_counter_reg[4]_i_1_n_1 ,\clock_counter_reg[4]_i_1_n_2 ,\clock_counter_reg[4]_i_1_n_3 }),
         .CYINIT(1'b0),
         .DI({1'b0,1'b0,1'b0,1'b0}),
@@ -692,34 +703,34 @@ module design_1_signal_detector_0_1_signal_detector_v1_0_M00_AXIS
     .INIT(1'b0)) 
     \clock_counter_reg[5] 
        (.C(m00_axis_aclk),
-        .CE(last_signal_input1),
+        .CE(\mst_exec_state_reg[0]_0 ),
         .D(\clock_counter_reg[4]_i_1_n_6 ),
         .Q(clock_counter_reg[5]),
-        .R(\clock_counter[0]_i_1_n_0 ));
+        .R(axis_tlast));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[6] 
        (.C(m00_axis_aclk),
-        .CE(last_signal_input1),
+        .CE(\mst_exec_state_reg[0]_0 ),
         .D(\clock_counter_reg[4]_i_1_n_5 ),
         .Q(clock_counter_reg[6]),
-        .R(\clock_counter[0]_i_1_n_0 ));
+        .R(axis_tlast));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[7] 
        (.C(m00_axis_aclk),
-        .CE(last_signal_input1),
+        .CE(\mst_exec_state_reg[0]_0 ),
         .D(\clock_counter_reg[4]_i_1_n_4 ),
         .Q(clock_counter_reg[7]),
-        .R(\clock_counter[0]_i_1_n_0 ));
+        .R(axis_tlast));
   FDRE #(
     .INIT(1'b0)) 
     \clock_counter_reg[8] 
        (.C(m00_axis_aclk),
-        .CE(last_signal_input1),
+        .CE(\mst_exec_state_reg[0]_0 ),
         .D(\clock_counter_reg[8]_i_1_n_7 ),
         .Q(clock_counter_reg[8]),
-        .R(\clock_counter[0]_i_1_n_0 ));
+        .R(axis_tlast));
   CARRY4 \clock_counter_reg[8]_i_1 
        (.CI(\clock_counter_reg[4]_i_1_n_0 ),
         .CO({\clock_counter_reg[8]_i_1_n_0 ,\clock_counter_reg[8]_i_1_n_1 ,\clock_counter_reg[8]_i_1_n_2 ,\clock_counter_reg[8]_i_1_n_3 }),
@@ -731,10 +742,10 @@ module design_1_signal_detector_0_1_signal_detector_v1_0_M00_AXIS
     .INIT(1'b0)) 
     \clock_counter_reg[9] 
        (.C(m00_axis_aclk),
-        .CE(last_signal_input1),
+        .CE(\mst_exec_state_reg[0]_0 ),
         .D(\clock_counter_reg[8]_i_1_n_6 ),
         .Q(clock_counter_reg[9]),
-        .R(\clock_counter[0]_i_1_n_0 ));
+        .R(axis_tlast));
   LUT2 #(
     .INIT(4'h7)) 
     fifo_reset_internal_i_1
@@ -746,113 +757,112 @@ module design_1_signal_detector_0_1_signal_detector_v1_0_M00_AXIS
     fifo_reset_internal_reg
        (.C(m00_axis_aclk),
         .CE(1'b1),
-        .D(mst_exec_state),
+        .D(fifo_reset_internal),
         .Q(fifo_reset),
         .R(fifo_reset_internal_i_1_n_0));
-  (* SOFT_HLUTNM = "soft_lutpair3" *) 
+  (* SOFT_HLUTNM = "soft_lutpair13" *) 
   LUT1 #(
     .INIT(2'h1)) 
     \init_counter[0]_i_1 
-       (.I0(init_counter_reg[0]),
-        .O(plusOp[0]));
-  (* SOFT_HLUTNM = "soft_lutpair2" *) 
+       (.I0(\init_counter_reg_n_0_[0] ),
+        .O(\init_counter[0]_i_1_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair13" *) 
   LUT2 #(
     .INIT(4'h6)) 
     \init_counter[1]_i_1 
-       (.I0(init_counter_reg[0]),
-        .I1(init_counter_reg[1]),
-        .O(plusOp[1]));
+       (.I0(\init_counter_reg_n_0_[1] ),
+        .I1(\init_counter_reg_n_0_[0] ),
+        .O(\init_counter[1]_i_1_n_0 ));
   (* SOFT_HLUTNM = "soft_lutpair2" *) 
   LUT3 #(
-    .INIT(8'h78)) 
+    .INIT(8'h6A)) 
     \init_counter[2]_i_1 
-       (.I0(init_counter_reg[0]),
-        .I1(init_counter_reg[1]),
-        .I2(init_counter_reg[2]),
+       (.I0(\init_counter_reg_n_0_[2] ),
+        .I1(\init_counter_reg_n_0_[1] ),
+        .I2(\init_counter_reg_n_0_[0] ),
         .O(\init_counter[2]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair0" *) 
+  (* SOFT_HLUTNM = "soft_lutpair2" *) 
   LUT4 #(
-    .INIT(16'h7F80)) 
+    .INIT(16'h6AAA)) 
     \init_counter[3]_i_1 
-       (.I0(init_counter_reg[1]),
-        .I1(init_counter_reg[0]),
-        .I2(init_counter_reg[2]),
-        .I3(init_counter_reg[3]),
-        .O(plusOp[3]));
-  LUT6 #(
-    .INIT(64'h2AAAAAAAAAAAAAAA)) 
+       (.I0(\init_counter_reg_n_0_[3] ),
+        .I1(\init_counter_reg_n_0_[0] ),
+        .I2(\init_counter_reg_n_0_[1] ),
+        .I3(\init_counter_reg_n_0_[2] ),
+        .O(\init_counter[3]_i_1_n_0 ));
+  LUT4 #(
+    .INIT(16'h0AC0)) 
     \init_counter[4]_i_1 
-       (.I0(\FSM_onehot_mst_exec_state_reg_n_0_[2] ),
-        .I1(init_counter_reg[2]),
-        .I2(init_counter_reg[4]),
-        .I3(init_counter_reg[0]),
-        .I4(init_counter_reg[1]),
-        .I5(init_counter_reg[3]),
-        .O(\init_counter[4]_i_1_n_0 ));
+       (.I0(m00_axis_tready),
+        .I1(\FSM_sequential_mst_exec_state[1]_i_2_n_0 ),
+        .I2(mst_exec_state__0),
+        .I3(fifo_reset_internal),
+        .O(init_counter));
   (* SOFT_HLUTNM = "soft_lutpair0" *) 
   LUT5 #(
-    .INIT(32'h7FFF8000)) 
+    .INIT(32'h6AAAAAAA)) 
     \init_counter[4]_i_2 
-       (.I0(init_counter_reg[2]),
-        .I1(init_counter_reg[0]),
-        .I2(init_counter_reg[1]),
-        .I3(init_counter_reg[3]),
-        .I4(init_counter_reg[4]),
-        .O(plusOp[4]));
+       (.I0(\init_counter_reg_n_0_[4] ),
+        .I1(\init_counter_reg_n_0_[2] ),
+        .I2(\init_counter_reg_n_0_[1] ),
+        .I3(\init_counter_reg_n_0_[0] ),
+        .I4(\init_counter_reg_n_0_[3] ),
+        .O(\init_counter[4]_i_2_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \init_counter_reg[0] 
        (.C(m00_axis_aclk),
-        .CE(\init_counter[4]_i_1_n_0 ),
-        .D(plusOp[0]),
-        .Q(init_counter_reg[0]),
+        .CE(init_counter),
+        .D(\init_counter[0]_i_1_n_0 ),
+        .Q(\init_counter_reg_n_0_[0] ),
         .R(fifo_reset_internal_i_1_n_0));
   FDRE #(
     .INIT(1'b0)) 
     \init_counter_reg[1] 
        (.C(m00_axis_aclk),
-        .CE(\init_counter[4]_i_1_n_0 ),
-        .D(plusOp[1]),
-        .Q(init_counter_reg[1]),
+        .CE(init_counter),
+        .D(\init_counter[1]_i_1_n_0 ),
+        .Q(\init_counter_reg_n_0_[1] ),
         .R(fifo_reset_internal_i_1_n_0));
   FDRE #(
     .INIT(1'b0)) 
     \init_counter_reg[2] 
        (.C(m00_axis_aclk),
-        .CE(\init_counter[4]_i_1_n_0 ),
+        .CE(init_counter),
         .D(\init_counter[2]_i_1_n_0 ),
-        .Q(init_counter_reg[2]),
+        .Q(\init_counter_reg_n_0_[2] ),
         .R(fifo_reset_internal_i_1_n_0));
   FDRE #(
     .INIT(1'b0)) 
     \init_counter_reg[3] 
        (.C(m00_axis_aclk),
-        .CE(\init_counter[4]_i_1_n_0 ),
-        .D(plusOp[3]),
-        .Q(init_counter_reg[3]),
+        .CE(init_counter),
+        .D(\init_counter[3]_i_1_n_0 ),
+        .Q(\init_counter_reg_n_0_[3] ),
         .R(fifo_reset_internal_i_1_n_0));
   FDRE #(
     .INIT(1'b0)) 
     \init_counter_reg[4] 
        (.C(m00_axis_aclk),
-        .CE(\init_counter[4]_i_1_n_0 ),
-        .D(plusOp[4]),
-        .Q(init_counter_reg[4]),
+        .CE(init_counter),
+        .D(\init_counter[4]_i_2_n_0 ),
+        .Q(\init_counter_reg_n_0_[4] ),
         .R(fifo_reset_internal_i_1_n_0));
   (* SOFT_HLUTNM = "soft_lutpair1" *) 
-  LUT3 #(
-    .INIT(8'h80)) 
+  LUT4 #(
+    .INIT(16'h2000)) 
     last_signal_input_i_1
-       (.I0(signal_input),
-        .I1(mst_exec_state),
-        .I2(trigger_input),
-        .O(last_signal_input_0));
+       (.I0(signal_inut_internal_reg_n_0),
+        .I1(p_0_in_0[0]),
+        .I2(p_0_in_0[1]),
+        .I3(trigger_input),
+        .O(last_signal_input_i_1_n_0));
   FDRE #(
     .INIT(1'b0)) 
     last_signal_input_reg
        (.C(m00_axis_aclk),
         .CE(1'b1),
-        .D(last_signal_input_0),
+        .D(last_signal_input_i_1_n_0),
         .Q(last_signal_input),
         .R(1'b0));
   CARRY4 minusOp_carry
@@ -958,24 +968,67 @@ module design_1_signal_detector_0_1_signal_detector_v1_0_M00_AXIS
     minusOp_carry_i_4
        (.I0(word_counter[1]),
         .O(minusOp_carry_i_4_n_0));
+  (* SOFT_HLUTNM = "soft_lutpair3" *) 
+  LUT4 #(
+    .INIT(16'hF575)) 
+    \mst_exec_state[0]_i_1 
+       (.I0(p_0_in_0[1]),
+        .I1(m00_axis_tready),
+        .I2(p_0_in_0[0]),
+        .I3(\FSM_sequential_mst_exec_state[1]_i_2_n_0 ),
+        .O(\mst_exec_state[0]_i_1_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair3" *) 
   LUT3 #(
-    .INIT(8'h08)) 
+    .INIT(8'hF4)) 
+    \mst_exec_state[1]_i_1 
+       (.I0(\FSM_sequential_mst_exec_state[1]_i_2_n_0 ),
+        .I1(p_0_in_0[0]),
+        .I2(p_0_in_0[1]),
+        .O(\mst_exec_state[1]_i_1_n_0 ));
+  FDRE \mst_exec_state_reg[0] 
+       (.C(m00_axis_aclk),
+        .CE(1'b1),
+        .D(\mst_exec_state[0]_i_1_n_0 ),
+        .Q(p_0_in_0[0]),
+        .R(fifo_reset_internal_i_1_n_0));
+  FDRE \mst_exec_state_reg[1] 
+       (.C(m00_axis_aclk),
+        .CE(1'b1),
+        .D(\mst_exec_state[1]_i_1_n_0 ),
+        .Q(p_0_in_0[1]),
+        .R(fifo_reset_internal_i_1_n_0));
+  LUT3 #(
+    .INIT(8'h80)) 
+    signal_inut_internal_i_1
+       (.I0(fifo_reset_internal),
+        .I1(mst_exec_state__0),
+        .I2(signal_input),
+        .O(signal_inut_internal));
+  FDRE signal_inut_internal_reg
+       (.C(m00_axis_aclk),
+        .CE(1'b1),
+        .D(signal_inut_internal),
+        .Q(signal_inut_internal_reg_n_0),
+        .R(1'b0));
+  LUT3 #(
+    .INIT(8'h40)) 
     signal_state_INST_0
-       (.I0(mst_exec_state),
-        .I1(trigger_input),
-        .I2(m00_axis_tvalid),
-        .O(signal_state));
-  LUT2 #(
-    .INIT(4'h7)) 
+       (.I0(p_0_in_0[0]),
+        .I1(p_0_in_0[1]),
+        .I2(trigger_input),
+        .O(\mst_exec_state_reg[0]_0 ));
+  LUT3 #(
+    .INIT(8'hF7)) 
     \stream_data_out[31]_i_1 
-       (.I0(mst_exec_state),
-        .I1(trigger_input),
+       (.I0(trigger_input),
+        .I1(p_0_in_0[1]),
+        .I2(p_0_in_0[0]),
         .O(p_0_in));
   LUT2 #(
-    .INIT(4'h4)) 
+    .INIT(4'h2)) 
     \stream_data_out[31]_i_2 
-       (.I0(last_signal_input),
-        .I1(signal_input),
+       (.I0(signal_inut_internal_reg_n_0),
+        .I1(last_signal_input),
         .O(stream_data_out0));
   FDRE #(
     .INIT(1'b0)) 
@@ -1233,157 +1286,142 @@ module design_1_signal_detector_0_1_signal_detector_v1_0_M00_AXIS
         .D(clock_counter_reg[9]),
         .Q(m00_axis_tdata[9]),
         .R(p_0_in));
-  LUT5 #(
-    .INIT(32'h7FFF4000)) 
+  (* SOFT_HLUTNM = "soft_lutpair5" *) 
+  LUT3 #(
+    .INIT(8'h8B)) 
     \word_counter[0]_i_1 
-       (.I0(word_counter[0]),
-        .I1(axis_tlast0__13),
-        .I2(trigger_input),
-        .I3(mst_exec_state),
-        .I4(number_words[0]),
+       (.I0(number_words[0]),
+        .I1(axis_tlast_i_2_n_0),
+        .I2(word_counter[0]),
         .O(p_1_in[0]));
-  LUT5 #(
-    .INIT(32'hBFFF8000)) 
+  (* SOFT_HLUTNM = "soft_lutpair5" *) 
+  LUT3 #(
+    .INIT(8'hB8)) 
     \word_counter[10]_i_1 
-       (.I0(minusOp[10]),
-        .I1(axis_tlast0__13),
-        .I2(trigger_input),
-        .I3(mst_exec_state),
-        .I4(number_words[10]),
+       (.I0(number_words[10]),
+        .I1(axis_tlast_i_2_n_0),
+        .I2(minusOp[10]),
         .O(p_1_in[10]));
-  LUT5 #(
-    .INIT(32'hBFFF8000)) 
+  (* SOFT_HLUTNM = "soft_lutpair7" *) 
+  LUT3 #(
+    .INIT(8'hB8)) 
     \word_counter[11]_i_1 
-       (.I0(minusOp[11]),
-        .I1(axis_tlast0__13),
-        .I2(trigger_input),
-        .I3(mst_exec_state),
-        .I4(number_words[11]),
+       (.I0(number_words[11]),
+        .I1(axis_tlast_i_2_n_0),
+        .I2(minusOp[11]),
         .O(p_1_in[11]));
-  LUT5 #(
-    .INIT(32'hBFFF8000)) 
+  (* SOFT_HLUTNM = "soft_lutpair6" *) 
+  LUT3 #(
+    .INIT(8'hB8)) 
     \word_counter[12]_i_1 
-       (.I0(minusOp[12]),
-        .I1(axis_tlast0__13),
-        .I2(trigger_input),
-        .I3(mst_exec_state),
-        .I4(number_words[12]),
+       (.I0(number_words[12]),
+        .I1(axis_tlast_i_2_n_0),
+        .I2(minusOp[12]),
         .O(p_1_in[12]));
-  LUT5 #(
-    .INIT(32'hBFFF8000)) 
+  (* SOFT_HLUTNM = "soft_lutpair8" *) 
+  LUT3 #(
+    .INIT(8'hB8)) 
     \word_counter[13]_i_1 
-       (.I0(minusOp[13]),
-        .I1(axis_tlast0__13),
-        .I2(trigger_input),
-        .I3(mst_exec_state),
-        .I4(number_words[13]),
+       (.I0(number_words[13]),
+        .I1(axis_tlast_i_2_n_0),
+        .I2(minusOp[13]),
         .O(p_1_in[13]));
-  LUT5 #(
-    .INIT(32'hBFFF8000)) 
+  (* SOFT_HLUTNM = "soft_lutpair12" *) 
+  LUT3 #(
+    .INIT(8'hB8)) 
     \word_counter[14]_i_1 
-       (.I0(minusOp[14]),
-        .I1(axis_tlast0__13),
-        .I2(trigger_input),
-        .I3(mst_exec_state),
-        .I4(number_words[14]),
+       (.I0(number_words[14]),
+        .I1(axis_tlast_i_2_n_0),
+        .I2(minusOp[14]),
         .O(p_1_in[14]));
-  LUT4 #(
-    .INIT(16'h2FFF)) 
+  LUT5 #(
+    .INIT(32'hFFFF2FFF)) 
     \word_counter[15]_i_1 
-       (.I0(signal_input),
+       (.I0(signal_inut_internal_reg_n_0),
         .I1(last_signal_input),
-        .I2(mst_exec_state),
-        .I3(trigger_input),
+        .I2(trigger_input),
+        .I3(p_0_in_0[1]),
+        .I4(p_0_in_0[0]),
         .O(\word_counter[15]_i_1_n_0 ));
-  LUT5 #(
-    .INIT(32'hBFFF8000)) 
+  (* SOFT_HLUTNM = "soft_lutpair12" *) 
+  LUT3 #(
+    .INIT(8'hB8)) 
     \word_counter[15]_i_2 
-       (.I0(minusOp[15]),
-        .I1(axis_tlast0__13),
-        .I2(trigger_input),
-        .I3(mst_exec_state),
-        .I4(number_words[15]),
+       (.I0(number_words[15]),
+        .I1(axis_tlast_i_2_n_0),
+        .I2(minusOp[15]),
         .O(p_1_in[15]));
-  LUT5 #(
-    .INIT(32'hBFFF8000)) 
+  (* SOFT_HLUTNM = "soft_lutpair6" *) 
+  LUT3 #(
+    .INIT(8'hB8)) 
     \word_counter[1]_i_1 
-       (.I0(minusOp[1]),
-        .I1(axis_tlast0__13),
-        .I2(trigger_input),
-        .I3(mst_exec_state),
-        .I4(number_words[1]),
+       (.I0(number_words[1]),
+        .I1(axis_tlast_i_2_n_0),
+        .I2(minusOp[1]),
         .O(p_1_in[1]));
-  LUT5 #(
-    .INIT(32'hBFFF8000)) 
+  (* SOFT_HLUTNM = "soft_lutpair7" *) 
+  LUT3 #(
+    .INIT(8'hB8)) 
     \word_counter[2]_i_1 
-       (.I0(minusOp[2]),
-        .I1(axis_tlast0__13),
-        .I2(trigger_input),
-        .I3(mst_exec_state),
-        .I4(number_words[2]),
+       (.I0(number_words[2]),
+        .I1(axis_tlast_i_2_n_0),
+        .I2(minusOp[2]),
         .O(p_1_in[2]));
-  LUT5 #(
-    .INIT(32'hBFFF8000)) 
+  (* SOFT_HLUTNM = "soft_lutpair8" *) 
+  LUT3 #(
+    .INIT(8'hB8)) 
     \word_counter[3]_i_1 
-       (.I0(minusOp[3]),
-        .I1(axis_tlast0__13),
-        .I2(trigger_input),
-        .I3(mst_exec_state),
-        .I4(number_words[3]),
+       (.I0(number_words[3]),
+        .I1(axis_tlast_i_2_n_0),
+        .I2(minusOp[3]),
         .O(p_1_in[3]));
-  LUT5 #(
-    .INIT(32'hBFFF8000)) 
+  (* SOFT_HLUTNM = "soft_lutpair9" *) 
+  LUT3 #(
+    .INIT(8'hB8)) 
     \word_counter[4]_i_1 
-       (.I0(minusOp[4]),
-        .I1(axis_tlast0__13),
-        .I2(trigger_input),
-        .I3(mst_exec_state),
-        .I4(number_words[4]),
+       (.I0(number_words[4]),
+        .I1(axis_tlast_i_2_n_0),
+        .I2(minusOp[4]),
         .O(p_1_in[4]));
-  LUT5 #(
-    .INIT(32'hBFFF8000)) 
+  (* SOFT_HLUTNM = "soft_lutpair9" *) 
+  LUT3 #(
+    .INIT(8'hB8)) 
     \word_counter[5]_i_1 
-       (.I0(minusOp[5]),
-        .I1(axis_tlast0__13),
-        .I2(trigger_input),
-        .I3(mst_exec_state),
-        .I4(number_words[5]),
+       (.I0(number_words[5]),
+        .I1(axis_tlast_i_2_n_0),
+        .I2(minusOp[5]),
         .O(p_1_in[5]));
-  LUT5 #(
-    .INIT(32'hBFFF8000)) 
+  (* SOFT_HLUTNM = "soft_lutpair10" *) 
+  LUT3 #(
+    .INIT(8'hB8)) 
     \word_counter[6]_i_1 
-       (.I0(minusOp[6]),
-        .I1(axis_tlast0__13),
-        .I2(trigger_input),
-        .I3(mst_exec_state),
-        .I4(number_words[6]),
+       (.I0(number_words[6]),
+        .I1(axis_tlast_i_2_n_0),
+        .I2(minusOp[6]),
         .O(p_1_in[6]));
-  LUT5 #(
-    .INIT(32'hBFFF8000)) 
+  (* SOFT_HLUTNM = "soft_lutpair11" *) 
+  LUT3 #(
+    .INIT(8'hB8)) 
     \word_counter[7]_i_1 
-       (.I0(minusOp[7]),
-        .I1(axis_tlast0__13),
-        .I2(trigger_input),
-        .I3(mst_exec_state),
-        .I4(number_words[7]),
+       (.I0(number_words[7]),
+        .I1(axis_tlast_i_2_n_0),
+        .I2(minusOp[7]),
         .O(p_1_in[7]));
-  LUT5 #(
-    .INIT(32'hBFFF8000)) 
+  (* SOFT_HLUTNM = "soft_lutpair11" *) 
+  LUT3 #(
+    .INIT(8'hB8)) 
     \word_counter[8]_i_1 
-       (.I0(minusOp[8]),
-        .I1(axis_tlast0__13),
-        .I2(trigger_input),
-        .I3(mst_exec_state),
-        .I4(number_words[8]),
+       (.I0(number_words[8]),
+        .I1(axis_tlast_i_2_n_0),
+        .I2(minusOp[8]),
         .O(p_1_in[8]));
-  LUT5 #(
-    .INIT(32'hBFFF8000)) 
+  (* SOFT_HLUTNM = "soft_lutpair10" *) 
+  LUT3 #(
+    .INIT(8'hB8)) 
     \word_counter[9]_i_1 
-       (.I0(minusOp[9]),
-        .I1(axis_tlast0__13),
-        .I2(trigger_input),
-        .I3(mst_exec_state),
-        .I4(number_words[9]),
+       (.I0(number_words[9]),
+        .I1(axis_tlast_i_2_n_0),
+        .I2(minusOp[9]),
         .O(p_1_in[9]));
   FDRE #(
     .INIT(1'b0)) 

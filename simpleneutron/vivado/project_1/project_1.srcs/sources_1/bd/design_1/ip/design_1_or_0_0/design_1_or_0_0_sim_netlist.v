@@ -1,10 +1,10 @@
 // Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2019.2.1 (lin64) Build 2729669 Thu Dec  5 04:48:12 MST 2019
-// Date        : Fri Feb  7 00:33:34 2020
-// Host        : vm-VirtualBox running 64-bit Ubuntu 18.04.3 LTS
-// Command     : write_verilog -force -mode funcsim
-//               /home/vm/projects/TUDNeutron/simpleneutron/vivado/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_or_0_0/design_1_or_0_0_sim_netlist.v
+// Date        : Sat Feb  8 16:43:41 2020
+// Host        : vm-VirtualBox running 64-bit Ubuntu 18.04.4 LTS
+// Command     : write_verilog -force -mode funcsim -rename_top design_1_or_0_0 -prefix
+//               design_1_or_0_0_ design_1_or_0_0_sim_netlist.v
 // Design      : design_1_or_0_0
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -56,7 +56,6 @@ module design_1_or_0_0
         .out0(out0));
 endmodule
 
-(* ORIG_REF_NAME = "or_v1_0" *) 
 module design_1_or_0_0_or_v1_0
    (out0,
     in6,
@@ -89,7 +88,7 @@ module design_1_or_0_0_or_v1_0
   wire out0_INST_0_i_1_n_0;
 
   LUT5 #(
-    .INIT(32'hFFFF7FFF)) 
+    .INIT(32'hFFFFFFFE)) 
     out0_INST_0
        (.I0(in6),
         .I1(in5),
@@ -98,7 +97,7 @@ module design_1_or_0_0_or_v1_0
         .I4(out0_INST_0_i_1_n_0),
         .O(out0));
   LUT4 #(
-    .INIT(16'h7FFF)) 
+    .INIT(16'hFFFE)) 
     out0_INST_0_i_1
        (.I0(in3),
         .I1(in4),

@@ -47,7 +47,7 @@
 -- DO NOT MODIFY THIS FILE.
 
 -- IP VLNV: akr.neutron:user:signal_detector:1.0
--- IP Revision: 5
+-- IP Revision: 6
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
