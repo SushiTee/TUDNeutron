@@ -90,6 +90,7 @@
 #########
 *.cache/
 *.runs/
+*.tmp/
 *.jobs*
 *.ip_user_files*
 
