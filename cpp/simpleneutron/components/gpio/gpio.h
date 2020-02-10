@@ -15,8 +15,10 @@ class Gpio {
     bool mHasError = false;
 
 protected:
-    void setValue(uint32_t value);
-    uint32_t getValue();
+    void setValue(uint32_t value); // 1st data register
+    uint32_t getValue(); // 1st data register
+    void setValue2(uint32_t value); // 2nd data register
+    uint32_t getValue2(); // 2nd data register
     bool hasError() const;
 
 public:

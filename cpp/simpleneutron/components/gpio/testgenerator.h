@@ -14,6 +14,8 @@ class TestGenerator : public Gpio {
     static TestGenerator &getInstance();
 
     bool mGeneratorState = false; // every bit is one Sensor
+    uint32_t mSignalCount = 1;
+    uint32_t mSignalFrequency = 1;
 public:
     TestGenerator() = delete;
     TestGenerator(const TestGenerator&) = delete;
@@ -22,7 +24,8 @@ public:
     static void init(uint32_t registerBase, int mem);
     static void activate();
     static void deactivate();
-    static void setSignalCount(uint8_t signalCount);
+    static void setSignalFrequency(uint32_t signalFrequency);
+    static void setSignalCount(uint32_t signalCount);
     static bool getStatus();
     static bool hasError();
 };

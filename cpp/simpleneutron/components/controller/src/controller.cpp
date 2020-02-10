@@ -321,7 +321,7 @@ bool Controller::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType type, siz
         deactivateAll();
 
         // check payload size
-        if (size != 4) {
+        if (size != 11) {
             LogErr << "Received unexpected payload" << std::endl;
             networkOK = sendData(type, "{\"status\":\"Error\",\"msg\":\"Received unexpected payload.\"}");
             break;
@@ -336,24 +336,28 @@ bool Controller::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType type, siz
             gpio::WordLengthController::setWordLength(static_cast<uint16_t>(std::pow(2, value)));
         }
 
-        // setting test generator
-        value = static_cast<uint8_t>(buff[1]);
-        if (value & 1) {
-            gpio::TestGenerator::activate();
-        } else {
-            gpio::TestGenerator::deactivate();
-        }
-
         // setting trigger input
-        value = static_cast<uint8_t>(buff[2]);
+        value = static_cast<uint8_t>(buff[1]);
         if (value & 1) {
             gpio::TriggerInput::activate();
         } else {
             gpio::TriggerInput::deactivate();
         }
 
+        // setting test generator
+        value = static_cast<uint8_t>(buff[2]);
+        if (value & 1) {
+            gpio::TestGenerator::activate();
+        } else {
+            gpio::TestGenerator::deactivate();
+        }
+
         // setting test generator signal count
-        gpio::TestGenerator::setSignalCount(static_cast<uint8_t>(buff[3]));
+        gpio::TestGenerator::setSignalCount(* reinterpret_cast<const uint32_t *>(&buff[3]));
+
+        // setting test generator signal frequency
+        LogOut << "Use frequency: " << * reinterpret_cast<const uint32_t *>(&buff[7]) << std::endl;
+        gpio::TestGenerator::setSignalFrequency(* reinterpret_cast<const uint32_t *>(&buff[7]));
 
         bool oneActive = false;
         std::string switchState = "[";

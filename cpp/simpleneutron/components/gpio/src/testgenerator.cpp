@@ -29,32 +29,49 @@ void TestGenerator::init(uint32_t registerBase, int mem) {
     getInstanceImpl(registerBase, mem);
 }
 
+// active bit and signal frequency are in the same register (29 bit)
+// <      signal frequency      >|<active>
+// <0000000000000000000000000000>|<  0   >
+// so shift the frequency value left once
 void TestGenerator::deactivate() {
     TestGenerator &ref = TestGenerator::getInstance();
     if (ref.mGeneratorState != false) {
         ref.mGeneratorState = false;
-        uint8_t val = static_cast<uint8_t>(ref.getValue());
-        val &= ~(1u);
-        ref.setValue(val);
+        ref.setValue(ref.mSignalFrequency << 1); // no need to set active bit since it's 0 by shift
     }
 }
 
+// active bit and signal frequency are in the same register (29 bit)
+// <      signal frequency      >|<active>
+// <0000000000000000000000000000>|<  0   >
+// so shift the frequency value left once and set active bit
 void TestGenerator::activate() {
     TestGenerator &ref = TestGenerator::getInstance();
     if (ref.mGeneratorState != true) {
         ref.mGeneratorState = true;
-        uint8_t val = static_cast<uint8_t>(ref.getValue());
-        val |= 1u;
-        ref.setValue(val);
+        ref.setValue((ref.mSignalFrequency << 1) | 1u);
     }
 }
 
-void TestGenerator::setSignalCount(uint8_t signalCount) {
-    signalCount = signalCount << 1;
+// active bit and signal frequency are in the same register (29 bit)
+// <      signal frequency      >|<active>
+// <0000000000000000000000000000>|<  0   >
+// so shift the frequency value left once and set active bit
+void TestGenerator::setSignalFrequency(uint32_t signalFrequency) {
     TestGenerator &ref = TestGenerator::getInstance();
-    uint8_t val = static_cast<uint8_t>(ref.getValue()) & 1u; // get just enabled bit
-    val = signalCount | val;
-    ref.setValue(val);
+    if (ref.mSignalFrequency != signalFrequency) {
+        ref.mSignalFrequency = signalFrequency;
+        ref.setValue((signalFrequency << 1) | static_cast<uint8_t>(ref.mGeneratorState));
+    }
+}
+
+// signal count is in 2nd data register
+void TestGenerator::setSignalCount(uint32_t signalCount) {
+    TestGenerator &ref = TestGenerator::getInstance();
+    if (ref.mSignalCount != signalCount) {
+        ref.mSignalCount = signalCount;
+        ref.setValue2(signalCount);
+    }
 }
 
 bool TestGenerator::getStatus() {

@@ -28,6 +28,14 @@ uint32_t Gpio::getValue() {
     return mRegister[0];
 }
 
+void Gpio::setValue2(uint32_t value) {
+    mRegister[2] = value;
+}
+
+uint32_t Gpio::getValue2() {
+    return mRegister[2];
+}
+
 bool Gpio::hasError() const {
     return mHasError;
 }
