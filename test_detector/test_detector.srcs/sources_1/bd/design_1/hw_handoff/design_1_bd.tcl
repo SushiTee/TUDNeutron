@@ -203,6 +203,9 @@ proc create_root_design { parentCell } {
    CONFIG.LOGO_FILE {data/sym_andgate.png} \
  ] $util_vector_logic_0
 
+  # Create instance: xlconstant_0, and set properties
+  set xlconstant_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 xlconstant_0 ]
+
   # Create interface connections
   connect_bd_intf_net -intf_net signal_detector_0_M00_AXIS [get_bd_intf_pins axis_data_fifo_0/S_AXIS] [get_bd_intf_pins signal_detector_0/M00_AXIS]
 
@@ -225,6 +228,7 @@ proc create_root_design { parentCell } {
   connect_bd_net -net signal_input_0_out0 [get_bd_pins signal_detector_0/signal_input] [get_bd_pins signal_input_0/out0]
   connect_bd_net -net signal_input_1_1 [get_bd_ports signal_input] [get_bd_pins signal_input_0/signal_input]
   connect_bd_net -net util_vector_logic_0_Res [get_bd_ports fifo_reset] [get_bd_pins axis_data_fifo_0/s_axis_aresetn] [get_bd_pins util_vector_logic_0/Res]
+  connect_bd_net -net xlconstant_0_dout [get_bd_pins signal_detector_0/trigger_input] [get_bd_pins xlconstant_0/dout]
 
   # Create address segments
 

@@ -1,8 +1,8 @@
 --Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2019.2.1 (lin64) Build 2729669 Thu Dec  5 04:48:12 MST 2019
---Date        : Thu Jan 23 01:19:41 2020
---Host        : vm-VirtualBox running 64-bit Ubuntu 18.04.3 LTS
+--Date        : Sun Feb  9 23:20:26 2020
+--Host        : vm-VirtualBox running 64-bit Ubuntu 18.04.4 LTS
 --Command     : generate_target design_1.bd
 --Design      : design_1
 --Purpose     : IP block netlist
@@ -32,7 +32,7 @@ entity design_1 is
     wr_fifo_fill : out STD_LOGIC_VECTOR ( 31 downto 0 )
   );
   attribute CORE_GENERATION_INFO : string;
-  attribute CORE_GENERATION_INFO of design_1 : entity is "design_1,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=design_1,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=4,numReposBlks=4,numNonXlnxBlks=2,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=USER,synth_mode=OOC_per_IP}";
+  attribute CORE_GENERATION_INFO of design_1 : entity is "design_1,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=design_1,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=5,numReposBlks=5,numNonXlnxBlks=2,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=USER,synth_mode=OOC_per_IP}";
   attribute HW_HANDOFF : string;
   attribute HW_HANDOFF of design_1 : entity is "design_1.hwdef";
 end design_1;
@@ -83,6 +83,7 @@ architecture STRUCTURE of design_1 is
     signal_state : out STD_LOGIC;
     fifo_reset : out STD_LOGIC;
     number_words : in STD_LOGIC_VECTOR ( 15 downto 0 );
+    trigger_input : in STD_LOGIC;
     m00_axis_aclk : in STD_LOGIC;
     m00_axis_aresetn : in STD_LOGIC;
     m00_axis_tvalid : out STD_LOGIC;
@@ -92,6 +93,11 @@ architecture STRUCTURE of design_1 is
     m00_axis_tready : in STD_LOGIC
   );
   end component design_1_signal_detector_0_0;
+  component design_1_xlconstant_0_0 is
+  port (
+    dout : out STD_LOGIC_VECTOR ( 0 to 0 )
+  );
+  end component design_1_xlconstant_0_0;
   signal axis_data_fifo_0_axis_rd_data_count : STD_LOGIC_VECTOR ( 31 downto 0 );
   signal axis_data_fifo_0_axis_wr_data_count : STD_LOGIC_VECTOR ( 31 downto 0 );
   signal axis_data_fifo_0_m_axis_tdata : STD_LOGIC_VECTOR ( 31 downto 0 );
@@ -113,6 +119,7 @@ architecture STRUCTURE of design_1 is
   signal signal_input_0_out0 : STD_LOGIC;
   signal signal_input_1_1 : STD_LOGIC_VECTOR ( 7 downto 0 );
   signal util_vector_logic_0_Res : STD_LOGIC_VECTOR ( 0 to 0 );
+  signal xlconstant_0_dout : STD_LOGIC_VECTOR ( 0 to 0 );
   signal NLW_signal_input_0_out1_UNCONNECTED : STD_LOGIC;
   signal NLW_signal_input_0_out2_UNCONNECTED : STD_LOGIC;
   signal NLW_signal_input_0_out3_UNCONNECTED : STD_LOGIC;
@@ -174,7 +181,8 @@ signal_detector_0: component design_1_signal_detector_0_0
       m00_axis_tvalid => signal_detector_0_m00_axis_tvalid,
       number_words(15 downto 0) => number_words_1(15 downto 0),
       signal_input => signal_input_0_out0,
-      signal_state => signal_detector_0_signal_state
+      signal_state => signal_detector_0_signal_state,
+      trigger_input => xlconstant_0_dout(0)
     );
 signal_input_0: component design_1_signal_input_0_0
      port map (
@@ -193,5 +201,9 @@ util_vector_logic_0: component design_1_util_vector_logic_0_0
       Op1(0) => reset_1,
       Op2(0) => signal_detector_0_fifo_reset,
       Res(0) => util_vector_logic_0_Res(0)
+    );
+xlconstant_0: component design_1_xlconstant_0_0
+     port map (
+      dout(0) => xlconstant_0_dout(0)
     );
 end STRUCTURE;

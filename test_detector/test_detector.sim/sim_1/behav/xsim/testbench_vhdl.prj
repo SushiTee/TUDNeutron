@@ -1,7 +1,7 @@
 # compile vhdl design source files
 vhdl xil_defaultlib  \
-"../../../../test_detector.ip_user_files/bd/design_1/ipshared/8804/hdl/signal_detector_v1_0_M00_AXIS.vhd" \
-"../../../../test_detector.ip_user_files/bd/design_1/ipshared/8804/hdl/signal_detector_v1_0.vhd" \
+"../../../../test_detector.ip_user_files/bd/design_1/ipshared/5dee/hdl/signal_detector_v1_0_M00_AXIS.vhd" \
+"../../../../test_detector.ip_user_files/bd/design_1/ipshared/5dee/hdl/signal_detector_v1_0.vhd" \
 "../../../../test_detector.ip_user_files/bd/design_1/ip/design_1_signal_detector_0_0/sim/design_1_signal_detector_0_0.vhd" \
 "../../../../test_detector.ip_user_files/bd/design_1/ipshared/e8fd/hdl/signal_input_v1_0.vhd" \
 "../../../../test_detector.ip_user_files/bd/design_1/ip/design_1_signal_input_0_0/sim/design_1_signal_input_0_0.vhd" \
