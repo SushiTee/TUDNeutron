@@ -16,6 +16,7 @@ Page {
     property bool testGenerator: DB.getTestGenerator();
     property bool inputTrigger: DB.getInputTrigger();
     property string testSignalCount: DB.getTestSignalCount();
+    property string testSignalFrequency: DB.getTestSignalFrequency();
 
     onGoBack: {
         if (host !== hostTextField.displayText) {
@@ -38,9 +39,13 @@ Page {
             DB.setInputTrigger(inputTriggerCheckBox.checked);
             console.info("Wait for input trigger changed to:", inputTriggerCheckBox.checked);
         }
-        if (testSignalCount !== signalGeneratorCount.displayText) {
-            DB.setTestSignalCount(signalGeneratorCount.displayText);
-            console.info("Test signal count changed to:", signalGeneratorCount.displayText);
+        if (testSignalCount !== signalGeneratorCount.signalCount.toString()) {
+            DB.setTestSignalCount(signalGeneratorCount.signalCount);
+            console.info("Test signal count changed to:", signalGeneratorCount.signalCount);
+        }
+        if (testSignalFrequency !== signalGeneratorFrequency.actualFrequency.toString()) {
+            DB.setTestSignalFrequency(signalGeneratorFrequency.actualFrequency);
+            console.info("Test signal frequency changed to:", signalGeneratorFrequency.actualFrequency);
         }
     }
 
@@ -122,14 +127,36 @@ Page {
 
             TextField {
                 id: signalGeneratorCount
+                property int signalCount: text ? parseInt(text) : 1
                 text: root.testSignalCount
                 inputMethodHints: Qt.ImhFormattedNumbersOnly
-                validator: IntValidator{bottom: 1; top: 127;}
+                validator: IntValidator{bottom: 1; top: 2147483647;}
+            }
+        }
+
+        Row {
+            anchors.horizontalCenter: parent.horizontalCenter
+            spacing: 10
+            Label {
+                anchors.verticalCenter: parent.verticalCenter
+                text: "Test signal freq."
+            }
+
+            TextField {
+                id: signalGeneratorFrequency
+                property int actualFrequency: {
+                    if (!text) return 1;
+                    return parseInt(100000000 / parseInt(100000000 / parseInt(text)));
+                }
+                text: root.testSignalFrequency
+                inputMethodHints: Qt.ImhFormattedNumbersOnly
+                validator: IntValidator{bottom: 1; top: 50000000;}
             }
 
             Label {
+                id: signalGeneratorFrequencyLabel
                 anchors.verticalCenter: parent.verticalCenter
-                text: "x1000"
+                text: "Actual: " + (signalGeneratorFrequency.actualFrequency+'').replace(/\B(?=(\d{3})+(?!\d))/g, '\u202F') + "Hz"; // use thin space after 3 digits
             }
         }
     }

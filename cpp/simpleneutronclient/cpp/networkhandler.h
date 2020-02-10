@@ -22,7 +22,8 @@ class NetworkHandler : public QObject {
     uint16_t m_packageSize;
     uint8_t m_inputTrigger;
     uint8_t m_testGenerator;
-    uint8_t m_testSignalCount;
+    uint32_t m_testSignalCount;
+    uint32_t m_testSignalFrequency;
 
     // reserve buffer
     kn::buffer<BUFFER_SIZE> m_recvBuff;

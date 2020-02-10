@@ -159,18 +159,32 @@ void NetworkController::setInputTrigger(int inputTrigger)
     emit inputTriggerChanged(m_inputTrigger);
 }
 
-int NetworkController::testSignalCount() const
+uint32_t NetworkController::testSignalCount() const
 {
     return m_testSignalCount;
 }
 
-void NetworkController::setTestSignalCount(int testSignalCount)
+int NetworkController::testSignalFrequency() const
+{
+    return m_testSignalFrequency;
+}
+
+void NetworkController::setTestSignalCount(uint32_t testSignalCount)
 {
     if (m_testSignalCount == testSignalCount)
         return;
 
     m_testSignalCount = testSignalCount;
     emit testSignalCountChanged(m_testSignalCount);
+}
+
+void NetworkController::setTestSignalFrequency(int testSignalFrequency)
+{
+    if (m_testSignalFrequency == testSignalFrequency)
+        return;
+
+    m_testSignalFrequency = testSignalFrequency;
+    emit testSignalFrequencyChanged(m_testSignalFrequency);
 }
 
 void NetworkController::setSensors(QVariantList sensors)

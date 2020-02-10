@@ -17,7 +17,8 @@ function dbInit() {
     SN.NetworkController.port = parseInt(getPort());
     SN.NetworkController.testGenerator = getTestGenerator();
     SN.NetworkController.inputTrigger = getInputTrigger();
-    SN.NetworkController.testSignalCount = getTestSignalCount();
+    SN.NetworkController.testSignalCount = parseInt(getTestSignalCount());
+    SN.NetworkController.testSignalFrequency = parseInt(getTestSignalFrequency());
 }
 
 function dbGetHandle() {
@@ -117,11 +118,22 @@ function setInputTrigger(inputTrigger) {
 
 function getTestSignalCount() {
     let result = readSettingsValue('testSignalCount');
-    if (!result) result = '1'; // default
+    if (!result) result = '10'; // default
     return result;
 }
 
 function setTestSignalCount(testSignalCount) {
-    setSettingsValue('testSignalCount', testSignalCount);
-    SN.NetworkController.testSignalCount = parseInt(testSignalCount);
+    setSettingsValue('testSignalCount', testSignalCount.toString());
+    SN.NetworkController.testSignalCount = testSignalCount;
+}
+
+function getTestSignalFrequency() {
+    let result = readSettingsValue('testSignalFrequency');
+    if (!result) result = '1'; // default
+    return result;
+}
+
+function setTestSignalFrequency(testSignalFrequency) {
+    setSettingsValue('testSignalFrequency', testSignalFrequency.toString());
+    SN.NetworkController.testSignalFrequency = testSignalFrequency;
 }

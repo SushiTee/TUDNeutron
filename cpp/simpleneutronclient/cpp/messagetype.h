@@ -37,6 +37,7 @@ public:
 };
 
 Q_DECLARE_METATYPE(uint8_t)
+Q_DECLARE_METATYPE(uint32_t)
 Q_DECLARE_METATYPE(uint64_t)
 Q_DECLARE_METATYPE(MessageType::Message)
 Q_DECLARE_METATYPE(QVector<uint64_t>)

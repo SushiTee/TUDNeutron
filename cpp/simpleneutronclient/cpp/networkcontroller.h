@@ -29,7 +29,8 @@ public:
     int packageSize() const;
     int testGenerator() const;
     int inputTrigger() const;
-    int testSignalCount() const;
+    uint32_t testSignalCount() const;
+    int testSignalFrequency() const;
 
 private:
     Q_PROPERTY(int port READ port WRITE setPort NOTIFY portChanged)
@@ -39,7 +40,8 @@ private:
     Q_PROPERTY(bool sensorsActive READ sensorsActive NOTIFY sensorsActiveChanged)
     Q_PROPERTY(int testGenerator READ testGenerator WRITE setTestGenerator NOTIFY testGeneratorChanged)
     Q_PROPERTY(int inputTrigger READ inputTrigger WRITE setInputTrigger NOTIFY inputTriggerChanged)
-    Q_PROPERTY(int testSignalCount READ testSignalCount WRITE setTestSignalCount NOTIFY testSignalCountChanged)
+    Q_PROPERTY(uint32_t testSignalCount READ testSignalCount WRITE setTestSignalCount NOTIFY testSignalCountChanged)
+    Q_PROPERTY(int testSignalFrequency READ testSignalFrequency WRITE setTestSignalFrequency NOTIFY testSignalFrequencyChanged)
     Q_PROPERTY(QVariantList sensors READ sensors NOTIFY sensorsChanged)
 
     QString m_host = "zedboard";
@@ -48,7 +50,8 @@ private:
     bool m_sensorsActive = false;
     int m_testGenerator = false;
     int m_inputTrigger = false;
-    int m_testSignalCount = 1;
+    uint32_t m_testSignalCount = 1;
+    int m_testSignalFrequency = 1;
     QVariantList m_sensors = {};
     MessageType::ConnectedState m_connected = MessageType::ConnectedState::DISCONNECTED;
 
@@ -59,7 +62,8 @@ private:
     void setPackageSize(int packageSize);
     void setTestGenerator(int testGenerator);
     void setInputTrigger(int inputTrigger);
-    void setTestSignalCount(int testSignalCount);
+    void setTestSignalCount(uint32_t testSignalCount);
+    void setTestSignalFrequency(int testSignalFrequency);
     void setSensors(QVariantList sensors);
     bool sensorsActive() const;
     void setSensorsActive(bool sensorsActive);
@@ -96,5 +100,6 @@ signals:
     void sensorResult(QVector<uint64_t> sensorData);
     void testGeneratorChanged(int testGenerator);
     void inputTriggerChanged(int inputTrigger);
-    void testSignalCountChanged(int testSignalCount);
+    void testSignalCountChanged(uint32_t testSignalCount);
+    void testSignalFrequencyChanged(int testSignalFrequency);
 };

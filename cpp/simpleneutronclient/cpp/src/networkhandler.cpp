@@ -9,8 +9,13 @@
 constexpr size_t PACKAGE_HEADER_SIZE = 3;
 
 union payloadSizeConverter {
-    uint8_t bytes[2];
+    std::byte bytes[2];
     uint16_t num;
+};
+
+union int32converter {
+    std::byte bytes[24];
+    uint32_t num;
 };
 
 NetworkHandler::NetworkHandler(NetworkController *parent)
@@ -19,7 +24,8 @@ NetworkHandler::NetworkHandler(NetworkController *parent)
       m_packageSize(static_cast<uint16_t>(std::pow(2, parent->packageSize()))),
       m_inputTrigger(parent->inputTrigger() ? 1u : 0u),
       m_testGenerator(parent->testGenerator() ? 1u : 0u),
-      m_testSignalCount(static_cast<uint8_t>(parent->testSignalCount())),
+      m_testSignalCount(parent->testSignalCount()),
+      m_testSignalFrequency(static_cast<uint32_t>(parent->testSignalFrequency())),
       m_sensorDataCount(8)
 {
 }
@@ -72,11 +78,18 @@ void NetworkHandler::networkConnect(QString host, int port)
             m_stream.close();
         });
         // setting settings on connection! Order is important!
-        kn::buffer<4> buff;
+        int32converter testSignalCount;
+        testSignalCount.num = m_testSignalCount;
+        int32converter testSignalFrequency;
+        testSignalFrequency.num = m_testSignalFrequency;
+        kn::buffer<11> buff;
         buff[0] = static_cast<std::byte>(m_packageSizeIndex);
-        buff[1] = static_cast<std::byte>(m_testGenerator);
-        buff[2] = static_cast<std::byte>(m_inputTrigger);
-        buff[3] = static_cast<std::byte>(m_testSignalCount);
+        buff[1] = static_cast<std::byte>(m_inputTrigger);
+        buff[2] = static_cast<std::byte>(m_testGenerator);
+        for (uint64_t i = 0; i < 4; i++) {
+            buff[i+3] = testSignalCount.bytes[i];
+            buff[i+7] = testSignalFrequency.bytes[i];
+        }
         sendData(MessageType::Message::CONNECT, buff.data(), buff.size());
     } else {
         QMetaObject::invokeMethod(m_controller, "connected", Q_ARG(bool, false), Q_ARG(QJsonDocument, QJsonDocument()));
@@ -179,12 +192,12 @@ void NetworkHandler::sendData(MessageType::Message type, QString data) const
     auto dataLength = static_cast<size_t>(data.length());
 
     // buffer
-    std::array<uint8_t, PACKAGE_HEADER_SIZE> message;
+    kn::buffer<PACKAGE_HEADER_SIZE> message;
 
     // write header
     payloadSizeConverter conv;
     conv.num = static_cast<uint16_t>(dataLength);
-    message[0] = static_cast<uint8_t>(type);
+    message[0] = static_cast<std::byte>(type);
     message[1] = conv.bytes[0];
     message[2] = conv.bytes[1];
 
@@ -194,12 +207,12 @@ void NetworkHandler::sendData(MessageType::Message type, QString data) const
 void NetworkHandler::sendData(MessageType::Message type, const std::byte* data, size_t length) const
 {
     // buffer
-    std::array<uint8_t, PACKAGE_HEADER_SIZE> message;
+    kn::buffer<PACKAGE_HEADER_SIZE> message;
 
     // write header
     payloadSizeConverter conv;
     conv.num = static_cast<uint16_t>(length);
-    message[0] = static_cast<uint8_t>(type);
+    message[0] = static_cast<std::byte>(type);
     message[1] = conv.bytes[0];
     message[2] = conv.bytes[1];
 
@@ -209,12 +222,12 @@ void NetworkHandler::sendData(MessageType::Message type, const std::byte* data, 
 void NetworkHandler::sendData(MessageType::Message type, uint8_t value) const
 {
     // buffer
-    std::array<uint8_t, PACKAGE_HEADER_SIZE> message;
+    kn::buffer<PACKAGE_HEADER_SIZE> message;
 
     // write header
     payloadSizeConverter conv;
     conv.num = static_cast<uint16_t>(1);
-    message[0] = static_cast<uint8_t>(type);
+    message[0] = static_cast<std::byte>(type);
     message[1] = conv.bytes[0];
     message[2] = conv.bytes[1];
 
