@@ -21,7 +21,7 @@ namespace controller {
 constexpr int quitSignal = SIGINT;
 sighandler_t prevSignal;
 bool quit = false;
-bool threadQuit = false;
+std::atomic<bool> threadQuit = false;
 
 union payloadSizeConverter {
     uint8_t bytes[2];
@@ -40,9 +40,13 @@ void Controller::run() {
     siginterrupt(quitSignal, true);
 
     // register signal handler
-    std::signal(quitSignal, [](int) {
+    prevSignal = std::signal(quitSignal, [](int) {
         // use global var here
+        LogErr << "Quit signal" << std::endl;
         quit = true;
+
+        // reset to previous (original) signal
+        std::signal(quitSignal, prevSignal);
     });
 
     using namespace std::chrono_literals;
@@ -204,7 +208,14 @@ void Controller::sendDmaData() {
     {
         bool dataSend = false;
         for (auto &dma : mDmas) {
-            if (dma->empty()) {
+            if (dma->getWaitForDestroy() || dma->empty()) {
+                continue;
+            }
+
+            if (dma->full()) {
+                dma->setWaitForDestroy();
+                LogOut << "Fifo is full " << std::to_string(dma->getID()) << std::endl;
+                sendData(MessageType::FIFO_FULL, "{\"status\":\"Error\",\"msg\":\"Fifo is full.\",\"dma\":" + std::to_string(dma->getID()) + "}");
                 continue;
             }
 
@@ -232,7 +243,7 @@ void Controller::sendDmaData() {
 
         // sleep if there is really nothing!
         if (!dataSend) {
-            std::this_thread::sleep_for(1ms);
+            std::this_thread::sleep_for(1ns);
         }
     }
 }
@@ -291,6 +302,7 @@ bool Controller::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType type, siz
 
         if (!dmaStartFailed) {
             // do busy wait until all Dmas are started
+            using namespace std::chrono_literals;
             bool allDmaRunning = false;
             while (!allDmaRunning) {
                 allDmaRunning = true;
@@ -299,6 +311,7 @@ bool Controller::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType type, siz
                         allDmaRunning = false;
                         break;
                     }
+                    std::this_thread::sleep_for(1ms);
                 }
             }
             gpio::SensorController::activateSpecific(dmas);
@@ -415,20 +428,8 @@ void Controller::deactivateAll() {
 void Controller::destroyThread() {
     if (!mThread) return;
 
-    // enforce POSIX semantics
-    siginterrupt(quitSignal, true);
-
-    // register signal handler
-    prevSignal = std::signal(quitSignal, [](int) {
-        // use global var here
-        threadQuit = true;
-
-        // reset to previous (original) signal
-        std::signal(quitSignal, prevSignal);
-    });
-
-    // send signal to thread
-    pthread_kill(mThread->native_handle(), quitSignal);
+    // set thread quit
+    threadQuit = true;
 
     // wait for thread to finish
     mThread->join();

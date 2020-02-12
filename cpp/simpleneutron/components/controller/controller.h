@@ -24,6 +24,7 @@ enum class MessageType : uint8_t {
     START_DMA,
     STOP_DMA,
     CONNECT,
+    FIFO_FULL,
 
     NONE // marks the last Type (is used to determine valid types)
 };

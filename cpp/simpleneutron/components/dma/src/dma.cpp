@@ -35,7 +35,7 @@ enum ControlBit : Bit {
 };
 
 Dma::Dma(uint8_t id, int mem)
- : ID(id), MEMORY_BASE(DMAS[id].mMemory), REGISTER_BASE(DMAS[id].mRegister), mWordLength(gpio::WordLengthController::getWordLength()), mInterruptCount(0)
+ : ID(id), MEMORY_BASE(DMAS[id].mMemory), REGISTER_BASE(DMAS[id].mRegister), mWordLength(gpio::WordLengthController::getWordLength())
 {
     mRegister = (uint32_t *)mmap(NULL, 128, PROT_READ | PROT_WRITE, MAP_SHARED, mem, REGISTER_BASE);
     if (mRegister == MAP_FAILED) {
@@ -57,6 +57,13 @@ Dma::Dma(uint8_t id, int mem)
         mHasError = true;
         return;
     }
+
+    mFifoUio = open(FIFO_INTERRUPTS[id], O_RDWR);
+    if (mFifoUio < 0) {
+        LogErr << "DMA (" << std::hex << REGISTER_BASE << "): could not open FIFO UIO Device" << std::endl;
+        mHasError = true;
+        return;
+    }
 }
 
 Dma::~Dma() {
@@ -64,6 +71,12 @@ Dma::~Dma() {
         mUio = close(mUio);
         if (mUio < 0) {
             LogOut << "DMA (" << std::hex << REGISTER_BASE << "): could not close UIO Device" << std::endl;
+        }
+    }
+    if (mFifoUio >= 0) {
+        mFifoUio = close(mFifoUio);
+        if (mFifoUio < 0) {
+            LogOut << "DMA (" << std::hex << REGISTER_BASE << "): could not close FIFO UIO Device" << std::endl;
         }
     }
 
@@ -83,6 +96,10 @@ bool Dma::empty() {
 }
 
 bool Dma::full() {
+    if (mDramFifoFull) {
+        return true;
+    }
+
     uint32_t diff = writeToReadPointerDifference();
     if (diff < mWordLength) {
         return true;
@@ -102,9 +119,13 @@ void Dma::reset() {
 }
 
 void Dma::enableInterrupt() {
-    // interrupt is disabled after read. So we have to reenable it by writing to it also reset the interrup bit
+    // interrupt is disabled after read. So we have to reenable it by writing to it also reset the interrupt bit
     MemoryControl::registerSetBit(mRegister, DmaOffset::S2MM_STATUS, CONTROL_COMPLETE_INTERRUPT, 1);
     write(mUio, "1", 4);
+}
+
+void Dma::enableFifoInterrupt() {
+    write(mFifoUio, "1", 4);
 }
 
 void Dma::waitForData() {
@@ -114,16 +135,21 @@ void Dma::waitForData() {
     if (result != 4) {
         LogOut << "DMA (" << std::hex << REGISTER_BASE << "): Signal Interrupt occured. No data handling!" << std::endl;
     } else {
-        uint32_t numberOfInterrupts = static_cast<uint32_t>(*buf);
-        // todo: check if we even have to check the interrupt count as it should be always just one!
-        if (mInterruptCount == 0) { // on very first interrupt after software start set the correct value
-            mInterruptCount = numberOfInterrupts - 1;
-        }
-        LogOut << "DMA (" << std::hex << REGISTER_BASE << "): Interrupt occured | Count: " << (numberOfInterrupts - mInterruptCount) << std::endl;
-        mInterruptCount = numberOfInterrupts;
-
         // interrupt is disabled after read. So we have to reenable it by writing to it
         enableInterrupt();
+    }
+}
+
+void Dma::waitForFifoInterrupt() {
+    // read interrupt count to buffer
+    char buf[4];
+    int result = read(mFifoUio, buf, 4); // this blocks until an interrupt occurs. Exactly what we want.
+    if (result != 4) {
+        LogOut << "DMA (" << std::hex << REGISTER_BASE << "): Signal Interrupt occured. No Fifo Interrupt handling!" << std::endl;
+    } else {
+        // Fifo is full. Kill everything!
+        LogErr << "DMA (" << std::hex << REGISTER_BASE << "): FIFO full!" << std::endl;
+        mDramFifoFull = true;
     }
 }
 
@@ -132,7 +158,13 @@ void Dma::enable() {
         return;
     }
 
+    mDramFifoFull = false;
+    mWaitForDestroy = false;
     mEnabled = true;
+    mFifoThread = std::make_unique<std::thread>([this](){
+        enableFifoInterrupt();
+        waitForFifoInterrupt();
+    });
     mThread = std::make_unique<std::thread>([this](){
         reset();
         enableInterrupt();
@@ -158,7 +190,7 @@ void Dma::enable() {
 
         mRunning = true;
 
-        while(!mQuit) {
+        while(!mQuit && !mDramFifoFull) {
             waitForData();
             // if thread was quit while waiting break here
             if (mQuit) {
@@ -171,7 +203,7 @@ void Dma::enable() {
                 break;
             }
             if (status & ((1 << simpleneutron::components::dma::StatusBit::STATUS_HALTED) | (1 << simpleneutron::components::dma::StatusBit::STATUS_IDLE))) {
-                LogOut << "DMA (" << std::hex << REGISTER_BASE << "): " << std::hex << readMemory(mWriteAddress) << " status: " << std::dec << simpleneutron::components::memorycontrol::MemoryControl::registerRead(mRegister, 0x58u) << std::endl;
+                //LogOut << "DMA (" << std::hex << REGISTER_BASE << "): " << std::hex << readMemory(mWriteAddress) << " status: " << std::dec << simpleneutron::components::memorycontrol::MemoryControl::registerRead(mRegister, 0x58u) << std::endl;
                 mWriteAddress += mWordLength;
                 if (mWriteAddress >= mSize) {
                     mWriteAddress = 0;
@@ -193,31 +225,55 @@ void Dma::disable() {
     }
 
     // store current object to global var
-    dmaStore = this;
+    dmaStore = this;  
 
-    // enforce POSIX semantics
-    siginterrupt(quitSignal, true);
+    // send signal to thread and wait
+    if (mThread->joinable()) {
+        // enforce POSIX semantics
+        siginterrupt(quitSignal, true);
 
-    // register signal handler
-    prevSignal = std::signal(quitSignal, [](int) {
-        // use global var here
-        if (dmaStore) {
-            dmaStore->setQuit(true);
-        }
+        // register signal handler
+        prevSignal = std::signal(quitSignal, [](int) {
+            // use global var here
+            if (dmaStore) {
+                dmaStore->setQuit(true);
+            }
 
-        // reset to previous (original) signal
+            // reset to previous (original) signal
+            std::signal(quitSignal, prevSignal);
+        });
+
+        pthread_kill(mThread->native_handle(), quitSignal);
+        mThread->join();
+
         std::signal(quitSignal, prevSignal);
-    });
+    }
 
-    // send signal to thread
-    pthread_kill(mThread->native_handle(), quitSignal);
+    if (mFifoThread->joinable()) {
+        // enforce POSIX semantics
+        siginterrupt(quitSignal, true);
 
-    // wait for thread to finish
-    mThread->join();
+        // register signal handler
+        prevSignal = std::signal(quitSignal, [](int) {
+            // use global var here
+            if (dmaStore) {
+                dmaStore->setQuit(true);
+            }
+
+            // reset to previous (original) signal
+            std::signal(quitSignal, prevSignal);
+        });
+
+        pthread_kill(mFifoThread->native_handle(), quitSignal);
+        mFifoThread->join();
+
+        std::signal(quitSignal, prevSignal);
+    }
 
     // cleanup
     dmaStore = nullptr;
     mThread = nullptr;
+    mFifoThread = nullptr;
     mQuit = false;
 
     // turn off hardware
@@ -255,7 +311,7 @@ bool Dma::hasStatusError(uint32_t status) {
     bool hasError = false;
     std::stringstream ss;
     if (status & (1 << STATUS_HALTED)) ss << "(halted)";
-    if (status & (1 << STATUS_IDLE)) ss << "(idle)";
+    //if (status & (1 << STATUS_IDLE)) ss << "(idle)";
     if (status & (1 << STATUS_INTERNAL_ERROR)) {
         ss << "(internal error)";
         hasError = true;
@@ -286,6 +342,14 @@ bool Dma::hasError() const {
 
 bool Dma::isRunning() const {
     return mRunning;
+}
+
+void Dma::setWaitForDestroy() {
+    mWaitForDestroy = true;
+}
+
+bool Dma::getWaitForDestroy() {
+    return mWaitForDestroy;
 }
 
 void Dma::setQuit(bool quit) {

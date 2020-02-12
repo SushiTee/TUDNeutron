@@ -34,6 +34,7 @@ class Dma {
     uint32_t readToWritePointerDifference();
 
     int mUio;
+    int mFifoUio;
     uint32_t *mRegister = 0;
     uint32_t *mMemoryMap = 0;
     uint32_t mSize = DMA_SIZE;
@@ -43,11 +44,13 @@ class Dma {
     bool mHasError = false;
     std::atomic<bool> mEnabled = false;
     std::atomic<bool> mRunning = false;
+    std::atomic<bool> mWaitForDestroy = false;
 
     std::unique_ptr<std::thread> mThread = nullptr;
+    std::unique_ptr<std::thread> mFifoThread = nullptr;
 
     std::atomic<uint16_t> mWordLength;
-    std::atomic<uint32_t> mInterruptCount;
+    std::atomic<bool> mDramFifoFull = false;
     std::sig_atomic_t mQuit = false;
 
 public:
@@ -66,7 +69,9 @@ public:
 
     void reset();
     void enableInterrupt();
+    void enableFifoInterrupt();
     void waitForData();
+    void waitForFifoInterrupt();
     void enable();
     void disable();
     void setDestinationAddress(uint32_t address);
@@ -78,6 +83,8 @@ public:
     bool hasStatusError(uint32_t status);
     bool hasError() const;
     bool isRunning() const;
+    void setWaitForDestroy();
+    bool getWaitForDestroy();
 
     uint32_t *memoryMap() const;
     uint32_t writeSize() const;
