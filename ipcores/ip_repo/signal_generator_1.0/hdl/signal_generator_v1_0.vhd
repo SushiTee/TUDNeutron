@@ -20,7 +20,8 @@ entity signal_generator_v1_0 is
     signal_state : out std_logic; -- shows the state (if enabled AND signal detected -> LOW; if enabled AND no signal detected -> HIGH; otherwise LOW )
     fifo_reset   : out std_logic; -- resets an connected fifo after being enabled
     number_words : in std_logic_vector(15 downto 0); -- number of words to be send as package
-    signal_count : in std_logic_vector(6 downto 0);
+    signal_count : in std_logic_vector(31 downto 0);
+    signal_frequency: in std_logic_vector(27 downto 0);
     signal_input : in std_logic;
     -- User ports ends
     -- Do not modify the ports beyond this line
@@ -49,7 +50,8 @@ architecture arch_imp of signal_generator_v1_0 is
     signal_state   : out std_logic;
     fifo_reset     : out std_logic;
     number_words   : in std_logic_vector(15 downto 0);
-    signal_count   : in std_logic_vector(6 downto 0);
+    signal_count   : in std_logic_vector(31 downto 0);
+    signal_frequency: in std_logic_vector(27 downto 0);
     signal_input   : in std_logic;
     M_AXIS_ACLK    : in std_logic;
     M_AXIS_ARESETN : in std_logic;
@@ -76,6 +78,7 @@ signal_generator_v1_0_M00_AXIS_inst : signal_generator_v1_0_M00_AXIS
     number_words   => number_words,
     signal_count   => signal_count,
     signal_input   => signal_input,
+    signal_frequency => signal_frequency,
     M_AXIS_ACLK    => m00_axis_aclk,
     M_AXIS_ARESETN => m00_axis_aresetn,
     M_AXIS_TVALID  => m00_axis_tvalid,

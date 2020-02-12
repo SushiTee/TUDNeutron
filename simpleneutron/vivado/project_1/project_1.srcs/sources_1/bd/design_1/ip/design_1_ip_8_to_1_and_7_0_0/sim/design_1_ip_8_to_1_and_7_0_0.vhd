@@ -47,7 +47,7 @@
 -- DO NOT MODIFY THIS FILE.
 
 -- IP VLNV: user.org:user:ip_8_to_1_and_7:1.0
--- IP Revision: 2
+-- IP Revision: 3
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
@@ -55,9 +55,9 @@ USE ieee.numeric_std.ALL;
 
 ENTITY design_1_ip_8_to_1_and_7_0_0 IS
   PORT (
-    in0 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+    in0 : IN STD_LOGIC_VECTOR(28 DOWNTO 0);
     out0 : OUT STD_LOGIC;
-    out1 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0)
+    out1 : OUT STD_LOGIC_VECTOR(27 DOWNTO 0)
   );
 END design_1_ip_8_to_1_and_7_0_0;
 
@@ -66,9 +66,9 @@ ARCHITECTURE design_1_ip_8_to_1_and_7_0_0_arch OF design_1_ip_8_to_1_and_7_0_0 I
   ATTRIBUTE DowngradeIPIdentifiedWarnings OF design_1_ip_8_to_1_and_7_0_0_arch: ARCHITECTURE IS "yes";
   COMPONENT ip_8_to_1_and_7_v1_0 IS
     PORT (
-      in0 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+      in0 : IN STD_LOGIC_VECTOR(28 DOWNTO 0);
       out0 : OUT STD_LOGIC;
-      out1 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0)
+      out1 : OUT STD_LOGIC_VECTOR(27 DOWNTO 0)
     );
   END COMPONENT ip_8_to_1_and_7_v1_0;
 BEGIN

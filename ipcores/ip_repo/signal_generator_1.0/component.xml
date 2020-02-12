@@ -19,6 +19,14 @@
             <spirit:name>m00_axis_tdata</spirit:name>
           </spirit:physicalPort>
         </spirit:portMap>
+	<spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>TKEEP</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>m00_axis_tkeep</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
         <spirit:portMap>
           <spirit:logicalPort>
             <spirit:name>TLAST</spirit:name>
@@ -130,7 +138,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>4f5c195b</spirit:value>
+            <spirit:value>59c20701</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -146,7 +154,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>4f5c195b</spirit:value>
+            <spirit:value>59c20701</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -241,7 +249,24 @@
         <spirit:wire>
           <spirit:direction>in</spirit:direction>
           <spirit:vector>
-            <spirit:left spirit:format="long">6</spirit:left>
+            <spirit:left spirit:format="long">31</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic_vector</spirit:typeName>
+              <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>signal_frequency</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long">27</spirit:left>
             <spirit:right spirit:format="long">0</spirit:right>
           </spirit:vector>
           <spirit:wireTypeDefs>
@@ -402,7 +427,7 @@
       <spirit:file>
         <spirit:name>hdl/signal_generator_v1_0.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_3b824bf4</spirit:userFileType>
+        <spirit:userFileType>CHECKSUM_a98622e5</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
@@ -468,8 +493,8 @@
         <xilinx:taxonomy>AXI_Peripheral</xilinx:taxonomy>
       </xilinx:taxonomies>
       <xilinx:displayName>signal_generator_v1.0</xilinx:displayName>
-      <xilinx:coreRevision>8</xilinx:coreRevision>
-      <xilinx:coreCreationDateTime>2020-02-09T19:20:58Z</xilinx:coreCreationDateTime>
+      <xilinx:coreRevision>9</xilinx:coreRevision>
+      <xilinx:coreCreationDateTime>2020-02-10T17:17:31Z</xilinx:coreCreationDateTime>
       <xilinx:tags>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@6f145de5_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/signal_generator_1.0</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@7771d214_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/signal_generator_1.0</xilinx:tag>
@@ -607,13 +632,30 @@
         <xilinx:tag xilinx:name="ui.data.coregen.dd@3daa5a50_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/signal_generator_1.0</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@cde2ef8_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/signal_generator_1.0</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@1a3aaa86_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@42e77a44_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@77c4d53e_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2cb8dec3_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@f2d2b9_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6efcbde8_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7260d5bf_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@147b511b_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@11592088_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@49f6d061_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@63912653_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@193b85b_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@761cf049_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6cf486e7_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@25c097d7_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@54d7b209_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4149ff94_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@752d36cc_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/signal_generator_1.0</xilinx:tag>
       </xilinx:tags>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2019.2.1</xilinx:xilinxVersion>
       <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="8de02c38"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="3f053250"/>
-      <xilinx:checksum xilinx:scope="ports" xilinx:value="445ca84f"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="fba941dc"/>
+      <xilinx:checksum xilinx:scope="ports" xilinx:value="89463fe0"/>
       <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="9a194edc"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="bdd17a4f"/>
     </xilinx:packagingInfo>

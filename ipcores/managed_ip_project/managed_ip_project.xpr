@@ -24,6 +24,8 @@
     <Option Name="ActiveSimSet" Val="sim_1"/>
     <Option Name="DefaultLib" Val="xil_defaultlib"/>
     <Option Name="ProjectType" Val="Managed_IP"/>
+    <Option Name="IPRepoPath" Val="$PPRDIR/../ip_repo/hold_signal_1.0"/>
+    <Option Name="IPRepoPath" Val="$PPRDIR/../ip_repo/hold_signal_1.0"/>
     <Option Name="IPRepoPath" Val="$PPRDIR/../ip_repo/ip_8_to_1_and_7_1.0"/>
     <Option Name="IPRepoPath" Val="$PPRDIR/../ip_repo/input_trigger_1.0"/>
     <Option Name="IPRepoPath" Val="$PPRDIR/../ip_repo/or_1.0"/>

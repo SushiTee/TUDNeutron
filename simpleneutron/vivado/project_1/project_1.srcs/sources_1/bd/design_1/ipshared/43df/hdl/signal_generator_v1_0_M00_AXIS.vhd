@@ -20,7 +20,8 @@ entity signal_generator_v1_0_M00_AXIS is
     signal_state : out std_logic; -- shows the state (if enabled AND signal detected -> LOW; if enabled AND no signal detected -> HIGH; otherwise LOW )
     fifo_reset   : out std_logic; -- resets an connected fifo after being enabled
     number_words : in std_logic_vector(15 downto 0); -- number of words to be send as package
-    signal_count : in std_logic_vector(6 downto 0);
+    signal_count : in std_logic_vector(31 downto 0);
+    signal_frequency: in std_logic_vector(27 downto 0);
     signal_input : in std_logic;
     -- User ports ends
     -- Do not modify the ports beyond this line
@@ -90,16 +91,14 @@ architecture implementation of signal_generator_v1_0_M00_AXIS is
   signal axis_tlast                      : std_logic                                         := '0';
   signal stream_data_out                 : unsigned(C_M_AXIS_TDATA_WIDTH-1 downto 0)         := (others => '0');
   signal word_counter                    : unsigned(15 downto 0)                             := (others => '0');
-  signal clock_counter                   : unsigned(31 downto 0)                             := (others => '0');
-  signal signal_count_32                 : std_logic_vector(31 downto 0)                     := (others => '0');
-  signal signal_count_1000               : unsigned(31 downto 0)                             := (others => '0');
+  signal clock_counter                   : unsigned(27 downto 0)                             := (others => '0');
+  signal signal_counter                  : unsigned(31 downto 0)                             := (others => '0');
   signal last_signal_input               : std_logic                                         := '0';
   signal signal_inut_internal            : std_logic;
 
 begin
   -- I/O Connections assignments
   M_AXIS_TKEEP  <= (others => '1'); -- this is always 1 for reasons!
-  signal_count_32(6 downto 0) <= signal_count;
 
   -- Control state machine implementation
   process(M_AXIS_ACLK)
@@ -181,11 +180,13 @@ begin
   begin
     if rising_edge(M_AXIS_ACLK) then
       if (mst_exec_state = STATE_SEND_STREAM) then
-        if (clock_counter < unsigned(signal_count_32) * 2000) then
-          clock_counter <= clock_counter + 1;
+        if (clock_counter > 1) then
+          clock_counter <= clock_counter - 1;
+        else
+          clock_counter <= 100000000 / unsigned(signal_frequency);
         end if;
       else
-        clock_counter <= (others => '0');
+        clock_counter <= 100000000 / unsigned(signal_frequency);
       end if;
     end if;
   end process;
@@ -195,11 +196,13 @@ begin
   begin
     if rising_edge(M_AXIS_ACLK) then
       if (mst_exec_state = STATE_SEND_STREAM) then
-        if ((clock_counter mod 2 = 0 and clock_counter < unsigned(signal_count_32) * 2000) or (signal_inut_internal = '1' and last_signal_input /= signal_inut_internal)) then
+        if ((clock_counter = 1 and signal_counter < unsigned(signal_count)) or (signal_inut_internal = '1' and last_signal_input /= signal_inut_internal)) then
           stream_data_out <= stream_data_out + 1;
+          signal_counter <= signal_counter + 1;
         end if;
       else
         stream_data_out <= (others => '0');
+        signal_counter <= (others => '0');
       end if;
     end if;
   end process;
@@ -212,7 +215,7 @@ begin
     if rising_edge(M_AXIS_ACLK) then
       if (mst_exec_state = STATE_SEND_STREAM) then
         axis_tvalid <= '0';
-        if ((clock_counter mod 2 = 0 and clock_counter < unsigned(signal_count_32) * 2000) or (signal_inut_internal = '1' and last_signal_input /= signal_inut_internal)) then
+        if ((clock_counter = 1 and signal_counter < unsigned(signal_count)) or (signal_inut_internal = '1' and last_signal_input /= signal_inut_internal)) then
           axis_tvalid <= '1';
         end if;
       else
@@ -228,7 +231,7 @@ begin
   begin
     if rising_edge(M_AXIS_ACLK) then
       if (mst_exec_state = STATE_SEND_STREAM) then
-        if ((clock_counter mod 2 = 0 and clock_counter < unsigned(signal_count_32) * 2000) or (signal_inut_internal = '1' and last_signal_input /= signal_inut_internal)) then
+        if ((clock_counter = 1 and signal_counter < unsigned(signal_count)) or (signal_inut_internal = '1' and last_signal_input /= signal_inut_internal)) then
           if (word_counter > 1) then
             axis_tlast <= '0';
             word_counter <= word_counter - 1;

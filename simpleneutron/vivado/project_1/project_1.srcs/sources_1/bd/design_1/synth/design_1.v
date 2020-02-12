@@ -1,7 +1,7 @@
 //Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2019.2.1 (lin64) Build 2729669 Thu Dec  5 04:48:12 MST 2019
-//Date        : Sun Feb  9 20:24:27 2020
+//Date        : Wed Feb 12 20:38:14 2020
 //Host        : vm-VirtualBox running 64-bit Ubuntu 18.04.4 LTS
 //Command     : generate_target design_1.bd
 //Design      : design_1
@@ -9,7 +9,7 @@
 //--------------------------------------------------------------------------------
 `timescale 1 ps / 1 ps
 
-(* CORE_GENERATION_INFO = "design_1,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=design_1,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=88,numReposBlks=63,numNonXlnxBlks=15,numHierBlks=25,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=USER,da_axi4_cnt=22,da_clkrst_cnt=31,da_ps7_cnt=1,synth_mode=OOC_per_IP}" *) (* HW_HANDOFF = "design_1.hwdef" *) 
+(* CORE_GENERATION_INFO = "design_1,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=design_1,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=96,numReposBlks=71,numNonXlnxBlks=23,numHierBlks=25,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=USER,da_axi4_cnt=22,da_clkrst_cnt=31,da_ps7_cnt=1,synth_mode=OOC_per_IP}" *) (* HW_HANDOFF = "design_1.hwdef" *) 
 module design_1
    (DDR_addr,
     DDR_ba,
@@ -204,7 +204,8 @@ module design_1
   wire axi_dma_7_s2mm_introut;
   wire [7:0]axi_gpio_0_gpio_io_o;
   wire [15:0]axi_gpio_1_gpio_io_o;
-  wire [7:0]axi_gpio_3_gpio_io_o;
+  wire [31:0]axi_gpio_3_gpio2_io_o;
+  wire [28:0]axi_gpio_3_gpio_io_o;
   wire [0:0]axi_gpio_4_gpio_io_o;
   wire [31:0]axi_mem_intercon_M00_AXI_ARADDR;
   wire [1:0]axi_mem_intercon_M00_AXI_ARBURST;
@@ -302,6 +303,14 @@ module design_1
   wire fifo_generator_7_M_AXIS_TVALID;
   wire fifo_generator_7_axis_overflow;
   wire fifo_generator_7_s_axis_tready;
+  wire hold_signal_0_signal_out;
+  wire hold_signal_1_signal_out;
+  wire hold_signal_2_signal_out;
+  wire hold_signal_3_signal_out;
+  wire hold_signal_4_signal_out;
+  wire hold_signal_5_signal_out;
+  wire hold_signal_6_signal_out;
+  wire hold_signal_7_signal_out;
   wire input_selector_0_fifo_reset;
   wire [31:0]input_selector_0_m00_axis_tdata;
   wire [3:0]input_selector_0_m00_axis_tkeep;
@@ -319,7 +328,7 @@ module design_1
   wire input_trigger_0_trigger_out6;
   wire input_trigger_0_trigger_out7;
   wire ip_8_to_1_and_7_0_out0;
-  wire [6:0]ip_8_to_1_and_7_0_out1;
+  wire [27:0]ip_8_to_1_and_7_0_out1;
   wire or_0_out0;
   wire [7:0]pmod_input_1;
   wire [14:0]processing_system7_0_DDR_ADDR;
@@ -1088,7 +1097,8 @@ module design_1
         .s_axi_wstrb(ps7_0_axi_periph_M10_AXI_WSTRB),
         .s_axi_wvalid(ps7_0_axi_periph_M10_AXI_WVALID));
   design_1_axi_gpio_3_0 axi_gpio_3
-       (.gpio_io_o(axi_gpio_3_gpio_io_o),
+       (.gpio2_io_o(axi_gpio_3_gpio2_io_o),
+        .gpio_io_o(axi_gpio_3_gpio_io_o),
         .s_axi_aclk(processing_system7_0_FCLK_CLK0),
         .s_axi_araddr(ps7_0_axi_periph_M11_AXI_ARADDR[8:0]),
         .s_axi_aresetn(rst_ps7_0_100M_peripheral_aresetn),
@@ -1439,6 +1449,46 @@ module design_1
         .s_axis_tlast(input_selector_0_m00_axis_tlast),
         .s_axis_tready(fifo_generator_7_s_axis_tready),
         .s_axis_tvalid(input_selector_0_m00_axis_tvalid));
+  design_1_hold_signal_0_0 hold_signal_0
+       (.m00_axis_aclk(processing_system7_0_FCLK_CLK0),
+        .m00_axis_aresetn(util_vector_logic_1_Res),
+        .signal_in(fifo_generator_0_axis_overflow),
+        .signal_out(hold_signal_0_signal_out));
+  design_1_hold_signal_0_1 hold_signal_1
+       (.m00_axis_aclk(processing_system7_0_FCLK_CLK0),
+        .m00_axis_aresetn(util_vector_logic_2_Res),
+        .signal_in(fifo_generator_1_axis_overflow),
+        .signal_out(hold_signal_1_signal_out));
+  design_1_hold_signal_0_2 hold_signal_2
+       (.m00_axis_aclk(processing_system7_0_FCLK_CLK0),
+        .m00_axis_aresetn(util_vector_logic_3_Res),
+        .signal_in(fifo_generator_2_axis_overflow),
+        .signal_out(hold_signal_2_signal_out));
+  design_1_hold_signal_0_3 hold_signal_3
+       (.m00_axis_aclk(processing_system7_0_FCLK_CLK0),
+        .m00_axis_aresetn(util_vector_logic_4_Res),
+        .signal_in(fifo_generator_3_axis_overflow),
+        .signal_out(hold_signal_3_signal_out));
+  design_1_hold_signal_0_4 hold_signal_4
+       (.m00_axis_aclk(processing_system7_0_FCLK_CLK0),
+        .m00_axis_aresetn(util_vector_logic_5_Res),
+        .signal_in(fifo_generator_4_axis_overflow),
+        .signal_out(hold_signal_4_signal_out));
+  design_1_hold_signal_0_5 hold_signal_5
+       (.m00_axis_aclk(processing_system7_0_FCLK_CLK0),
+        .m00_axis_aresetn(util_vector_logic_6_Res),
+        .signal_in(fifo_generator_5_axis_overflow),
+        .signal_out(hold_signal_5_signal_out));
+  design_1_hold_signal_0_6 hold_signal_6
+       (.m00_axis_aclk(processing_system7_0_FCLK_CLK0),
+        .m00_axis_aresetn(util_vector_logic_7_Res),
+        .signal_in(fifo_generator_6_axis_overflow),
+        .signal_out(hold_signal_6_signal_out));
+  design_1_hold_signal_0_7 hold_signal_7
+       (.m00_axis_aclk(processing_system7_0_FCLK_CLK0),
+        .m00_axis_aresetn(util_vector_logic_8_Res),
+        .signal_in(fifo_generator_7_axis_overflow),
+        .signal_out(hold_signal_7_signal_out));
   design_1_input_selector_0_0 input_selector_0
        (.fifo_reset(input_selector_0_fifo_reset),
         .fifo_reset_0(signal_generator_0_fifo_reset),
@@ -2005,7 +2055,8 @@ module design_1
         .m00_axis_tready(input_selector_0_s00_axis_tready),
         .m00_axis_tvalid(signal_generator_0_m00_axis_tvalid),
         .number_words(axi_gpio_1_gpio_io_o),
-        .signal_count(ip_8_to_1_and_7_0_out1),
+        .signal_count(axi_gpio_3_gpio2_io_o),
+        .signal_frequency(ip_8_to_1_and_7_0_out1),
         .signal_input(util_vector_logic_10_Res),
         .signal_state(signal_generator_0_signal_state));
   design_1_signal_input_0_0 signal_input_0
@@ -2065,20 +2116,20 @@ module design_1
   design_1_xlconcat_0_0 xlconcat_0
        (.In0(axi_dma_0_s2mm_introut),
         .In1(axi_dma_1_s2mm_introut),
-        .In10(fifo_generator_2_axis_overflow),
-        .In11(fifo_generator_3_axis_overflow),
-        .In12(fifo_generator_4_axis_overflow),
-        .In13(fifo_generator_5_axis_overflow),
-        .In14(fifo_generator_6_axis_overflow),
-        .In15(fifo_generator_7_axis_overflow),
+        .In10(hold_signal_2_signal_out),
+        .In11(hold_signal_3_signal_out),
+        .In12(hold_signal_4_signal_out),
+        .In13(hold_signal_5_signal_out),
+        .In14(hold_signal_6_signal_out),
+        .In15(hold_signal_7_signal_out),
         .In2(axi_dma_2_s2mm_introut),
         .In3(axi_dma_3_s2mm_introut),
         .In4(axi_dma_4_s2mm_introut),
         .In5(axi_dma_5_s2mm_introut),
         .In6(axi_dma_6_s2mm_introut),
         .In7(axi_dma_7_s2mm_introut),
-        .In8(fifo_generator_0_axis_overflow),
-        .In9(fifo_generator_1_axis_overflow),
+        .In8(hold_signal_0_signal_out),
+        .In9(hold_signal_1_signal_out),
         .dout(xlconcat_0_dout));
   design_1_xlconcat_0_1 xlconcat_1
        (.In0(signal_detector_0_signal_state),

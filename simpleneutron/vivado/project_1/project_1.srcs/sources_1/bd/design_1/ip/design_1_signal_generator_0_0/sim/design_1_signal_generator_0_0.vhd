@@ -47,7 +47,7 @@
 -- DO NOT MODIFY THIS FILE.
 
 -- IP VLNV: user.org:user:signal_generator:1.0
--- IP Revision: 8
+-- IP Revision: 9
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
@@ -59,7 +59,8 @@ ENTITY design_1_signal_generator_0_0 IS
     signal_state : OUT STD_LOGIC;
     fifo_reset : OUT STD_LOGIC;
     number_words : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-    signal_count : IN STD_LOGIC_VECTOR(6 DOWNTO 0);
+    signal_count : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+    signal_frequency : IN STD_LOGIC_VECTOR(27 DOWNTO 0);
     signal_input : IN STD_LOGIC;
     m00_axis_aclk : IN STD_LOGIC;
     m00_axis_aresetn : IN STD_LOGIC;
@@ -84,7 +85,8 @@ ARCHITECTURE design_1_signal_generator_0_0_arch OF design_1_signal_generator_0_0
       signal_state : OUT STD_LOGIC;
       fifo_reset : OUT STD_LOGIC;
       number_words : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-      signal_count : IN STD_LOGIC_VECTOR(6 DOWNTO 0);
+      signal_count : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+      signal_frequency : IN STD_LOGIC_VECTOR(27 DOWNTO 0);
       signal_input : IN STD_LOGIC;
       m00_axis_aclk : IN STD_LOGIC;
       m00_axis_aresetn : IN STD_LOGIC;
@@ -99,8 +101,9 @@ ARCHITECTURE design_1_signal_generator_0_0_arch OF design_1_signal_generator_0_0
   ATTRIBUTE X_INTERFACE_PARAMETER : STRING;
   ATTRIBUTE X_INTERFACE_INFO OF m00_axis_tready: SIGNAL IS "xilinx.com:interface:axis:1.0 M00_AXIS TREADY";
   ATTRIBUTE X_INTERFACE_INFO OF m00_axis_tlast: SIGNAL IS "xilinx.com:interface:axis:1.0 M00_AXIS TLAST";
+  ATTRIBUTE X_INTERFACE_INFO OF m00_axis_tkeep: SIGNAL IS "xilinx.com:interface:axis:1.0 M00_AXIS TKEEP";
   ATTRIBUTE X_INTERFACE_INFO OF m00_axis_tdata: SIGNAL IS "xilinx.com:interface:axis:1.0 M00_AXIS TDATA";
-  ATTRIBUTE X_INTERFACE_PARAMETER OF m00_axis_tvalid: SIGNAL IS "XIL_INTERFACENAME M00_AXIS, WIZ_DATA_WIDTH 32, TDATA_NUM_BYTES 4, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 1, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK0, LAYERED_METADATA undef, INSERT_VIP 0";
+  ATTRIBUTE X_INTERFACE_PARAMETER OF m00_axis_tvalid: SIGNAL IS "XIL_INTERFACENAME M00_AXIS, WIZ_DATA_WIDTH 32, TDATA_NUM_BYTES 4, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 1, HAS_TLAST 1, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK0, LAYERED_METADATA undef, INSERT_VIP 0";
   ATTRIBUTE X_INTERFACE_INFO OF m00_axis_tvalid: SIGNAL IS "xilinx.com:interface:axis:1.0 M00_AXIS TVALID";
   ATTRIBUTE X_INTERFACE_PARAMETER OF m00_axis_aresetn: SIGNAL IS "XIL_INTERFACENAME M00_AXIS_RST, POLARITY ACTIVE_LOW, INSERT_VIP 0";
   ATTRIBUTE X_INTERFACE_INFO OF m00_axis_aresetn: SIGNAL IS "xilinx.com:signal:reset:1.0 M00_AXIS_RST RST";
@@ -120,6 +123,7 @@ BEGIN
       fifo_reset => fifo_reset,
       number_words => number_words,
       signal_count => signal_count,
+      signal_frequency => signal_frequency,
       signal_input => signal_input,
       m00_axis_aclk => m00_axis_aclk,
       m00_axis_aresetn => m00_axis_aresetn,
