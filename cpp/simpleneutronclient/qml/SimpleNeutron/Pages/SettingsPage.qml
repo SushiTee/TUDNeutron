@@ -1,7 +1,10 @@
 import QtQuick 2.14
 import QtQuick.Controls 2.14
+import Qt.labs.platform 1.1
+import QtQuick.Dialogs 1.2
 import SimpleNeutron.Components 1.0
-
+import SimpleNeutron.Network 1.0
+import SimpleNeutron.Utils 1.0
 import "qrc:/js/db.js" as DB
 
 Page {
@@ -17,6 +20,7 @@ Page {
     property bool inputTrigger: DB.getInputTrigger();
     property string testSignalCount: DB.getTestSignalCount();
     property string testSignalFrequency: DB.getTestSignalFrequency();
+    property string storageLocation: DB.getStorageLocation();
 
     onGoBack: {
         if (host !== hostTextField.displayText) {
@@ -47,116 +51,184 @@ Page {
             DB.setTestSignalFrequency(signalGeneratorFrequency.actualFrequency);
             console.info("Test signal frequency changed to:", signalGeneratorFrequency.actualFrequency);
         }
+        if (storageLocation !== folderDialog.selectedFolder) {
+            DB.setStorageLocation(folderDialog.selectedFolder);
+            console.info("Storage location changed to:", folderDialog.selectedFolder);
+        }
     }
 
-    Column {
+    Label {
+        id: locationDummy
+        text: storageLocation;
+        visible: false
+    }
+
+    FileDialog {
+        id: folderDialog
+        title: "Select storage location"
+        folder: StandardPaths.standardLocations(StandardPaths.DownloadLocation)[0]
+        selectMultiple: false
+        selectFolder: true
+        property string selectedFolder: storageLocation
+        onAccepted: {
+            let selected = fileUrls[0].toString().replace("file:///", "");
+            if (!NetworkController.storageWritable(selected)) {
+                Globals.mainWindow.dialog.title = "Location not writable";
+                Globals.mainWindow.dialog.message = "The selected storage location is not writable";
+                Globals.mainWindow.dialog.open();
+                return;
+            }
+            selectedFolder = selected
+            locationDummy.text = selected;
+            storageLocationLabel.text = selected;
+        }
+    }
+
+    Flickable {
+        id: flickable
         width: parent.width
-        anchors.centerIn: parent
-        spacing: 10
+        height: parent.height
+        interactive: column.height > height
+        contentHeight: column.height
 
-        Row {
-            anchors.horizontalCenter: parent.horizontalCenter
-            spacing: 10
-            Label {
-                anchors.verticalCenter: parent.verticalCenter
-                text: "Host"
-            }
+        Item {
+            width: parent.width
+            height: flickable.interactive ? column.height : root.height
 
-            TextField {
-                id: hostTextField
-                text: root.host
-                inputMethodHints: Qt.ImhUrlCharactersOnly
-            }
-        }
+            Column {
+                id: column
+                width: parent.width
+                anchors.centerIn: parent
+                spacing: 10
 
-        Row {
-            anchors.horizontalCenter: parent.horizontalCenter
-            spacing: 10
-            Label {
-                anchors.verticalCenter: parent.verticalCenter
-                text: "Port"
-            }
+                Row {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    spacing: 10
+                    Label {
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: "Host"
+                    }
 
-            TextField {
-                id: portTextField
-                text: root.port
-                inputMethodHints: Qt.ImhFormattedNumbersOnly
-                validator: IntValidator{bottom: 1; top: 65535;}
-            }
-        }
-
-        Row {
-            anchors.horizontalCenter: parent.horizontalCenter
-            spacing: 10
-            Label {
-                anchors.verticalCenter: parent.verticalCenter
-                text: "Package Size"
-            }
-
-            ComboBox {
-                id: packageSizeBox
-                model: [...Array(13).keys()].map(x => 2 ** x)
-
-                Component.onCompleted: {
-                    currentIndex = Math.min(Math.max(packageSize, 0), model.length);
+                    TextField {
+                        id: hostTextField
+                        text: root.host
+                        inputMethodHints: Qt.ImhUrlCharactersOnly
+                    }
                 }
-            }
-        }
 
-        CheckBox {
-            id: inputTriggerCheckBox
-            anchors.horizontalCenter: parent.horizontalCenter
-            text: "Wait for input trigger"
-            checked: inputTrigger
-        }
+                Row {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    spacing: 10
+                    Label {
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: "Port"
+                    }
 
-        CheckBox {
-            id: testGeneratorCheckBox
-            anchors.horizontalCenter: parent.horizontalCenter
-            text: "Test (Sensor 8)"
-            checked: testGenerator
-        }
-
-        Row {
-            anchors.horizontalCenter: parent.horizontalCenter
-            spacing: 10
-            Label {
-                anchors.verticalCenter: parent.verticalCenter
-                text: "Test signal count"
-            }
-
-            TextField {
-                id: signalGeneratorCount
-                property int signalCount: text ? parseInt(text) : 1
-                text: root.testSignalCount
-                inputMethodHints: Qt.ImhFormattedNumbersOnly
-                validator: IntValidator{bottom: 1; top: 2147483647;}
-            }
-        }
-
-        Row {
-            anchors.horizontalCenter: parent.horizontalCenter
-            spacing: 10
-            Label {
-                anchors.verticalCenter: parent.verticalCenter
-                text: "Test signal freq."
-            }
-
-            TextField {
-                id: signalGeneratorFrequency
-                property int actualFrequency: {
-                    if (!text) return 1;
-                    return parseInt(100000000 / parseInt(100000000 / parseInt(text)));
+                    TextField {
+                        id: portTextField
+                        text: root.port
+                        inputMethodHints: Qt.ImhFormattedNumbersOnly
+                        validator: IntValidator{bottom: 1; top: 65535;}
+                    }
                 }
-                text: root.testSignalFrequency
-                inputMethodHints: Qt.ImhFormattedNumbersOnly
-                validator: IntValidator{bottom: 1; top: 50000000;}
-            }
 
-            Label {
-                id: signalGeneratorFrequencyLabel
-                anchors.verticalCenter: parent.verticalCenter
-                text: "Actual: " + (signalGeneratorFrequency.actualFrequency+'').replace(/\B(?=(\d{3})+(?!\d))/g, '\u202F') + "Hz"; // use thin space after 3 digits
+                Row {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    spacing: 10
+                    Label {
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: "Storage location"
+                    }
+
+                    Label {
+                        id: storageLocationLabel
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: storageLocation
+                        width: locationDummy.width < 200 ? locationDummy.width : 200
+                        elide: Text.ElideMiddle
+                    }
+
+                    Button {
+                        text: "Select"
+                        anchors.verticalCenter: parent.verticalCenter
+                        onClicked: folderDialog.open()
+                    }
+                }
+
+                Row {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    spacing: 10
+                    Label {
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: "Package Size"
+                    }
+
+                    ComboBox {
+                        id: packageSizeBox
+                        model: [...Array(13).keys()].map(x => 2 ** x)
+
+                        Component.onCompleted: {
+                            currentIndex = Math.min(Math.max(packageSize, 0), model.length);
+                        }
+                    }
+                }
+
+                CheckBox {
+                    id: inputTriggerCheckBox
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    text: "Wait for input trigger"
+                    checked: inputTrigger
+                }
+
+                CheckBox {
+                    id: testGeneratorCheckBox
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    text: "Test (Sensor 8)"
+                    checked: testGenerator
+                }
+
+                Row {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    spacing: 10
+                    Label {
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: "Test signal count"
+                    }
+
+                    TextField {
+                        id: signalGeneratorCount
+                        property int signalCount: text ? parseInt(text) : 1
+                        text: root.testSignalCount
+                        inputMethodHints: Qt.ImhFormattedNumbersOnly
+                        validator: IntValidator{bottom: 1; top: 2147483647;}
+                    }
+                }
+
+                Row {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    spacing: 10
+                    Label {
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: "Test signal freq."
+                    }
+
+                    TextField {
+                        id: signalGeneratorFrequency
+                        property int actualFrequency: {
+                            if (!text) return 1;
+                            return parseInt(100000000 / parseInt(100000000 / parseInt(text)));
+                        }
+                        text: root.testSignalFrequency
+                        inputMethodHints: Qt.ImhFormattedNumbersOnly
+                        validator: IntValidator{bottom: 1; top: 50000000;}
+                    }
+
+                    Label {
+                        id: signalGeneratorFrequencyLabel
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: "Actual: " + (signalGeneratorFrequency.actualFrequency+'').replace(/\B(?=(\d{3})+(?!\d))/g, '\u202F') + "Hz"; // use thin space after 3 digits
+                    }
+                }
             }
         }
     }

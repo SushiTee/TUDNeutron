@@ -31,6 +31,7 @@ public:
     int inputTrigger() const;
     uint32_t testSignalCount() const;
     int testSignalFrequency() const;
+    QString storageLocation() const;
 
 private:
     Q_PROPERTY(int port READ port WRITE setPort NOTIFY portChanged)
@@ -43,6 +44,8 @@ private:
     Q_PROPERTY(uint32_t testSignalCount READ testSignalCount WRITE setTestSignalCount NOTIFY testSignalCountChanged)
     Q_PROPERTY(int testSignalFrequency READ testSignalFrequency WRITE setTestSignalFrequency NOTIFY testSignalFrequencyChanged)
     Q_PROPERTY(QVariantList sensors READ sensors NOTIFY sensorsChanged)
+    Q_PROPERTY(QString storageLocation READ storageLocation WRITE setStorageLocation NOTIFY storageLocationChanged)
+    Q_PROPERTY(QVector<uint64_t> sensorData READ sensorData)
 
     QString m_host = "zedboard";
     int m_port = 22222;
@@ -53,6 +56,7 @@ private:
     uint32_t m_testSignalCount = 1;
     int m_testSignalFrequency = 1;
     QVariantList m_sensors = {};
+    QString m_storageLocation = "";
     MessageType::ConnectedState m_connected = MessageType::ConnectedState::DISCONNECTED;
 
     int port() const;
@@ -67,6 +71,7 @@ private:
     void setSensors(QVariantList sensors);
     bool sensorsActive() const;
     void setSensorsActive(bool sensorsActive);
+    void setStorageLocation(QString storageLocation);
     MessageType::ConnectedState getConnected();
     void setConnected(MessageType::ConnectedState connected);
 
@@ -79,7 +84,9 @@ public slots:
     void activateSensors(QList<bool> list);
     void deactivateSensors();
     QVariantList sensors();
-    QVector<uint64_t> getSensorData();
+    QVector<uint64_t> sensorData();
+    bool storageWritable();
+    bool storageWritable(QString storageLocation);
 
 signals:
     void hostChanged(QString host);
@@ -97,9 +104,10 @@ signals:
     void sensorsActiveChanged(bool sensorsActive);
     void sendDataFailed();
     void messageResult(MessageType::Message type, bool success, QString message);
-    void sensorResult(QVector<uint64_t> sensorData);
     void testGeneratorChanged(int testGenerator);
     void inputTriggerChanged(int inputTrigger);
     void testSignalCountChanged(uint32_t testSignalCount);
     void testSignalFrequencyChanged(int testSignalFrequency);
+    void storageLocationChanged(QString storageLocation);
+    void dmaFull(int dma);
 };

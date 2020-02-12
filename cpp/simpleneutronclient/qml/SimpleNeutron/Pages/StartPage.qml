@@ -1,6 +1,8 @@
 import QtQuick 2.14
 import QtQuick.Controls 2.14
 import SimpleNeutron.Components 1.0
+import SimpleNeutron.Network 1.0
+import SimpleNeutron.Utils 1.0
 
 Page {
     width: parent ? parent.width : 0
@@ -17,6 +19,12 @@ Page {
             anchors.horizontalCenter: parent.horizontalCenter
 
             onClicked: {
+                if (!NetworkController.storageWritable()) {
+                    Globals.mainWindow.dialog.title = "Location not writable";
+                    Globals.mainWindow.dialog.message = "The selected storage location is not writable. Please enter the settings page and select a different location.";
+                    Globals.mainWindow.dialog.open();
+                    return;
+                }
                 navigate("qrc:/SimpleNeutron/Pages/ZedboardPage.qml");
             }
         }

@@ -3,7 +3,8 @@
 #include <networkhandler.h>
 #include <QJsonDocument>
 #include <QJsonObject>
-#include <QElapsedTimer>
+#include <QDateTime>
+#include <QDir>
 #include <networkcontroller.h>
 
 constexpr size_t PACKAGE_HEADER_SIZE = 3;
@@ -26,6 +27,7 @@ NetworkHandler::NetworkHandler(NetworkController *parent)
       m_testGenerator(parent->testGenerator() ? 1u : 0u),
       m_testSignalCount(parent->testSignalCount()),
       m_testSignalFrequency(static_cast<uint32_t>(parent->testSignalFrequency())),
+      m_storageLocation(parent->storageLocation()),
       m_sensorDataCount(8)
 {
 }
@@ -36,7 +38,12 @@ NetworkHandler::~NetworkHandler()
         m_receiveThread->join();
         m_receiveThread = nullptr;
     }
-    m_stream.close();
+    for (uint32_t i = 0; i < 8; i++) {
+        if (m_fileStreams[i].is_open()) {
+            m_fileStreams[i].flush();
+            m_fileStreams[i].close();
+        }
+    }
 }
 
 void NetworkHandler::quit()
@@ -44,6 +51,18 @@ void NetworkHandler::quit()
     m_quit = true;
     if (m_sock != nullptr) {
         m_sock->close();
+    }
+}
+
+void NetworkHandler::openFiles(QList<bool> &list)
+{
+    QString timeString = QDateTime::currentDateTime().toString(Qt::ISODate);
+    QDir::setCurrent(m_storageLocation);
+    for (int i = 0; i < list.size(); i++) {
+        if (list[i]) {
+            QString filename = timeString + "_Sensor_" + QString::number(i + 1) + ".bin";
+            m_fileStreams[static_cast<size_t>(i)].open(filename.replace(" ", "-").replace(":", ".").toStdString(), std::ios::out | std::ios::binary);
+        }
     }
 }
 
@@ -58,7 +77,6 @@ void NetworkHandler::networkConnect(QString host, int port)
     }
 
     if (m_sock->connect()) {
-        m_stream.open("file.bin", std::ios::out | std::ios::binary);
         m_receiveThread = std::make_unique<std::thread>([this](){
             bool continueReceiving = true;
             while (!m_quit && continueReceiving) {
@@ -74,8 +92,6 @@ void NetworkHandler::networkConnect(QString host, int port)
             if (!m_quit) {
                 QMetaObject::invokeMethod(m_controller, "closedConnection");
             }
-            m_stream.flush();
-            m_stream.close();
         });
         // setting settings on connection! Order is important!
         int32converter testSignalCount;
@@ -241,15 +257,6 @@ QVector<uint64_t> NetworkHandler::getSensorData()
 
 void NetworkHandler::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType::Message type, size_t size)
 {
-    static QElapsedTimer timer;
-    if (!timer.isValid()) {
-        timer.start();
-        QMetaObject::invokeMethod(m_controller, "sensorResult", Q_ARG(QVector<uint64_t>, m_sensorDataCount));
-    } else {
-        if (timer.elapsed() > 1000) {
-            timer.invalidate();
-        }
-    }
     switch (type)
     {
     case MessageType::Message::DMA0:
@@ -265,26 +272,22 @@ void NetworkHandler::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType::Mess
         }
         uint64_t dataSize = size * m_packageSize;
         m_sensorDataCount[static_cast<int>(type)] += dataSize;
-        m_stream.write(reinterpret_cast<const char*>(buff.data()), static_cast<std::streamsize>(dataSize * 4));
+        m_fileStreams[static_cast<size_t>(type)].write(reinterpret_cast<const char*>(buff.data()), static_cast<std::streamsize>(dataSize * 4));
         break;
     }
-    case MessageType::Message::START_DMA:
+    case MessageType::Message::START_DMA: {
+        m_sensorDataCount = QVector<uint64_t>(8);
+        handleStartStopMessage(type, reinterpret_cast<const char *>(buff.data()), static_cast<int>(size));
+        break;
+    }
     case MessageType::Message::STOP_DMA: {
-        QJsonDocument doc = QJsonDocument::fromJson(QByteArray::fromRawData(reinterpret_cast<const char *>(buff.data()), static_cast<int>(size)));
-        if (!doc.isNull()) {
-            QString status = doc["status"].toString();
-            if (status == "OK") {
-                QMetaObject::invokeMethod(m_controller, "messageResult", Q_ARG(MessageType::Message, type), Q_ARG(bool, true), Q_ARG(QString, ""));
-                return;
-            } else {
-                QString message = doc["msg"].toString();
-                if (!message.isNull()) {
-                    QMetaObject::invokeMethod(m_controller, "messageResult", Q_ARG(MessageType::Message, type), Q_ARG(bool, false), Q_ARG(QString, message));
-                    return;
-                }
+        for (uint32_t i = 0; i < 8; i++) {
+            if (m_fileStreams[i].is_open()) {
+                m_fileStreams[i].flush();
+                m_fileStreams[i].close();
             }
         }
-        QMetaObject::invokeMethod(m_controller, "messageResult", Q_ARG(MessageType::Message, type), Q_ARG(bool, false), Q_ARG(QString, "Unexpected message from server"));
+        handleStartStopMessage(type, reinterpret_cast<const char *>(buff.data()), static_cast<int>(size));
         break;
     }
     case MessageType::Message::CONNECT: {
@@ -305,6 +308,16 @@ void NetworkHandler::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType::Mess
         QMetaObject::invokeMethod(m_controller, "connected", Q_ARG(MessageType::Message, type), Q_ARG(bool, false), Q_ARG(QJsonDocument, doc));
         break;
     }
+    case MessageType::Message::FIFO_FULL: {
+        QJsonDocument doc = QJsonDocument::fromJson(QByteArray::fromRawData(reinterpret_cast<const char *>(buff.data()), static_cast<int>(size)));
+        if (!doc.isNull()) {
+            int dma = doc["dma"].toInt(-1);
+            QMetaObject::invokeMethod(m_controller, "dmaFull", Q_ARG(int, dma));
+            return;
+        }
+        QMetaObject::invokeMethod(m_controller, "damFull", Q_ARG(int, -1));
+        break;
+    }
     case MessageType::Message::NONE:
         break;
     }
@@ -320,4 +333,23 @@ bool NetworkHandler::isSocketValid(kissnet::socket_status status) const
         return false;
     }
     return true;
+}
+
+void NetworkHandler::handleStartStopMessage(MessageType::Message type, const char* data, int size)
+{
+    QJsonDocument doc = QJsonDocument::fromJson(QByteArray::fromRawData(data, size));
+    if (!doc.isNull()) {
+        QString status = doc["status"].toString();
+        if (status == "OK") {
+            QMetaObject::invokeMethod(m_controller, "messageResult", Q_ARG(MessageType::Message, type), Q_ARG(bool, true), Q_ARG(QString, ""));
+            return;
+        } else {
+            QString message = doc["msg"].toString();
+            if (!message.isNull()) {
+                QMetaObject::invokeMethod(m_controller, "messageResult", Q_ARG(MessageType::Message, type), Q_ARG(bool, false), Q_ARG(QString, message));
+                return;
+            }
+        }
+    }
+    QMetaObject::invokeMethod(m_controller, "messageResult", Q_ARG(MessageType::Message, type), Q_ARG(bool, false), Q_ARG(QString, "Unexpected message from server"));
 }

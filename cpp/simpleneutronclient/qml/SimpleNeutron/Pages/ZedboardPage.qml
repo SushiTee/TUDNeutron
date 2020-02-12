@@ -3,6 +3,7 @@ import QtQuick.Controls 2.14
 import SimpleNeutron.Components 1.0
 import SimpleNeutron.Network 1.0
 import SimpleNeutron.MessageType 1.0
+import SimpleNeutron.Utils 1.0
 
 import "qrc:/js/db.js" as DB
 
@@ -25,13 +26,12 @@ Page {
     function getActiveSensors() {
         for (let i = 0; i < NetworkController.sensors.length; i++) {
             if (NetworkController.sensors[i] === true) {
-                listModel.append({num: i, name: `Sensor ${i+1}`, selected: false, count: 0});
+                listModel.append({num: i, name: `Sensor ${i+1}`, selected: false, count: 0, full: false});
             }
         }
     }
 
     function setSensorData(sensorData) {
-        console.info("Sensordata:", sensorData);
         for (let i = 0; i < sensorData.length; i++) {
             for (let j = 0; j < listModel.count; j++) {
                 if (listModel.get(j).num === i) {
@@ -49,6 +49,15 @@ Page {
         visible: running
     }
 
+    Timer {
+        id: sensroDataTimer
+        interval: 500
+        repeat: true
+        onTriggered: {
+            setSensorData(NetworkController.sensorData);
+        }
+    }
+
     ListModel {
         id: listModel
         Component.onCompleted: {
@@ -59,16 +68,29 @@ Page {
     Connections {
         target: NetworkController
 
-        onSensorResult: { // list sensorData
-            setSensorData(sensorData);
-        }
-
         onSensorsChanged: { // list sensors
             if (listModel.count > 0) {
                 listModel.clear();
             }
 
             getActiveSensors()
+        }
+
+        onDmaFull: { // int dma
+            if (dma === -1) {
+                Globals.mainWindow.dialog.title = "Sensor buffer full";
+                Globals.mainWindow.dialog.message = "Recevied a sensor buffer full message without any information which sensor.";
+                Globals.mainWindow.dialog.open();
+                stackView.reset();
+                return;
+            }
+
+            for (let i = 0; i < listModel.count; i++) {
+                if (listModel.get(i).num === dma) {
+                    listModel.get(i).full = true;
+                    break;
+                }
+            }
         }
     }
 
@@ -103,12 +125,13 @@ Page {
             delegate: Item {
                 width: 200
                 height: 50
+                opacity: model.full ? 0.5 : 1.0
 
                 CheckBox {
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.top: parent.top
                     checked: model.selected
-                    text: model.name
+                    text: model.full ? model.name + " (full)" : model.name
                     enabled: !NetworkController.sensorsActive
 
                     onCheckedChanged: {
@@ -133,6 +156,7 @@ Page {
                     text: "Count: " + model.count
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.bottom: parent.bottom
+                    color: model.full ? "red" : "black"
                 }
             }
         }
@@ -150,6 +174,14 @@ Page {
 
                 onClicked: {
                     if (!NetworkController.sensorsActive) {
+                        if (!NetworkController.storageWritable()) {
+                            Globals.mainWindow.dialog.title = "Location not writable";
+                            Globals.mainWindow.dialog.message = "The selected storage location is not writable. Please enter the settings page and select a different location.";
+                            Globals.mainWindow.dialog.open();
+                            stackView.reset();
+                            return;
+                        }
+
                         let list = Array(8).fill(false);
                         for (let i = 0; i < list.length; i++) {
                             list[i] = false;
@@ -160,10 +192,19 @@ Page {
                                 }
                             }
                         }
+                        for (let i = 0; i < listModel.count; i++) {
+                            listModel.get(i).count = 0;
+                            listModel.get(i).full = false;
+                        }
+
+                        sensroDataTimer.start();
+
                         NetworkController.activateSensors(list);
                     } else {
+                        sensroDataTimer.stop();
+
                         NetworkController.deactivateSensors();
-                        setSensorData(NetworkController.getSensorData());
+                        setSensorData(NetworkController.sensorData);
                     }
                 }
             }
@@ -171,8 +212,6 @@ Page {
     }
 
     Component.onCompleted: {
-        NetworkController.host = DB.getHost();
-        NetworkController.port = DB.getPort();
         NetworkController.networkConnect();
     }
 }

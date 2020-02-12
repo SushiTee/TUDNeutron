@@ -4,6 +4,7 @@ import QtQuick.Dialogs 1.1
 import SimpleNeutron.Pages 1.0
 import SimpleNeutron.Network 1.0
 import SimpleNeutron.MessageType 1.0
+import SimpleNeutron.Utils 1.0
 import QtQuick.LocalStorage 2.12 // needed so the sql plugin is deployed
 
 import "qrc:/js/db.js" as DB
@@ -14,6 +15,8 @@ ApplicationWindow {
     width: 640
     height: 480
     title: qsTr("SimpleNeutron Client")
+
+    property alias dialog: messageDialog
 
     header: ToolBar {
         contentHeight: toolButton.implicitHeight
@@ -102,6 +105,7 @@ ApplicationWindow {
     }
 
     Component.onCompleted: {
+        Globals.mainWindow = window;
         DB.dbInit();
     }
 }

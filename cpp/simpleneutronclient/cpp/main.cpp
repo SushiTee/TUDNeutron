@@ -1,8 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <external/networking/kissnet.hpp>
-#include <QDir>
-#include <QStandardPaths>
 #include <messagetype.h>
 #include <networkcontroller.h>
 
@@ -54,7 +52,9 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
 
-    QDir::setCurrent(QStandardPaths::writableLocation(QStandardPaths::DownloadLocation));
+    // this has to be set to prevent a warning when using the FileDialog
+    app.setOrganizationName("Sascha Weichel");
+    app.setOrganizationDomain("sw");
 
     QQmlApplicationEngine engine;
     MessageType::declareQML();

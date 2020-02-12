@@ -1,6 +1,7 @@
 #include <QDebug>
 #include <QThread>
 #include <QJsonArray>
+#include <QFileInfo>
 #include <networkhandler.h>
 #include <networkcontroller.h>
 
@@ -210,6 +211,20 @@ void NetworkController::setSensorsActive(bool sensorsActive)
     emit sensorsActiveChanged(m_sensorsActive);
 }
 
+QString NetworkController::storageLocation() const
+{
+    return m_storageLocation;
+}
+
+void NetworkController::setStorageLocation(QString storageLocation)
+{
+    if (m_storageLocation == storageLocation)
+        return;
+
+    m_storageLocation = storageLocation;
+    emit storageLocationChanged(m_storageLocation);
+}
+
 int NetworkController::port() const
 {
     return m_port;
@@ -269,6 +284,11 @@ void NetworkController::networkDisconnect()
 
 void NetworkController::activateSensors(QList<bool> list)
 {
+    if (!storageWritable()) {
+        return;
+    }
+
+    m_handler->openFiles(list);
     uint8_t sensorsBinary = 0;
     for (int i = 0; i < list.size(); i++) {
         if (list[i]) {
@@ -288,7 +308,21 @@ QVariantList NetworkController::sensors()
     return m_sensors;
 }
 
-QVector<uint64_t> NetworkController::getSensorData()
+QVector<uint64_t> NetworkController::sensorData()
 {
     return m_handler->getSensorData();
+}
+
+bool NetworkController::storageWritable()
+{
+    return storageWritable(m_storageLocation);
+}
+
+bool NetworkController::storageWritable(QString storageLocation)
+{
+    QFileInfo dir(storageLocation);
+    if (dir.isDir() && dir.isWritable()) {
+        return true;
+    }
+    return false;
 }

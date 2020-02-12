@@ -2,6 +2,7 @@
 
 .import QtQuick.LocalStorage 2.12 as LS
 .import SimpleNeutron.Network 1.0 as SN
+.import Qt.labs.platform 1.1 as PF
 
 function dbInit() {
     let db = LS.LocalStorage.openDatabaseSync("SimpleNeutron", "", "SimpleNeutron", 1000000);
@@ -19,6 +20,7 @@ function dbInit() {
     SN.NetworkController.inputTrigger = getInputTrigger();
     SN.NetworkController.testSignalCount = parseInt(getTestSignalCount());
     SN.NetworkController.testSignalFrequency = parseInt(getTestSignalFrequency());
+    SN.NetworkController.storageLocation = getStorageLocation();
 }
 
 function dbGetHandle() {
@@ -136,4 +138,15 @@ function getTestSignalFrequency() {
 function setTestSignalFrequency(testSignalFrequency) {
     setSettingsValue('testSignalFrequency', testSignalFrequency.toString());
     SN.NetworkController.testSignalFrequency = testSignalFrequency;
+}
+
+function getStorageLocation() {
+    let result = readSettingsValue('storageLocation');
+    if (!result) result = PF.StandardPaths.standardLocations(PF.StandardPaths.DownloadLocation)[0]; // default
+    return result;
+}
+
+function setStorageLocation(storageLocation) {
+    setSettingsValue('storageLocation', storageLocation.toString());
+    SN.NetworkController.storageLocation = storageLocation;
 }

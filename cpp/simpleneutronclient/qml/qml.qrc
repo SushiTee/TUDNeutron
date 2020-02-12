@@ -8,5 +8,7 @@
         <file>qtquickcontrols2.conf</file>
         <file>SimpleNeutron/Pages/SettingsPage.qml</file>
         <file>SimpleNeutron/Pages/ZedboardPage.qml</file>
+        <file>SimpleNeutron/Utils/qmldir</file>
+        <file>SimpleNeutron/Utils/Globals.qml</file>
     </qresource>
 </RCC>

@@ -24,21 +24,24 @@ class NetworkHandler : public QObject {
     uint8_t m_testGenerator;
     uint32_t m_testSignalCount;
     uint32_t m_testSignalFrequency;
+    QString m_storageLocation;
 
     // reserve buffer
     kn::buffer<BUFFER_SIZE> m_recvBuff;
     QVector<uint64_t> m_sensorDataCount;
-    std::ofstream m_stream;
+    std::array<std::ofstream, 8> m_fileStreams;
 
     bool receiveData();
     void sendData(const std::byte *header, const std::byte *data, size_t dataLength) const;
     void handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType::Message type, size_t size);
     bool isSocketValid(kn::socket_status status) const;
+    void handleStartStopMessage(MessageType::Message type, const char *data, int size);
 
 public:
     NetworkHandler(NetworkController *parent);
     ~NetworkHandler();
     void quit();
+    void openFiles(QList<bool> &list);
 
 public slots:
     void networkConnect(QString host, int port);
