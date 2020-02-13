@@ -204,9 +204,16 @@ bool Controller::sendData(MessageType type, const std::string &data) {
 
 void Controller::sendDmaData() {
     using namespace std::chrono_literals;
+    // buffer
+    std::array<uint8_t, PACKAGE_HEADER_SIZE> message;
+    uint32_t size;
+    uint32_t offset;
+    uint16_t payloadSize; // 0 means max!
+    payloadSizeConverter conv;
+    bool dataSend;
     while (!threadQuit)
     {
-        bool dataSend = false;
+        dataSend = false;
         for (auto &dma : mDmas) {
             if (dma->getWaitForDestroy() || dma->empty()) {
                 continue;
@@ -219,16 +226,12 @@ void Controller::sendDmaData() {
                 continue;
             }
 
-            uint32_t size = dma->writeSize();
-            uint32_t offset = dma->readAddress();
-            uint16_t payloadSize = static_cast<uint16_t>(size / dma->getWordLength()); // 0 means max!
+            size = dma->writeSize();
+            offset = dma->readAddress();
+            payloadSize = static_cast<uint16_t>(size / dma->getWordLength()); // 0 means max!
             dma->setReadAddress(size);
 
-            // buffer
-            std::array<uint8_t, PACKAGE_HEADER_SIZE> message;
-
             // write header
-            payloadSizeConverter conv;
             conv.num = static_cast<uint16_t>(payloadSize);
             message[0] = dma->getID();
             message[1] = conv.bytes[0];
@@ -301,6 +304,11 @@ bool Controller::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType type, siz
         }
 
         if (!dmaStartFailed) {
+            networkOK = sendData(type, "{\"status\":\"OK\"}");
+            mThread = std::make_unique<std::thread>([this](){
+                sendDmaData();
+            });
+
             // do busy wait until all Dmas are started
             using namespace std::chrono_literals;
             bool allDmaRunning = false;
@@ -315,10 +323,6 @@ bool Controller::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType type, siz
                 }
             }
             gpio::SensorController::activateSpecific(dmas);
-            mThread = std::make_unique<std::thread>([this](){
-                sendDmaData();
-            });
-            networkOK = sendData(type, "{\"status\":\"OK\"}");
         }
         break;
     }

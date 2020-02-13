@@ -169,22 +169,22 @@ void Dma::enable() {
         reset();
         enableInterrupt();
         if (hasStatusError()) {
-            LogOut << "DMA (" << std::hex << REGISTER_BASE << "): Status error" << std::endl;
+            LogErr << "DMA (" << std::hex << REGISTER_BASE << "): Status error" << std::endl;
             return;
         }
         registerEnable();
         if (hasStatusError()) {
-            LogOut << "DMA (" << std::hex << REGISTER_BASE << "): Status error" << std::endl;
+            LogErr << "DMA (" << std::hex << REGISTER_BASE << "): Status error" << std::endl;
             return;
         }
         setDestinationAddress(mWriteAddress);
         if (hasStatusError()) {
-            LogOut << "DMA (" << std::hex << REGISTER_BASE << "): Status error" << std::endl;
+            LogErr << "DMA (" << std::hex << REGISTER_BASE << "): Status error" << std::endl;
             return;
         }
         setWordLength(mWordLength);
         if (hasStatusError()) {
-            LogOut << "DMA (" << std::hex << REGISTER_BASE << "): Status error" << std::endl;
+            LogErr << "DMA (" << std::hex << REGISTER_BASE << "): Status error" << std::endl;
             return;
         }
 
@@ -197,20 +197,12 @@ void Dma::enable() {
                 break;
             }
 
-            uint32_t status = getStatus();
-            
-            if (hasStatusError(status)) {
-                break;
+            mWriteAddress += mWordLength;
+            if (mWriteAddress >= mSize) {
+                mWriteAddress = 0;
             }
-            if (status & ((1 << simpleneutron::components::dma::StatusBit::STATUS_HALTED) | (1 << simpleneutron::components::dma::StatusBit::STATUS_IDLE))) {
-                //LogOut << "DMA (" << std::hex << REGISTER_BASE << "): " << std::hex << readMemory(mWriteAddress) << " status: " << std::dec << simpleneutron::components::memorycontrol::MemoryControl::registerRead(mRegister, 0x58u) << std::endl;
-                mWriteAddress += mWordLength;
-                if (mWriteAddress >= mSize) {
-                    mWriteAddress = 0;
-                }
-                setDestinationAddress(mWriteAddress);
-                setWordLength(mWordLength);
-            }
+            setDestinationAddress(mWriteAddress);
+            setWordLength(mWordLength);
         }
 
         mRunning = false;
@@ -291,7 +283,7 @@ uint16_t Dma::getWordLength() {
 }
 
 void Dma::setWordLength(uint32_t length) {
-    MemoryControl::registerWrite(mRegister, DmaOffset::S2MM_LENGTH, length * 4 * 2); // packets are always 4 byte
+    MemoryControl::registerWrite(mRegister, DmaOffset::S2MM_LENGTH, length * 4); // packets are always 4 byte
 }
 
 uint32_t Dma::getStatus() {
