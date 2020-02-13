@@ -165,7 +165,7 @@ Page {
 
                     ComboBox {
                         id: packageSizeBox
-                        model: [...Array(13).keys()].map(x => 2 ** x)
+                        model: [...Array(16).keys()].map(x => 2 ** x)
 
                         Component.onCompleted: {
                             currentIndex = Math.min(Math.max(packageSize, 0), model.length);
