@@ -85,6 +85,8 @@ NetworkController::NetworkController(QString host, int port, QObject *parent) : 
             }
             break;
         }
+        default:
+            break;
         }
     });
 }

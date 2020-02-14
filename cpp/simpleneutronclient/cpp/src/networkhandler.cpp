@@ -180,7 +180,7 @@ void NetworkHandler::sendData(const std::byte *header, const std::byte *data, si
         }
 
         // socket might be invalid
-        if (!isSocketValid(valid.value)) {
+        if (size <= 0 || !isSocketValid(valid.value)) {
             QMetaObject::invokeMethod(m_controller, "sendDataFailed");
             return;
         }
@@ -195,7 +195,7 @@ void NetworkHandler::sendData(const std::byte *header, const std::byte *data, si
         }
 
         // socket might be invalid
-        if (!isSocketValid(valid.value)) {
+        if (size <= 0 || !isSocketValid(valid.value)) {
             QMetaObject::invokeMethod(m_controller, "sendDataFailed");
             return;
         }
