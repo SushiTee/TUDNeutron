@@ -71,7 +71,7 @@ Page {
         selectFolder: true
         property string selectedFolder: storageLocation
         onAccepted: {
-            let selected = fileUrls[0].toString().replace("file:///", "");
+            let selected = fileUrls[0].toString().replace("file://", "");
             if (!NetworkController.storageWritable(selected)) {
                 Globals.mainWindow.dialog.title = "Location not writable";
                 Globals.mainWindow.dialog.message = "The selected storage location is not writable";

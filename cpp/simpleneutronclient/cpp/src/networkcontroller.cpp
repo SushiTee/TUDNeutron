@@ -277,6 +277,7 @@ void NetworkController::networkDisconnect()
     setSensorsActive(false);
     if (m_thread != nullptr) {
         m_handler->quit();
+        m_handler = nullptr;
         m_thread->quit();
         m_thread->wait();
         m_thread = nullptr;

@@ -1,4 +1,7 @@
 #include <cmath>
+#ifdef __linux__
+#include <csignal>
+#endif
 #include <QDebug>
 #include <networkhandler.h>
 #include <QJsonDocument>
@@ -8,6 +11,10 @@
 #include <networkcontroller.h>
 
 constexpr size_t PACKAGE_HEADER_SIZE = 3;
+#ifdef __linux__
+constexpr int quitSignal = SIGINT;
+sighandler_t prevSignal;
+#endif
 
 union payloadSizeConverter {
     std::byte bytes[2];
@@ -35,8 +42,24 @@ NetworkHandler::NetworkHandler(NetworkController *parent)
 NetworkHandler::~NetworkHandler()
 {
     if (m_receiveThread && m_receiveThread->joinable()) {
+#ifdef __linux__
+        // enforce POSIX semantics
+        siginterrupt(quitSignal, true);
+
+        // register signal handler
+        prevSignal = std::signal(quitSignal, [](int) {
+            // reset to previous (original) signal
+            std::signal(quitSignal, prevSignal);
+        });
+
+        pthread_kill(m_receiveThread->native_handle(), quitSignal);
+#endif
+
         m_receiveThread->join();
         m_receiveThread = nullptr;
+#ifdef __linux__
+        std::signal(quitSignal, prevSignal);
+#endif
     }
     for (uint32_t i = 0; i < 8; i++) {
         if (m_fileStreams[i].is_open()) {

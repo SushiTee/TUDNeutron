@@ -142,7 +142,7 @@ function setTestSignalFrequency(testSignalFrequency) {
 
 function getStorageLocation() {
     let result = readSettingsValue('storageLocation');
-    if (!result) result = PF.StandardPaths.standardLocations(PF.StandardPaths.DownloadLocation)[0]; // default
+    if (!result) result = PF.StandardPaths.standardLocations(PF.StandardPaths.DownloadLocation)[0].replace("file://", ""); // default
     return result;
 }
 
