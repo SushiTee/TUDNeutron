@@ -56,12 +56,10 @@ NetworkController::NetworkController(QString host, int port, QObject *parent) : 
         }
     });
     QObject::connect(this, &NetworkController::closedConnection, this, [this](){
-        qDebug() << "huh?";
         setConnected(MessageType::ConnectedState::FAILED);
         networkDisconnect();
     });
     QObject::connect(this, &NetworkController::sendDataFailed, this, [this](){
-        qDebug() << "huh?2";
         setConnected(MessageType::ConnectedState::FAILED);
         networkDisconnect();
     });
