@@ -99,3 +99,5 @@
 #########
 !cpp/
 cpp/build*
+!scripts/
+!*.service
