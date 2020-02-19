@@ -246,7 +246,7 @@ void Controller::sendDmaData() {
 
         // sleep if there is really nothing!
         if (!dataSend) {
-            std::this_thread::sleep_for(1ns);
+            std::this_thread::sleep_for(1us);
         }
     }
 }
