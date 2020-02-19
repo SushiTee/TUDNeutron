@@ -58,6 +58,73 @@ Page {
         }
     }
 
+    Timer {
+        id: measurementTimer
+        repeat: true
+        interval: 10
+        onTriggered: {
+            if (runningTimer.stopTime > 0 && Date.now() >= runningTimer.stopTime) {
+                NetworkController.deactivateSensors();
+
+                sensroDataTimer.stop();
+
+                setSensorData(NetworkController.sensorData);
+
+                runningTimer.stop();
+                runningTimer.reset();
+            }
+        }
+    }
+
+    Timer {
+        id: runningTimer
+        property real startTime: -1
+        property real stopTime: -1
+
+        function setData(time) {
+            let now = Date.now();
+            startTime = now;
+            if (time) {
+                let end = now + time;
+                stopTime = end;
+            }
+        }
+
+        function reset() {
+            startTime = -1;
+            stopTime = -1;
+        }
+
+        repeat: true
+        interval: 100
+        onTriggered: {
+            let runningStr = '';
+            let running = Date.now() - startTime;
+            if (running > 3600000) {
+                runningStr = parseInt(running / 3600000) + "h " + parseInt((running % 3600000) / 60000) + "min " + (parseInt(running % 60000) / 1000).toFixed(1) + "s";
+            } else if (running > 60000) {
+                runningStr = parseInt((running % 3600000) / 60000) + "min " + (parseInt(running % 60000) / 1000).toFixed(1) + "s";
+            } else {
+                runningStr = (parseInt(running % 60000) / 1000).toFixed(1) + "s";
+            }
+            runningLabel.text = runningStr;
+            if (stopTime == -1) {
+                remainingLabel.text = "infinite"
+            } else {
+                let remainingStr = '';
+                let remaining = stopTime - Date.now();
+                if (remaining > 3600000) {
+                    remainingStr = parseInt(remaining / 3600000) + "h " + parseInt((remaining % 3600000) / 60000) + "min " + (parseInt(remaining % 60000) / 1000).toFixed(1) + "s";
+                } else if (remaining > 60000) {
+                    remainingStr = parseInt((remaining % 3600000) / 60000) + "min " + (parseInt(remaining % 60000) / 1000).toFixed(1) + "s";
+                } else {
+                    remainingStr = (parseInt(remaining % 60000) / 1000).toFixed(1) + "s";
+                }
+                remainingLabel.text = remainingStr;
+            }
+        }
+    }
+
     ListModel {
         id: listModel
         Component.onCompleted: {
@@ -112,7 +179,7 @@ Page {
         GridView {
             id: listView
             anchors.top: header.bottom
-            anchors.bottom: footer.top
+            anchors.bottom: timerItem.top
             anchors.horizontalCenter: parent.horizontalCenter
             cellHeight: 50
             cellWidth: 200
@@ -162,6 +229,74 @@ Page {
         }
 
         Item {
+            id: runningItem
+            height: 50
+            width: parent.width
+            anchors.bottom: footer.top
+
+            visible: NetworkController.sensorsActive
+
+            Row {
+                anchors.centerIn: parent
+                height: childrenRect.height
+                spacing: 10
+
+                Label {
+                    text: "Running since:"
+                }
+
+                Label {
+                    id: runningLabel
+                }
+
+                Label {
+                    text: "remaining time:"
+                }
+
+                Label {
+                    id: remainingLabel
+                }
+            }
+        }
+
+        Item {
+            id: timerItem
+            height: 50
+            width: parent.width
+            anchors.bottom: footer.top
+
+            visible: !NetworkController.sensorsActive
+
+            Row {
+                anchors.centerIn: parent
+                height: timerComboBox.height
+                spacing: 10
+
+                CheckBox {
+                    id: timerCheckbox
+                    anchors.verticalCenter: parent.verticalCenter
+                    text: "Timer"
+                    checked: false
+                }
+
+                TextField {
+                    id: timerTextField
+                    enabled: timerCheckbox.checked
+                    anchors.verticalCenter: parent.verticalCenter
+                    text: "10"
+                    inputMethodHints: Qt.ImhFormattedNumbersOnly
+                }
+
+                ComboBox {
+                    id: timerComboBox
+                    enabled: timerCheckbox.checked
+                    model: ["ms", "s", "min", "h"]
+                    currentIndex: 1
+                }
+            }
+        }
+
+        Item {
             id: footer
             width: parent.width
             height: 50
@@ -182,6 +317,17 @@ Page {
                             return;
                         }
 
+                        if (timerCheckbox.checked) {
+                            let timeVal = parseFloat(timerTextField.text);
+                            if (timeVal <= 0) {
+                                console.error("Timer should not be smaller than 0");
+                                Globals.mainWindow.dialog.title = "Time value wrong";
+                                Globals.mainWindow.dialog.message = "The value for the timer must be bigger than 0!";
+                                Globals.mainWindow.dialog.open();
+                                return;
+                            }
+                        }
+
                         let list = Array(8).fill(false);
                         for (let i = 0; i < list.length; i++) {
                             list[i] = false;
@@ -200,10 +346,35 @@ Page {
                         sensroDataTimer.start();
 
                         NetworkController.activateSensors(list);
-                    } else {
-                        sensroDataTimer.stop();
+                        if (timerCheckbox.checked) {
+                            let timeVal = parseFloat(timerTextField.text);
+                            switch (timerComboBox.currentIndex) {
+                            case 0:
+                                break;
+                            case 1:
+                                timeVal *= 1000;
+                                break;
+                            case 2:
+                                timeVal *= 60000;
+                                break;
+                            case 3:
+                                timeVal *= 3600000;
+                            }
+                            measurementTimer.start();
+                            runningTimer.setData(timeVal);
+                        } else {
+                            runningTimer.setData();
+                        }
 
+                        runningTimer.start();
+                    } else {
                         NetworkController.deactivateSensors();
+
+                        measurementTimer.stop();
+                        sensroDataTimer.stop();
+                        runningTimer.stop();
+                        runningTimer.reset();
+
                         setSensorData(NetworkController.sensorData);
                     }
                 }
