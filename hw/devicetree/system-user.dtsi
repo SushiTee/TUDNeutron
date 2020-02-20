@@ -1,0 +1,166 @@
+/include/ "system-conf.dtsi"
+/ {
+  chosen {
+    bootargs = "console=ttyPS0,115200 earlycon uio_pdrv_genirq.of_id=generic-uio root=/dev/mmcblk0p2 rw rootwait";
+  };
+
+  amba_pl: amba_pl {
+    fifo_interrupt_0: fifo@41250000 {
+      #dma-cells = <0x01>;
+      compatible = "generic-uio";
+      interrupt-parent = <0x04>;
+      interrupts = <0x00 0x34 0x04>;
+      reg = <0x41250000 0x10000>;
+    };
+
+    fifo_interrupt_1: fifo@41260000 {
+      #dma-cells = <0x01>;
+      compatible = "generic-uio";
+      interrupt-parent = <0x04>;
+      interrupts = <0x00 0x35 0x04>;
+      reg = <0x41260000 0x10000>;
+    };
+
+    fifo_interrupt_2: fifo@41270000 {
+      #dma-cells = <0x01>;
+      compatible = "generic-uio";
+      interrupt-parent = <0x04>;
+      interrupts = <0x00 0x36 0x04>;
+      reg = <0x41270000 0x10000>;
+    };
+
+    fifo_interrupt_3: fifo@41280000 {
+      #dma-cells = <0x01>;
+      compatible = "generic-uio";
+      interrupt-parent = <0x04>;
+      interrupts = <0x00 0x37 0x04>;
+      reg = <0x41280000 0x10000>;
+    };
+
+    fifo_interrupt_4: fifo@41290000 {
+      #dma-cells = <0x01>;
+      compatible = "generic-uio";
+      interrupt-parent = <0x04>;
+      interrupts = <0x00 0x38 0x04>;
+      reg = <0x41290000 0x10000>;
+    };
+
+    fifo_interrupt_5: fifo@412a0000 {
+      #dma-cells = <0x01>;
+      compatible = "generic-uio";
+      interrupt-parent = <0x04>;
+      interrupts = <0x00 0x39 0x04>;
+      reg = <0x412a0000 0x10000>;
+    };
+
+    fifo_interrupt_6: fifo@412b0000 {
+      #dma-cells = <0x01>;
+      compatible = "generic-uio";
+      interrupt-parent = <0x04>;
+      interrupts = <0x00 0x3a 0x04>;
+      reg = <0x412b0000 0x10000>;
+    };
+
+    fifo_interrupt_7: fifo@412c0000 {
+      #dma-cells = <0x01>;
+      compatible = "generic-uio";
+      interrupt-parent = <0x04>;
+      interrupts = <0x00 0x3b 0x04>;
+      reg = <0x412c0000 0x10000>;
+    };
+  };
+
+  reserved-memory {
+    #address-cells = <1>;
+    #size-cells = <1>;
+      ranges;
+
+      reserved: buffer@0 {
+        compatible = "shared-dma-pool";
+        no-map;
+        reg = <0x10000000 0x10000000>;
+      };
+  };
+
+  reserved-driver@0 {
+      compatible = "xlnx,reserved-memory";
+      memory-region = <&reserved>;
+  };
+};
+
+&amba {
+  /delete-node/ dmac@f8003000;
+};
+
+&axi_dma_0 {
+  compatible = "generic-uio";
+  /delete-property/ clock-names;
+  /delete-property/ clocks;
+  /delete-property/ interrupt-names;
+  /delete-property/ xlnx,addrwidth;
+  /delete-property/ xlnx,sg-length-width;
+  /delete-node/ dma-channel@40400030;
+};
+&axi_dma_1 {
+  compatible = "generic-uio";
+  /delete-property/ clock-names;
+  /delete-property/ clocks;
+  /delete-property/ interrupt-names;
+  /delete-property/ xlnx,addrwidth;
+  /delete-property/ xlnx,sg-length-width;
+  /delete-node/ dma-channel@40410030;
+};
+&axi_dma_2 {
+  compatible = "generic-uio";
+  /delete-property/ clock-names;
+  /delete-property/ clocks;
+  /delete-property/ interrupt-names;
+  /delete-property/ xlnx,addrwidth;
+  /delete-property/ xlnx,sg-length-width;
+  /delete-node/ dma-channel@40420030;
+};
+&axi_dma_3 {
+  compatible = "generic-uio";
+  /delete-property/ clock-names;
+  /delete-property/ clocks;
+  /delete-property/ interrupt-names;
+  /delete-property/ xlnx,addrwidth;
+  /delete-property/ xlnx,sg-length-width;
+  /delete-node/ dma-channel@40430030;
+};
+&axi_dma_4 {
+  compatible = "generic-uio";
+  /delete-property/ clock-names;
+  /delete-property/ clocks;
+  /delete-property/ interrupt-names;
+  /delete-property/ xlnx,addrwidth;
+  /delete-property/ xlnx,sg-length-width;
+  /delete-node/ dma-channel@40440030;
+};
+&axi_dma_5 {
+  compatible = "generic-uio";
+  /delete-property/ clock-names;
+  /delete-property/ clocks;
+  /delete-property/ interrupt-names;
+  /delete-property/ xlnx,addrwidth;
+  /delete-property/ xlnx,sg-length-width;
+  /delete-node/ dma-channel@40450030;
+};
+&axi_dma_6 {
+  compatible = "generic-uio";
+  /delete-property/ clock-names;
+  /delete-property/ clocks;
+  /delete-property/ interrupt-names;
+  /delete-property/ xlnx,addrwidth;
+  /delete-property/ xlnx,sg-length-width;
+  /delete-node/ dma-channel@40460030;
+};
+&axi_dma_7 {
+  compatible = "generic-uio";
+  /delete-property/ clock-names;
+  /delete-property/ clocks;
+  /delete-property/ interrupt-names;
+  /delete-property/ xlnx,addrwidth;
+  /delete-property/ xlnx,sg-length-width;
+  /delete-node/ dma-channel@40470030;
+};
