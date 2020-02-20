@@ -152,11 +152,6 @@ bool Controller::sendDataImpl(const std::byte *header, const std::byte *data, si
     {
         mSendLock.lock();
         auto [size, valid] = mSock->send(header, PACKAGE_HEADER_SIZE);
-        // check if we got an interrupt
-        if (quit || threadQuit) {
-            mSendLock.unlock();
-            return false;
-        }
 
         // socket might be invalid
         if (!isSocketValid(valid.value)) {
