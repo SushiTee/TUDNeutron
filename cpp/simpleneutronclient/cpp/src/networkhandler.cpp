@@ -197,10 +197,6 @@ void NetworkHandler::sendData(const std::byte *header, const std::byte *data, si
     // send header
     {
         auto [size, valid] = m_sock->send(header, PACKAGE_HEADER_SIZE);
-        // check if we got an interrupt
-        if (m_quit) {
-            return;
-        }
 
         // socket might be invalid
         if (size <= 0 || !isSocketValid(valid.value)) {
