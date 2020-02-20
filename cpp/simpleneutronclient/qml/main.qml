@@ -35,6 +35,19 @@ ApplicationWindow {
             text: stackView.currentItem.title
             anchors.centerIn: parent
         }
+
+        ToolButton {
+            id: helpButton
+            anchors.right: parent.right
+            visible: Qt.platform.os === "windows"
+            text: "?"
+            font.pixelSize: Qt.application.font.pixelSize * 1.6
+            onClicked: {
+                messageDialog.title = "About"
+                messageDialog.message = "Application icon by Retinaicons from flaticon.com"
+                messageDialog.open();
+            }
+        }
     }
 
     StackView {
@@ -66,6 +79,7 @@ ApplicationWindow {
         onConnectedChanged: {
             if (NetworkController.connected === MessageType.FAILED) {
                 stackView.reset();
+                messageDialog.title = "Connection failed"
                 messageDialog.message = "An error occured with the connection to the Zedboard or the connection could not be established.\n\nCheck if the Zedboard is turned on and connected to the network."
                 messageDialog.open();
             }
@@ -73,6 +87,7 @@ ApplicationWindow {
 
         onNetworkDataError: { // string message
             stackView.reset();
+            messageDialog.title = "Connection failed"
             messageDialog.message = message;
             messageDialog.open();
         }

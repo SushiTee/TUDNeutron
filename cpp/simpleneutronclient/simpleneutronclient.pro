@@ -39,6 +39,8 @@ win32 {
         BUILDTYPE = "release"
         QMAKE_POST_LINK += "$$getenv(QTDIR)/bin/windeployqt --$$BUILDTYPE --no-translations --qmldir $$PWD/qml $$BUILDTYPE/$${TARGET}.exe"
     }
+
+    RC_ICONS = "$$PWD/icon/nuclear.ico"
 }
 
 # Default rules for deployment.

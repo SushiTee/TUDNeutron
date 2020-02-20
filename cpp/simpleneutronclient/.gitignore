@@ -9,6 +9,7 @@
 !*.qrc
 !*.conf
 !*.pro
+!*.ico
 
 *~
 *.autosave
