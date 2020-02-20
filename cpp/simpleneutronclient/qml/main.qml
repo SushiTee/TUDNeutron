@@ -5,6 +5,7 @@ import SimpleNeutron.Pages 1.0
 import SimpleNeutron.Network 1.0
 import SimpleNeutron.MessageType 1.0
 import SimpleNeutron.Utils 1.0
+import SimpleNeutron.Version 1.0
 import QtQuick.LocalStorage 2.12 // needed so the sql plugin is deployed
 
 import "qrc:/js/db.js" as DB
@@ -39,12 +40,16 @@ ApplicationWindow {
         ToolButton {
             id: helpButton
             anchors.right: parent.right
-            visible: Qt.platform.os === "windows"
             text: "?"
             font.pixelSize: Qt.application.font.pixelSize * 1.6
             onClicked: {
                 messageDialog.title = "About"
-                messageDialog.message = "Application icon by Retinaicons from flaticon.com"
+                if (Qt.platform.os === "windows") {
+                    messageDialog.message = `Application icon by Retinaicons from flaticon.com\n\nVersion: ${Version.version} Build: ${Version.buildTime}`;
+                } else {
+                    messageDialog.message = `Version: ${Version.version} Build: ${Version.buildTime}`;
+                }
+
                 messageDialog.open();
             }
         }

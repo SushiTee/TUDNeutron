@@ -3,6 +3,7 @@
 #include <external/networking/kissnet.hpp>
 #include <messagetype.h>
 #include <networkcontroller.h>
+#include <version.h>
 
 namespace kn = kissnet;
 
@@ -59,6 +60,7 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
     MessageType::declareQML();
     qmlRegisterSingletonType<NetworkController>("SimpleNeutron.Network", 1, 0, "NetworkController", &NetworkController::instance);
+    qmlRegisterSingletonType<Version>("SimpleNeutron.Version", 1, 0, "Version", &Version::instance);
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {

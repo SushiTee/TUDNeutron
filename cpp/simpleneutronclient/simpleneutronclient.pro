@@ -20,13 +20,15 @@ SOURCES += \
         "$$PWD/cpp/src/networkcontroller.cpp" \
         "$$PWD/cpp/src/networkhandler.cpp" \
         "$$PWD/cpp/src/messagetype.cpp" \
-        "$$PWD/cpp/main.cpp"
+        "$$PWD/cpp/main.cpp" \
+        "$$PWD/cpp/src/version.cpp"
 
 HEADERS += \
         "$$PWD/cpp/networkcontroller.h" \
         "$$PWD/cpp/networkhandler.h" \
         "$$PWD/cpp/messagetype.h" \
-        cpp/messagetype.h
+        "$$PWD/cpp/messagetype.h" \
+        "$$PWD/cpp/version.h"
 
 RESOURCES += "$$PWD/qml/qml.qrc" \
         "$$PWD/js/js.qrc"
