@@ -303,7 +303,7 @@ Page {
             anchors.bottom: parent.bottom
 
             Button {
-                text: NetworkController.sensorsActive ? "Stop measuement" : "Start measurement"
+                text: NetworkController.sensorsActive ? "Stop measurement" : "Start measurement"
                 anchors.horizontalCenter: parent.horizontalCenter
                 enabled: sensorsSelected || NetworkController.sensorsActive
 
