@@ -309,9 +309,11 @@ QVariantList NetworkController::sensors()
     return m_sensors;
 }
 
-QVector<uint64_t> NetworkController::sensorData()
+void NetworkController::requestSensorData()
 {
-    return m_handler->getSensorData();
+    if (m_handler) {
+        QMetaObject::invokeMethod(m_handler.get(), "getSensorData");
+    }
 }
 
 bool NetworkController::storageWritable()

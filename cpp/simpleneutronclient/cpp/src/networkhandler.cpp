@@ -273,9 +273,9 @@ void NetworkHandler::sendData(MessageType::Message type, uint8_t value) const
     sendData(reinterpret_cast<const std::byte*>(message.data()), reinterpret_cast<const std::byte*>(&value), 1);
 }
 
-QVector<uint64_t> NetworkHandler::getSensorData()
+void NetworkHandler::getSensorData()
 {
-    return m_sensorDataCount;
+    QMetaObject::invokeMethod(m_controller, "sensorData", Q_ARG(QVector<uint64_t>, m_sensorDataCount));
 }
 
 void NetworkHandler::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType::Message type, size_t size)

@@ -45,7 +45,6 @@ private:
     Q_PROPERTY(int testSignalFrequency READ testSignalFrequency WRITE setTestSignalFrequency NOTIFY testSignalFrequencyChanged)
     Q_PROPERTY(QVariantList sensors READ sensors NOTIFY sensorsChanged)
     Q_PROPERTY(QString storageLocation READ storageLocation WRITE setStorageLocation NOTIFY storageLocationChanged)
-    Q_PROPERTY(QVector<uint64_t> sensorData READ sensorData)
 
     QString m_host = "zedboard";
     int m_port = 22222;
@@ -84,7 +83,7 @@ public slots:
     void activateSensors(QList<bool> list);
     void deactivateSensors();
     QVariantList sensors();
-    QVector<uint64_t> sensorData();
+    void requestSensorData();
     bool storageWritable();
     bool storageWritable(QString storageLocation);
 
@@ -110,4 +109,5 @@ signals:
     void testSignalFrequencyChanged(int testSignalFrequency);
     void storageLocationChanged(QString storageLocation);
     void dmaFull(int dma);
+    void sensorData(QVector<uint64_t> sensorData);
 };

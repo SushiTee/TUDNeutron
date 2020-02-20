@@ -54,7 +54,7 @@ Page {
         interval: 500
         repeat: true
         onTriggered: {
-            setSensorData(NetworkController.sensorData);
+            NetworkController.requestSensorData();
         }
     }
 
@@ -158,6 +158,10 @@ Page {
                     break;
                 }
             }
+        }
+
+        onSensorData: { // list sensorData
+            setSensorData(sensorData);
         }
     }
 
@@ -375,7 +379,7 @@ Page {
                         runningTimer.stop();
                         runningTimer.reset();
 
-                        setSensorData(NetworkController.sensorData);
+                        NetworkController.requestSensorData();
                     }
                 }
             }
