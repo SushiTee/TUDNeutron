@@ -71,7 +71,12 @@ Page {
         selectFolder: true
         property string selectedFolder: storageLocation
         onAccepted: {
-            let selected = fileUrls[0].toString().replace("file://", "");
+            let selected = fileUrls[0].toString();
+            if (Qt.platform.os === "windows") {
+                selected = selected.replace("file:///", "");
+            } else {
+                selected = selected.replace("file://", "");
+            }
             if (!NetworkController.storageWritable(selected)) {
                 Globals.mainWindow.dialog.title = "Location not writable";
                 Globals.mainWindow.dialog.message = "The selected storage location is not writable";
