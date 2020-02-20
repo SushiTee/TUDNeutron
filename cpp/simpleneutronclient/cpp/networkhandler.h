@@ -2,6 +2,7 @@
 
 #include <thread>
 #include <QObject>
+#include <QMutex>
 #include <external/networking/kissnet.hpp>
 #include <messagetype.h>
 #include <fstream>
@@ -25,6 +26,7 @@ class NetworkHandler : public QObject {
     uint32_t m_testSignalCount;
     uint32_t m_testSignalFrequency;
     QString m_storageLocation;
+    QMutex m_mutex;
 
     // reserve buffer
     kn::buffer<BUFFER_SIZE> m_recvBuff;

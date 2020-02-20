@@ -8,6 +8,7 @@
 #include <QJsonObject>
 #include <QDateTime>
 #include <QDir>
+#include <QMutexLocker>
 #include <networkcontroller.h>
 
 constexpr size_t PACKAGE_HEADER_SIZE = 3;
@@ -271,7 +272,9 @@ void NetworkHandler::sendData(MessageType::Message type, uint8_t value) const
 
 void NetworkHandler::getSensorData()
 {
+    m_mutex.lock();
     QMetaObject::invokeMethod(m_controller, "sensorData", Q_ARG(QVector<uint64_t>, m_sensorDataCount));
+    m_mutex.unlock();
 }
 
 void NetworkHandler::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType::Message type, size_t size)
@@ -290,12 +293,16 @@ void NetworkHandler::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType::Mess
             size = 0x10000u;
         }
         uint64_t dataSize = size * m_packageSize;
+        m_mutex.lock();
         m_sensorDataCount[static_cast<int>(type)] += dataSize;
+        m_mutex.unlock();
         m_fileStreams[static_cast<size_t>(type)].write(reinterpret_cast<const char*>(buff.data()), static_cast<std::streamsize>(dataSize * 4));
         break;
     }
     case MessageType::Message::START_DMA: {
+        m_mutex.lock();
         m_sensorDataCount = QVector<uint64_t>(8);
+        m_mutex.unlock();
         handleStartStopMessage(type, reinterpret_cast<const char *>(buff.data()), static_cast<int>(size));
         break;
     }
