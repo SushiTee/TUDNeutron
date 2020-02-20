@@ -242,7 +242,7 @@ Page {
                 spacing: 10
 
                 Label {
-                    text: "Running since:"
+                    text: "Running for:"
                 }
 
                 Label {
@@ -250,7 +250,7 @@ Page {
                 }
 
                 Label {
-                    text: "remaining time:"
+                    text: "Remaining time:"
                 }
 
                 Label {
