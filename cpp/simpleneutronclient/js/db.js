@@ -142,7 +142,15 @@ function setTestSignalFrequency(testSignalFrequency) {
 
 function getStorageLocation() {
     let result = readSettingsValue('storageLocation');
-    if (!result) result = PF.StandardPaths.standardLocations(PF.StandardPaths.DownloadLocation)[0].replace("file://", ""); // default
+    if (!result) {
+        let defaultPath = PF.StandardPaths.standardLocations(PF.StandardPaths.DownloadLocation)[0];
+        if (Qt.application.os === "windows") {
+            defaultPath.replace("file:///", "");
+        } else {
+            defaultPath.replace("file://", "");
+        }
+        result = defaultPath;
+    }
     return result;
 }
 
