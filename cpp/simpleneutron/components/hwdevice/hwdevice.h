@@ -8,6 +8,14 @@ typedef struct {
     const char* mUioDevice;
 } DMA_DEVICE;
 
+typedef struct {
+    const char* mRegisterBit;
+    const char* mGpioValue;
+    const char* mGpioDirection;
+    const char* mGpioExport;
+    const char* mGpioUnexport;
+} LED_GPIO;
+
 constexpr uint32_t DMA_SIZE = 0x800000u; // total size / dma count / 4
 
 constexpr DMA_DEVICE DMAS[8] = { // complete JA port on Zedboard
@@ -39,3 +47,11 @@ constexpr uint32_t GPIO_3 = 0x41230000u; // enable test generator on input 7 (ou
 constexpr uint32_t GPIO_4 = 0x41240000u; // enable trigger input (JB1 on zedboard) (out)
 
 constexpr uint16_t DEFAULT_WORD_LENGTH = 0x20u;
+
+constexpr LED_GPIO PS_LED = {
+    "819",
+    "/sys/class/gpio/gpio819/value",
+    "/sys/class/gpio/gpio819/direction",
+    "/sys/class/gpio/export",
+    "/sys/class/gpio/unexport"
+};

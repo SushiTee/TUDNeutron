@@ -11,6 +11,7 @@
 #include <gpio/switches.h>
 #include <gpio/triggerinput.h>
 #include <gpio/testgenerator.h>
+#include <gpio/psled.h>
 
 int main(int argc, char *argv[]) {
    int mem = open("/dev/mem", O_RDWR | O_SYNC);
@@ -54,6 +55,10 @@ int main(int argc, char *argv[]) {
    simpleneutron::components::gpio::WordLengthController::setWordLength(wordLength);
 
    auto controller = simpleneutron::components::controller::Controller(mem);
+   if (simpleneutron::components::gpio::PsLed::hasError()) {
+      LogErr << "Error activating PS LED" << std::endl;
+      return 1;
+   }
    controller.run();
 
    return 0;
