@@ -9,6 +9,7 @@ Restart=always
 User=root
 ExecStartPre=/bin/sleep 10
 ExecStart=/path/to/app/simpleneutron
+KillSignal=SIGINT
 
 [Install]
 WantedBy=basic.target
