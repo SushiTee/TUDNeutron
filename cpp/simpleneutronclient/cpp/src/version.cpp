@@ -11,7 +11,7 @@ QObject *Version::instance(QQmlEngine *engine, QJSEngine *scriptEngine)
 
 QString Version::version() const
 {
-    return "v1.0.0 dev";
+    return "v1.0.1";
 }
 
 QString Version::buildTime() const
