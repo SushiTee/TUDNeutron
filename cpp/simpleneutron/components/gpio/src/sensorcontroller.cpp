@@ -41,7 +41,7 @@ void SensorController::activateSpecific(uint8_t value) {
     SensorController &ref = SensorController::getInstance();
     if (value != ref.mSensorState) {
         ref.mSensorState = value;
-        ref.setValue(static_cast<uint32_t>(value));;
+        ref.setValue(static_cast<uint32_t>(value));
     }
 }
 
