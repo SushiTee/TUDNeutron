@@ -37,9 +37,9 @@ function readSettingsValue(value) {
     let result = '';
     let db = dbGetHandle();
     db.transaction(function (tx) {
-        var results = tx.executeSql(
+        let results = tx.executeSql(
                     'SELECT * FROM settings');
-        for (var i = 0; i < results.rows.length; i++) {
+        for (let i = 0; i < results.rows.length; i++) {
             if (results.rows.item(i).key === value) {
                 result = results.rows.item(i).value;
                 return;
@@ -52,7 +52,7 @@ function readSettingsValue(value) {
 function setSettingsValue(key, value) {
     let db = dbGetHandle();
     db.transaction(function (tx) {
-        var results = tx.executeSql('SELECT * FROM settings WHERE key=?', [key]);
+        let results = tx.executeSql('SELECT * FROM settings WHERE key=?', [key]);
         if (!results.rows.length) {
             // insert
             tx.executeSql('INSERT INTO settings(key, value) VALUES(?, ?)', [key, value]);
