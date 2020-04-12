@@ -389,7 +389,7 @@ bool Controller::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType type, siz
         } else {
             switchState += "]";
         }
-        networkOK = sendData(type, "{\"status\":\"OK\",\"switchState\":" + switchState + "}"); // todo: fill with data
+        networkOK = sendData(type, "{\"status\":\"OK\",\"switchState\":" + switchState + "}");
         break;
     }
     default:
