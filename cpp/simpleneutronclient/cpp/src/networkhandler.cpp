@@ -23,7 +23,7 @@ union payloadSizeConverter {
 };
 
 union int32converter {
-    std::byte bytes[24];
+    std::byte bytes[4];
     uint32_t num;
 };
 

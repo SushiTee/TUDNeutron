@@ -15,7 +15,7 @@ ApplicationWindow {
     visible: true
     width: 640
     height: 480
-    title: qsTr("SimpleNeutron Client")
+    title: "SimpleNeutron Client"
 
     property alias dialog: messageDialog
 
