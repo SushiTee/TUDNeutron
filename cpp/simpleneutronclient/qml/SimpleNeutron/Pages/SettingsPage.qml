@@ -11,7 +11,7 @@ Page {
     id: root
     width: parent ? parent.width : 0
     height: parent ? parent.height : 0
-    title: qsTr("Settings")
+    title: "Settings"
 
     property string host: DB.getHost();
     property string port: DB.getPort();

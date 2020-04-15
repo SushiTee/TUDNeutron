@@ -7,7 +7,7 @@ import SimpleNeutron.Utils 1.0
 Page {
     width: parent ? parent.width : 0
     height: parent ? parent.height : 0
-    title: qsTr("Home")
+    title: "Home"
 
     Column {
         width: parent.width
