@@ -68,8 +68,6 @@ Page {
 
                 sensroDataTimer.stop();
 
-                setSensorData(NetworkController.sensorData);
-
                 runningTimer.stop();
                 runningTimer.reset();
             }
