@@ -133,12 +133,12 @@ Page {
     Connections {
         target: NetworkController
 
-        onSensorsChanged: { // list sensors
+        onSensorsChanged: {
             if (listModel.count > 0) {
                 listModel.clear();
             }
 
-            getActiveSensors()
+            getActiveSensors();
         }
 
         onDmaFull: { // int dma
