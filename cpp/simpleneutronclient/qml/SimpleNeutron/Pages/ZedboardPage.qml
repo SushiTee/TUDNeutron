@@ -50,7 +50,7 @@ Page {
     }
 
     Timer {
-        id: sensroDataTimer
+        id: sensorDataTimer
         interval: 500
         repeat: true
         onTriggered: {
@@ -66,7 +66,7 @@ Page {
             if (runningTimer.stopTime > 0 && Date.now() >= runningTimer.stopTime) {
                 NetworkController.deactivateSensors();
 
-                sensroDataTimer.stop();
+                sensorDataTimer.stop();
 
                 runningTimer.stop();
                 runningTimer.reset();
@@ -344,7 +344,7 @@ Page {
                             listModel.get(i).full = false;
                         }
 
-                        sensroDataTimer.start();
+                        sensorDataTimer.start();
 
                         NetworkController.activateSensors(list);
                         if (timerCheckbox.checked) {
@@ -372,7 +372,7 @@ Page {
                         NetworkController.deactivateSensors();
 
                         measurementTimer.stop();
-                        sensroDataTimer.stop();
+                        sensorDataTimer.stop();
                         runningTimer.stop();
                         runningTimer.reset();
 
