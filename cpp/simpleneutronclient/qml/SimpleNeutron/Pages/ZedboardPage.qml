@@ -332,7 +332,6 @@ Page {
 
                         let list = Array(8).fill(false);
                         for (let i = 0; i < list.length; i++) {
-                            list[i] = false;
                             for (let j = 0; j < listModel.count; j++) {
                                 if (listModel.get(j).num === i && listModel.get(j).selected) {
                                     list[i] = listModel.get(j).selected;
