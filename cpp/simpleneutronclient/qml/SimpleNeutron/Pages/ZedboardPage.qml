@@ -42,6 +42,17 @@ Page {
         }
     }
 
+    function deactivateSensors() {
+        NetworkController.deactivateSensors();
+
+        measurementTimer.stop();
+        sensorDataTimer.stop();
+        runningTimer.stop();
+        runningTimer.reset();
+
+        NetworkController.requestSensorData();
+    }
+
     BusyIndicator {
         id: busyIndicator
         anchors.centerIn: parent
@@ -64,12 +75,7 @@ Page {
         interval: 10
         onTriggered: {
             if (runningTimer.stopTime > 0 && Date.now() >= runningTimer.stopTime) {
-                NetworkController.deactivateSensors();
-
-                sensorDataTimer.stop();
-
-                runningTimer.stop();
-                runningTimer.reset();
+                root.deactivateSensors();
             }
         }
     }
@@ -369,14 +375,7 @@ Page {
 
                         runningTimer.start();
                     } else {
-                        NetworkController.deactivateSensors();
-
-                        measurementTimer.stop();
-                        sensorDataTimer.stop();
-                        runningTimer.stop();
-                        runningTimer.reset();
-
-                        NetworkController.requestSensorData();
+                        root.deactivateSensors();
                     }
                 }
             }
