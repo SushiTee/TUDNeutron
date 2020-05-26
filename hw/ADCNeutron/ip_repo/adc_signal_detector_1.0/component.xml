@@ -1,0 +1,674 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spirit:component xmlns:xilinx="http://www.xilinx.com" xmlns:spirit="http://www.spiritconsortium.org/XMLSchema/SPIRIT/1685-2009" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <spirit:vendor>user.org</spirit:vendor>
+  <spirit:library>user</spirit:library>
+  <spirit:name>adc_signal_detector</spirit:name>
+  <spirit:version>1.0</spirit:version>
+  <spirit:busInterfaces>
+    <spirit:busInterface>
+      <spirit:name>M00_AXIS</spirit:name>
+      <spirit:busType spirit:vendor="xilinx.com" spirit:library="interface" spirit:name="axis" spirit:version="1.0"/>
+      <spirit:abstractionType spirit:vendor="xilinx.com" spirit:library="interface" spirit:name="axis_rtl" spirit:version="1.0"/>
+      <spirit:master/>
+      <spirit:portMaps>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>TDATA</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>m00_axis_tdata</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>TLAST</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>m00_axis_tlast</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>TVALID</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>m00_axis_tvalid</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>TREADY</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>m00_axis_tready</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>TKEEP</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>m00_axis_tkeep</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+      </spirit:portMaps>
+      <spirit:parameters>
+        <spirit:parameter>
+          <spirit:name>WIZ_DATA_WIDTH</spirit:name>
+          <spirit:value spirit:format="long" spirit:id="BUSIFPARAM_VALUE.M00_AXIS.WIZ_DATA_WIDTH" spirit:choiceRef="choice_list_6fc15197">32</spirit:value>
+        </spirit:parameter>
+      </spirit:parameters>
+    </spirit:busInterface>
+    <spirit:busInterface>
+      <spirit:name>M00_AXIS_RST</spirit:name>
+      <spirit:busType spirit:vendor="xilinx.com" spirit:library="signal" spirit:name="reset" spirit:version="1.0"/>
+      <spirit:abstractionType spirit:vendor="xilinx.com" spirit:library="signal" spirit:name="reset_rtl" spirit:version="1.0"/>
+      <spirit:slave/>
+      <spirit:portMaps>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>RST</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>m00_axis_aresetn</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+      </spirit:portMaps>
+      <spirit:parameters>
+        <spirit:parameter>
+          <spirit:name>POLARITY</spirit:name>
+          <spirit:value spirit:id="BUSIFPARAM_VALUE.M00_AXIS_RST.POLARITY" spirit:choiceRef="choice_list_9d8b0d81">ACTIVE_LOW</spirit:value>
+        </spirit:parameter>
+      </spirit:parameters>
+    </spirit:busInterface>
+    <spirit:busInterface>
+      <spirit:name>M00_AXIS_CLK</spirit:name>
+      <spirit:busType spirit:vendor="xilinx.com" spirit:library="signal" spirit:name="clock" spirit:version="1.0"/>
+      <spirit:abstractionType spirit:vendor="xilinx.com" spirit:library="signal" spirit:name="clock_rtl" spirit:version="1.0"/>
+      <spirit:slave/>
+      <spirit:portMaps>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>CLK</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>m00_axis_aclk</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+      </spirit:portMaps>
+      <spirit:parameters>
+        <spirit:parameter>
+          <spirit:name>ASSOCIATED_BUSIF</spirit:name>
+          <spirit:value spirit:id="BUSIFPARAM_VALUE.M00_AXIS_CLK.ASSOCIATED_BUSIF">M00_AXIS</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>ASSOCIATED_RESET</spirit:name>
+          <spirit:value spirit:id="BUSIFPARAM_VALUE.M00_AXIS_CLK.ASSOCIATED_RESET">m00_axis_aresetn</spirit:value>
+        </spirit:parameter>
+      </spirit:parameters>
+    </spirit:busInterface>
+    <spirit:busInterface>
+      <spirit:name>fifo_reset</spirit:name>
+      <spirit:busType spirit:vendor="xilinx.com" spirit:library="signal" spirit:name="reset" spirit:version="1.0"/>
+      <spirit:abstractionType spirit:vendor="xilinx.com" spirit:library="signal" spirit:name="reset_rtl" spirit:version="1.0"/>
+      <spirit:master/>
+      <spirit:portMaps>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>RST</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>fifo_reset</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+      </spirit:portMaps>
+    </spirit:busInterface>
+  </spirit:busInterfaces>
+  <spirit:model>
+    <spirit:views>
+      <spirit:view>
+        <spirit:name>xilinx_vhdlsynthesis</spirit:name>
+        <spirit:displayName>VHDL Synthesis</spirit:displayName>
+        <spirit:envIdentifier>vhdlSource:vivado.xilinx.com:synthesis</spirit:envIdentifier>
+        <spirit:language>vhdl</spirit:language>
+        <spirit:modelName>adc_signal_detector_v1_0</spirit:modelName>
+        <spirit:fileSetRef>
+          <spirit:localName>xilinx_vhdlsynthesis_view_fileset</spirit:localName>
+        </spirit:fileSetRef>
+        <spirit:parameters>
+          <spirit:parameter>
+            <spirit:name>viewChecksum</spirit:name>
+            <spirit:value>874a5aa1</spirit:value>
+          </spirit:parameter>
+        </spirit:parameters>
+      </spirit:view>
+      <spirit:view>
+        <spirit:name>xilinx_vhdlbehavioralsimulation</spirit:name>
+        <spirit:displayName>VHDL Simulation</spirit:displayName>
+        <spirit:envIdentifier>vhdlSource:vivado.xilinx.com:simulation</spirit:envIdentifier>
+        <spirit:language>vhdl</spirit:language>
+        <spirit:modelName>adc_signal_detector_v1_0</spirit:modelName>
+        <spirit:fileSetRef>
+          <spirit:localName>xilinx_vhdlbehavioralsimulation_view_fileset</spirit:localName>
+        </spirit:fileSetRef>
+        <spirit:parameters>
+          <spirit:parameter>
+            <spirit:name>viewChecksum</spirit:name>
+            <spirit:value>874a5aa1</spirit:value>
+          </spirit:parameter>
+        </spirit:parameters>
+      </spirit:view>
+      <spirit:view>
+        <spirit:name>xilinx_xpgui</spirit:name>
+        <spirit:displayName>UI Layout</spirit:displayName>
+        <spirit:envIdentifier>:vivado.xilinx.com:xgui.ui</spirit:envIdentifier>
+        <spirit:fileSetRef>
+          <spirit:localName>xilinx_xpgui_view_fileset</spirit:localName>
+        </spirit:fileSetRef>
+        <spirit:parameters>
+          <spirit:parameter>
+            <spirit:name>viewChecksum</spirit:name>
+            <spirit:value>42d33723</spirit:value>
+          </spirit:parameter>
+        </spirit:parameters>
+      </spirit:view>
+      <spirit:view>
+        <spirit:name>bd_tcl</spirit:name>
+        <spirit:displayName>Block Diagram</spirit:displayName>
+        <spirit:envIdentifier>:vivado.xilinx.com:block.diagram</spirit:envIdentifier>
+        <spirit:fileSetRef>
+          <spirit:localName>bd_tcl_view_fileset</spirit:localName>
+        </spirit:fileSetRef>
+        <spirit:parameters>
+          <spirit:parameter>
+            <spirit:name>viewChecksum</spirit:name>
+            <spirit:value>45a2f450</spirit:value>
+          </spirit:parameter>
+        </spirit:parameters>
+      </spirit:view>
+    </spirit:views>
+    <spirit:ports>
+      <spirit:port>
+        <spirit:name>enabled</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic</spirit:typeName>
+              <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>signal_input_a</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic</spirit:typeName>
+              <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>signal_input_b</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic</spirit:typeName>
+              <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>signal_state</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic</spirit:typeName>
+              <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>fifo_reset</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic</spirit:typeName>
+              <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>number_words</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long">15</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic_vector</spirit:typeName>
+              <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>trigger_input</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic</spirit:typeName>
+              <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>data_clock</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic</spirit:typeName>
+              <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>frame_clock</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic</spirit:typeName>
+              <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>test_output</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long">7</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic_vector</spirit:typeName>
+              <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>m00_axis_aclk</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic</spirit:typeName>
+              <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>m00_axis_aresetn</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic</spirit:typeName>
+              <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>m00_axis_tvalid</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic</spirit:typeName>
+              <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>m00_axis_tdata</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long" spirit:resolve="dependent" spirit:dependency="(spirit:decode(id(&apos;MODELPARAM_VALUE.C_M00_AXIS_TDATA_WIDTH&apos;)) - 1)">31</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic_vector</spirit:typeName>
+              <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>m00_axis_tkeep</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long" spirit:resolve="dependent" spirit:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_M00_AXIS_TDATA_WIDTH&apos;)) / 8) - 1)">3</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic_vector</spirit:typeName>
+              <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>m00_axis_tlast</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic</spirit:typeName>
+              <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>m00_axis_tready</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic</spirit:typeName>
+              <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+    </spirit:ports>
+    <spirit:modelParameters>
+      <spirit:modelParameter xsi:type="spirit:nameValueTypeType" spirit:dataType="integer">
+        <spirit:name>C_M00_AXIS_TDATA_WIDTH</spirit:name>
+        <spirit:displayName>C M00 AXIS TDATA WIDTH</spirit:displayName>
+        <spirit:description>Width of S_AXIS address bus. The slave accepts the read and write addresses of width C_M_AXIS_TDATA_WIDTH.</spirit:description>
+        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_M00_AXIS_TDATA_WIDTH" spirit:order="3" spirit:rangeType="long">32</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter spirit:dataType="integer">
+        <spirit:name>C_M00_AXIS_START_COUNT</spirit:name>
+        <spirit:displayName>C M00 AXIS START COUNT</spirit:displayName>
+        <spirit:description>Start count is the number of clock cycles the master will wait before initiating/issuing any transaction.</spirit:description>
+        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_M00_AXIS_START_COUNT" spirit:order="4" spirit:minimum="1" spirit:rangeType="long">32</spirit:value>
+      </spirit:modelParameter>
+    </spirit:modelParameters>
+  </spirit:model>
+  <spirit:choices>
+    <spirit:choice>
+      <spirit:name>choice_list_6fc15197</spirit:name>
+      <spirit:enumeration>32</spirit:enumeration>
+    </spirit:choice>
+    <spirit:choice>
+      <spirit:name>choice_list_9d8b0d81</spirit:name>
+      <spirit:enumeration>ACTIVE_HIGH</spirit:enumeration>
+      <spirit:enumeration>ACTIVE_LOW</spirit:enumeration>
+    </spirit:choice>
+  </spirit:choices>
+  <spirit:fileSets>
+    <spirit:fileSet>
+      <spirit:name>xilinx_vhdlsynthesis_view_fileset</spirit:name>
+      <spirit:file>
+        <spirit:name>hdl/adc_signal_detector_v1_0_M00_AXIS.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/adc_signal_detector_v1_0.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>CHECKSUM_51d91dd0</spirit:userFileType>
+      </spirit:file>
+    </spirit:fileSet>
+    <spirit:fileSet>
+      <spirit:name>xilinx_vhdlbehavioralsimulation_view_fileset</spirit:name>
+      <spirit:file>
+        <spirit:name>hdl/adc_signal_detector_v1_0_M00_AXIS.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/adc_signal_detector_v1_0.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+    </spirit:fileSet>
+    <spirit:fileSet>
+      <spirit:name>xilinx_xpgui_view_fileset</spirit:name>
+      <spirit:file>
+        <spirit:name>xgui/adc_signal_detector_v1_0.tcl</spirit:name>
+        <spirit:fileType>tclSource</spirit:fileType>
+        <spirit:userFileType>CHECKSUM_42d33723</spirit:userFileType>
+        <spirit:userFileType>XGUI_VERSION_2</spirit:userFileType>
+      </spirit:file>
+    </spirit:fileSet>
+    <spirit:fileSet>
+      <spirit:name>bd_tcl_view_fileset</spirit:name>
+      <spirit:file>
+        <spirit:name>bd/bd.tcl</spirit:name>
+        <spirit:fileType>tclSource</spirit:fileType>
+      </spirit:file>
+    </spirit:fileSet>
+  </spirit:fileSets>
+  <spirit:description>ADC Signal detector</spirit:description>
+  <spirit:parameters>
+    <spirit:parameter>
+      <spirit:name>C_M00_AXIS_TDATA_WIDTH</spirit:name>
+      <spirit:displayName>C M00 AXIS TDATA WIDTH</spirit:displayName>
+      <spirit:description>Width of S_AXIS address bus. The slave accepts the read and write addresses of width C_M_AXIS_TDATA_WIDTH.</spirit:description>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.C_M00_AXIS_TDATA_WIDTH" spirit:choiceRef="choice_list_6fc15197" spirit:order="3">32</spirit:value>
+      <spirit:vendorExtensions>
+        <xilinx:parameterInfo>
+          <xilinx:enablement>
+            <xilinx:isEnabled xilinx:id="PARAM_ENABLEMENT.C_M00_AXIS_TDATA_WIDTH">false</xilinx:isEnabled>
+          </xilinx:enablement>
+        </xilinx:parameterInfo>
+      </spirit:vendorExtensions>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>C_M00_AXIS_START_COUNT</spirit:name>
+      <spirit:displayName>C M00 AXIS START COUNT</spirit:displayName>
+      <spirit:description>Start count is the number of clock cycles the master will wait before initiating/issuing any transaction.</spirit:description>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.C_M00_AXIS_START_COUNT" spirit:order="4" spirit:minimum="1" spirit:rangeType="long">32</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>Component_Name</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Component_Name" spirit:order="1">adc_signal_detector_v1_0</spirit:value>
+    </spirit:parameter>
+  </spirit:parameters>
+  <spirit:vendorExtensions>
+    <xilinx:coreExtensions>
+      <xilinx:supportedFamilies>
+        <xilinx:family xilinx:lifeCycle="Pre-Production">zynq</xilinx:family>
+      </xilinx:supportedFamilies>
+      <xilinx:taxonomies>
+        <xilinx:taxonomy>AXI_Peripheral</xilinx:taxonomy>
+      </xilinx:taxonomies>
+      <xilinx:displayName>adc_signal_detector_v1.0</xilinx:displayName>
+      <xilinx:coreRevision>9</xilinx:coreRevision>
+      <xilinx:coreCreationDateTime>2020-05-23T14:34:21Z</xilinx:coreCreationDateTime>
+      <xilinx:tags>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6243e93b_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@174ad6e0_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@68d756bb_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3a3d537_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@157df84d_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@254522d3_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5d43a72e_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@10379714_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@48a689f4_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3cbc88f3_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2a4b7570_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7575b47f_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3add5438_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@73c357be_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7080af9d_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@732e1542_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5768cc50_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1d635b38_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@285df39e_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2891e83_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7437d4f2_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@160f0bf8_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@55c1f5d0_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3e64ef0c_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@50ccf4fa_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5474bb08_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@30422a66_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1e4c2ff9_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4a8402fe_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5e38bd69_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@50f702dd_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@70e8867d_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2d90dead_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1d8a26af_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3dc79db_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@55ac249e_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@380f1f0d_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@67821daf_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@62ed85d6_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@502d6f57_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@50c5f3eb_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@61ae15da_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@33f217cc_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6c9b390c_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@69a44d82_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@668d2471_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@86a6ca8_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@ef0b20e_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@580f0f7d_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@794ffe91_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4871dc2d_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@52b1b163_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@20082a52_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1ba5d05b_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@389a300a_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1449768e_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7ede6392_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@49b5ace5_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1f8ec80f_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@26011cea_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@338a6a62_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4fdaa3f_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@d44f36f_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4432f39f_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@a448c33_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@49b033c0_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@14872046_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@284f36f9_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1f126ea2_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@37aee8dd_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3698465a_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@55c781b9_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6a8d5c79_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1a128524_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3112e8c0_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2fbcdc03_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@16df8d83_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5d9ac3ad_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4a9c1165_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@18e336b9_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4f9d0d27_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5b3113b6_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3133a134_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5a5c17e7_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@30351691_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@19beb797_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@469441f1_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@97f5ade_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1b0faf10_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1e78c904_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5cd6da62_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@353c0a98_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@507579bc_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@73d47f66_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@db2713b_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1e16c8f_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@63dee0cf_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@416154da_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2bb0ba4c_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@692f90cb_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3a1da1be_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@e9476e_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@62997c4e_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1d8b83d6_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3adf079b_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@64d9d073_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@46840613_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@54ad9026_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1543a65b_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@33ad2e60_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@88df51e_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4665ea38_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@76337074_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@66f7d27f_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@a0d68c4_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7fdfdfef_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@219a2902_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7723c0fe_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@463c4dbe_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2ef73f31_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4feeca88_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5110d641_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7a72a371_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@280c9918_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3cb3a68e_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@df237d0_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1a648775_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1479e705_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@32addf58_ARCHIVE_LOCATION">/home/vm/projects/ip_repo/ip_repo/adc_signal_detector_1.0</xilinx:tag>
+      </xilinx:tags>
+    </xilinx:coreExtensions>
+    <xilinx:packagingInfo>
+      <xilinx:xilinxVersion>2019.2.1</xilinx:xilinxVersion>
+      <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="529b647d"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="89a5abd0"/>
+      <xilinx:checksum xilinx:scope="ports" xilinx:value="e3cff15e"/>
+      <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="9a194edc"/>
+      <xilinx:checksum xilinx:scope="parameters" xilinx:value="5f9266e5"/>
+    </xilinx:packagingInfo>
+  </spirit:vendorExtensions>
+</spirit:component>

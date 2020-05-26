@@ -1,0 +1,37 @@
+/include/ "system-conf.dtsi"
+/ {
+  chosen {
+    bootargs = "console=ttyPS0,115200 earlycon uio_pdrv_genirq.of_id=generic-uio root=/dev/mmcblk0p2 rw rootwait";
+  };
+
+  reserved-memory {
+    #address-cells = <1>;
+    #size-cells = <1>;
+      ranges;
+
+      reserved: buffer@0 {
+        compatible = "shared-dma-pool";
+        no-map;
+        reg = <0x10000000 0x10000000>;
+      };
+  };
+
+  reserved-driver@0 {
+      compatible = "xlnx,reserved-memory";
+      memory-region = <&reserved>;
+  };
+};
+
+&amba {
+  /delete-node/ dmac@f8003000;
+};
+
+&axi_dma_0 {
+  compatible = "generic-uio";
+  /delete-property/ clock-names;
+  /delete-property/ clocks;
+  /delete-property/ interrupt-names;
+  /delete-property/ xlnx,addrwidth;
+  /delete-property/ xlnx,sg-length-width;
+  /delete-node/ dma-channel@40400030;
+};

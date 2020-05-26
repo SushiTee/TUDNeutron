@@ -93,7 +93,8 @@
 *.tmp/
 *.jobs*
 *.ip_user_files*
-hw/project_1*
+hw/SimpleNeutron/project_1*
+hw/ADCNeutron/project_1*
 
 #########
 #non xilinx stuff
