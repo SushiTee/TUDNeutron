@@ -81,7 +81,7 @@ ApplicationWindow {
     Connections {
         target: NetworkController
 
-        onConnectedChanged: {
+        function onConnectedChanged(connected) {
             if (NetworkController.connected === MessageType.FAILED) {
                 stackView.reset();
                 messageDialog.title = "Connection failed"
@@ -90,7 +90,7 @@ ApplicationWindow {
             }
         }
 
-        onNetworkDataError: { // string message
+        function onNetworkDataError(message) {
             stackView.reset();
             messageDialog.title = "Connection failed"
             messageDialog.message = message;

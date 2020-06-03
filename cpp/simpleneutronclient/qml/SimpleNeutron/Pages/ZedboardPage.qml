@@ -139,7 +139,7 @@ Page {
     Connections {
         target: NetworkController
 
-        onSensorsChanged: {
+        function onSensorsChanged(sensors) {
             if (listModel.count > 0) {
                 listModel.clear();
             }
@@ -147,7 +147,7 @@ Page {
             getActiveSensors();
         }
 
-        onDmaFull: { // int dma
+        function onDmaFull(dma) {
             if (dma === -1) {
                 Globals.mainWindow.dialog.title = "Sensor buffer full";
                 Globals.mainWindow.dialog.message = "Recevied a sensor buffer full message without any information which sensor.";
@@ -164,7 +164,7 @@ Page {
             }
         }
 
-        onSensorData: { // list sensorData
+        function onSensorData(sensorData) {
             setSensorData(sensorData);
         }
     }
