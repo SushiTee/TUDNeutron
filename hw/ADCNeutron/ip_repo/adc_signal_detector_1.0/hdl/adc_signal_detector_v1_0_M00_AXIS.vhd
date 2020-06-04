@@ -93,7 +93,7 @@ architecture implementation of adc_signal_detector_v1_0_M00_AXIS is
   signal axis_tvalid                     : std_logic                                         := '0';
   signal axis_tlast                      : std_logic                                         := '0';
   signal stream_data_out                 : std_logic_vector(C_M_AXIS_TDATA_WIDTH-1 downto 0) := (others => '0');
-  signal stream_data_out_parts           : std_logic_vector(C_M_AXIS_TDATA_WIDTH-3 downto 0) := (others => '0');
+  signal stream_data_out_parts           : std_logic_vector(11 downto 0) := (others => '0');
   signal word_counter                    : unsigned(15 downto 0)                             := (others => '0');
 
   signal last_data_clock                 : std_logic                                         := '0';
@@ -111,7 +111,7 @@ architecture implementation of adc_signal_detector_v1_0_M00_AXIS is
   signal just_a_signal_2                 : std_logic                                         := '0';
   signal data_test                       : std_logic_vector(13 downto 0)                     := (others => '0');
 
-  signal data_clock_counter              : unsigned(2 downto 0)                              := (others => '0');
+  signal data_clock_counter              : unsigned(3 downto 0)                              := (others => '0');
 
 begin
   -- copy all input signal
@@ -195,27 +195,47 @@ begin
         end if;
         if ((last_data_clock = '1' and data_clock_copy = '0') or (last_data_clock = '0' and data_clock_copy = '1')) then
           case data_clock_counter is
-            when "111" =>
+            when "1111" =>
               stream_data_out_parts(11) <= signal_input_a_copy;
               stream_data_out_parts(10) <= signal_input_b_copy;
-            when "110" =>
+            when "1110" =>
               stream_data_out_parts(9) <= signal_input_a_copy;
               stream_data_out_parts(8) <= signal_input_b_copy;
-            when "101" =>
+            when "1101" =>
               stream_data_out_parts(7) <= signal_input_a_copy;
               stream_data_out_parts(6) <= signal_input_b_copy;
-            when "100" =>
+            when "1100" =>
               stream_data_out_parts(5) <= signal_input_a_copy;
               stream_data_out_parts(4) <= signal_input_b_copy;
-            when "011" =>
+            when "1011" =>
               stream_data_out_parts(3) <= signal_input_a_copy;
               stream_data_out_parts(2) <= signal_input_b_copy;
-            when "010" =>
+            when "1010" =>
               stream_data_out_parts(1) <= signal_input_a_copy;
               stream_data_out_parts(0) <= signal_input_b_copy;
-            when "001" =>
+            when "1001" =>
+              stream_data_out(27 downto 14) <= stream_data_out_parts & signal_input_a_copy & signal_input_b_copy;
+            when "0111" =>
+              stream_data_out_parts(11) <= signal_input_a_copy;
+              stream_data_out_parts(10) <= signal_input_b_copy;
+            when "0110" =>
+              stream_data_out_parts(9) <= signal_input_a_copy;
+              stream_data_out_parts(8) <= signal_input_b_copy;
+            when "0101" =>
+              stream_data_out_parts(7) <= signal_input_a_copy;
+              stream_data_out_parts(6) <= signal_input_b_copy;
+            when "0100" =>
+              stream_data_out_parts(5) <= signal_input_a_copy;
+              stream_data_out_parts(4) <= signal_input_b_copy;
+            when "0011" =>
+              stream_data_out_parts(3) <= signal_input_a_copy;
+              stream_data_out_parts(2) <= signal_input_b_copy;
+            when "0010" =>
+              stream_data_out_parts(1) <= signal_input_a_copy;
+              stream_data_out_parts(0) <= signal_input_b_copy;
+            when "0001" =>
               if (wait_frames > 1) then
-                stream_data_out <= stream_data_out_parts & signal_input_a_copy & signal_input_b_copy;
+                stream_data_out(13 downto 0) <= stream_data_out_parts & signal_input_a_copy & signal_input_b_copy;
                 axis_tvalid <= '1';
                 if (signal_counter_3 > 5000000) then
                   signal_counter_3 <= signal_counter_3 - 1;
@@ -235,7 +255,7 @@ begin
                   word_counter <= unsigned(number_words);
                 end if;
               end if;
-            when others =>
+            when others => -- "0000" and "1000"
               axis_tlast <= '0';
           end case;
           if (data_clock_counter > 0) then

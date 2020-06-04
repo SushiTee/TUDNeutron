@@ -4,6 +4,16 @@
     bootargs = "console=ttyPS0,115200 earlycon uio_pdrv_genirq.of_id=generic-uio root=/dev/mmcblk0p2 rw rootwait";
   };
 
+  amba_pl: amba_pl {
+    fifo_interrupt_0: fifo@41250000 {
+      #dma-cells = <0x01>;
+      compatible = "generic-uio";
+      interrupt-parent = <0x04>;
+      interrupts = <0x00 0x1e 0x04>;
+      reg = <0x41250000 0x10000>;
+    };
+  };
+
   reserved-memory {
     #address-cells = <1>;
     #size-cells = <1>;
