@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>AdcNeutron/Pages/qmldir</file>
+        <file>AdcNeutron/Pages/StartPage.qml</file>
+        <file>AdcNeutron/Components/qmldir</file>
+        <file>AdcNeutron/Components/Page.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>AdcNeutron/Pages/SettingsPage.qml</file>
+        <file>AdcNeutron/Pages/ZedboardPage.qml</file>
+        <file>AdcNeutron/Utils/qmldir</file>
+        <file>AdcNeutron/Utils/Globals.qml</file>
+    </qresource>
+</RCC>

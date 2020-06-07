@@ -1,0 +1,5 @@
+module AdcNeutron.Pages
+
+StartPage 1.0 StartPage.qml
+SettingsPage 1.0 SettingsPage.qml
+ZedboardPage 1.0 ZedboardPage.qml
