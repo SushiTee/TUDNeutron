@@ -296,6 +296,7 @@ proc create_root_design { parentCell } {
   set gpio_input_trigger [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_gpio:2.0 gpio_input_trigger ]
   set_property -dict [ list \
    CONFIG.C_ALL_OUTPUTS {1} \
+   CONFIG.C_DOUT_DEFAULT {0x00000000} \
    CONFIG.C_GPIO_WIDTH {1} \
  ] $gpio_input_trigger
 
@@ -303,9 +304,16 @@ proc create_root_design { parentCell } {
   set gpio_num_words [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_gpio:2.0 gpio_num_words ]
   set_property -dict [ list \
    CONFIG.C_ALL_OUTPUTS {1} \
-   CONFIG.C_DOUT_DEFAULT {0x00000100} \
+   CONFIG.C_DOUT_DEFAULT {0x00008000} \
    CONFIG.C_GPIO_WIDTH {16} \
  ] $gpio_num_words
+
+  # Create instance: gpio_switch_input, and set properties
+  set gpio_switch_input [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_gpio:2.0 gpio_switch_input ]
+  set_property -dict [ list \
+   CONFIG.C_ALL_INPUTS {1} \
+   CONFIG.C_GPIO_WIDTH {8} \
+ ] $gpio_switch_input
 
   # Create instance: hold_signal_0, and set properties
   set hold_signal_0 [ create_bd_cell -type ip -vlnv user.org:user:hold_signal:1.0 hold_signal_0 ]
@@ -716,7 +724,7 @@ proc create_root_design { parentCell } {
   # Create instance: ps7_0_axi_periph, and set properties
   set ps7_0_axi_periph [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect:2.1 ps7_0_axi_periph ]
   set_property -dict [ list \
-   CONFIG.NUM_MI {4} \
+   CONFIG.NUM_MI {5} \
  ] $ps7_0_axi_periph
 
   # Create instance: rst_ps7_0_200M, and set properties
@@ -771,6 +779,7 @@ proc create_root_design { parentCell } {
   connect_bd_intf_net -intf_net ps7_0_axi_periph_M01_AXI [get_bd_intf_pins gpio_enable_splitter/S_AXI] [get_bd_intf_pins ps7_0_axi_periph/M01_AXI]
   connect_bd_intf_net -intf_net ps7_0_axi_periph_M02_AXI [get_bd_intf_pins gpio_num_words/S_AXI] [get_bd_intf_pins ps7_0_axi_periph/M02_AXI]
   connect_bd_intf_net -intf_net ps7_0_axi_periph_M03_AXI [get_bd_intf_pins gpio_input_trigger/S_AXI] [get_bd_intf_pins ps7_0_axi_periph/M03_AXI]
+  connect_bd_intf_net -intf_net ps7_0_axi_periph_M04_AXI [get_bd_intf_pins gpio_switch_input/S_AXI] [get_bd_intf_pins ps7_0_axi_periph/M04_AXI]
 
   # Create port connections
   connect_bd_net -net adc_signal_detector_0_fifo_reset [get_bd_pins adc_signal_detector_0/fifo_reset] [get_bd_pins util_vector_logic_0/Op1]
@@ -786,11 +795,11 @@ proc create_root_design { parentCell } {
   connect_bd_net -net input_trigger_0_trigger_out0 [get_bd_pins adc_signal_detector_0/trigger_input] [get_bd_pins input_trigger_0/trigger_out0]
   connect_bd_net -net normal_1 [get_bd_ports normal] [get_bd_pins spi_programmer_0/normal]
   connect_bd_net -net pattern_1 [get_bd_ports pattern] [get_bd_pins spi_programmer_0/pattern]
-  connect_bd_net -net processing_system7_0_FCLK_CLK0 [get_bd_pins adc_signal_detector_0/m00_axis_aclk] [get_bd_pins axi_dma_0/m_axi_s2mm_aclk] [get_bd_pins axi_dma_0/s_axi_lite_aclk] [get_bd_pins axi_mem_intercon/ACLK] [get_bd_pins axi_mem_intercon/M00_ACLK] [get_bd_pins axi_mem_intercon/S00_ACLK] [get_bd_pins fifo_generator_0/s_aclk] [get_bd_pins gpio_enable_splitter/s_axi_aclk] [get_bd_pins gpio_input_trigger/s_axi_aclk] [get_bd_pins gpio_num_words/s_axi_aclk] [get_bd_pins hold_signal_0/m00_axis_aclk] [get_bd_pins processing_system7_0/FCLK_CLK0] [get_bd_pins processing_system7_0/M_AXI_GP0_ACLK] [get_bd_pins processing_system7_0/S_AXI_HP0_ACLK] [get_bd_pins ps7_0_axi_periph/ACLK] [get_bd_pins ps7_0_axi_periph/M00_ACLK] [get_bd_pins ps7_0_axi_periph/M01_ACLK] [get_bd_pins ps7_0_axi_periph/M02_ACLK] [get_bd_pins ps7_0_axi_periph/M03_ACLK] [get_bd_pins ps7_0_axi_periph/S00_ACLK] [get_bd_pins rst_ps7_0_200M/slowest_sync_clk] [get_bd_pins spi_programmer_0/clock]
+  connect_bd_net -net processing_system7_0_FCLK_CLK0 [get_bd_pins adc_signal_detector_0/m00_axis_aclk] [get_bd_pins axi_dma_0/m_axi_s2mm_aclk] [get_bd_pins axi_dma_0/s_axi_lite_aclk] [get_bd_pins axi_mem_intercon/ACLK] [get_bd_pins axi_mem_intercon/M00_ACLK] [get_bd_pins axi_mem_intercon/S00_ACLK] [get_bd_pins fifo_generator_0/s_aclk] [get_bd_pins gpio_enable_splitter/s_axi_aclk] [get_bd_pins gpio_input_trigger/s_axi_aclk] [get_bd_pins gpio_num_words/s_axi_aclk] [get_bd_pins gpio_switch_input/s_axi_aclk] [get_bd_pins hold_signal_0/m00_axis_aclk] [get_bd_pins processing_system7_0/FCLK_CLK0] [get_bd_pins processing_system7_0/M_AXI_GP0_ACLK] [get_bd_pins processing_system7_0/S_AXI_HP0_ACLK] [get_bd_pins ps7_0_axi_periph/ACLK] [get_bd_pins ps7_0_axi_periph/M00_ACLK] [get_bd_pins ps7_0_axi_periph/M01_ACLK] [get_bd_pins ps7_0_axi_periph/M02_ACLK] [get_bd_pins ps7_0_axi_periph/M03_ACLK] [get_bd_pins ps7_0_axi_periph/M04_ACLK] [get_bd_pins ps7_0_axi_periph/S00_ACLK] [get_bd_pins rst_ps7_0_200M/slowest_sync_clk] [get_bd_pins spi_programmer_0/clock]
   connect_bd_net -net processing_system7_0_FCLK_CLK1 [get_bd_ports adc_base_clock] [get_bd_pins processing_system7_0/FCLK_CLK1]
   connect_bd_net -net processing_system7_0_FCLK_RESET0_N [get_bd_pins processing_system7_0/FCLK_RESET0_N] [get_bd_pins rst_ps7_0_200M/ext_reset_in]
   connect_bd_net -net random_1 [get_bd_ports random] [get_bd_pins spi_programmer_0/random]
-  connect_bd_net -net rst_ps7_0_200M_peripheral_aresetn [get_bd_pins adc_signal_detector_0/m00_axis_aresetn] [get_bd_pins axi_dma_0/axi_resetn] [get_bd_pins axi_mem_intercon/ARESETN] [get_bd_pins axi_mem_intercon/M00_ARESETN] [get_bd_pins axi_mem_intercon/S00_ARESETN] [get_bd_pins gpio_enable_splitter/s_axi_aresetn] [get_bd_pins gpio_input_trigger/s_axi_aresetn] [get_bd_pins gpio_num_words/s_axi_aresetn] [get_bd_pins hold_signal_0/m00_axis_aresetn] [get_bd_pins ps7_0_axi_periph/ARESETN] [get_bd_pins ps7_0_axi_periph/M00_ARESETN] [get_bd_pins ps7_0_axi_periph/M01_ARESETN] [get_bd_pins ps7_0_axi_periph/M02_ARESETN] [get_bd_pins ps7_0_axi_periph/M03_ARESETN] [get_bd_pins ps7_0_axi_periph/S00_ARESETN] [get_bd_pins rst_ps7_0_200M/peripheral_aresetn] [get_bd_pins spi_programmer_0/reset] [get_bd_pins util_vector_logic_0/Op2]
+  connect_bd_net -net rst_ps7_0_200M_peripheral_aresetn [get_bd_pins adc_signal_detector_0/m00_axis_aresetn] [get_bd_pins axi_dma_0/axi_resetn] [get_bd_pins axi_mem_intercon/ARESETN] [get_bd_pins axi_mem_intercon/M00_ARESETN] [get_bd_pins axi_mem_intercon/S00_ARESETN] [get_bd_pins gpio_enable_splitter/s_axi_aresetn] [get_bd_pins gpio_input_trigger/s_axi_aresetn] [get_bd_pins gpio_num_words/s_axi_aresetn] [get_bd_pins gpio_switch_input/s_axi_aresetn] [get_bd_pins ps7_0_axi_periph/ARESETN] [get_bd_pins ps7_0_axi_periph/M00_ARESETN] [get_bd_pins ps7_0_axi_periph/M01_ARESETN] [get_bd_pins ps7_0_axi_periph/M02_ARESETN] [get_bd_pins ps7_0_axi_periph/M03_ARESETN] [get_bd_pins ps7_0_axi_periph/M04_ARESETN] [get_bd_pins ps7_0_axi_periph/S00_ARESETN] [get_bd_pins rst_ps7_0_200M/peripheral_aresetn] [get_bd_pins spi_programmer_0/reset] [get_bd_pins util_vector_logic_0/Op2]
   connect_bd_net -net sensor1b_buf2_BUFG_O [get_bd_pins adc_signal_detector_0/signal_input_b] [get_bd_pins sensor_1b_buffer/signal_output]
   connect_bd_net -net sensor_1a_n_1 [get_bd_ports sensor_1a_n] [get_bd_pins sensor_1a_buffer_0/signal_in_n]
   connect_bd_net -net sensor_1a_p_1 [get_bd_ports sensor_1a_p] [get_bd_pins sensor_1a_buffer_0/signal_in_p]
@@ -806,15 +815,16 @@ proc create_root_design { parentCell } {
   connect_bd_net -net spi_programmer_0_csb [get_bd_ports csb] [get_bd_pins spi_programmer_0/csb]
   connect_bd_net -net spi_programmer_0_mosi [get_bd_ports mosi] [get_bd_pins spi_programmer_0/mosi]
   connect_bd_net -net spi_programmer_0_sck [get_bd_ports sck] [get_bd_pins spi_programmer_0/sck]
-  connect_bd_net -net sws_8bits_1 [get_bd_ports sws_8bits] [get_bd_pins enable_splitter_0/switch_input]
+  connect_bd_net -net sws_8bits_1 [get_bd_ports sws_8bits] [get_bd_pins enable_splitter_0/switch_input] [get_bd_pins gpio_switch_input/gpio_io_i]
   connect_bd_net -net trigger_input_1 [get_bd_ports trigger_input] [get_bd_pins input_trigger_0/trigger_input]
   connect_bd_net -net util_ds_buf_0_BUFG_O [get_bd_pins adc_signal_detector_0/signal_input_a] [get_bd_pins sensor_1a_buffer_0/signal_output]
-  connect_bd_net -net util_vector_logic_0_Res [get_bd_pins fifo_generator_0/s_aresetn] [get_bd_pins util_vector_logic_0/Res]
+  connect_bd_net -net util_vector_logic_0_Res [get_bd_pins fifo_generator_0/s_aresetn] [get_bd_pins hold_signal_0/m00_axis_aresetn] [get_bd_pins util_vector_logic_0/Res]
   connect_bd_net -net xlconcat_0_dout [get_bd_pins processing_system7_0/IRQ_F2P] [get_bd_pins xlconcat_0/dout]
 
   # Create address segments
   assign_bd_address -offset 0x10000000 -range 0x10000000 -target_address_space [get_bd_addr_spaces axi_dma_0/Data_S2MM] [get_bd_addr_segs processing_system7_0/S_AXI_HP0/HP0_DDR_LOWOCM] -force
   assign_bd_address -offset 0x40400000 -range 0x00010000 -target_address_space [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs axi_dma_0/S_AXI_LITE/Reg] -force
+  assign_bd_address -offset 0x41230000 -range 0x00010000 -target_address_space [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs gpio_switch_input/S_AXI/Reg] -force
   assign_bd_address -offset 0x41200000 -range 0x00010000 -target_address_space [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs gpio_enable_splitter/S_AXI/Reg] -force
   assign_bd_address -offset 0x41220000 -range 0x00010000 -target_address_space [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs gpio_input_trigger/S_AXI/Reg] -force
   assign_bd_address -offset 0x41210000 -range 0x00010000 -target_address_space [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs gpio_num_words/S_AXI/Reg] -force

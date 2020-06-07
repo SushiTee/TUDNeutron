@@ -188,7 +188,9 @@ begin
         last_data_clock <= data_clock_copy;
         last_frame_clock <= frame_clock_copy;
         if (frame_clock_copy = '1' and last_frame_clock = '0') then
-          data_clock_counter <= (others => '1');
+          if (data_clock_counter < 7) then -- use data clock counter for 2 frames
+            data_clock_counter <= (others => '1');
+          end if;
           if (wait_frames < 2) then
             wait_frames := wait_frames + 1;
           end if;
@@ -271,6 +273,7 @@ begin
         stream_data_out_parts <= (others => '0');
         last_data_clock <= '0';
         last_frame_clock <= '0';
+        test_output <= (others => '0');
       end if;
     end if;
   end process;
