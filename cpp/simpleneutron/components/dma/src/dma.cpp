@@ -363,7 +363,7 @@ uint32_t Dma::writeSize() const {
 
     if (mWordLength < 4) {
         if (size / mWordLength > 0x10000u) {
-            return 0x10000u / mWordLength;
+            return 0x10000u * mWordLength;
         }
     } else {
         if (size * 4 > 0x100000u) {
