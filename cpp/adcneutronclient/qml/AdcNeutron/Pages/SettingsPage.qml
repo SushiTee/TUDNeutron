@@ -99,6 +99,16 @@ Page {
                         text: root.host
                         inputMethodHints: Qt.ImhUrlCharactersOnly
                     }
+
+                    ToolButton {
+                        text: "?"
+                        font.pixelSize: Qt.application.font.pixelSize * 1.6
+                        onClicked: {
+                            Globals.mainWindow.dialog.title = "Host";
+                            Globals.mainWindow.dialog.message = "The host name or IP of the Zedboard.";
+                            Globals.mainWindow.dialog.open();
+                        }
+                    }
                 }
 
                 Row {
@@ -114,6 +124,16 @@ Page {
                         text: root.port
                         inputMethodHints: Qt.ImhFormattedNumbersOnly
                         validator: IntValidator{bottom: 1; top: 65535;}
+                    }
+
+                    ToolButton {
+                        text: "?"
+                        font.pixelSize: Qt.application.font.pixelSize * 1.6
+                        onClicked: {
+                            Globals.mainWindow.dialog.title = "Port";
+                            Globals.mainWindow.dialog.message = "The port of the Zedboard on which the server is running.";
+                            Globals.mainWindow.dialog.open();
+                        }
                     }
                 }
 
@@ -138,13 +158,36 @@ Page {
                         anchors.verticalCenter: parent.verticalCenter
                         onClicked: folderDialog.open()
                     }
+
+                    ToolButton {
+                        text: "?"
+                        font.pixelSize: Qt.application.font.pixelSize * 1.6
+                        onClicked: {
+                            Globals.mainWindow.dialog.title = "Storage location";
+                            Globals.mainWindow.dialog.message = "In this location the measurement is stored.\nThe format is pure binary. Every 4 byte consist of 4 bits which present the sensor number (0 bis 7). 0 is Sensor 1, 1 is Sensor 2 and so on. The following 28 bit are two values of the sensor. the first 14 bit are the first value and the last 14 bit the value after.\nIf the value is 00000000000000 the value is -1V. If it is 11111111111111 The value is +1V. So 10000000000000 stands for 0V.";
+                            Globals.mainWindow.dialog.open();
+                        }
+                    }
                 }
 
-                CheckBox {
-                    id: inputTriggerCheckBox
+                Row {
                     anchors.horizontalCenter: parent.horizontalCenter
-                    text: "Wait for input trigger"
-                    checked: inputTrigger
+                    spacing: 10
+                    CheckBox {
+                        id: inputTriggerCheckBox
+                        text: "Wait for input trigger"
+                        checked: inputTrigger
+                    }
+
+                    ToolButton {
+                        text: "?"
+                        font.pixelSize: Qt.application.font.pixelSize * 1.6
+                        onClicked: {
+                            Globals.mainWindow.dialog.title = "Wait for input trigger";
+                            Globals.mainWindow.dialog.message = "After starting a measurment you will only start to receive signals after the external trigger input is HIGH. The input trigger needs to stay HIGH during the whole measurement.";
+                            Globals.mainWindow.dialog.open();
+                        }
+                    }
                 }
             }
         }

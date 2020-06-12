@@ -136,6 +136,19 @@ Page {
         }
     }
 
+    ListModel {
+        id: settingsListModel
+
+        ListElement {
+            settingsName: "Package size:"
+            value: "packageSize"
+        }
+        ListElement {
+            settingsName: "Input trigger:"
+            value: "inputTrigger"
+        }
+    }
+
     Connections {
         target: NetworkController
 
@@ -174,19 +187,61 @@ Page {
         visible: !busyIndicator.running
 
         Item {
-            id: header
+            id: settingsHeader
+            width: parent.width
+            height: 50
+
+            Label {
+                anchors.centerIn: parent
+                text: "Settings"
+                font.bold: true
+            }
+        }
+
+        ListView {
+            id: settings
+            anchors.top: settingsHeader.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: 400
+            height: contentHeight
+            interactive: false
+
+            model: settingsListModel
+
+            delegate: Item {
+                width: settings.width
+                height: childrenRect.height
+
+                Row {
+                    spacing: 10
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    Label {
+                        text: settingsName
+                    }
+
+                    Label {
+                        text: value === "packageSize" ? 2 ** NetworkController.packageSize : NetworkController.inputTrigger ? "Yes" : "No"
+                    }
+                }
+            }
+        }
+
+        Item {
+            id: gridHeader
+            anchors.top: settings.bottom
             width: parent.width
             height: 50
 
             Label {
                 anchors.centerIn: parent
                 text: "Select sensors"
+                font.bold: true
             }
         }
 
         GridView {
             id: listView
-            anchors.top: header.bottom
+            anchors.top: gridHeader.bottom
             anchors.bottom: timerItem.top
             anchors.horizontalCenter: parent.horizontalCenter
             cellHeight: 50
