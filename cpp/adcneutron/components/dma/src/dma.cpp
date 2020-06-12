@@ -100,8 +100,8 @@ bool Dma::full() {
         return true;
     }
 
-    uint32_t diff = writeToReadPointerDifference();
-    if (diff < mWordLength) {
+    if (mWritePointerWrap != mReadPointerWrap && mWriteAddress + mWordLength > mReadAddress) {
+        LogErr << "DMA (" << std::hex << REGISTER_BASE << "): RAM full" << std::endl;
         return true;
     }
     return false;
@@ -201,6 +201,7 @@ void Dma::enable() {
 
             mWriteAddress += mWordLength;
             if (mWriteAddress >= mSize) {
+                mWritePointerWrap = !mWritePointerWrap;
                 mWriteAddress = 0;
             }
             setDestinationAddress(mWriteAddress);
@@ -369,6 +370,7 @@ void Dma::setReadAddress(uint32_t lastSize) {
     mReadAddress += lastSize;
     if (mReadAddress >= mSize) {
         mReadAddress = 0;
+        mReadPointerWrap = !mReadPointerWrap;
     }
 }
 

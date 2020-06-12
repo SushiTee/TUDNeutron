@@ -53,6 +53,9 @@ class Dma {
     std::atomic<bool> mDramFifoFull = false;
     std::sig_atomic_t mQuit = false;
 
+    std::atomic<bool> mReadPointerWrap = false;
+    std::atomic<bool> mWritePointerWrap = false;
+
 public:
     Dma() = delete;
     Dma(const Dma&) = delete;
