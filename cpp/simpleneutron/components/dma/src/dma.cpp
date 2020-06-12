@@ -14,7 +14,7 @@ namespace dma {
 using namespace memorycontrol;
 
 // we need this because we have to send a signal to the dma thread
-// to terminate it while it is blocking 
+// to terminate it while it is blocking
 constexpr int quitSignal = SIGINT;
 sighandler_t prevSignal;
 Dma *dmaStore = nullptr;
@@ -100,8 +100,8 @@ bool Dma::full() {
         return true;
     }
 
-    uint32_t diff = writeToReadPointerDifference();
-    if (diff < mWordLength) {
+    if (mWritePointerWrap != mReadPointerWrap && mWriteAddress + mWordLength > mReadAddress) {
+        LogErr << "DMA (" << std::hex << REGISTER_BASE << "): RAM full" << std::endl;
         return true;
     }
     return false;
@@ -199,6 +199,7 @@ void Dma::enable() {
 
             mWriteAddress += mWordLength;
             if (mWriteAddress >= mSize) {
+                mWritePointerWrap = !mWritePointerWrap;
                 mWriteAddress = 0;
             }
             setDestinationAddress(mWriteAddress);
@@ -217,7 +218,7 @@ void Dma::disable() {
     }
 
     // store current object to global var
-    dmaStore = this;  
+    dmaStore = this;
 
     // send signal to thread and wait
     if (mThread->joinable()) {
@@ -380,10 +381,11 @@ uint32_t Dma::readAddress() const {
 void Dma::setReadAddress(uint32_t lastSize) {
     mReadAddress += lastSize;
     if (mReadAddress >= mSize) {
+        mReadPointerWrap = !mReadPointerWrap;
         mReadAddress = 0;
     }
 }
 
-} // dma    
+} // dma
 } // components
 } // simpleneutron
