@@ -10,6 +10,7 @@
 #include <QDir>
 #include <QMutexLocker>
 #include <networkcontroller.h>
+#include <bitset>
 
 constexpr size_t PACKAGE_HEADER_SIZE = 3;
 #ifdef __linux__
@@ -29,15 +30,15 @@ union int32converter {
     uint32_t num;
 };
 
-union valueConverter {
-    unsigned sensor : 4, value2 : 14, value1 : 14;
+struct valueConverter {
+    unsigned value2 : 14, value1 : 14, sensor : 4;
 };
 
 NetworkHandler::NetworkHandler(NetworkController *parent)
     : m_controller(parent),
       m_inputTrigger(parent->inputTrigger() ? 1u : 0u),
       m_storageLocation(parent->storageLocation()),
-      m_sensorDataCount(8)
+      m_sensorDataValues(8)
 {
 }
 
@@ -63,11 +64,9 @@ NetworkHandler::~NetworkHandler()
         std::signal(quitSignal, prevSignal);
 #endif
     }
-    for (uint32_t i = 0; i < 8; i++) {
-        if (m_fileStreams[i].is_open()) {
-            m_fileStreams[i].flush();
-            m_fileStreams[i].close();
-        }
+    if (m_fileStream.is_open()) {
+        m_fileStream.flush();
+        m_fileStream.close();
     }
 }
 
@@ -79,16 +78,18 @@ void NetworkHandler::quit()
     }
 }
 
-void NetworkHandler::openFiles(QList<bool> &list)
+void NetworkHandler::openFile(QList<bool> &list)
 {
     QString timeString = QDateTime::currentDateTime().toString(Qt::ISODate);
     QDir::setCurrent(m_storageLocation);
+    QString sensorStr = "";
     for (int i = 0; i < list.size(); i++) {
         if (list[i]) {
-            QString filename = timeString + "_Sensor_" + QString::number(i + 1) + ".bin";
-            m_fileStreams[static_cast<size_t>(i)].open(filename.replace(" ", "-").replace(":", ".").toStdString(), std::ios::out | std::ios::binary);
+            sensorStr += QString::number(i + 1);
         }
     }
+    QString filename = timeString + "_Sensor_"  +sensorStr + ".bin";
+    m_fileStream.open(filename.replace(" ", "-").replace(":", ".").toStdString(), std::ios::out | std::ios::binary);
 }
 
 void NetworkHandler::networkConnect(QString host, int port)
@@ -265,7 +266,7 @@ void NetworkHandler::sendData(MessageType::Message type, uint8_t value) const
 void NetworkHandler::getSensorData()
 {
     m_mutex.lock();
-    QMetaObject::invokeMethod(m_controller, "sensorData", Q_ARG(QVector<double>, m_sensorDataCount));
+    QMetaObject::invokeMethod(m_controller, "sensorData", Q_ARG(QVector<double>, m_sensorDataValues));
     m_mutex.unlock();
 }
 
@@ -280,31 +281,41 @@ void NetworkHandler::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType::Mess
         }
         uint64_t dataSize = size * PACKET_SIZE;
         m_mutex.lock();
-        uint32_t avarageVoltage = 0;
+        uint32_t avarageVoltage[8] = {0};
         uint64_t dataEnd = dataSize * 4;
-        for (auto i = 0; i < 5; i++) {
-            valueConverter values = *reinterpret_cast<valueConverter*>(buff.data() + (dataEnd - (4 * (i + 1))));
-            avarageVoltage += values.value1 + values.value2;
+        uint8_t runs = 0;
+        for (auto i = 0; i < 8; i++) {
+            if (m_controller->activeSensors() & (1 << i)) {
+                runs++;
+            }
         }
-        avarageVoltage /= 10;
-        m_sensorDataCount[0] = (static_cast<double>(avarageVoltage) / static_cast<double>(0b11111111111111)) * 2 - 1; // todo for different sensors
+        for (auto j = 0; j < runs; j++) {
+            for (auto i = 0; i < 5; i++) {
+                auto offset = dataEnd - ((4*i*runs)+4+(j*4));
+                if (offset < 0) break;
+                valueConverter values = *reinterpret_cast<valueConverter*>(buff.data() + offset);
+                avarageVoltage[values.sensor] += values.value1 + values.value2;
+            }
+        }
+        for (auto i = 0; i < 8; i++) {
+            m_sensorDataValues[i] = (static_cast<double>(avarageVoltage[i] / 10) / static_cast<double>(0b11111111111111)) * 2 - 1;
+        }
+
         m_mutex.unlock();
-        m_fileStreams[static_cast<size_t>(type)].write(reinterpret_cast<const char*>(buff.data()), static_cast<std::streamsize>(dataSize * 4));
+        m_fileStream.write(reinterpret_cast<const char*>(buff.data()), static_cast<std::streamsize>(dataSize * 4));
         break;
     }
     case MessageType::Message::START_DMA: {
         m_mutex.lock();
-        m_sensorDataCount = QVector<double>(8);
+        m_sensorDataValues = QVector<double>(8);
         m_mutex.unlock();
         handleStartStopMessage(type, reinterpret_cast<const char *>(buff.data()), static_cast<int>(size));
         break;
     }
     case MessageType::Message::STOP_DMA: {
-        for (uint32_t i = 0; i < 8; i++) {
-            if (m_fileStreams[i].is_open()) {
-                m_fileStreams[i].flush();
-                m_fileStreams[i].close();
-            }
+        if (m_fileStream.is_open()) {
+            m_fileStream.flush();
+            m_fileStream.close();
         }
         handleStartStopMessage(type, reinterpret_cast<const char *>(buff.data()), static_cast<int>(size));
         break;

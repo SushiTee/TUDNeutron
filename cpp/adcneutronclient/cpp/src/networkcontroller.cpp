@@ -158,6 +158,11 @@ QString NetworkController::storageLocation() const
     return m_storageLocation;
 }
 
+uint8_t NetworkController::activeSensors() const
+{
+    return m_activeSensors;
+}
+
 void NetworkController::setStorageLocation(QString storageLocation)
 {
     if (m_storageLocation == storageLocation)
@@ -231,18 +236,20 @@ void NetworkController::activateSensors(QList<bool> list)
         return;
     }
 
-    m_handler->openFiles(list);
+    m_handler->openFile(list);
     uint8_t sensorsBinary = 0;
     for (int i = 0; i < list.size(); i++) {
         if (list[i]) {
             sensorsBinary |= (1 << i);
         }
     }
+    m_activeSensors = sensorsBinary;
     QMetaObject::invokeMethod(m_handler.get(), "sendData", Q_ARG(MessageType::Message, MessageType::Message::START_DMA), Q_ARG(uint8_t, sensorsBinary));
 }
 
 void NetworkController::deactivateSensors()
 {
+    m_activeSensors = 0u;
     QMetaObject::invokeMethod(m_handler.get(), "sendData", Q_ARG(MessageType::Message, MessageType::Message::STOP_DMA), Q_ARG(uint8_t, 0));
 }
 

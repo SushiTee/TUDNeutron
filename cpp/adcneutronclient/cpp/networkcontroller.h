@@ -28,6 +28,7 @@ public:
 
     int inputTrigger() const;
     QString storageLocation() const;
+    uint8_t activeSensors() const;
 
 private:
     Q_PROPERTY(int port READ port WRITE setPort NOTIFY portChanged)
@@ -45,6 +46,7 @@ private:
     QVariantList m_sensors = {};
     QString m_storageLocation = "";
     MessageType::ConnectedState m_connected = MessageType::ConnectedState::DISCONNECTED;
+    uint8_t m_activeSensors = 0u;
 
     int port() const;
     void setPort(int port);

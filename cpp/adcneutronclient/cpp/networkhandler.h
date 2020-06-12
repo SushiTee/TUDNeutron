@@ -25,8 +25,8 @@ class NetworkHandler : public QObject {
 
     // reserve buffer
     kn::buffer<BUFFER_SIZE> m_recvBuff;
-    QVector<double> m_sensorDataCount;
-    std::array<std::ofstream, 8> m_fileStreams;
+    QVector<double> m_sensorDataValues;
+    std::ofstream m_fileStream;
 
     bool receiveData();
     void sendData(const std::byte *header, const std::byte *data, size_t dataLength) const;
@@ -38,7 +38,7 @@ public:
     NetworkHandler(NetworkController *parent);
     ~NetworkHandler();
     void quit();
-    void openFiles(QList<bool> &list);
+    void openFile(QList<bool> &list);
 
 public slots:
     void networkConnect(QString host, int port);
