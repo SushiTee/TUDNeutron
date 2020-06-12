@@ -16,16 +16,16 @@ entity adc_signal_detector_v1_0 is
   );
   port (
     -- Users to add ports here
-    enabled        : in std_logic; -- enable this ip core
-    signal_input_a : in std_logic; -- actual input signal
-    signal_input_b : in std_logic; -- actual input signal
-    signal_state   : out std_logic; -- shows the state (if enabled AND signal detected -> LOW; if enabled AND no signal detected -> HIGH; otherwise LOW )
+    enabled        : in std_logic_vector(7 downto 0); -- enable this ip core
+    signal_input_a : in std_logic_vector(7 downto 0); -- actual input signal
+    signal_input_b : in std_logic_vector(7 downto 0); -- actual input signal
+    signal_state   : out std_logic_vector(7 downto 0); -- shows the state (if enabled AND signal detected -> LOW; if enabled AND no signal detected -> HIGH; otherwise LOW )
     fifo_reset     : out std_logic; -- resets an connected fifo after being enabled
     number_words   : in std_logic_vector(15 downto 0); -- number of words to be send as package
     trigger_input  : in std_logic;
-    data_clock     : in std_logic;
-    frame_clock    : in std_logic;
-    test_output    : out std_logic_vector(7 downto 0); 
+    trigger_output : out std_logic;
+    data_clock     : in std_logic_vector(1 downto 0);
+    frame_clock    : in std_logic_vector(1 downto 0);
     -- User ports ends
     -- Do not modify the ports beyond this line
 
@@ -49,16 +49,16 @@ architecture arch_imp of adc_signal_detector_v1_0 is
     C_M_START_COUNT      : integer := 32
     );
     port (
-    enabled        : in std_logic;
-    signal_input_a   : in std_logic;
-    signal_input_b   : in std_logic;
-    signal_state   : out std_logic;
+    enabled        : in std_logic_vector(7 downto 0);
+    signal_input_a   : in std_logic_vector(7 downto 0);
+    signal_input_b   : in std_logic_vector(7 downto 0);
+    signal_state   : out std_logic_vector(7 downto 0);
     fifo_reset     : out std_logic;
     number_words   : in std_logic_vector(15 downto 0);
     trigger_input  : in std_logic;
-    data_clock     : in std_logic;
-    frame_clock    : in std_logic;
-    test_output    : out std_logic_vector(7 downto 0);
+    trigger_output : out std_logic;
+    data_clock     : in std_logic_vector(1 downto 0);
+    frame_clock    : in std_logic_vector(1 downto 0);
     M_AXIS_ACLK    : in std_logic;
     M_AXIS_ARESETN : in std_logic;
     M_AXIS_TVALID  : out std_logic;
@@ -85,9 +85,9 @@ adc_signal_detector_v1_0_M00_AXIS_inst : adc_signal_detector_v1_0_M00_AXIS
     fifo_reset     => fifo_reset,
     number_words   => number_words,
     trigger_input  => trigger_input,
+    trigger_output => trigger_output,
     data_clock     => data_clock,
     frame_clock    => frame_clock,
-    test_output    => test_output,
     M_AXIS_ACLK    => m00_axis_aclk,
     M_AXIS_ARESETN => m00_axis_aresetn,
     M_AXIS_TVALID  => m00_axis_tvalid,

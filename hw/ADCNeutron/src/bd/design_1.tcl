@@ -126,6 +126,7 @@ if { $bCheckIPs == 1 } {
    set list_check_ips "\ 
 user.org:user:adc_signal_detector:1.0\
 xilinx.com:ip:axi_dma:7.1\
+xilinx.com:ip:xlconcat:2.1\
 user.org:user:enable_splitter:1.0\
 xilinx.com:ip:fifo_generator:13.2\
 xilinx.com:ip:axi_gpio:2.0\
@@ -136,7 +137,6 @@ xilinx.com:ip:proc_sys_reset:5.0\
 user.org:user:clock_buffer:1.0\
 user.org:user:spi_programmer:1.0\
 xilinx.com:ip:util_vector_logic:2.0\
-xilinx.com:ip:xlconcat:2.1\
 "
 
    set list_ips_missing ""
@@ -219,10 +219,42 @@ proc create_root_design { parentCell } {
   set sensor_1a_p [ create_bd_port -dir I sensor_1a_p ]
   set sensor_1b_n [ create_bd_port -dir I sensor_1b_n ]
   set sensor_1b_p [ create_bd_port -dir I sensor_1b_p ]
-  set sensor_clock_n [ create_bd_port -dir I sensor_clock_n ]
-  set sensor_clock_p [ create_bd_port -dir I sensor_clock_p ]
-  set sensor_frame_n [ create_bd_port -dir I sensor_frame_n ]
-  set sensor_frame_p [ create_bd_port -dir I sensor_frame_p ]
+  set sensor_2a_n [ create_bd_port -dir I sensor_2a_n ]
+  set sensor_2a_p [ create_bd_port -dir I sensor_2a_p ]
+  set sensor_2b_n [ create_bd_port -dir I sensor_2b_n ]
+  set sensor_2b_p [ create_bd_port -dir I sensor_2b_p ]
+  set sensor_3a_n [ create_bd_port -dir I sensor_3a_n ]
+  set sensor_3a_p [ create_bd_port -dir I sensor_3a_p ]
+  set sensor_3b_n [ create_bd_port -dir I sensor_3b_n ]
+  set sensor_3b_p [ create_bd_port -dir I sensor_3b_p ]
+  set sensor_4a_n [ create_bd_port -dir I sensor_4a_n ]
+  set sensor_4a_p [ create_bd_port -dir I sensor_4a_p ]
+  set sensor_4b_n [ create_bd_port -dir I sensor_4b_n ]
+  set sensor_4b_p [ create_bd_port -dir I sensor_4b_p ]
+  set sensor_5a_n [ create_bd_port -dir I sensor_5a_n ]
+  set sensor_5a_p [ create_bd_port -dir I sensor_5a_p ]
+  set sensor_5b_n [ create_bd_port -dir I sensor_5b_n ]
+  set sensor_5b_p [ create_bd_port -dir I sensor_5b_p ]
+  set sensor_6a_n [ create_bd_port -dir I sensor_6a_n ]
+  set sensor_6a_p [ create_bd_port -dir I sensor_6a_p ]
+  set sensor_6b_n [ create_bd_port -dir I sensor_6b_n ]
+  set sensor_6b_p [ create_bd_port -dir I sensor_6b_p ]
+  set sensor_7a_n [ create_bd_port -dir I sensor_7a_n ]
+  set sensor_7a_p [ create_bd_port -dir I sensor_7a_p ]
+  set sensor_7b_n [ create_bd_port -dir I sensor_7b_n ]
+  set sensor_7b_p [ create_bd_port -dir I sensor_7b_p ]
+  set sensor_8a_n [ create_bd_port -dir I sensor_8a_n ]
+  set sensor_8a_p [ create_bd_port -dir I sensor_8a_p ]
+  set sensor_8b_n [ create_bd_port -dir I sensor_8b_n ]
+  set sensor_8b_p [ create_bd_port -dir I sensor_8b_p ]
+  set sensor_clock_0_n [ create_bd_port -dir I sensor_clock_0_n ]
+  set sensor_clock_0_p [ create_bd_port -dir I sensor_clock_0_p ]
+  set sensor_clock_1_n [ create_bd_port -dir I sensor_clock_1_n ]
+  set sensor_clock_1_p [ create_bd_port -dir I sensor_clock_1_p ]
+  set sensor_frame_0_n [ create_bd_port -dir I sensor_frame_0_n ]
+  set sensor_frame_0_p [ create_bd_port -dir I sensor_frame_0_p ]
+  set sensor_frame_1_n [ create_bd_port -dir I sensor_frame_1_n ]
+  set sensor_frame_1_p [ create_bd_port -dir I sensor_frame_1_p ]
   set sws_8bits [ create_bd_port -dir I -from 7 -to 0 sws_8bits ]
   set trigger_input [ create_bd_port -dir I trigger_input ]
   set trigger_out [ create_bd_port -dir O trigger_out ]
@@ -245,6 +277,24 @@ proc create_root_design { parentCell } {
   set_property -dict [ list \
    CONFIG.NUM_MI {1} \
  ] $axi_mem_intercon
+
+  # Create instance: concat_sensor_a, and set properties
+  set concat_sensor_a [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 concat_sensor_a ]
+  set_property -dict [ list \
+   CONFIG.NUM_PORTS {8} \
+ ] $concat_sensor_a
+
+  # Create instance: concat_sensor_b, and set properties
+  set concat_sensor_b [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 concat_sensor_b ]
+  set_property -dict [ list \
+   CONFIG.NUM_PORTS {8} \
+ ] $concat_sensor_b
+
+  # Create instance: enable_concat, and set properties
+  set enable_concat [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 enable_concat ]
+  set_property -dict [ list \
+   CONFIG.NUM_PORTS {8} \
+ ] $enable_concat
 
   # Create instance: enable_splitter_0, and set properties
   set enable_splitter_0 [ create_bd_cell -type ip -vlnv user.org:user:enable_splitter:1.0 enable_splitter_0 ]
@@ -730,11 +780,11 @@ proc create_root_design { parentCell } {
   # Create instance: rst_ps7_0_200M, and set properties
   set rst_ps7_0_200M [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 rst_ps7_0_200M ]
 
-  # Create instance: sensor_1a_buffer_0, and set properties
-  set sensor_1a_buffer_0 [ create_bd_cell -type ip -vlnv user.org:user:clock_buffer:1.0 sensor_1a_buffer_0 ]
+  # Create instance: sensor_1a_buffer, and set properties
+  set sensor_1a_buffer [ create_bd_cell -type ip -vlnv user.org:user:clock_buffer:1.0 sensor_1a_buffer ]
   set_property -dict [ list \
    CONFIG.IOSTANDARD {LVDS_25} \
- ] $sensor_1a_buffer_0
+ ] $sensor_1a_buffer
 
   # Create instance: sensor_1b_buffer, and set properties
   set sensor_1b_buffer [ create_bd_cell -type ip -vlnv user.org:user:clock_buffer:1.0 sensor_1b_buffer ]
@@ -742,17 +792,113 @@ proc create_root_design { parentCell } {
    CONFIG.IOSTANDARD {LVDS_25} \
  ] $sensor_1b_buffer
 
-  # Create instance: sensor_clock_buffer, and set properties
-  set sensor_clock_buffer [ create_bd_cell -type ip -vlnv user.org:user:clock_buffer:1.0 sensor_clock_buffer ]
+  # Create instance: sensor_2a_buffer, and set properties
+  set sensor_2a_buffer [ create_bd_cell -type ip -vlnv user.org:user:clock_buffer:1.0 sensor_2a_buffer ]
   set_property -dict [ list \
    CONFIG.IOSTANDARD {LVDS_25} \
- ] $sensor_clock_buffer
+ ] $sensor_2a_buffer
 
-  # Create instance: sensor_frame_buffer, and set properties
-  set sensor_frame_buffer [ create_bd_cell -type ip -vlnv user.org:user:clock_buffer:1.0 sensor_frame_buffer ]
+  # Create instance: sensor_2b_buffer, and set properties
+  set sensor_2b_buffer [ create_bd_cell -type ip -vlnv user.org:user:clock_buffer:1.0 sensor_2b_buffer ]
   set_property -dict [ list \
    CONFIG.IOSTANDARD {LVDS_25} \
- ] $sensor_frame_buffer
+ ] $sensor_2b_buffer
+
+  # Create instance: sensor_3a_buffer, and set properties
+  set sensor_3a_buffer [ create_bd_cell -type ip -vlnv user.org:user:clock_buffer:1.0 sensor_3a_buffer ]
+  set_property -dict [ list \
+   CONFIG.IOSTANDARD {LVDS_25} \
+ ] $sensor_3a_buffer
+
+  # Create instance: sensor_3b_buffer, and set properties
+  set sensor_3b_buffer [ create_bd_cell -type ip -vlnv user.org:user:clock_buffer:1.0 sensor_3b_buffer ]
+  set_property -dict [ list \
+   CONFIG.IOSTANDARD {LVDS_25} \
+ ] $sensor_3b_buffer
+
+  # Create instance: sensor_4a_buffer, and set properties
+  set sensor_4a_buffer [ create_bd_cell -type ip -vlnv user.org:user:clock_buffer:1.0 sensor_4a_buffer ]
+  set_property -dict [ list \
+   CONFIG.IOSTANDARD {LVDS_25} \
+ ] $sensor_4a_buffer
+
+  # Create instance: sensor_4b_buffer, and set properties
+  set sensor_4b_buffer [ create_bd_cell -type ip -vlnv user.org:user:clock_buffer:1.0 sensor_4b_buffer ]
+  set_property -dict [ list \
+   CONFIG.IOSTANDARD {LVDS_25} \
+ ] $sensor_4b_buffer
+
+  # Create instance: sensor_5a_buffer, and set properties
+  set sensor_5a_buffer [ create_bd_cell -type ip -vlnv user.org:user:clock_buffer:1.0 sensor_5a_buffer ]
+  set_property -dict [ list \
+   CONFIG.IOSTANDARD {LVDS_25} \
+ ] $sensor_5a_buffer
+
+  # Create instance: sensor_5b_buffer, and set properties
+  set sensor_5b_buffer [ create_bd_cell -type ip -vlnv user.org:user:clock_buffer:1.0 sensor_5b_buffer ]
+  set_property -dict [ list \
+   CONFIG.IOSTANDARD {LVDS_25} \
+ ] $sensor_5b_buffer
+
+  # Create instance: sensor_6a_buffer, and set properties
+  set sensor_6a_buffer [ create_bd_cell -type ip -vlnv user.org:user:clock_buffer:1.0 sensor_6a_buffer ]
+  set_property -dict [ list \
+   CONFIG.IOSTANDARD {LVDS_25} \
+ ] $sensor_6a_buffer
+
+  # Create instance: sensor_6b_buffer, and set properties
+  set sensor_6b_buffer [ create_bd_cell -type ip -vlnv user.org:user:clock_buffer:1.0 sensor_6b_buffer ]
+  set_property -dict [ list \
+   CONFIG.IOSTANDARD {LVDS_25} \
+ ] $sensor_6b_buffer
+
+  # Create instance: sensor_7a_buffer, and set properties
+  set sensor_7a_buffer [ create_bd_cell -type ip -vlnv user.org:user:clock_buffer:1.0 sensor_7a_buffer ]
+  set_property -dict [ list \
+   CONFIG.IOSTANDARD {LVDS_25} \
+ ] $sensor_7a_buffer
+
+  # Create instance: sensor_7b_buffer, and set properties
+  set sensor_7b_buffer [ create_bd_cell -type ip -vlnv user.org:user:clock_buffer:1.0 sensor_7b_buffer ]
+  set_property -dict [ list \
+   CONFIG.IOSTANDARD {LVDS_25} \
+ ] $sensor_7b_buffer
+
+  # Create instance: sensor_8a_buffer, and set properties
+  set sensor_8a_buffer [ create_bd_cell -type ip -vlnv user.org:user:clock_buffer:1.0 sensor_8a_buffer ]
+  set_property -dict [ list \
+   CONFIG.IOSTANDARD {LVDS_25} \
+ ] $sensor_8a_buffer
+
+  # Create instance: sensor_8b_buffer, and set properties
+  set sensor_8b_buffer [ create_bd_cell -type ip -vlnv user.org:user:clock_buffer:1.0 sensor_8b_buffer ]
+  set_property -dict [ list \
+   CONFIG.IOSTANDARD {LVDS_25} \
+ ] $sensor_8b_buffer
+
+  # Create instance: sensor_clock_buffer_0, and set properties
+  set sensor_clock_buffer_0 [ create_bd_cell -type ip -vlnv user.org:user:clock_buffer:1.0 sensor_clock_buffer_0 ]
+  set_property -dict [ list \
+   CONFIG.IOSTANDARD {LVDS_25} \
+ ] $sensor_clock_buffer_0
+
+  # Create instance: sensor_clock_buffer_1, and set properties
+  set sensor_clock_buffer_1 [ create_bd_cell -type ip -vlnv user.org:user:clock_buffer:1.0 sensor_clock_buffer_1 ]
+  set_property -dict [ list \
+   CONFIG.IOSTANDARD {LVDS_25} \
+ ] $sensor_clock_buffer_1
+
+  # Create instance: sensor_frame_buffer_0, and set properties
+  set sensor_frame_buffer_0 [ create_bd_cell -type ip -vlnv user.org:user:clock_buffer:1.0 sensor_frame_buffer_0 ]
+  set_property -dict [ list \
+   CONFIG.IOSTANDARD {LVDS_25} \
+ ] $sensor_frame_buffer_0
+
+  # Create instance: sensor_frame_buffer_1, and set properties
+  set sensor_frame_buffer_1 [ create_bd_cell -type ip -vlnv user.org:user:clock_buffer:1.0 sensor_frame_buffer_1 ]
+  set_property -dict [ list \
+   CONFIG.IOSTANDARD {LVDS_25} \
+ ] $sensor_frame_buffer_1
 
   # Create instance: spi_programmer_0, and set properties
   set spi_programmer_0 [ create_bd_cell -type ip -vlnv user.org:user:spi_programmer:1.0 spi_programmer_0 ]
@@ -766,6 +912,12 @@ proc create_root_design { parentCell } {
 
   # Create instance: xlconcat_0, and set properties
   set xlconcat_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 xlconcat_0 ]
+
+  # Create instance: xlconcat_1, and set properties
+  set xlconcat_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 xlconcat_1 ]
+
+  # Create instance: xlconcat_2, and set properties
+  set xlconcat_2 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 xlconcat_2 ]
 
   # Create interface connections
   connect_bd_intf_net -intf_net adc_signal_detector_0_M00_AXIS [get_bd_intf_pins adc_signal_detector_0/M00_AXIS] [get_bd_intf_pins fifo_generator_0/S_AXIS]
@@ -783,16 +935,26 @@ proc create_root_design { parentCell } {
 
   # Create port connections
   connect_bd_net -net adc_signal_detector_0_fifo_reset [get_bd_pins adc_signal_detector_0/fifo_reset] [get_bd_pins util_vector_logic_0/Op1]
-  connect_bd_net -net adc_signal_detector_0_signal_state [get_bd_ports trigger_out] [get_bd_pins adc_signal_detector_0/signal_state]
-  connect_bd_net -net adc_signal_detector_0_test_output [get_bd_ports leds_8bits1] [get_bd_pins adc_signal_detector_0/test_output]
+  connect_bd_net -net adc_signal_detector_0_test_output [get_bd_ports leds_8bits1] [get_bd_pins adc_signal_detector_0/signal_state]
+  connect_bd_net -net adc_signal_detector_0_trigger_output [get_bd_ports trigger_out] [get_bd_pins adc_signal_detector_0/trigger_output]
   connect_bd_net -net axi_dma_0_s2mm_introut [get_bd_pins axi_dma_0/s2mm_introut] [get_bd_pins xlconcat_0/In0]
   connect_bd_net -net axi_gpio_0_gpio_io_o [get_bd_pins enable_splitter_0/gpio_input] [get_bd_pins gpio_enable_splitter/gpio_io_o]
-  connect_bd_net -net enable_splitter_0_out0 [get_bd_pins adc_signal_detector_0/enabled] [get_bd_pins enable_splitter_0/out0]
+  connect_bd_net -net concat_sensor_a_dout [get_bd_pins adc_signal_detector_0/signal_input_a] [get_bd_pins concat_sensor_a/dout]
+  connect_bd_net -net concat_sensor_b_dout [get_bd_pins adc_signal_detector_0/signal_input_b] [get_bd_pins concat_sensor_b/dout]
+  connect_bd_net -net enable_concat_dout [get_bd_pins adc_signal_detector_0/enabled] [get_bd_pins enable_concat/dout]
+  connect_bd_net -net enable_splitter_0_out0 [get_bd_pins enable_concat/In0] [get_bd_pins enable_splitter_0/out0]
+  connect_bd_net -net enable_splitter_0_out1 [get_bd_pins enable_concat/In1] [get_bd_pins enable_splitter_0/out1]
+  connect_bd_net -net enable_splitter_0_out2 [get_bd_pins enable_concat/In2] [get_bd_pins enable_splitter_0/out2]
+  connect_bd_net -net enable_splitter_0_out3 [get_bd_pins enable_concat/In3] [get_bd_pins enable_splitter_0/out3]
+  connect_bd_net -net enable_splitter_0_out4 [get_bd_pins enable_concat/In4] [get_bd_pins enable_splitter_0/out4]
+  connect_bd_net -net enable_splitter_0_out5 [get_bd_pins enable_concat/In5] [get_bd_pins enable_splitter_0/out5]
+  connect_bd_net -net enable_splitter_0_out6 [get_bd_pins enable_concat/In6] [get_bd_pins enable_splitter_0/out6]
+  connect_bd_net -net enable_splitter_0_out7 [get_bd_pins enable_concat/In7] [get_bd_pins enable_splitter_0/out7]
   connect_bd_net -net fifo_generator_0_axis_overflow [get_bd_pins fifo_generator_0/axis_overflow] [get_bd_pins hold_signal_0/signal_in]
   connect_bd_net -net gpio_input_trigger_gpio_io_o [get_bd_pins gpio_input_trigger/gpio_io_o] [get_bd_pins input_trigger_0/enabled]
   connect_bd_net -net gpio_num_words_gpio_io_o [get_bd_pins adc_signal_detector_0/number_words] [get_bd_pins gpio_num_words/gpio_io_o]
   connect_bd_net -net hold_signal_0_signal_out [get_bd_pins hold_signal_0/signal_out] [get_bd_pins xlconcat_0/In1]
-  connect_bd_net -net input_trigger_0_trigger_out0 [get_bd_pins adc_signal_detector_0/trigger_input] [get_bd_pins input_trigger_0/trigger_out0]
+  connect_bd_net -net input_trigger_0_trigger_out [get_bd_pins adc_signal_detector_0/trigger_input] [get_bd_pins input_trigger_0/trigger_out]
   connect_bd_net -net normal_1 [get_bd_ports normal] [get_bd_pins spi_programmer_0/normal]
   connect_bd_net -net pattern_1 [get_bd_ports pattern] [get_bd_pins spi_programmer_0/pattern]
   connect_bd_net -net processing_system7_0_FCLK_CLK0 [get_bd_pins adc_signal_detector_0/m00_axis_aclk] [get_bd_pins axi_dma_0/m_axi_s2mm_aclk] [get_bd_pins axi_dma_0/s_axi_lite_aclk] [get_bd_pins axi_mem_intercon/ACLK] [get_bd_pins axi_mem_intercon/M00_ACLK] [get_bd_pins axi_mem_intercon/S00_ACLK] [get_bd_pins fifo_generator_0/s_aclk] [get_bd_pins gpio_enable_splitter/s_axi_aclk] [get_bd_pins gpio_input_trigger/s_axi_aclk] [get_bd_pins gpio_num_words/s_axi_aclk] [get_bd_pins gpio_switch_input/s_axi_aclk] [get_bd_pins hold_signal_0/m00_axis_aclk] [get_bd_pins processing_system7_0/FCLK_CLK0] [get_bd_pins processing_system7_0/M_AXI_GP0_ACLK] [get_bd_pins processing_system7_0/S_AXI_HP0_ACLK] [get_bd_pins ps7_0_axi_periph/ACLK] [get_bd_pins ps7_0_axi_periph/M00_ACLK] [get_bd_pins ps7_0_axi_periph/M01_ACLK] [get_bd_pins ps7_0_axi_periph/M02_ACLK] [get_bd_pins ps7_0_axi_periph/M03_ACLK] [get_bd_pins ps7_0_axi_periph/M04_ACLK] [get_bd_pins ps7_0_axi_periph/S00_ACLK] [get_bd_pins rst_ps7_0_200M/slowest_sync_clk] [get_bd_pins spi_programmer_0/clock]
@@ -800,26 +962,76 @@ proc create_root_design { parentCell } {
   connect_bd_net -net processing_system7_0_FCLK_RESET0_N [get_bd_pins processing_system7_0/FCLK_RESET0_N] [get_bd_pins rst_ps7_0_200M/ext_reset_in]
   connect_bd_net -net random_1 [get_bd_ports random] [get_bd_pins spi_programmer_0/random]
   connect_bd_net -net rst_ps7_0_200M_peripheral_aresetn [get_bd_pins adc_signal_detector_0/m00_axis_aresetn] [get_bd_pins axi_dma_0/axi_resetn] [get_bd_pins axi_mem_intercon/ARESETN] [get_bd_pins axi_mem_intercon/M00_ARESETN] [get_bd_pins axi_mem_intercon/S00_ARESETN] [get_bd_pins gpio_enable_splitter/s_axi_aresetn] [get_bd_pins gpio_input_trigger/s_axi_aresetn] [get_bd_pins gpio_num_words/s_axi_aresetn] [get_bd_pins gpio_switch_input/s_axi_aresetn] [get_bd_pins ps7_0_axi_periph/ARESETN] [get_bd_pins ps7_0_axi_periph/M00_ARESETN] [get_bd_pins ps7_0_axi_periph/M01_ARESETN] [get_bd_pins ps7_0_axi_periph/M02_ARESETN] [get_bd_pins ps7_0_axi_periph/M03_ARESETN] [get_bd_pins ps7_0_axi_periph/M04_ARESETN] [get_bd_pins ps7_0_axi_periph/S00_ARESETN] [get_bd_pins rst_ps7_0_200M/peripheral_aresetn] [get_bd_pins spi_programmer_0/reset] [get_bd_pins util_vector_logic_0/Op2]
-  connect_bd_net -net sensor1b_buf2_BUFG_O [get_bd_pins adc_signal_detector_0/signal_input_b] [get_bd_pins sensor_1b_buffer/signal_output]
-  connect_bd_net -net sensor_1a_n_1 [get_bd_ports sensor_1a_n] [get_bd_pins sensor_1a_buffer_0/signal_in_n]
-  connect_bd_net -net sensor_1a_p_1 [get_bd_ports sensor_1a_p] [get_bd_pins sensor_1a_buffer_0/signal_in_p]
+  connect_bd_net -net sensor_1a_buffer_signal_output [get_bd_pins concat_sensor_a/In0] [get_bd_pins sensor_1a_buffer/signal_output]
+  connect_bd_net -net sensor_1a_n_1 [get_bd_ports sensor_1a_n] [get_bd_pins sensor_1a_buffer/signal_in_n]
+  connect_bd_net -net sensor_1a_p_1 [get_bd_ports sensor_1a_p] [get_bd_pins sensor_1a_buffer/signal_in_p]
+  connect_bd_net -net sensor_1b_buffer_signal_output [get_bd_pins concat_sensor_b/In0] [get_bd_pins sensor_1b_buffer/signal_output]
   connect_bd_net -net sensor_1b_n_1 [get_bd_ports sensor_1b_n] [get_bd_pins sensor_1b_buffer/signal_in_n]
   connect_bd_net -net sensor_1b_p_1 [get_bd_ports sensor_1b_p] [get_bd_pins sensor_1b_buffer/signal_in_p]
-  connect_bd_net -net sensor_clock_buffer_signal_output [get_bd_pins adc_signal_detector_0/data_clock] [get_bd_pins sensor_clock_buffer/signal_output]
-  connect_bd_net -net sensor_clock_n_1 [get_bd_ports sensor_clock_n] [get_bd_pins sensor_clock_buffer/signal_in_n]
-  connect_bd_net -net sensor_clock_p_1 [get_bd_ports sensor_clock_p] [get_bd_pins sensor_clock_buffer/signal_in_p]
-  connect_bd_net -net sensor_frame_buffer_signal_output [get_bd_pins adc_signal_detector_0/frame_clock] [get_bd_pins sensor_frame_buffer/signal_output]
-  connect_bd_net -net sensor_frame_n_1 [get_bd_ports sensor_frame_n] [get_bd_pins sensor_frame_buffer/signal_in_n]
-  connect_bd_net -net sensor_frame_p_1 [get_bd_ports sensor_frame_p] [get_bd_pins sensor_frame_buffer/signal_in_p]
+  connect_bd_net -net sensor_2a_buffer_signal_output [get_bd_pins concat_sensor_a/In1] [get_bd_pins sensor_2a_buffer/signal_output]
+  connect_bd_net -net sensor_2a_n_1 [get_bd_ports sensor_2a_n] [get_bd_pins sensor_2a_buffer/signal_in_n]
+  connect_bd_net -net sensor_2a_p_1 [get_bd_ports sensor_2a_p] [get_bd_pins sensor_2a_buffer/signal_in_p]
+  connect_bd_net -net sensor_2b_buffer_signal_output [get_bd_pins concat_sensor_b/In1] [get_bd_pins sensor_2b_buffer/signal_output]
+  connect_bd_net -net sensor_2b_n_1 [get_bd_ports sensor_2b_n] [get_bd_pins sensor_2b_buffer/signal_in_n]
+  connect_bd_net -net sensor_2b_p_1 [get_bd_ports sensor_2b_p] [get_bd_pins sensor_2b_buffer/signal_in_p]
+  connect_bd_net -net sensor_3a_buffer_signal_output [get_bd_pins concat_sensor_a/In2] [get_bd_pins sensor_3a_buffer/signal_output]
+  connect_bd_net -net sensor_3a_n_1 [get_bd_ports sensor_3a_n] [get_bd_pins sensor_3a_buffer/signal_in_n]
+  connect_bd_net -net sensor_3a_p_1 [get_bd_ports sensor_3a_p] [get_bd_pins sensor_3a_buffer/signal_in_p]
+  connect_bd_net -net sensor_3b_buffer_signal_output [get_bd_pins concat_sensor_b/In2] [get_bd_pins sensor_3b_buffer/signal_output]
+  connect_bd_net -net sensor_3b_n_1 [get_bd_ports sensor_3b_n] [get_bd_pins sensor_3b_buffer/signal_in_n]
+  connect_bd_net -net sensor_3b_p_1 [get_bd_ports sensor_3b_p] [get_bd_pins sensor_3b_buffer/signal_in_p]
+  connect_bd_net -net sensor_4a_buffer_signal_output [get_bd_pins concat_sensor_a/In3] [get_bd_pins sensor_4a_buffer/signal_output]
+  connect_bd_net -net sensor_4a_n_1 [get_bd_ports sensor_4a_n] [get_bd_pins sensor_4a_buffer/signal_in_n]
+  connect_bd_net -net sensor_4a_p_1 [get_bd_ports sensor_4a_p] [get_bd_pins sensor_4a_buffer/signal_in_p]
+  connect_bd_net -net sensor_4b_buffer_signal_output [get_bd_pins concat_sensor_b/In3] [get_bd_pins sensor_4b_buffer/signal_output]
+  connect_bd_net -net sensor_4b_n_1 [get_bd_ports sensor_4b_n] [get_bd_pins sensor_4b_buffer/signal_in_n]
+  connect_bd_net -net sensor_4b_p_1 [get_bd_ports sensor_4b_p] [get_bd_pins sensor_4b_buffer/signal_in_p]
+  connect_bd_net -net sensor_5a_buffer_signal_output [get_bd_pins concat_sensor_a/In4] [get_bd_pins sensor_5a_buffer/signal_output]
+  connect_bd_net -net sensor_5a_n_1 [get_bd_ports sensor_5a_n] [get_bd_pins sensor_5a_buffer/signal_in_n]
+  connect_bd_net -net sensor_5a_p_1 [get_bd_ports sensor_5a_p] [get_bd_pins sensor_5a_buffer/signal_in_p]
+  connect_bd_net -net sensor_5b_buffer_signal_output [get_bd_pins concat_sensor_b/In4] [get_bd_pins sensor_5b_buffer/signal_output]
+  connect_bd_net -net sensor_5b_n_1 [get_bd_ports sensor_5b_n] [get_bd_pins sensor_5b_buffer/signal_in_n]
+  connect_bd_net -net sensor_5b_p_1 [get_bd_ports sensor_5b_p] [get_bd_pins sensor_5b_buffer/signal_in_p]
+  connect_bd_net -net sensor_6a_buffer_signal_output [get_bd_pins concat_sensor_a/In5] [get_bd_pins sensor_6a_buffer/signal_output]
+  connect_bd_net -net sensor_6a_n_1 [get_bd_ports sensor_6a_n] [get_bd_pins sensor_6a_buffer/signal_in_n]
+  connect_bd_net -net sensor_6a_p_1 [get_bd_ports sensor_6a_p] [get_bd_pins sensor_6a_buffer/signal_in_p]
+  connect_bd_net -net sensor_6b_buffer_signal_output [get_bd_pins concat_sensor_b/In5] [get_bd_pins sensor_6b_buffer/signal_output]
+  connect_bd_net -net sensor_6b_n_1 [get_bd_ports sensor_6b_n] [get_bd_pins sensor_6b_buffer/signal_in_n]
+  connect_bd_net -net sensor_6b_p_1 [get_bd_ports sensor_6b_p] [get_bd_pins sensor_6b_buffer/signal_in_p]
+  connect_bd_net -net sensor_7a_buffer_signal_output [get_bd_pins concat_sensor_a/In6] [get_bd_pins sensor_7a_buffer/signal_output]
+  connect_bd_net -net sensor_7a_n_1 [get_bd_ports sensor_7a_n] [get_bd_pins sensor_7a_buffer/signal_in_n]
+  connect_bd_net -net sensor_7a_p_1 [get_bd_ports sensor_7a_p] [get_bd_pins sensor_7a_buffer/signal_in_p]
+  connect_bd_net -net sensor_7b_buffer_signal_output [get_bd_pins concat_sensor_b/In6] [get_bd_pins sensor_7b_buffer/signal_output]
+  connect_bd_net -net sensor_7b_n_1 [get_bd_ports sensor_7b_n] [get_bd_pins sensor_7b_buffer/signal_in_n]
+  connect_bd_net -net sensor_7b_p_1 [get_bd_ports sensor_7b_p] [get_bd_pins sensor_7b_buffer/signal_in_p]
+  connect_bd_net -net sensor_8a_buffer_signal_output [get_bd_pins concat_sensor_a/In7] [get_bd_pins sensor_8a_buffer/signal_output]
+  connect_bd_net -net sensor_8a_n_1 [get_bd_ports sensor_8a_n] [get_bd_pins sensor_8a_buffer/signal_in_n]
+  connect_bd_net -net sensor_8a_p_1 [get_bd_ports sensor_8a_p] [get_bd_pins sensor_8a_buffer/signal_in_p]
+  connect_bd_net -net sensor_8b_buffer_signal_output [get_bd_pins concat_sensor_b/In7] [get_bd_pins sensor_8b_buffer/signal_output]
+  connect_bd_net -net sensor_8b_n_1 [get_bd_ports sensor_8b_n] [get_bd_pins sensor_8b_buffer/signal_in_n]
+  connect_bd_net -net sensor_8b_p_1 [get_bd_ports sensor_8b_p] [get_bd_pins sensor_8b_buffer/signal_in_p]
+  connect_bd_net -net sensor_clock_1_n_1 [get_bd_ports sensor_clock_1_n] [get_bd_pins sensor_clock_buffer_1/signal_in_n]
+  connect_bd_net -net sensor_clock_1_p_1 [get_bd_ports sensor_clock_1_p] [get_bd_pins sensor_clock_buffer_1/signal_in_p]
+  connect_bd_net -net sensor_clock_buffer_0_signal_output [get_bd_pins sensor_clock_buffer_0/signal_output] [get_bd_pins xlconcat_2/In0]
+  connect_bd_net -net sensor_clock_buffer_1_signal_output [get_bd_pins sensor_clock_buffer_1/signal_output] [get_bd_pins xlconcat_2/In1]
+  connect_bd_net -net sensor_clock_n_1 [get_bd_ports sensor_clock_0_n] [get_bd_pins sensor_clock_buffer_0/signal_in_n]
+  connect_bd_net -net sensor_clock_p_1 [get_bd_ports sensor_clock_0_p] [get_bd_pins sensor_clock_buffer_0/signal_in_p]
+  connect_bd_net -net sensor_frame_1_n_1 [get_bd_ports sensor_frame_1_n] [get_bd_pins sensor_frame_buffer_1/signal_in_n]
+  connect_bd_net -net sensor_frame_1_p_1 [get_bd_ports sensor_frame_1_p] [get_bd_pins sensor_frame_buffer_1/signal_in_p]
+  connect_bd_net -net sensor_frame_buffer_0_signal_output [get_bd_pins sensor_frame_buffer_0/signal_output] [get_bd_pins xlconcat_1/In0]
+  connect_bd_net -net sensor_frame_buffer_1_signal_output [get_bd_pins sensor_frame_buffer_1/signal_output] [get_bd_pins xlconcat_1/In1]
+  connect_bd_net -net sensor_frame_n_1 [get_bd_ports sensor_frame_0_n] [get_bd_pins sensor_frame_buffer_0/signal_in_n]
+  connect_bd_net -net sensor_frame_p_1 [get_bd_ports sensor_frame_0_p] [get_bd_pins sensor_frame_buffer_0/signal_in_p]
   connect_bd_net -net spi_programmer_0_csa [get_bd_ports csa] [get_bd_pins spi_programmer_0/csa]
   connect_bd_net -net spi_programmer_0_csb [get_bd_ports csb] [get_bd_pins spi_programmer_0/csb]
   connect_bd_net -net spi_programmer_0_mosi [get_bd_ports mosi] [get_bd_pins spi_programmer_0/mosi]
   connect_bd_net -net spi_programmer_0_sck [get_bd_ports sck] [get_bd_pins spi_programmer_0/sck]
   connect_bd_net -net sws_8bits_1 [get_bd_ports sws_8bits] [get_bd_pins enable_splitter_0/switch_input] [get_bd_pins gpio_switch_input/gpio_io_i]
   connect_bd_net -net trigger_input_1 [get_bd_ports trigger_input] [get_bd_pins input_trigger_0/trigger_input]
-  connect_bd_net -net util_ds_buf_0_BUFG_O [get_bd_pins adc_signal_detector_0/signal_input_a] [get_bd_pins sensor_1a_buffer_0/signal_output]
   connect_bd_net -net util_vector_logic_0_Res [get_bd_pins fifo_generator_0/s_aresetn] [get_bd_pins hold_signal_0/m00_axis_aresetn] [get_bd_pins util_vector_logic_0/Res]
   connect_bd_net -net xlconcat_0_dout [get_bd_pins processing_system7_0/IRQ_F2P] [get_bd_pins xlconcat_0/dout]
+  connect_bd_net -net xlconcat_1_dout [get_bd_pins adc_signal_detector_0/frame_clock] [get_bd_pins xlconcat_1/dout]
+  connect_bd_net -net xlconcat_2_dout [get_bd_pins adc_signal_detector_0/data_clock] [get_bd_pins xlconcat_2/dout]
 
   # Create address segments
   assign_bd_address -offset 0x10000000 -range 0x10000000 -target_address_space [get_bd_addr_spaces axi_dma_0/Data_S2MM] [get_bd_addr_segs processing_system7_0/S_AXI_HP0/HP0_DDR_LOWOCM] -force
