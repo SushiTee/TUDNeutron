@@ -18,7 +18,7 @@ constexpr int quitSignal = SIGINT;
 sighandler_t prevSignal;
 #endif
 
-constexpr uint32_t PACKET_SIZE = 0x8000u;
+constexpr uint32_t PACKET_SIZE = 0x10000u;
 
 union payloadSizeConverter {
     std::byte bytes[2];
