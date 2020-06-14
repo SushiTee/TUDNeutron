@@ -73,18 +73,104 @@
   reserved-memory {
     #address-cells = <1>;
     #size-cells = <1>;
-      ranges;
-
-      reserved: buffer@0 {
-        compatible = "shared-dma-pool";
-        no-map;
-        reg = <0x10000000 0x10000000>;
-      };
+    ranges;
+    sensor_buf0: sensor_buf@0 {
+      compatible = "shared-dma-pool";
+      reusable;
+      reg = <0x10000000 0x2000000>;
+      label = "sensor_buf0";
+    };
+    sensor_buf1: sensor_buf@1 {
+      compatible = "shared-dma-pool";
+      reusable;
+      reg = <0x12000000 0x2000000>;
+      label = "sensor_buf1";
+    };
+    sensor_buf2: sensor_buf@2 {
+      compatible = "shared-dma-pool";
+      reusable;
+      reg = <0x14000000 0x2000000>;
+      label = "sensor_buf2";
+    };
+    sensor_buf3: sensor_buf@3 {
+      compatible = "shared-dma-pool";
+      reusable;
+      reg = <0x16000000 0x2000000>;
+      label = "sensor_buf3";
+    };
+    sensor_buf4: sensor_buf@4 {
+      compatible = "shared-dma-pool";
+      reusable;
+      reg = <0x18000000 0x2000000>;
+      label = "sensor_buf4";
+    };
+    sensor_buf5: sensor_buf@5 {
+      compatible = "shared-dma-pool";
+      reusable;
+      reg = <0x1a000000 0x2000000>;
+      label = "sensor_buf5";
+    };
+    sensor_buf6: sensor_buf@6 {
+      compatible = "shared-dma-pool";
+      reusable;
+      reg = <0x1c000000 0x2000000>;
+      label = "sensor_buf6";
+    };
+    sensor_buf7: sensor_buf@7 {
+      compatible = "shared-dma-pool";
+      reusable;
+      reg = <0x1e000000 0x2000000>;
+      label = "sensor_buf7";
+    };
   };
 
-  reserved-driver@0 {
-      compatible = "xlnx,reserved-memory";
-      memory-region = <&reserved>;
+  udmabuf@0 {
+    compatible = "ikwzm,udmabuf-0.10.a";
+    device-name = "udmabuf0";
+    size = <0x2000000>; // 32MiB
+    memory-region = <&sensor_buf0>;
+  };
+  udmabuf@1 {
+    compatible = "ikwzm,udmabuf-0.10.a";
+    device-name = "udmabuf1";
+    size = <0x2000000>; // 32MiB
+    memory-region = <&sensor_buf1>;
+  };
+  udmabuf@2 {
+    compatible = "ikwzm,udmabuf-0.10.a";
+    device-name = "udmabuf2";
+    size = <0x2000000>; // 32MiB
+    memory-region = <&sensor_buf2>;
+  };
+  udmabuf@3 {
+    compatible = "ikwzm,udmabuf-0.10.a";
+    device-name = "udmabuf3";
+    size = <0x2000000>; // 32MiB
+    memory-region = <&sensor_buf3>;
+  };
+  udmabuf@4 {
+    compatible = "ikwzm,udmabuf-0.10.a";
+    device-name = "udmabuf4";
+    size = <0x2000000>; // 32MiB
+    memory-region = <&sensor_buf4>;
+  };
+  udmabuf@5 {
+    compatible = "ikwzm,udmabuf-0.10.a";
+    device-name = "udmabuf5";
+    size = <0x2000000>; // 32MiB
+    memory-region = <&sensor_buf5>;
+  };
+  udmabuf@6 {
+    compatible = "ikwzm,udmabuf-0.10.a";
+    device-name = "udmabuf6";
+    size = <0x2000000>; // 32MiB
+    memory-region = <&sensor_buf6>;
+  };
+  udmabuf@7 {
+    compatible = "ikwzm,udmabuf-0.10.a";
+    device-name = "udmabuf7";
+    size = <0x2000000>; // 32MiB
+    memory-region = <&sensor_buf7>;
   };
 };
 

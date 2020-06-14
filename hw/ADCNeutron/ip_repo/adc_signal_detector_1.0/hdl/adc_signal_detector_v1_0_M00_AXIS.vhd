@@ -21,7 +21,7 @@ entity adc_signal_detector_v1_0_M00_AXIS is
     signal_input_b : in  std_logic_vector(7 downto 0); -- signal input
     signal_state : out std_logic_vector(7 downto 0); -- shows the state (if enabled AND signal detected -> LOW; if enabled AND no signal detected -> HIGH; otherwise LOW )
     fifo_reset   : out std_logic; -- resets an connected fifo after being enabled
-    number_words : in std_logic_vector(15 downto 0); -- number of words to be send as package
+    number_words : in std_logic_vector(31 downto 0); -- number of words to be send as package
     trigger_input: in std_logic;
     trigger_output : out std_logic;
     data_clock   : in std_logic_vector(1 downto 0);
@@ -109,7 +109,7 @@ architecture implementation of adc_signal_detector_v1_0_M00_AXIS is
   signal stream_data_out_complete_5      : std_logic_vector(27 downto 0)                     := (others => '0');
   signal stream_data_out_complete_6      : std_logic_vector(27 downto 0)                     := (others => '0');
   signal stream_data_out_complete_7      : std_logic_vector(27 downto 0)                     := (others => '0');
-  signal word_counter                    : unsigned(15 downto 0)                             := (others => '0');
+  signal word_counter                    : unsigned(31 downto 0)                             := (others => '0');
 
   signal last_data_clock                 : std_logic_vector(1 downto 0)                      := (others => '0');
   signal last_frame_clock                : std_logic_vector(1 downto 0)                      := (others => '0');

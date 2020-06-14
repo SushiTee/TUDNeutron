@@ -17,18 +17,20 @@
   reserved-memory {
     #address-cells = <1>;
     #size-cells = <1>;
-      ranges;
-
-      reserved: buffer@0 {
-        compatible = "shared-dma-pool";
-        no-map;
-        reg = <0x10000000 0x10000000>;
-      };
+    ranges;
+    sensor_buf0: sensor_buf@0 {
+      compatible = "shared-dma-pool";
+      reusable;
+      reg = <0x10000000 0x10000000>;
+      label = "sensor_buf0";
+    };
   };
 
-  reserved-driver@0 {
-      compatible = "xlnx,reserved-memory";
-      memory-region = <&reserved>;
+  udmabuf@0 {
+    compatible = "ikwzm,udmabuf-0.10.a";
+    device-name = "udmabuf0";
+    size = <0x10000000>; // 256MiB
+    memory-region = <&sensor_buf0>;
   };
 };
 

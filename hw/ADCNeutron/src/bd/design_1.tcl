@@ -338,7 +338,7 @@ proc create_root_design { parentCell } {
   set gpio_enable_splitter [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_gpio:2.0 gpio_enable_splitter ]
   set_property -dict [ list \
    CONFIG.C_ALL_OUTPUTS {1} \
-   CONFIG.C_DOUT_DEFAULT {0xFFFFFFFF} \
+   CONFIG.C_DOUT_DEFAULT {0x00000000} \
    CONFIG.C_GPIO_WIDTH {8} \
  ] $gpio_enable_splitter
 
@@ -354,8 +354,8 @@ proc create_root_design { parentCell } {
   set gpio_num_words [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_gpio:2.0 gpio_num_words ]
   set_property -dict [ list \
    CONFIG.C_ALL_OUTPUTS {1} \
-   CONFIG.C_DOUT_DEFAULT {0x00008000} \
-   CONFIG.C_GPIO_WIDTH {16} \
+   CONFIG.C_DOUT_DEFAULT {0x00010000} \
+   CONFIG.C_GPIO_WIDTH {32} \
  ] $gpio_num_words
 
   # Create instance: gpio_switch_input, and set properties
@@ -1036,10 +1036,10 @@ proc create_root_design { parentCell } {
   # Create address segments
   assign_bd_address -offset 0x10000000 -range 0x10000000 -target_address_space [get_bd_addr_spaces axi_dma_0/Data_S2MM] [get_bd_addr_segs processing_system7_0/S_AXI_HP0/HP0_DDR_LOWOCM] -force
   assign_bd_address -offset 0x40400000 -range 0x00010000 -target_address_space [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs axi_dma_0/S_AXI_LITE/Reg] -force
-  assign_bd_address -offset 0x41230000 -range 0x00010000 -target_address_space [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs gpio_switch_input/S_AXI/Reg] -force
   assign_bd_address -offset 0x41200000 -range 0x00010000 -target_address_space [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs gpio_enable_splitter/S_AXI/Reg] -force
   assign_bd_address -offset 0x41220000 -range 0x00010000 -target_address_space [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs gpio_input_trigger/S_AXI/Reg] -force
   assign_bd_address -offset 0x41210000 -range 0x00010000 -target_address_space [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs gpio_num_words/S_AXI/Reg] -force
+  assign_bd_address -offset 0x41230000 -range 0x00010000 -target_address_space [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs gpio_switch_input/S_AXI/Reg] -force
 
 
   # Restore current instance
