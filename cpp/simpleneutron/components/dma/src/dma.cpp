@@ -44,7 +44,12 @@ Dma::Dma(uint8_t id, int mem)
         return;
     }
 
-    mMemoryMap = (uint32_t *)mmap(NULL, 0x2000000, PROT_READ | PROT_WRITE, MAP_SHARED, mem, MEMORY_BASE);
+    int dmaDevice = open(DMAS[id].mDmaDevice, O_RDONLY);
+    if (dmaDevice == -1) {
+        LogErr << "Error opening " << DMAS[id].mDmaDevice << std::endl;
+        return;
+    }
+    mMemoryMap = (uint32_t *)mmap(NULL, 0x2000000, PROT_READ, MAP_SHARED, dmaDevice, 0);
     if (mMemoryMap == MAP_FAILED) {
         LogErr << "DMA (" << std::hex << REGISTER_BASE << "): could not map memory map" << std::endl;
         mHasError = true;

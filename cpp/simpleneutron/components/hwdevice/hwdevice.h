@@ -5,6 +5,7 @@
 typedef struct {
     uint32_t mRegister;
     uint32_t mMemory;
+    const char* mDmaDevice;
     const char* mUioDevice;
 } DMA_DEVICE;
 
@@ -19,14 +20,14 @@ typedef struct {
 constexpr uint32_t DMA_SIZE = 0x800000u; // total size / dma count / 4
 
 constexpr DMA_DEVICE DMAS[8] = { // complete JA port on Zedboard
-    {0x40400000u, 0x10000000u, "/dev/uio0"},
-    {0x40410000u, 0x12000000u, "/dev/uio1"},
-    {0x40420000u, 0x14000000u, "/dev/uio2"},
-    {0x40430000u, 0x16000000u, "/dev/uio3"},
-    {0x40440000u, 0x18000000u, "/dev/uio4"},
-    {0x40450000u, 0x1a000000u, "/dev/uio5"},
-    {0x40460000u, 0x1c000000u, "/dev/uio6"},
-    {0x40470000u, 0x1e000000u, "/dev/uio7"}
+    {0x40400000u, 0x10000000u, "/dev/udmabuf0", "/dev/uio0"},
+    {0x40410000u, 0x12000000u, "/dev/udmabuf1", "/dev/uio1"},
+    {0x40420000u, 0x14000000u, "/dev/udmabuf2", "/dev/uio2"},
+    {0x40430000u, 0x16000000u, "/dev/udmabuf3", "/dev/uio3"},
+    {0x40440000u, 0x18000000u, "/dev/udmabuf4", "/dev/uio4"},
+    {0x40450000u, 0x1a000000u, "/dev/udmabuf5", "/dev/uio5"},
+    {0x40460000u, 0x1c000000u, "/dev/udmabuf6", "/dev/uio6"},
+    {0x40470000u, 0x1e000000u, "/dev/udmabuf7", "/dev/uio7"}
 };
 
 constexpr const char* FIFO_INTERRUPTS[8] = {

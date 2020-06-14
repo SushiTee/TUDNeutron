@@ -49,7 +49,7 @@ class Dma {
     std::unique_ptr<std::thread> mThread = nullptr;
     std::unique_ptr<std::thread> mFifoThread = nullptr;
 
-    std::atomic<uint16_t> mWordLength;
+    std::atomic<uint32_t> mWordLength;
     std::atomic<bool> mDramFifoFull = false;
     std::sig_atomic_t mQuit = false;
 
@@ -78,7 +78,7 @@ public:
     void enable();
     void disable();
     void setDestinationAddress(uint32_t address);
-    uint16_t getWordLength();
+    uint32_t getWordLength();
     void setWordLength(uint32_t length);
     uint32_t getStatus();
     uint32_t readMemory(uint32_t offset);

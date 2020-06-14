@@ -14,7 +14,7 @@ class WordLengthController : public Gpio {
     static WordLengthController &getInstanceImpl(uint32_t registerBase = 0, int mem = 0);
     static WordLengthController &getInstance();
 
-    uint16_t mWordLength = DEFAULT_WORD_LENGTH;
+    uint32_t mWordLength = DEFAULT_WORD_LENGTH;
 public:
     WordLengthController() = delete;
     WordLengthController(const WordLengthController&) = delete;
