@@ -1,4 +1,4 @@
-# Pot ADC Data
+# Plot ADC Data
 
 This little tool is to plot the ADC data. It uses [Jupyter Lab](https://jupyter.org/) and takes the data recoded by the ADCNeutron client directly to plot a specific range of the data. The sensor to be plotted must be chosen.
 
