@@ -104,3 +104,5 @@ cpp/build*
 !scripts/
 !*.service
 !*.dtsi
+!*.md
+!*.ipynb
