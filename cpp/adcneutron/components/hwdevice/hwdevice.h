@@ -31,9 +31,9 @@ constexpr uint32_t GPIO_3 = 0x41220000u; // enable trigger input (JB1 on zedboar
 constexpr uint32_t DEFAULT_WORD_LENGTH = 0x10000u;
 
 constexpr LED_GPIO PS_LED = {
-    "880",
-    "/sys/class/gpio/gpio880/value",
-    "/sys/class/gpio/gpio880/direction",
+    "864",
+    "/sys/class/gpio/gpio864/value",
+    "/sys/class/gpio/gpio864/direction",
     "/sys/class/gpio/export",
     "/sys/class/gpio/unexport"
 };
