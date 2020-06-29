@@ -28,7 +28,8 @@ HEADERS += \
         "$$PWD/cpp/networkhandler.h" \
         "$$PWD/cpp/messagetype.h" \
         "$$PWD/cpp/messagetype.h" \
-        "$$PWD/cpp/version.h"
+        "$$PWD/cpp/version.h" \
+        "$$PWD/cpp/meanring.h"
 
 RESOURCES += "$$PWD/qml/qml.qrc" \
         "$$PWD/js/js.qrc"

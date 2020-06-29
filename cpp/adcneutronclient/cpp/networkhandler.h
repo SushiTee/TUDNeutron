@@ -6,6 +6,7 @@
 #include <external/networking/kissnet.hpp>
 #include <messagetype.h>
 #include <fstream>
+#include <meanring.h>
 
 namespace kn = kissnet;
 
@@ -26,7 +27,13 @@ class NetworkHandler : public QObject {
     // reserve buffer
     kn::buffer<BUFFER_SIZE> m_recvBuff;
     QVector<double> m_sensorDataValues;
+    QVector<uint64_t> m_impulseCount;
     std::ofstream m_fileStream;
+
+    std::vector<MeanRing> m_sensorMeans;
+    std::vector<uint16_t> m_lowValue;
+    std::vector<uint16_t> m_highValue;
+    std::vector<int8_t> m_dataDir;
 
     bool receiveData();
     void sendData(const std::byte *header, const std::byte *data, size_t dataLength) const;
@@ -46,4 +53,5 @@ public slots:
     void sendData(MessageType::Message type, const std::byte *data, size_t length) const;
     void sendData(MessageType::Message type, uint8_t value) const; // send only one value
     void getSensorData();
+    void getSensorCount();
 };

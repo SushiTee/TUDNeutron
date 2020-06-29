@@ -220,7 +220,7 @@ Page {
                     }
 
                     Label {
-                        text: value === "packageSize" ? 2 ** NetworkController.packageSize : NetworkController.inputTrigger ? "Yes" : "No"
+                        text: value === "packageSize" ? 2 ** NetworkController.packageSize : NetworkController[value] ? "Yes" : "No"
                     }
                 }
             }

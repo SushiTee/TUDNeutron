@@ -163,6 +163,34 @@ uint8_t NetworkController::activeSensors() const
     return m_activeSensors;
 }
 
+int NetworkController::trigger() const
+{
+    return m_trigger;
+}
+
+void NetworkController::setTrigger(int riseCount)
+{
+    if (m_trigger == riseCount)
+        return;
+
+    m_trigger = riseCount;
+    emit triggerChanged(m_trigger);
+}
+
+int NetworkController::meanCount() const
+{
+    return m_meanCount;
+}
+
+void NetworkController::setMeanCount(int meanCount)
+{
+    if (m_meanCount == meanCount)
+        return;
+
+    m_meanCount = meanCount;
+    emit meanCountChanged(m_meanCount);
+}
+
 void NetworkController::setStorageLocation(QString storageLocation)
 {
     if (m_storageLocation == storageLocation)
@@ -262,6 +290,13 @@ void NetworkController::requestSensorData()
 {
     if (m_handler) {
         QMetaObject::invokeMethod(m_handler.get(), "getSensorData");
+    }
+}
+
+void NetworkController::requestSensorCount()
+{
+    if (m_handler) {
+        QMetaObject::invokeMethod(m_handler.get(), "getSensorCount");
     }
 }
 

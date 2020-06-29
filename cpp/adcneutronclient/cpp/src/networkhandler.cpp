@@ -38,7 +38,12 @@ NetworkHandler::NetworkHandler(NetworkController *parent)
     : m_controller(parent),
       m_inputTrigger(parent->inputTrigger() ? 1u : 0u),
       m_storageLocation(parent->storageLocation()),
-      m_sensorDataValues(8)
+      m_sensorDataValues(8),
+      m_impulseCount(8),
+      m_sensorMeans(8, MeanRing(m_controller->meanCount())),
+      m_lowValue(8, 0),
+      m_highValue(8, 0),
+      m_dataDir(8, 0)
 {
 }
 
@@ -270,6 +275,13 @@ void NetworkHandler::getSensorData()
     m_mutex.unlock();
 }
 
+void NetworkHandler::getSensorCount()
+{
+    m_mutex.lock();
+    QMetaObject::invokeMethod(m_controller, "sensorCount", Q_ARG(QVector<uint64_t>, m_impulseCount));
+    m_mutex.unlock();
+}
+
 void NetworkHandler::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType::Message type, size_t size)
 {
     switch (type)
@@ -289,6 +301,39 @@ void NetworkHandler::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType::Mess
                 runs++;
             }
         }
+
+        // very simple and imperfect method to count impulses
+        auto trigger = m_controller->trigger();
+        for (uint64_t i = 0; i < dataEnd; i+=4) {
+            valueConverter values = *reinterpret_cast<valueConverter*>(buff.data() + i);
+            auto sensorNum = values.sensor;
+            m_sensorMeans[sensorNum].push(values.value1);
+            m_sensorMeans[sensorNum].push(values.value2);
+            if (m_sensorMeans[sensorNum].full()) {
+                uint16_t avarage = m_sensorMeans[sensorNum].mean();
+                if (m_dataDir[sensorNum] == 0) {
+                    m_dataDir[sensorNum] = -1;
+                    m_lowValue[sensorNum] = avarage;
+                } else if (m_dataDir[sensorNum] == -1) {
+                    if (avarage < m_lowValue[sensorNum]) {
+                        m_lowValue[sensorNum] = avarage;
+                    } else if (avarage > m_lowValue[sensorNum] + trigger) {
+                        m_impulseCount[sensorNum]++;
+                        m_dataDir[sensorNum] = 1;
+                        m_highValue[sensorNum] = avarage;
+                    }
+                } else if (m_dataDir[sensorNum] == 1) {
+                    if (avarage > m_highValue[sensorNum]) {
+                        m_highValue[sensorNum] = avarage;
+                    } else if (avarage < m_highValue[sensorNum] - trigger) {
+                        m_dataDir[sensorNum] = -1;
+                        m_lowValue[sensorNum] = avarage;
+                    }
+                }
+            }
+        }
+
+        // get voltage for different sensors
         for (auto j = 0; j < runs; j++) {
             for (auto i = 0; i < 5; i++) {
                 auto offset = dataEnd - ((4*i*runs)+4+(j*4));
@@ -298,7 +343,9 @@ void NetworkHandler::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType::Mess
             }
         }
         for (auto i = 0; i < 8; i++) {
-            m_sensorDataValues[i] = (static_cast<double>(avarageVoltage[i] / 10) / static_cast<double>(0b11111111111111)) * 2 - 1;
+            if (m_controller->activeSensors() & (1 << i)) {
+                m_sensorDataValues[i] = (static_cast<double>(avarageVoltage[i] / 10) / static_cast<double>(0b11111111111111)) * 2 - 1;
+            }
         }
 
         m_mutex.unlock();
@@ -308,6 +355,11 @@ void NetworkHandler::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType::Mess
     case MessageType::Message::START_DMA: {
         m_mutex.lock();
         m_sensorDataValues = QVector<double>(8);
+        m_impulseCount = QVector<uint64_t>(8);
+        m_sensorMeans = std::vector<MeanRing>(8, MeanRing(m_controller->meanCount()));
+        m_lowValue = std::vector<uint16_t>(8, 0);
+        m_highValue = std::vector<uint16_t>(8, 0);
+        m_dataDir = std::vector<int8_t>(8, 0);
         m_mutex.unlock();
         handleStartStopMessage(type, reinterpret_cast<const char *>(buff.data()), static_cast<int>(size));
         break;

@@ -17,6 +17,8 @@ function dbInit() {
     SN.NetworkController.port = parseInt(getPort());
     SN.NetworkController.inputTrigger = getInputTrigger();
     SN.NetworkController.storageLocation = getStorageLocation();
+    SN.NetworkController.meanCount = parseInt(getMeanCount());
+    SN.NetworkController.trigger = parseInt(getTrigger());
 }
 
 function dbGetHandle() {
@@ -109,4 +111,26 @@ function getStorageLocation() {
 function setStorageLocation(storageLocation) {
     setSettingsValue('storageLocation', storageLocation.toString());
     SN.NetworkController.storageLocation = storageLocation;
+}
+
+function getMeanCount() {
+    let result = readSettingsValue('meanCount');
+    if (!result) result = '250'; // default
+    return result;
+}
+
+function setMeanCount(meanCount) {
+    setSettingsValue('meanCount', meanCount);
+    SN.NetworkController.meanCount = parseInt(meanCount);
+}
+
+function getTrigger() {
+    let result = readSettingsValue('trigger');
+    if (!result) result = '25'; // default
+    return result;
+}
+
+function setTrigger(trigger) {
+    setSettingsValue('trigger', trigger);
+    SN.NetworkController.trigger = parseInt(trigger);
 }

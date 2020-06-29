@@ -29,12 +29,16 @@ public:
     int inputTrigger() const;
     QString storageLocation() const;
     uint8_t activeSensors() const;
+    int trigger() const;
+    int meanCount() const;
 
 private:
     Q_PROPERTY(int port READ port WRITE setPort NOTIFY portChanged)
     Q_PROPERTY(QString host READ host WRITE setHost NOTIFY hostChanged)
     Q_PROPERTY(MessageType::ConnectedState connected READ getConnected NOTIFY connectedChanged)
     Q_PROPERTY(bool sensorsActive READ sensorsActive NOTIFY sensorsActiveChanged)
+    Q_PROPERTY(int meanCount READ meanCount WRITE setMeanCount NOTIFY meanCountChanged)
+    Q_PROPERTY(int trigger READ trigger WRITE setTrigger NOTIFY triggerChanged)
     Q_PROPERTY(int inputTrigger READ inputTrigger WRITE setInputTrigger NOTIFY inputTriggerChanged)
     Q_PROPERTY(QVariantList sensors READ sensors NOTIFY sensorsChanged)
     Q_PROPERTY(QString storageLocation READ storageLocation WRITE setStorageLocation NOTIFY storageLocationChanged)
@@ -47,6 +51,8 @@ private:
     QString m_storageLocation = "";
     MessageType::ConnectedState m_connected = MessageType::ConnectedState::DISCONNECTED;
     uint8_t m_activeSensors = 0u;
+    int m_trigger = 150;
+    int m_meanCount = 250;
 
     int port() const;
     void setPort(int port);
@@ -70,8 +76,11 @@ public slots:
     void deactivateSensors();
     QVariantList sensors();
     void requestSensorData();
+    void requestSensorCount();
     bool storageWritable();
     bool storageWritable(QString storageLocation);
+    void setTrigger(int trigger);
+    void setMeanCount(int meanCount);
 
 signals:
     void hostChanged(QString host);
@@ -92,4 +101,7 @@ signals:
     void storageLocationChanged(QString storageLocation);
     void dmaFull(int dma);
     void sensorData(QVector<double> sensorData);
+    void sensorCount(QVector<uint64_t> sensorCount);
+    void triggerChanged(int trigger);
+    void meanCountChanged(int meanCount);
 };
