@@ -48,7 +48,7 @@ Page {
         for (let i = 0; i < sensorCount.length; i++) {
             for (let j = 0; j < listModel.count; j++) {
                 if (listModel.get(j).num === i) {
-                    listModel.get(j).count = sensorCount[i];
+                    listModel.get(j).count = parseInt(sensorCount[i]);
                     break;
                 }
             }
