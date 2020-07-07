@@ -44,7 +44,7 @@ Dma::Dma(uint8_t id, int mem)
         return;
     }
 
-    int dmaDevice = open(DMAS[id].mDmaDevice, O_RDONLY);
+    int dmaDevice = open(DMAS[id].mDmaDevice, O_RDONLY | O_SYNC);
     if (dmaDevice == -1) {
         LogErr << "Error opening " << DMAS[id].mDmaDevice << std::endl;
         return;
