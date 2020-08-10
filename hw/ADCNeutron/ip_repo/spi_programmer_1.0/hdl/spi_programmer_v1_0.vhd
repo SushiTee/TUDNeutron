@@ -48,7 +48,6 @@ architecture implementation of spi_programmer_v1_0 is
   signal programming_counter : unsigned(7 downto 0) := (others => '0');
   signal programming_part_counter : unsigned(2 downto 0) := (others => '0');
   signal current_mode : std_logic_vector(63 downto 0) := (others => '0');
-  signal state_active : std_logic := '0';
   signal programming_delay_counter : unsigned(31 downto 0) := (others => '0');
   signal normal_internal : std_logic := '0';
   signal random_internal : std_logic := '0';
