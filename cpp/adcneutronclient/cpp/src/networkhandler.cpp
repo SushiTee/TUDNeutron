@@ -344,7 +344,7 @@ void NetworkHandler::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType::Mess
         }
         for (auto i = 0; i < 8; i++) {
             if (m_controller->activeSensors() & (1 << i)) {
-                m_sensorDataValues[i] = (static_cast<double>(avarageVoltage[i] / 10) / static_cast<double>(0b11111111111111)) * 2 - 1;
+                m_sensorDataValues[i] = (static_cast<double>(avarageVoltage[i] / 10) / static_cast<double>(16384)) * 2 - 1;
             }
         }
 
