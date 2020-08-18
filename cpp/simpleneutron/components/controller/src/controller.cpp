@@ -341,8 +341,8 @@ bool Controller::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType type, siz
 
         // setting package size
         uint8_t value = static_cast<uint8_t>(buff[0]);
-        if (value > 12) {
-            networkOK = sendData(type, "{\"status\":\"Error\",\"msg\":\"Value for package size must be between 0 and 12\"}");
+        if (value > 15) {
+            networkOK = sendData(type, "{\"status\":\"Error\",\"msg\":\"Value for package size must be between 0 and 15\"}");
         } else {
             LogOut << "Use packet size: " << static_cast<uint16_t>(std::pow(2, value)) << std::endl;
             gpio::WordLengthController::setWordLength(static_cast<uint16_t>(std::pow(2, value)));
