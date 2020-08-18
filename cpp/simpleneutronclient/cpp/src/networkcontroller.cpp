@@ -127,7 +127,7 @@ void NetworkController::setPackageSize(int packageSize)
         return;
 
     if (packageSize < 0) packageSize = 0;
-    else if (packageSize > 15) packageSize = 15;
+    else if (packageSize > 13) packageSize = 13;
     m_packageSize = packageSize;
     emit packageSizeChanged(m_packageSize);
 }
