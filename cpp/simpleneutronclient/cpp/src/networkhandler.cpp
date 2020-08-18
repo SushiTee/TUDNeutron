@@ -326,12 +326,12 @@ void NetworkHandler::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType::Mess
             } else {
                 QString message = doc["msg"].toString();
                 if (!message.isNull()) {
-                    QMetaObject::invokeMethod(m_controller, "connected", Q_ARG(MessageType::Message, type), Q_ARG(bool, false), Q_ARG(QJsonDocument, doc));
+                    QMetaObject::invokeMethod(m_controller, "connected", Q_ARG(bool, false), Q_ARG(QJsonDocument, doc));
                     return;
                 }
             }
         }
-        QMetaObject::invokeMethod(m_controller, "connected", Q_ARG(MessageType::Message, type), Q_ARG(bool, false), Q_ARG(QJsonDocument, doc));
+        QMetaObject::invokeMethod(m_controller, "connected", Q_ARG(bool, false), Q_ARG(QJsonDocument, doc));
         break;
     }
     case MessageType::Message::FIFO_FULL: {
