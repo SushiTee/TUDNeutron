@@ -9,7 +9,7 @@ This project contains tow different measurement systems using the Zedboard [1].
 
 *ADCNeutron* uses the ADC extension board DC1884A-F from Linear Technology [2] to measure analog data.
 
-Both systems are used on the training reactor AKR-2 of TU-Dresden.
+Both systems are used on the training reactor AKR-2 of TU-Dresden [3].
 
 For more information about the parts and on how to build the software browse the subdirectories.
 
