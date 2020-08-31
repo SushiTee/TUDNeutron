@@ -106,3 +106,4 @@ cpp/build*
 !*.dtsi
 !*.md
 !*.ipynb
+!hw/pcb/*.zip
