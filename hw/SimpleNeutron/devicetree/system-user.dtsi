@@ -125,49 +125,49 @@
   };
 
   udmabuf@0 {
-    compatible = "ikwzm,udmabuf-0.10.a";
+    compatible = "ikwzm,u-dma-buf";
     device-name = "udmabuf0";
     size = <0x2000000>; // 32MiB
     memory-region = <&sensor_buf0>;
   };
   udmabuf@1 {
-    compatible = "ikwzm,udmabuf-0.10.a";
+    compatible = "ikwzm,u-dma-buf";
     device-name = "udmabuf1";
     size = <0x2000000>; // 32MiB
     memory-region = <&sensor_buf1>;
   };
   udmabuf@2 {
-    compatible = "ikwzm,udmabuf-0.10.a";
+    compatible = "ikwzm,u-dma-buf";
     device-name = "udmabuf2";
     size = <0x2000000>; // 32MiB
     memory-region = <&sensor_buf2>;
   };
   udmabuf@3 {
-    compatible = "ikwzm,udmabuf-0.10.a";
+    compatible = "ikwzm,u-dma-buf";
     device-name = "udmabuf3";
     size = <0x2000000>; // 32MiB
     memory-region = <&sensor_buf3>;
   };
   udmabuf@4 {
-    compatible = "ikwzm,udmabuf-0.10.a";
+    compatible = "ikwzm,u-dma-buf";
     device-name = "udmabuf4";
     size = <0x2000000>; // 32MiB
     memory-region = <&sensor_buf4>;
   };
   udmabuf@5 {
-    compatible = "ikwzm,udmabuf-0.10.a";
+    compatible = "ikwzm,u-dma-buf";
     device-name = "udmabuf5";
     size = <0x2000000>; // 32MiB
     memory-region = <&sensor_buf5>;
   };
   udmabuf@6 {
-    compatible = "ikwzm,udmabuf-0.10.a";
+    compatible = "ikwzm,u-dma-buf";
     device-name = "udmabuf6";
     size = <0x2000000>; // 32MiB
     memory-region = <&sensor_buf6>;
   };
   udmabuf@7 {
-    compatible = "ikwzm,udmabuf-0.10.a";
+    compatible = "ikwzm,u-dma-buf";
     device-name = "udmabuf7";
     size = <0x2000000>; // 32MiB
     memory-region = <&sensor_buf7>;
