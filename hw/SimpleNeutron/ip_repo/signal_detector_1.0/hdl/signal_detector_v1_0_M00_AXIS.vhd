@@ -187,6 +187,7 @@ begin
           clock_counter <= clock_counter + 1;
         end if;
       else
+        clock_counter <= (others => '0');
         stream_data_out <= (others => '0');
       end if;
     end if;
