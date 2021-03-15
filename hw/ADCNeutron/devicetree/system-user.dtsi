@@ -27,7 +27,7 @@
   };
 
   udmabuf@0 {
-    compatible = "ikwzm,udmabuf-0.10.a";
+    compatible = "ikwzm,u-dma-buf";
     device-name = "udmabuf0";
     size = <0x10000000>; // 256MiB
     memory-region = <&sensor_buf0>;
