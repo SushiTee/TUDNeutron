@@ -77,6 +77,7 @@ public slots:
     QVariantList sensors();
     void requestSensorData();
     void requestSensorCount();
+    bool storageExists(QString storageLocation);
     bool storageWritable();
     bool storageWritable(QString storageLocation);
     void setTrigger(int trigger);

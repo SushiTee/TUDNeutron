@@ -38,6 +38,8 @@ RESOURCES += "$$PWD/qml/qml.qrc" \
 QML_IMPORT_PATH = "$$PWD/qml"
 
 win32 {
+    LIBS += -lws2_32
+
     CONFIG(release, debug|release) {
         BUILDTYPE = "release"
         QMAKE_POST_LINK += "$$getenv(QTDIR)/bin/windeployqt --$$BUILDTYPE --no-translations --qmldir $$PWD/qml $$BUILDTYPE/$${TARGET}.exe"

@@ -235,7 +235,7 @@ void NetworkHandler::sendData(MessageType::Message type, QString data) const
     message[1] = conv.bytes[0];
     message[2] = conv.bytes[1];
 
-    sendData(reinterpret_cast<const std::byte*>(message.data()), reinterpret_cast<const std::byte*>(data.data_ptr()), dataLength);
+    sendData(reinterpret_cast<const std::byte*>(message.data()), reinterpret_cast<const std::byte*>(data.toStdString().c_str()), dataLength);
 }
 
 void NetworkHandler::sendData(MessageType::Message type, const std::byte* data, size_t length) const

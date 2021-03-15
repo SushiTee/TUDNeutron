@@ -1,6 +1,5 @@
 import QtQuick 2.14
 import QtQuick.Controls 2.14
-import QtQuick.Dialogs 1.1
 import AdcNeutron.Pages 1.0
 import AdcNeutron.Network 1.0
 import AdcNeutron.MessageType 1.0
@@ -107,7 +106,7 @@ ApplicationWindow {
         width: parent.width - 20
         title: "Connection failed"
         modal: true
-        standardButtons: StandardButton.Ok
+        standardButtons: Dialog.Ok
         contentItem: Item {
             implicitWidth: 400
             implicitHeight: 100

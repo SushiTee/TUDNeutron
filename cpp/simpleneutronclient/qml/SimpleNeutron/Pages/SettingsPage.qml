@@ -1,7 +1,6 @@
 import QtQuick 2.14
 import QtQuick.Controls 2.14
 import Qt.labs.platform 1.1
-import QtQuick.Dialogs 1.2
 import SimpleNeutron.Components 1.0
 import SimpleNeutron.Network 1.0
 import SimpleNeutron.Utils 1.0
@@ -63,15 +62,13 @@ Page {
         visible: false
     }
 
-    FileDialog {
+    FolderDialog {
         id: folderDialog
         title: "Select storage location"
         folder: StandardPaths.standardLocations(StandardPaths.DownloadLocation)[0]
-        selectMultiple: false
-        selectFolder: true
         property string selectedFolder: storageLocation
         onAccepted: {
-            let selected = fileUrls[0].toString();
+            let selected = currentFolder.toString();
             if (Qt.platform.os === "windows") {
                 selected = selected.replace("file:///", "");
             } else {

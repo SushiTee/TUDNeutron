@@ -144,6 +144,7 @@ function getStorageLocation() {
     let result = readSettingsValue('storageLocation');
     if (!result) {
         let defaultPath = PF.StandardPaths.standardLocations(PF.StandardPaths.DownloadLocation)[0];
+        defaultPath = defaultPath.toString();
         if (Qt.application.os === "windows") {
             defaultPath.replace("file:///", "");
         } else {

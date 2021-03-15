@@ -44,13 +44,12 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QS
         fprintf(stderr, "\u001b[36mF:(%s:%u - %s) %s\u001b[0m\n", file.toLocal8Bit().constData(), context.line, function.toLocal8Bit().constData(), localMsg.constData());
         break;
     }
+    fflush(stderr);
 }
 
 int main(int argc, char *argv[])
 {
     qInstallMessageHandler(myMessageOutput);
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-
     QGuiApplication app(argc, argv);
 
     // this has to be set to prevent a warning when using the FileDialog

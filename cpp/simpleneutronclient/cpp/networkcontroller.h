@@ -84,6 +84,7 @@ public slots:
     void deactivateSensors();
     QVariantList sensors();
     void requestSensorData();
+    bool storageExists(QString storageLocation);
     bool storageWritable();
     bool storageWritable(QString storageLocation);
 

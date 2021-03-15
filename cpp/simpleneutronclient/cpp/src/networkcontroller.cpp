@@ -316,6 +316,12 @@ void NetworkController::requestSensorData()
     }
 }
 
+bool NetworkController::storageExists(QString storageLocation)
+{
+    QFileInfo dir(storageLocation);
+    return dir.isDir();
+}
+
 bool NetworkController::storageWritable()
 {
     return storageWritable(m_storageLocation);
