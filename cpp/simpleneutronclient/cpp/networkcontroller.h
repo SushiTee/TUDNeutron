@@ -32,6 +32,8 @@ public:
     uint32_t testSignalCount() const;
     int testSignalFrequency() const;
     QString storageLocation() const;
+    void connectionLock();
+    void connectionUnlock();
 
 private:
     Q_PROPERTY(int port READ port WRITE setPort NOTIFY portChanged)
@@ -57,6 +59,7 @@ private:
     QVariantList m_sensors = {};
     QString m_storageLocation = "";
     MessageType::ConnectedState m_connected = MessageType::ConnectedState::DISCONNECTED;
+    QMutex m_connectMutex;
 
     int port() const;
     void setPort(int port);

@@ -99,11 +99,13 @@ void NetworkHandler::openFile(QList<bool> &list)
 
 void NetworkHandler::networkConnect(QString host, int port)
 {
+    m_controller->connectionLock();
     try {
         m_sock = std::make_unique<kn::tcp_socket>(kn::endpoint(host.toStdString(), static_cast<kn::port_t>(port)));
     } catch (const std::exception& e) {
         qDebug() << "Error creating socket:" << QString::fromStdString(e.what());
         QMetaObject::invokeMethod(m_controller, "connected", Q_ARG(bool, false), Q_ARG(QJsonDocument, QJsonDocument()));
+        m_controller->connectionUnlock();
         return;
     }
 
@@ -132,6 +134,7 @@ void NetworkHandler::networkConnect(QString host, int port)
     } else {
         QMetaObject::invokeMethod(m_controller, "connected", Q_ARG(bool, false), Q_ARG(QJsonDocument, QJsonDocument()));
     }
+    m_controller->connectionUnlock();
 }
 
 bool NetworkHandler::receiveData() {
@@ -336,8 +339,9 @@ void NetworkHandler::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType::Mess
         // get voltage for different sensors
         for (auto j = 0; j < runs; j++) {
             for (auto i = 0; i < 5; i++) {
-                auto offset = dataEnd - ((4*i*runs)+4+(j*4));
-                if (offset < 0) break;
+                uint64_t offset = ((4*i*runs)+4+(j*4));
+                if (offset > dataEnd) break;
+                offset = dataEnd - offset;
                 valueConverter values = *reinterpret_cast<valueConverter*>(buff.data() + offset);
                 avarageVoltage[values.sensor] += values.value1 + values.value2;
             }

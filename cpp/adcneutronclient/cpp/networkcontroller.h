@@ -31,6 +31,8 @@ public:
     uint8_t activeSensors() const;
     int trigger() const;
     int meanCount() const;
+    void connectionLock();
+    void connectionUnlock();
 
 private:
     Q_PROPERTY(int port READ port WRITE setPort NOTIFY portChanged)
@@ -53,6 +55,7 @@ private:
     uint8_t m_activeSensors = 0u;
     int m_trigger = 150;
     int m_meanCount = 250;
+    QMutex m_connectMutex;
 
     int port() const;
     void setPort(int port);

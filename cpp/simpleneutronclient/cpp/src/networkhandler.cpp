@@ -92,11 +92,13 @@ void NetworkHandler::openFiles(QList<bool> &list)
 
 void NetworkHandler::networkConnect(QString host, int port)
 {
+    m_controller->connectionLock();
     try {
         m_sock = std::make_unique<kn::tcp_socket>(kn::endpoint(host.toStdString(), static_cast<kn::port_t>(port)));
     } catch (const std::exception& e) {
         qDebug() << "Error creating socket:" << QString::fromStdString(e.what());
         QMetaObject::invokeMethod(m_controller, "connected", Q_ARG(bool, false), Q_ARG(QJsonDocument, QJsonDocument()));
+        m_controller->connectionUnlock();
         return;
     }
 
@@ -134,6 +136,7 @@ void NetworkHandler::networkConnect(QString host, int port)
     } else {
         QMetaObject::invokeMethod(m_controller, "connected", Q_ARG(bool, false), Q_ARG(QJsonDocument, QJsonDocument()));
     }
+    m_controller->connectionUnlock();
 }
 
 bool NetworkHandler::receiveData() {

@@ -216,6 +216,16 @@ QString NetworkController::storageLocation() const
     return m_storageLocation;
 }
 
+void NetworkController::connectionLock()
+{
+    m_connectMutex.lock();
+}
+
+void NetworkController::connectionUnlock()
+{
+    m_connectMutex.unlock();
+}
+
 void NetworkController::setStorageLocation(QString storageLocation)
 {
     if (m_storageLocation == storageLocation)
@@ -271,6 +281,8 @@ void NetworkController::networkDisconnect()
 {
     if (getConnected() == MessageType::ConnectedState::DISCONNECTED) return;
 
+    connectionLock();
+
     setSensors(QVariantList());
     setSensorsActive(false);
     if (m_thread != nullptr) {
@@ -281,6 +293,8 @@ void NetworkController::networkDisconnect()
         m_thread = nullptr;
         setConnected(MessageType::ConnectedState::DISCONNECTED);
     }
+
+    connectionUnlock();
 }
 
 void NetworkController::activateSensors(QList<bool> list)
