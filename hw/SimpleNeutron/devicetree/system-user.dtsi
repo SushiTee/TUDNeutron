@@ -5,68 +5,68 @@
   };
 
   amba_pl: amba_pl {
-    fifo_interrupt_0: fifo@41250000 {
+    fifo_interrupt_0: fifo@412a0000 {
       #dma-cells = <0x01>;
       compatible = "generic-uio";
       interrupt-parent = <0x04>;
       interrupts = <0x00 0x34 0x04>;
-      reg = <0x41250000 0x10000>;
+      reg = <0x412a0000 0x10000>;
     };
 
-    fifo_interrupt_1: fifo@41260000 {
+    fifo_interrupt_1: fifo@412b0000 {
       #dma-cells = <0x01>;
       compatible = "generic-uio";
       interrupt-parent = <0x04>;
       interrupts = <0x00 0x35 0x04>;
-      reg = <0x41260000 0x10000>;
+      reg = <0x412b0000 0x10000>;
     };
 
-    fifo_interrupt_2: fifo@41270000 {
+    fifo_interrupt_2: fifo@412c0000 {
       #dma-cells = <0x01>;
       compatible = "generic-uio";
       interrupt-parent = <0x04>;
       interrupts = <0x00 0x36 0x04>;
-      reg = <0x41270000 0x10000>;
+      reg = <0x412c0000 0x10000>;
     };
 
-    fifo_interrupt_3: fifo@41280000 {
+    fifo_interrupt_3: fifo@412d0000 {
       #dma-cells = <0x01>;
       compatible = "generic-uio";
       interrupt-parent = <0x04>;
       interrupts = <0x00 0x37 0x04>;
-      reg = <0x41280000 0x10000>;
+      reg = <0x412d0000 0x10000>;
     };
 
-    fifo_interrupt_4: fifo@41290000 {
+    fifo_interrupt_4: fifo@412e0000 {
       #dma-cells = <0x01>;
       compatible = "generic-uio";
       interrupt-parent = <0x04>;
       interrupts = <0x00 0x38 0x04>;
-      reg = <0x41290000 0x10000>;
+      reg = <0x412e0000 0x10000>;
     };
 
-    fifo_interrupt_5: fifo@412a0000 {
+    fifo_interrupt_5: fifo@412f0000 {
       #dma-cells = <0x01>;
       compatible = "generic-uio";
       interrupt-parent = <0x04>;
       interrupts = <0x00 0x39 0x04>;
-      reg = <0x412a0000 0x10000>;
+      reg = <0x412f0000 0x10000>;
     };
 
-    fifo_interrupt_6: fifo@412b0000 {
+    fifo_interrupt_6: fifo@41300000 {
       #dma-cells = <0x01>;
       compatible = "generic-uio";
       interrupt-parent = <0x04>;
       interrupts = <0x00 0x3a 0x04>;
-      reg = <0x412b0000 0x10000>;
+      reg = <0x41300000 0x10000>;
     };
 
-    fifo_interrupt_7: fifo@412c0000 {
+    fifo_interrupt_7: fifo@41310000 {
       #dma-cells = <0x01>;
       compatible = "generic-uio";
       interrupt-parent = <0x04>;
       interrupts = <0x00 0x3b 0x04>;
-      reg = <0x412c0000 0x10000>;
+      reg = <0x41310000 0x10000>;
     };
   };
 
