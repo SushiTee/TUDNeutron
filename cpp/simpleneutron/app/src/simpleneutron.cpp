@@ -8,6 +8,8 @@
 #include <hwdevice/hwdevice.h>
 #include <gpio/sensorcontroller.h>
 #include <gpio/wordlengthcontroller.h>
+#include <gpio/measurementtimer.h>
+#include <gpio/measurementstop.h>
 #include <gpio/switches.h>
 #include <gpio/triggerinput.h>
 #include <gpio/testgenerator.h>
@@ -48,6 +50,18 @@ int main(int argc, char *argv[]) {
    simpleneutron::components::gpio::TriggerInput::init(GPIO_4, mem);
    if (simpleneutron::components::gpio::TriggerInput::hasError()) {
       LogErr << "Error creating TriggerInput Gpio object" << std::endl;
+      return 1;
+   }
+
+   simpleneutron::components::gpio::MeasurementTimer::init(GPIO_5, mem);
+   if (simpleneutron::components::gpio::MeasurementTimer::hasError()) {
+      LogErr << "Error creating MeasurementTimer Gpio object" << std::endl;
+      return 1;
+   }
+
+   simpleneutron::components::gpio::MeasurementStop::init(GPIO_6, mem);
+   if (simpleneutron::components::gpio::MeasurementStop::hasError()) {
+      LogErr << "Error creating MeasurementStop Gpio object" << std::endl;
       return 1;
    }
 

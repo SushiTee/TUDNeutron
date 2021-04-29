@@ -19,7 +19,7 @@
             <spirit:name>m00_axis_tdata</spirit:name>
           </spirit:physicalPort>
         </spirit:portMap>
-	<spirit:portMap>
+        <spirit:portMap>
           <spirit:logicalPort>
             <spirit:name>TKEEP</spirit:name>
           </spirit:logicalPort>
@@ -138,23 +138,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>59c20701</spirit:value>
-          </spirit:parameter>
-        </spirit:parameters>
-      </spirit:view>
-      <spirit:view>
-        <spirit:name>xilinx_vhdlbehavioralsimulation</spirit:name>
-        <spirit:displayName>VHDL Simulation</spirit:displayName>
-        <spirit:envIdentifier>vhdlSource:vivado.xilinx.com:simulation</spirit:envIdentifier>
-        <spirit:language>vhdl</spirit:language>
-        <spirit:modelName>signal_generator_v1_0</spirit:modelName>
-        <spirit:fileSetRef>
-          <spirit:localName>xilinx_vhdlbehavioralsimulation_view_fileset</spirit:localName>
-        </spirit:fileSetRef>
-        <spirit:parameters>
-          <spirit:parameter>
-            <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>59c20701</spirit:value>
+            <spirit:value>7e63a05a</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -168,7 +152,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>42d33723</spirit:value>
+            <spirit:value>6c81f027</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -186,6 +170,36 @@
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
+      <spirit:view>
+        <spirit:name>xilinx_testbench</spirit:name>
+        <spirit:displayName>Test Bench</spirit:displayName>
+        <spirit:envIdentifier>:vivado.xilinx.com:simulation.testbench</spirit:envIdentifier>
+        <spirit:modelName>testbench</spirit:modelName>
+        <spirit:fileSetRef>
+          <spirit:localName>xilinx_testbench_view_fileset</spirit:localName>
+        </spirit:fileSetRef>
+        <spirit:parameters>
+          <spirit:parameter>
+            <spirit:name>viewChecksum</spirit:name>
+            <spirit:value>f959eca4</spirit:value>
+          </spirit:parameter>
+        </spirit:parameters>
+      </spirit:view>
+      <spirit:view>
+        <spirit:name>xilinx_anylanguagebehavioralsimulation</spirit:name>
+        <spirit:displayName>Simulation</spirit:displayName>
+        <spirit:envIdentifier>:vivado.xilinx.com:simulation</spirit:envIdentifier>
+        <spirit:modelName>signal_generator_v1_0</spirit:modelName>
+        <spirit:fileSetRef>
+          <spirit:localName>xilinx_anylanguagebehavioralsimulation_view_fileset</spirit:localName>
+        </spirit:fileSetRef>
+        <spirit:parameters>
+          <spirit:parameter>
+            <spirit:name>viewChecksum</spirit:name>
+            <spirit:value>7e63a05a</spirit:value>
+          </spirit:parameter>
+        </spirit:parameters>
+      </spirit:view>
     </spirit:views>
     <spirit:ports>
       <spirit:port>
@@ -196,7 +210,7 @@
             <spirit:wireTypeDef>
               <spirit:typeName>std_logic</spirit:typeName>
               <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
-              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
             </spirit:wireTypeDef>
           </spirit:wireTypeDefs>
         </spirit:wire>
@@ -209,7 +223,7 @@
             <spirit:wireTypeDef>
               <spirit:typeName>std_logic</spirit:typeName>
               <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
-              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
             </spirit:wireTypeDef>
           </spirit:wireTypeDefs>
         </spirit:wire>
@@ -222,7 +236,7 @@
             <spirit:wireTypeDef>
               <spirit:typeName>std_logic</spirit:typeName>
               <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
-              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
             </spirit:wireTypeDef>
           </spirit:wireTypeDefs>
         </spirit:wire>
@@ -239,7 +253,37 @@
             <spirit:wireTypeDef>
               <spirit:typeName>std_logic_vector</spirit:typeName>
               <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
-              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>measurement_time</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long">31</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic_vector</spirit:typeName>
+              <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>stopped</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic</spirit:typeName>
+              <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
             </spirit:wireTypeDef>
           </spirit:wireTypeDefs>
         </spirit:wire>
@@ -256,7 +300,7 @@
             <spirit:wireTypeDef>
               <spirit:typeName>std_logic_vector</spirit:typeName>
               <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
-              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
             </spirit:wireTypeDef>
           </spirit:wireTypeDefs>
         </spirit:wire>
@@ -273,7 +317,7 @@
             <spirit:wireTypeDef>
               <spirit:typeName>std_logic_vector</spirit:typeName>
               <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
-              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
             </spirit:wireTypeDef>
           </spirit:wireTypeDefs>
         </spirit:wire>
@@ -286,7 +330,7 @@
             <spirit:wireTypeDef>
               <spirit:typeName>std_logic</spirit:typeName>
               <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
-              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
             </spirit:wireTypeDef>
           </spirit:wireTypeDefs>
         </spirit:wire>
@@ -299,7 +343,7 @@
             <spirit:wireTypeDef>
               <spirit:typeName>std_logic</spirit:typeName>
               <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
-              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
             </spirit:wireTypeDef>
           </spirit:wireTypeDefs>
         </spirit:wire>
@@ -312,7 +356,7 @@
             <spirit:wireTypeDef>
               <spirit:typeName>std_logic</spirit:typeName>
               <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
-              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
             </spirit:wireTypeDef>
           </spirit:wireTypeDefs>
         </spirit:wire>
@@ -325,7 +369,7 @@
             <spirit:wireTypeDef>
               <spirit:typeName>std_logic</spirit:typeName>
               <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
-              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
             </spirit:wireTypeDef>
           </spirit:wireTypeDefs>
         </spirit:wire>
@@ -342,7 +386,7 @@
             <spirit:wireTypeDef>
               <spirit:typeName>std_logic_vector</spirit:typeName>
               <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
-              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
             </spirit:wireTypeDef>
           </spirit:wireTypeDefs>
         </spirit:wire>
@@ -359,7 +403,7 @@
             <spirit:wireTypeDef>
               <spirit:typeName>std_logic_vector</spirit:typeName>
               <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
-              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
             </spirit:wireTypeDef>
           </spirit:wireTypeDefs>
         </spirit:wire>
@@ -372,7 +416,7 @@
             <spirit:wireTypeDef>
               <spirit:typeName>std_logic</spirit:typeName>
               <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
-              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
             </spirit:wireTypeDef>
           </spirit:wireTypeDefs>
         </spirit:wire>
@@ -385,7 +429,7 @@
             <spirit:wireTypeDef>
               <spirit:typeName>std_logic</spirit:typeName>
               <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
-              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
             </spirit:wireTypeDef>
           </spirit:wireTypeDefs>
         </spirit:wire>
@@ -403,6 +447,11 @@
         <spirit:displayName>C M00 AXIS START COUNT</spirit:displayName>
         <spirit:description>Start count is the number of clock cycles the master will wait before initiating/issuing any transaction.</spirit:description>
         <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_M00_AXIS_START_COUNT" spirit:order="4" spirit:minimum="1" spirit:rangeType="long">32</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter spirit:dataType="integer">
+        <spirit:name>STOP_DELAY_TICKS</spirit:name>
+        <spirit:displayName>Stop Delay Ticks</spirit:displayName>
+        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.STOP_DELAY_TICKS">10000000</spirit:value>
       </spirit:modelParameter>
     </spirit:modelParameters>
   </spirit:model>
@@ -427,18 +476,7 @@
       <spirit:file>
         <spirit:name>hdl/signal_generator_v1_0.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_a98622e5</spirit:userFileType>
-      </spirit:file>
-    </spirit:fileSet>
-    <spirit:fileSet>
-      <spirit:name>xilinx_vhdlbehavioralsimulation_view_fileset</spirit:name>
-      <spirit:file>
-        <spirit:name>hdl/signal_generator_v1_0_M00_AXIS.vhd</spirit:name>
-        <spirit:fileType>vhdlSource</spirit:fileType>
-      </spirit:file>
-      <spirit:file>
-        <spirit:name>hdl/signal_generator_v1_0.vhd</spirit:name>
-        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>CHECKSUM_80510cd2</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
@@ -446,7 +484,7 @@
       <spirit:file>
         <spirit:name>xgui/signal_generator_v1_0.tcl</spirit:name>
         <spirit:fileType>tclSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_42d33723</spirit:userFileType>
+        <spirit:userFileType>CHECKSUM_6c81f027</spirit:userFileType>
         <spirit:userFileType>XGUI_VERSION_2</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
@@ -455,6 +493,26 @@
       <spirit:file>
         <spirit:name>bd/bd.tcl</spirit:name>
         <spirit:fileType>tclSource</spirit:fileType>
+      </spirit:file>
+    </spirit:fileSet>
+    <spirit:fileSet>
+      <spirit:name>xilinx_testbench_view_fileset</spirit:name>
+      <spirit:file>
+        <spirit:name>hdl/testbench.v</spirit:name>
+        <spirit:fileType>verilogSource</spirit:fileType>
+        <spirit:userFileType>USED_IN_simulation</spirit:userFileType>
+        <spirit:userFileType>USED_IN_testbench</spirit:userFileType>
+      </spirit:file>
+    </spirit:fileSet>
+    <spirit:fileSet>
+      <spirit:name>xilinx_anylanguagebehavioralsimulation_view_fileset</spirit:name>
+      <spirit:file>
+        <spirit:name>hdl/signal_generator_v1_0_M00_AXIS.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>hdl/signal_generator_v1_0.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
     </spirit:fileSet>
   </spirit:fileSets>
@@ -483,6 +541,11 @@
       <spirit:name>Component_Name</spirit:name>
       <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Component_Name" spirit:order="1">signal_generator_v1_0</spirit:value>
     </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>STOP_DELAY_TICKS</spirit:name>
+      <spirit:displayName>Stop Delay Ticks</spirit:displayName>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.STOP_DELAY_TICKS" spirit:minimum="1" spirit:maximum="100000000" spirit:rangeType="long">10000000</spirit:value>
+    </spirit:parameter>
   </spirit:parameters>
   <spirit:vendorExtensions>
     <xilinx:coreExtensions>
@@ -493,8 +556,8 @@
         <xilinx:taxonomy>AXI_Peripheral</xilinx:taxonomy>
       </xilinx:taxonomies>
       <xilinx:displayName>signal_generator_v1.0</xilinx:displayName>
-      <xilinx:coreRevision>9</xilinx:coreRevision>
-      <xilinx:coreCreationDateTime>2020-02-10T17:17:31Z</xilinx:coreCreationDateTime>
+      <xilinx:coreRevision>13</xilinx:coreRevision>
+      <xilinx:coreCreationDateTime>2021-03-24T09:55:50Z</xilinx:coreCreationDateTime>
       <xilinx:tags>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@6f145de5_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/signal_generator_1.0</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@7771d214_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/signal_generator_1.0</xilinx:tag>
@@ -649,15 +712,122 @@
         <xilinx:tag xilinx:name="ui.data.coregen.dd@54d7b209_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/signal_generator_1.0</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@4149ff94_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/signal_generator_1.0</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@752d36cc_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@16266c2e_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2a3a1e74_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@774f3e84_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4f1bec5d_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@596b93e2_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5d099f9b_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4d065d9a_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2fa6fa23_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@50aecca9_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@50a72b0_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@89d3638_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@b0b36c2_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@20d5384c_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@459bbf60_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1a749a89_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@c4c4fbe_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5030c83d_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2c5f0979_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2968b1f7_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@77a59a44_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3ec5f8a5_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@520f7f04_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@729f5bd5_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2874b413_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@254c4a66_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@31306627_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2f314969_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@781660a9_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@ce7676d_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4a37df46_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@200e5703_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@59f55aa0_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2da7688_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@66a514d6_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2b33a453_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@68dee4af_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@57d8b507_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@621da07d_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2040f3fa_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1c9597fd_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@d8586f0_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6d779f02_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@639a8820_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@61b34b15_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1e7a4938_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1e043299_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@547e0c19_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@60eca7bc_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@328c0fcc_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2c8dbf21_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@16266338_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@30615ff4_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7939ee09_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@519ae4dc_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3b4b5905_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3e5e5697_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3d576172_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@108e927c_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@78fc51ce_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@79b1c343_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@15ba34be_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4d14783a_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1b982d01_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7c3b716e_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2a00f6c7_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@14210517_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1cd3af4_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@60af659f_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@61a9fbff_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4532777e_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@38255615_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@482dc79b_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@57a09b60_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@270959aa_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@64c92909_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@30bb7c25_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@76128f32_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2e7ce4d7_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3fa49403_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@d42a484_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@365fb77c_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@471f49d8_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1bcf0b3c_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@d430992_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@8e57459_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6983a559_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@372092e6_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5a40f148_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@311fe87a_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@37321d62_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6e4bab54_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6083eda2_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@242a436f_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2bd57e16_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3938c02a_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@29b83aa_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7c796e64_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@76e9f0fd_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@476f03ab_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@14ddb5b5_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@68ecf1cd_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@64e3bdc_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1328d587_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@769cb604_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1c35516a_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3a35f0f5_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@44bc18a7_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/signal_generator_1.0</xilinx:tag>
       </xilinx:tags>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
-      <xilinx:xilinxVersion>2019.2.1</xilinx:xilinxVersion>
-      <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="8de02c38"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="fba941dc"/>
-      <xilinx:checksum xilinx:scope="ports" xilinx:value="89463fe0"/>
-      <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="9a194edc"/>
-      <xilinx:checksum xilinx:scope="parameters" xilinx:value="bdd17a4f"/>
+      <xilinx:xilinxVersion>2020.2</xilinx:xilinxVersion>
+      <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="185c79f2"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="5f9ae7bb"/>
+      <xilinx:checksum xilinx:scope="ports" xilinx:value="8fd1ee45"/>
+      <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="44e4af7c"/>
+      <xilinx:checksum xilinx:scope="parameters" xilinx:value="17f38401"/>
     </xilinx:packagingInfo>
   </spirit:vendorExtensions>
 </spirit:component>

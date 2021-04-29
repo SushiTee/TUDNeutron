@@ -64,8 +64,11 @@ ApplicationWindow {
 
         function goBack() {
             if (stackView.depth > 1) {
-                stackView.currentItem.goBack();
-                stackView.pop();
+                stackView.currentItem.validate();
+                if (stackView.currentItem.backValid) {
+                    stackView.currentItem.goBack();
+                    stackView.pop();
+                }
             }
         }
 

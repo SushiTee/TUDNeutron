@@ -11,6 +11,8 @@
 #include <gpio/switches.h>
 #include <gpio/testgenerator.h>
 #include <gpio/triggerinput.h>
+#include <gpio/measurementstop.h>
+#include <gpio/measurementtimer.h>
 #include <controller/controller.h>
 
 namespace simpleneutron {
@@ -136,7 +138,7 @@ bool Controller::receiveData() {
         LogErr << "Payload too big (given: " << payloadSize << " max: " << BUFFER_SIZE << "). Disconnecting!" << std::endl;
         return false;
     }
-    
+
     // header done. Take care of payload
     if (!receive(buff, payloadSize)) {
         return false;
@@ -206,19 +208,35 @@ void Controller::sendDmaData() {
     uint16_t payloadSize; // 0 means max!
     payloadSizeConverter conv;
     bool dataSend;
+    uint8_t dmaFinished = 0;
+    uint8_t dmaFinishedCount = 0;
     while (!threadQuit)
     {
         dataSend = false;
         for (auto &dma : mDmas) {
-            if (dma->getWaitForDestroy() || dma->empty()) {
+            if (dma->empty()) {
+                if (dma->isStopped() && !dma->isRunning()) {
+                    if (!(dmaFinished & (1 << dma->getID()))) {
+                        dmaFinished |= (1 << dma->getID());
+                        dmaFinishedCount++;
+                        if (dmaFinishedCount == mDmas.size()) {
+                            LogOut << "All DMA finished" << std::endl;
+                            deactivateAll();
+                            gpio::MeasurementTimer::resetStopMeasurement(); // set correct measurement time again!
+                            sendData(MessageType::STOP_DMA, "{\"status\":\"OK\"}");
+                            return;
+                        }
+                    }
+                }
                 continue;
             }
 
             if (dma->full()) {
-                dma->setWaitForDestroy();
-                LogOut << "Fifo is full " << std::to_string(dma->getID()) << std::endl;
-                sendData(MessageType::FIFO_FULL, "{\"status\":\"Error\",\"msg\":\"Fifo is full.\",\"dma\":" + std::to_string(dma->getID()) + "}");
-                continue;
+                if (!dma->fifoFullHandled()) {
+                    LogOut << "Fifo is full " << std::to_string(dma->getID()) << std::endl;
+                    sendData(MessageType::FIFO_FULL, "{\"status\":\"Error\",\"msg\":\"Fifo is full.\",\"dma\":" + std::to_string(dma->getID()) + "}");
+                    dma->setFifoFullHandled();
+                }
             }
 
             size = dma->writeSize();
@@ -232,6 +250,7 @@ void Controller::sendDmaData() {
             message[1] = conv.bytes[0];
             message[2] = conv.bytes[1];
 
+            // this sends the last package complete which may contain invalid values. All values before the last 0 are valid!
             sendDataImpl(reinterpret_cast<const std::byte*>(message.data()), reinterpret_cast<const std::byte*>(dma->memoryMap() + offset), size * 4);
 
             if (!dataSend) {
@@ -253,11 +272,11 @@ bool Controller::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType type, siz
     case MessageType::START_DMA: {
         LogOut << "Handle DMA start " << std::endl;
 
-        if (size != 1) {
+        if (size != 5) {
             LogErr << "Received unexpected payload" << std::endl;
             networkOK = sendData(type, "{\"status\":\"Error\",\"msg\":\"Received unexpected payload.\"}");
             break;
-        } 
+        }
 
         uint8_t dmas = static_cast<uint8_t>(buff[0]);
         if (dmas == 0u) {
@@ -265,6 +284,12 @@ bool Controller::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType type, siz
             networkOK = sendData(type, "{\"status\":\"Error\",\"msg\":\"Error no DMA should be activated.\"}");
             break;
         }
+
+        // set measurement time
+        gpio::MeasurementTimer::setTime(* reinterpret_cast<const uint32_t *>(&buff[1]));
+
+        // reset measurement stopped
+        gpio::MeasurementStop::reset();
 
         bool dmaStartFailed = false;
         for (auto i = 0; i < 8; i++) {
@@ -300,6 +325,9 @@ bool Controller::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType type, siz
 
         if (!dmaStartFailed) {
             networkOK = sendData(type, "{\"status\":\"OK\"}");
+            if (mThread != nullptr) { // destroy thread if it is still there!
+                destroyThread();
+            }
             mThread = std::make_unique<std::thread>([this](){
                 sendDmaData();
             });
@@ -323,9 +351,9 @@ bool Controller::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType type, siz
     }
     case MessageType::STOP_DMA:
         LogOut << "Handle DMA stop " << size << std::endl;
-        destroyThread();
-        deactivateAll();
-        networkOK = sendData(type, "{\"status\":\"OK\"}");
+        // set time to 1ms to stop measurement
+        // The measurement will be stopped after the remaining data is sent
+        gpio::MeasurementTimer::stopMeasurement();
         break;
     case MessageType::CONNECT: {
         // stop everything
@@ -337,7 +365,7 @@ bool Controller::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType type, siz
             LogErr << "Received unexpected payload" << std::endl;
             networkOK = sendData(type, "{\"status\":\"Error\",\"msg\":\"Received unexpected payload.\"}");
             break;
-        } 
+        }
 
         // setting package size
         uint8_t value = static_cast<uint8_t>(buff[0]);
@@ -376,9 +404,9 @@ bool Controller::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType type, siz
         for (auto i = 0; i < 8; i++) {
             if (mSwitchState & (1 << i)) {
                 switchState += "true";
-                oneActive = true; 
+                oneActive = true;
             } else {
-                switchState += "false"; 
+                switchState += "false";
             }
             if (i < 7) {
                 switchState += ',';
@@ -389,7 +417,7 @@ bool Controller::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType type, siz
         } else {
             switchState += "]";
         }
-        networkOK = sendData(type, "{\"status\":\"OK\",\"switchState\":" + switchState + "}");
+        networkOK = sendData(type, "{\"status\":\"OK\",\"switchState\":" + switchState + ",\"measurementTime\":" + std::to_string(gpio::MeasurementTimer::getTime()) + "}");
         break;
     }
     default:
@@ -427,6 +455,11 @@ void Controller::deactivateAll() {
 void Controller::destroyThread() {
     if (!mThread) return;
 
+    if (!mThread->joinable()) {
+        mThread = nullptr;
+        return;
+    }
+
     // set thread quit
     threadQuit = true;
 
@@ -438,6 +471,6 @@ void Controller::destroyThread() {
     threadQuit = false;
 }
 
-} // controller    
+} // controller
 } // components
 } // simpleneutron

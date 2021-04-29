@@ -17,6 +17,11 @@ constexpr int quitSignal = SIGINT;
 sighandler_t prevSignal;
 #endif
 
+union MeasurementTimeConverter {
+    std::byte bytes[4];
+    uint32_t measurementTime;
+};
+
 union payloadSizeConverter {
     std::byte bytes[2];
     uint16_t num;
@@ -137,6 +142,27 @@ void NetworkHandler::networkConnect(QString host, int port)
         QMetaObject::invokeMethod(m_controller, "connected", Q_ARG(bool, false), Q_ARG(QJsonDocument, QJsonDocument()));
     }
     m_controller->connectionUnlock();
+}
+
+void NetworkHandler::startMeasurement(QList<bool> sensorsList, uint32_t measurementTime)
+{
+    openFiles(sensorsList);
+    uint8_t sensorsBinary = 0;
+    for (int i = 0; i < sensorsList.size(); i++) {
+        if (sensorsList[i]) {
+            sensorsBinary |= (1 << i);
+        }
+    }
+    MeasurementTimeConverter measurementTimeConverter;
+    measurementTimeConverter.measurementTime = measurementTime;
+    kn::buffer<5> buff;
+    buff[0] = static_cast<std::byte>(sensorsBinary);
+    buff[1] = measurementTimeConverter.bytes[0];
+    buff[2] = measurementTimeConverter.bytes[1];
+    buff[3] = measurementTimeConverter.bytes[2];
+    buff[4] = measurementTimeConverter.bytes[3];
+
+    sendData(MessageType::START_DMA, buff.data(), buff.size());
 }
 
 bool NetworkHandler::receiveData() {
@@ -296,6 +322,17 @@ void NetworkHandler::handleData(kn::buffer<BUFFER_SIZE> &buff, MessageType::Mess
             size = 0x10000u;
         }
         uint64_t dataSize = size * m_packageSize;
+
+        // check for 0 in received. If found it indicated the last value for the sensor.
+        uint64_t lastPackage = 4 * (dataSize - m_packageSize); // pointer to last package
+        for (uint64_t i = 0; i < m_packageSize; i++) {
+            uint32_t value = *reinterpret_cast<uint32_t*>(buff.data() + lastPackage + i * 4);
+            // if value == 0 it indicated that the last value was received!
+            if (value == 0) {
+                dataSize -= m_packageSize - i;
+                break;
+            }
+        }
         m_mutex.lock();
         m_sensorDataCount[static_cast<int>(type)] += dataSize;
         m_mutex.unlock();

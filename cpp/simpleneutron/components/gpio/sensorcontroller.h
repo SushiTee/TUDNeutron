@@ -9,6 +9,8 @@ namespace gpio {
 
 class SensorController : public Gpio {
     SensorController(uint32_t registerBase, int mem);
+    SensorController(SensorController &&) = delete;
+    SensorController &operator=(SensorController &&) = delete;
     ~SensorController();
     static SensorController &getInstanceImpl(uint32_t registerBase = 0, int mem = 0);
     static SensorController &getInstance();
@@ -26,6 +28,6 @@ public:
     static bool hasError();
 };
 
-} // gpio    
+} // gpio
 } // components
 } // simpleneutron

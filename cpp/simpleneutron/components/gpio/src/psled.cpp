@@ -1,7 +1,9 @@
 #include <iostream>
+#include <fstream>
 #include <unistd.h>
 #include <cstring>
 #include <fcntl.h>
+#include <filesystem>
 #include <logger/logger.h>
 #include <hwdevice/hwdevice.h>
 #include <gpio/psled.h>
@@ -12,21 +14,49 @@ namespace gpio {
 
 PsLed::PsLed()
 {
-    int device = open(PS_LED.mGpioExport, O_WRONLY);
+    std::string path = "/sys/class/gpio";
+    std::string gpioPath = "";
+    for (const auto & entry : std::filesystem::directory_iterator(path)) {
+        if (entry.is_directory()) {
+            std::string filename = entry.path().filename().string();
+            if (filename.find("gpiochip") != std::string::npos) {
+                std::string gpioBase = filename.substr(8);
+                std::string labelPath = entry.path().string() + "/label";
+                std::ifstream file(labelPath);
+                std::string line;
+                std::getline(file, line);
+                if (line == "zynq_gpio") {
+                    mGpioNumber = std::stoi(gpioBase) + PS_LED.mOffset;
+                    gpioPath = path + "/gpio" + std::to_string(mGpioNumber);
+                }
+            }
+        }
+    }
+    if (mGpioNumber == 0) {
+        LogErr << "PS_LED: could not find GPIO for LED" << std::endl;
+        mHasError = true;
+        return;
+    }
+
+    std::string tmpPath = path + "/export";
+    int device = open(tmpPath.c_str(), O_WRONLY);
     if (device < 0) {
         LogErr << "PS_LED: could not open export file" << std::endl;
         mHasError = true;
         return;
     }
 
-    int bytes = write(device, PS_LED.mRegisterBit, std::strlen(PS_LED.mRegisterBit));
-    if (bytes != std::strlen(PS_LED.mRegisterBit)) {
+    std::string gpioNumberStr = std::to_string(mGpioNumber);
+    int bytes = write(device, gpioNumberStr.c_str(), gpioNumberStr.length());
+    if (static_cast<std::size_t>(bytes) != gpioNumberStr.length()) {
         LogErr << "PS_LED: could not export LED GPIO. Probably already done!" << std::endl;
     }
 
     close(device);
 
-    device = open(PS_LED.mGpioDirection, O_WRONLY);
+    tmpPath = gpioPath + "/direction";
+    LogOut << "Dir " << tmpPath << std::endl;
+    device = open(tmpPath.c_str(), O_WRONLY);
     if (device < 0) {
         LogErr << "PS_LED: could not open direction file" << std::endl;
         mHasError = true;
@@ -43,7 +73,8 @@ PsLed::PsLed()
 
     close(device);
 
-    mGpio = open(PS_LED.mGpioValue, O_WRONLY);
+    tmpPath = gpioPath + "/value";
+    mGpio = open(tmpPath.c_str(), O_WRONLY);
     if (mGpio < 0) {
         LogErr << "PS_LED: could not open value file" << std::endl;
         mHasError = true;
@@ -69,15 +100,17 @@ PsLed::~PsLed() {
         close(mGpio);
     }
 
-    int device = open(PS_LED.mGpioUnexport, O_WRONLY);
+    std::string path = "/sys/class/gpio/unexport";
+    int device = open(path.c_str(), O_WRONLY);
     if (device < 0) {
         LogErr << "PS_LED: could not open unexport file" << std::endl;
         mHasError = true;
         return;
     }
 
-    int bytes = write(device, PS_LED.mRegisterBit, std::strlen(PS_LED.mRegisterBit));
-    if (bytes != std::strlen(PS_LED.mRegisterBit)) {
+    std::string gpioNumberStr = std::to_string(mGpioNumber);
+    int bytes = write(device, gpioNumberStr.c_str(), gpioNumberStr.length());
+    if (static_cast<std::size_t>(bytes) != gpioNumberStr.length()) {
         LogErr << "PS_LED: could not unexport LED GPIO. Proboably already done!" << std::endl;
     }
 
@@ -99,6 +132,6 @@ bool PsLed::hasError() {
     return ref.hasErrorImpl();
 }
 
-} // gpio    
+} // gpio
 } // components
 } // simpleneutron

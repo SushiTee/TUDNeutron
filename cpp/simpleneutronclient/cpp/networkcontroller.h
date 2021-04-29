@@ -32,6 +32,7 @@ public:
     uint32_t testSignalCount() const;
     int testSignalFrequency() const;
     QString storageLocation() const;
+    uint32_t measurementTime() const; // im ms | 0 -> infinite
     void connectionLock();
     void connectionUnlock();
 
@@ -47,6 +48,7 @@ private:
     Q_PROPERTY(int testSignalFrequency READ testSignalFrequency WRITE setTestSignalFrequency NOTIFY testSignalFrequencyChanged)
     Q_PROPERTY(QVariantList sensors READ sensors NOTIFY sensorsChanged)
     Q_PROPERTY(QString storageLocation READ storageLocation WRITE setStorageLocation NOTIFY storageLocationChanged)
+    Q_PROPERTY(uint32_t measurementTime READ measurementTime WRITE setMeasurementTime NOTIFY measurementTimeChanged)
 
     QString m_host = "zedboard";
     int m_port = 22222;
@@ -58,6 +60,7 @@ private:
     int m_testSignalFrequency = 1;
     QVariantList m_sensors = {};
     QString m_storageLocation = "";
+    uint32_t m_measurementTime;
     MessageType::ConnectedState m_connected = MessageType::ConnectedState::DISCONNECTED;
     QMutex m_connectMutex;
 
@@ -74,6 +77,7 @@ private:
     bool sensorsActive() const;
     void setSensorsActive(bool sensorsActive);
     void setStorageLocation(QString storageLocation);
+    void setMeasurementTime(uint32_t measurementTime);
     MessageType::ConnectedState getConnected();
     void setConnected(MessageType::ConnectedState connected);
 
@@ -83,7 +87,7 @@ private:
 public slots:
     void networkConnect();
     void networkDisconnect();
-    void activateSensors(QList<bool> list);
+    void activateSensors(QList<bool> list, uint32_t measurementTime);
     void deactivateSensors();
     QVariantList sensors();
     void requestSensorData();
@@ -112,6 +116,7 @@ signals:
     void testSignalCountChanged(uint32_t testSignalCount);
     void testSignalFrequencyChanged(int testSignalFrequency);
     void storageLocationChanged(QString storageLocation);
+    void measurementTimeChanged(uint32_t measurementTime);
     void dmaFull(int dma);
     void sensorData(QVector<uint64_t> sensorData);
 };

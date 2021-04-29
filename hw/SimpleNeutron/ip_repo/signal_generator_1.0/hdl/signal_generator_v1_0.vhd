@@ -5,7 +5,7 @@ use ieee.numeric_std.all;
 entity signal_generator_v1_0 is
   generic (
     -- Users to add parameters here
-
+    STOP_DELAY_TICKS : integer := 10000000;
     -- User parameters ends
     -- Do not modify the parameters beyond this line
 
@@ -17,9 +17,11 @@ entity signal_generator_v1_0 is
   port (
     -- Users to add ports here
     enabled      : in std_logic; -- enable this ip core
-    signal_state : out std_logic; -- shows the state (if enabled AND signal detected -> LOW; if enabled AND no signal detected -> HIGH; otherwise LOW )
+    signal_state : out std_logic; -- shows the state (HIGH if measurement is running)
     fifo_reset   : out std_logic; -- resets an connected fifo after being enabled
     number_words : in std_logic_vector(15 downto 0); -- number of words to be send as package
+    measurement_time : in std_logic_vector(31 downto 0); -- measurement time in ms
+    stopped      : out std_logic; -- measurement stopped
     signal_count : in std_logic_vector(31 downto 0);
     signal_frequency: in std_logic_vector(27 downto 0);
     signal_input : in std_logic;
@@ -42,6 +44,7 @@ architecture arch_imp of signal_generator_v1_0 is
   -- component declaration
   component signal_generator_v1_0_M00_AXIS is
     generic (
+    STOP_DELAY_TICKS     : integer := 10000000;
     C_M_AXIS_TDATA_WIDTH : integer := 32;
     C_M_START_COUNT      : integer := 32
     );
@@ -50,6 +53,8 @@ architecture arch_imp of signal_generator_v1_0 is
     signal_state   : out std_logic;
     fifo_reset     : out std_logic;
     number_words   : in std_logic_vector(15 downto 0);
+    measurement_time : in std_logic_vector(31 downto 0);
+    stopped        : out std_logic;
     signal_count   : in std_logic_vector(31 downto 0);
     signal_frequency: in std_logic_vector(27 downto 0);
     signal_input   : in std_logic;
@@ -69,13 +74,16 @@ begin
 signal_generator_v1_0_M00_AXIS_inst : signal_generator_v1_0_M00_AXIS
   generic map (
     C_M_AXIS_TDATA_WIDTH => C_M00_AXIS_TDATA_WIDTH,
-    C_M_START_COUNT      => C_M00_AXIS_START_COUNT
+    C_M_START_COUNT      => C_M00_AXIS_START_COUNT,
+    STOP_DELAY_TICKS     => STOP_DELAY_TICKS
   )
   port map (
     enabled        => enabled,
     signal_state   => signal_state,
     fifo_reset     => fifo_reset,
     number_words   => number_words,
+    measurement_time => measurement_time,
+    stopped        => stopped,
     signal_count   => signal_count,
     signal_input   => signal_input,
     signal_frequency => signal_frequency,

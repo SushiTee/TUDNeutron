@@ -23,6 +23,84 @@ Page {
         NetworkController.networkDisconnect();
     }
 
+    Keys.onPressed: {
+        if (!startStopButton.enabled || event.isAutoRepeat) return;
+
+        if (event.key === Qt.Key_Enter || event.key === Qt.Key_Return) {
+            clickHandler();
+        }
+    }
+
+    function clickHandler() {
+        if (!NetworkController.sensorsActive) {
+            if (!NetworkController.storageWritable()) {
+                Globals.mainWindow.dialog.title = "Location not writable";
+                Globals.mainWindow.dialog.message = "The selected storage location is not writable. Please enter the settings page and select a different location.";
+                Globals.mainWindow.dialog.open();
+                stackView.reset();
+                return;
+            }
+
+            if (timerCheckbox.checked) {
+                let timeVal = parseFloat(timerTextField.text);
+                if (timeVal <= 0) {
+                    console.error("Timer should not be smaller than 0");
+                    Globals.mainWindow.dialog.title = "Time value wrong";
+                    Globals.mainWindow.dialog.message = "The value for the timer must be bigger than 0!";
+                    Globals.mainWindow.dialog.open();
+                    return;
+                }
+            }
+
+            let list = Array(8).fill(false);
+            for (let i = 0; i < list.length; i++) {
+                for (let j = 0; j < listModel.count; j++) {
+                    if (listModel.get(j).num === i && listModel.get(j).selected) {
+                        list[i] = listModel.get(j).selected;
+                        break;
+                    }
+                }
+            }
+            for (let i = 0; i < listModel.count; i++) {
+                listModel.get(i).count = 0;
+                listModel.get(i).full = false;
+            }
+
+            sensorDataTimer.start();
+            if (timerCheckbox.checked) {
+                let timeVal = parseFloat(timerTextField.text);
+                switch (timerComboBox.currentIndex) {
+                case 0:
+                    break;
+                case 1:
+                    timeVal *= 1000;
+                    break;
+                case 2:
+                    timeVal *= 60000;
+                    break;
+                case 3:
+                    timeVal *= 3600000;
+                }
+                timeVal = parseInt(timeVal);
+                if (timeVal < 1) { // not smaller than 1
+                    timeVal = 1;
+                    timerComboBox.currentIndex = 0;
+                    timerTextField.text = "1";
+                }
+                NetworkController.activateSensors(list, timeVal);
+                measurementTimer.start();
+                runningTimer.setData(timeVal);
+            } else {
+                NetworkController.activateSensors(list, 0);
+                runningTimer.setData();
+            }
+
+            runningTimer.start();
+        } else {
+            root.deactivateSensors();
+        }
+    }
+
     function getActiveSensors() {
         for (let i = 0; i < NetworkController.sensors.length; i++) {
             if (NetworkController.sensors[i] === true) {
@@ -45,12 +123,14 @@ Page {
     function deactivateSensors() {
         NetworkController.deactivateSensors();
 
+        stopTimers();
+    }
+
+    function stopTimers() {
         measurementTimer.stop();
         sensorDataTimer.stop();
         runningTimer.stop();
         runningTimer.reset();
-
-        NetworkController.requestSensorData();
     }
 
     BusyIndicator {
@@ -75,7 +155,7 @@ Page {
         interval: 10
         onTriggered: {
             if (runningTimer.stopTime > 0 && Date.now() >= runningTimer.stopTime) {
-                root.deactivateSensors();
+                root.stopTimers();
             }
         }
     }
@@ -180,11 +260,46 @@ Page {
         function onSensorData(sensorData) {
             setSensorData(sensorData);
         }
+
+        function onSensorsActiveChanged(sensorsActive) {
+            if (!sensorsActive) {
+                stopTimers();
+                NetworkController.requestSensorData();
+            }
+        }
     }
 
     Item {
         anchors.fill: parent
         visible: !busyIndicator.running
+
+        onVisibleChanged: {
+            if (!visible) return;
+
+            // set timer item according to data from FPGA
+            console.info("Measurement time", NetworkController.measurementTime);
+            if (NetworkController.measurementTime === 0) { // no time set
+                return;
+            }
+
+            // a time is set
+            timerCheckbox.checked = true;
+
+            // set drop down fitting to value
+            if (NetworkController.measurementTime % 3600000 === 0) { // hours
+                timerComboBox.currentIndex = 3;
+                timerTextField.text = parseInt(NetworkController.measurementTime / 3600000);
+            } else if (NetworkController.measurementTime % 60000 === 0) { // min
+                timerComboBox.currentIndex = 2;
+                timerTextField.text = parseInt(NetworkController.measurementTime / 60000);
+            } else if (NetworkController.measurementTime % 1000 === 0) { // s
+                timerComboBox.currentIndex = 1;
+                timerTextField.text = parseInt(NetworkController.measurementTime / 1000);
+            } else { // ms
+                timerComboBox.currentIndex = 0;
+                timerTextField.text = NetworkController.measurementTime;
+            }
+        }
 
         Item {
             id: settingsHeader
@@ -297,7 +412,7 @@ Page {
             width: parent.width
             anchors.bottom: footer.top
 
-            visible: NetworkController.sensorsActive
+            visible: NetworkController.sensorsActive && runningTimer.running
 
             Row {
                 anchors.centerIn: parent
@@ -318,6 +433,25 @@ Page {
 
                 Label {
                     id: remainingLabel
+                }
+            }
+        }
+
+        Item {
+            id: waitingItem
+            height: 50
+            width: parent.width
+            anchors.bottom: footer.top
+
+            visible: NetworkController.sensorsActive && !runningTimer.running
+
+            Row {
+                anchors.centerIn: parent
+                height: childrenRect.height
+                spacing: 10
+
+                Label {
+                    text: "Waiting for Measurement to be stopped."
                 }
             }
         }
@@ -348,6 +482,7 @@ Page {
                     anchors.verticalCenter: parent.verticalCenter
                     text: "10"
                     inputMethodHints: Qt.ImhFormattedNumbersOnly
+                    selectByMouse: true
                 }
 
                 ComboBox {
@@ -364,75 +499,15 @@ Page {
             width: parent.width
             height: 50
             anchors.bottom: parent.bottom
+            focus: true
 
             Button {
+                id: startStopButton
                 text: NetworkController.sensorsActive ? "Stop measurement" : "Start measurement"
                 anchors.horizontalCenter: parent.horizontalCenter
-                enabled: sensorsSelected || NetworkController.sensorsActive
+                enabled: (sensorsSelected && !NetworkController.sensorsActive) || (NetworkController.sensorsActive && runningTimer.running)
 
-                onClicked: {
-                    if (!NetworkController.sensorsActive) {
-                        if (!NetworkController.storageWritable()) {
-                            Globals.mainWindow.dialog.title = "Location not writable";
-                            Globals.mainWindow.dialog.message = "The selected storage location is not writable. Please enter the settings page and select a different location.";
-                            Globals.mainWindow.dialog.open();
-                            stackView.reset();
-                            return;
-                        }
-
-                        if (timerCheckbox.checked) {
-                            let timeVal = parseFloat(timerTextField.text);
-                            if (timeVal <= 0) {
-                                console.error("Timer should not be smaller than 0");
-                                Globals.mainWindow.dialog.title = "Time value wrong";
-                                Globals.mainWindow.dialog.message = "The value for the timer must be bigger than 0!";
-                                Globals.mainWindow.dialog.open();
-                                return;
-                            }
-                        }
-
-                        let list = Array(8).fill(false);
-                        for (let i = 0; i < list.length; i++) {
-                            for (let j = 0; j < listModel.count; j++) {
-                                if (listModel.get(j).num === i && listModel.get(j).selected) {
-                                    list[i] = listModel.get(j).selected;
-                                    break;
-                                }
-                            }
-                        }
-                        for (let i = 0; i < listModel.count; i++) {
-                            listModel.get(i).count = 0;
-                            listModel.get(i).full = false;
-                        }
-
-                        sensorDataTimer.start();
-
-                        NetworkController.activateSensors(list);
-                        if (timerCheckbox.checked) {
-                            let timeVal = parseFloat(timerTextField.text);
-                            switch (timerComboBox.currentIndex) {
-                            case 0:
-                                break;
-                            case 1:
-                                timeVal *= 1000;
-                                break;
-                            case 2:
-                                timeVal *= 60000;
-                                break;
-                            case 3:
-                                timeVal *= 3600000;
-                            }
-                            measurementTimer.start();
-                            runningTimer.setData(timeVal);
-                        } else {
-                            runningTimer.setData();
-                        }
-
-                        runningTimer.start();
-                    } else {
-                        root.deactivateSensors();
-                    }
-                }
+                onClicked: root.clickHandler()
             }
         }
     }

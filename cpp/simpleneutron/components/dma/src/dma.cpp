@@ -6,6 +6,7 @@
 #include <logger/logger.h>
 #include <dma/dma.h>
 #include <gpio/wordlengthcontroller.h>
+#include <gpio/measurementstop.h>
 
 namespace simpleneutron {
 namespace components {
@@ -101,15 +102,26 @@ bool Dma::empty() {
 }
 
 bool Dma::full() {
-    if (mDramFifoFull) {
+    if (mFifoFull) { // DMA is already stopped
         return true;
     }
 
     if (mWritePointerWrap != mReadPointerWrap && mWriteAddress + mWordLength > mReadAddress) {
         LogErr << "DMA (" << std::hex << REGISTER_BASE << "): RAM full" << std::endl;
+        // set full and stop DMA
+        mFifoFull = true;
+        mStopped = true;
         return true;
     }
     return false;
+}
+
+void Dma::setFifoFullHandled() {
+    mFifoFullHandled = true;
+}
+
+bool Dma::fifoFullHandled() const {
+    return mFifoFullHandled;
 }
 
 void Dma::registerEnable() {
@@ -138,7 +150,7 @@ void Dma::waitForData() {
     char buf[4];
     int result = read(mUio, buf, 4); // this blocks until an interrupt occurs. Exactly what we want.
     if (result != 4) {
-        LogOut << "DMA (" << std::hex << REGISTER_BASE << "): Signal Interrupt occured. No data handling!" << std::endl;
+        LogOut << "DMA (" << std::hex << REGISTER_BASE << "): Signal Interrupt occurred. No data handling!" << std::endl;
     } else {
         // interrupt is disabled after read. So we have to reenable it by writing to it
         enableInterrupt();
@@ -150,11 +162,18 @@ void Dma::waitForFifoInterrupt() {
     char buf[4];
     int result = read(mFifoUio, buf, 4); // this blocks until an interrupt occurs. Exactly what we want.
     if (result != 4) {
-        LogOut << "DMA (" << std::hex << REGISTER_BASE << "): Signal Interrupt occured. No Fifo Interrupt handling!" << std::endl;
+        LogOut << "DMA (" << std::hex << REGISTER_BASE << "): Signal Interrupt occurred. No Fifo Interrupt handling!" << std::endl;
     } else {
-        // Fifo is full. Kill everything!
-        LogErr << "DMA (" << std::hex << REGISTER_BASE << "): FIFO full!" << std::endl;
-        mDramFifoFull = true;
+        gpio::MeasurementStop::checkStatus();
+        if (gpio::MeasurementStop::getStopped(ID)) {
+            LogOut << "DMA (" << std::hex << REGISTER_BASE << "): Fifo finished interrupt" << std::endl;
+            mStopped = true;
+        } else {
+            // Fifo is full. Kill everything!
+            LogErr << "DMA (" << std::hex << REGISTER_BASE << "): FIFO full!" << std::endl;
+            mFifoFull = true;
+            mStopped = true;
+        }
     }
 }
 
@@ -163,8 +182,7 @@ void Dma::enable() {
         return;
     }
 
-    mDramFifoFull = false;
-    mWaitForDestroy = false;
+    mFifoFull = false;
     mEnabled = true;
     mFifoThread = std::make_unique<std::thread>([this](){
         enableFifoInterrupt();
@@ -195,18 +213,32 @@ void Dma::enable() {
 
         mRunning = true;
 
-        while(!mQuit && !mDramFifoFull) {
+        while(!mQuit && !mFifoFull) {
             waitForData();
             // if thread was quit while waiting break here
             if (mQuit) {
                 break;
             }
 
+            // copy read address because it is needed to check if the DMA finished
+            // using the member may be wrong as it is set by another thread!
+            uint32_t tmpReadAddress = mReadAddress;
+
+            // set write address for next expected data
             mWriteAddress += mWordLength;
             if (mWriteAddress >= mSize) {
                 mWritePointerWrap = !mWritePointerWrap;
                 mWriteAddress = 0;
             }
+
+            // stop dma if it is the last package!
+            if (mStopped) {
+                // The last value is by definition 0. Every values before are valid.
+                if (*(memoryMap() + tmpReadAddress + getDataLength() - 1) == 0) {
+                    break;
+                }
+            }
+
             setDestinationAddress(mWriteAddress);
             setWordLength(mWordLength);
         }
@@ -284,6 +316,10 @@ void Dma::setDestinationAddress(uint32_t offset) {
     MemoryControl::registerWrite(mRegister, DmaOffset::S2MM_DESTINATION, MEMORY_BASE + offset * 4);
 }
 
+uint16_t Dma::getDataLength() {
+    return static_cast<uint16_t>(MemoryControl::registerRead(mRegister, DmaOffset::S2MM_LENGTH) / 4);
+}
+
 uint16_t Dma::getWordLength() {
     return mWordLength;
 }
@@ -342,12 +378,8 @@ bool Dma::isRunning() const {
     return mRunning;
 }
 
-void Dma::setWaitForDestroy() {
-    mWaitForDestroy = true;
-}
-
-bool Dma::getWaitForDestroy() {
-    return mWaitForDestroy;
+bool Dma::isStopped() const {
+    return mStopped;
 }
 
 void Dma::setQuit(bool quit) {

@@ -63,6 +63,6 @@ public:
     void run();
 };
 
-} // controller    
+} // controller
 } // components
 } // simpleneutron

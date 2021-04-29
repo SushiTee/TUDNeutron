@@ -7,6 +7,9 @@ namespace components {
 namespace gpio {
 
 class Gpio {
+    Gpio(Gpio &&) = delete;
+    Gpio &operator=(Gpio &&) = delete;
+
     const uint32_t REGISTER_BASE;
 
     int mMem;
@@ -23,11 +26,12 @@ protected:
 
 public:
     Gpio() = delete;
+    ~Gpio() = default;
     Gpio(const Gpio&) = delete;
     Gpio(uint32_t registerBase, int mem);
     void operator=(const Gpio&) = delete;
 };
 
-} // gpio    
+} // gpio
 } // components
 } // simpleneutron

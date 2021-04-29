@@ -26,10 +26,11 @@ NetworkController::NetworkController(QString host, int port, QObject *parent) : 
 
         if (success) {
             QJsonValue::Type type = doc["switchState"].type();
+            QJsonArray switches;
             if (type == QJsonValue::Array) {
-                QJsonArray switches = doc["switchState"].toArray();
+                switches = doc["switchState"].toArray();
                 bool oneEnabled = false;
-                for (auto val : switches) {
+                for (auto val : std::as_const(switches)) {
                     if (val.isBool() && val.toBool()) {
                         oneEnabled = true;
                         break;
@@ -37,14 +38,22 @@ NetworkController::NetworkController(QString host, int port, QObject *parent) : 
                 }
                 if (!oneEnabled) {
                     failed("All sensors turned off by switch");
-                } else {
-                    setSensors(switches.toVariantList());
-                    setConnected(MessageType::ConnectedState::CONNECTED);
+                    return;
                 }
             } else if (type != QJsonValue::Undefined) {
                 failed("All sensors turned off by switch");
+                return;
             } else {
                 failed("Available sensors not received");
+                return;
+            }
+            type = doc["measurementTime"].type();
+            if (type == QJsonValue::Double) {
+                setMeasurementTime(static_cast<uint32_t>(doc["measurementTime"].toInteger()));
+                setSensors(switches.toVariantList());
+                setConnected(MessageType::ConnectedState::CONNECTED);
+            } else {
+                failed("Measurement time not received");
             }
         } else if (getConnected() != MessageType::ConnectedState::DISCONNECTED){
             QString message = doc["msg"].toString();
@@ -216,6 +225,11 @@ QString NetworkController::storageLocation() const
     return m_storageLocation;
 }
 
+uint32_t NetworkController::measurementTime() const
+{
+    return m_measurementTime;
+}
+
 void NetworkController::connectionLock()
 {
     m_connectMutex.lock();
@@ -233,6 +247,15 @@ void NetworkController::setStorageLocation(QString storageLocation)
 
     m_storageLocation = storageLocation;
     emit storageLocationChanged(m_storageLocation);
+}
+
+void NetworkController::setMeasurementTime(uint32_t measurementTime)
+{
+    if (m_measurementTime == measurementTime)
+        return;
+
+    m_measurementTime = measurementTime;
+    emit measurementTimeChanged(m_measurementTime);
 }
 
 int NetworkController::port() const
@@ -297,20 +320,13 @@ void NetworkController::networkDisconnect()
     connectionUnlock();
 }
 
-void NetworkController::activateSensors(QList<bool> list)
+void NetworkController::activateSensors(QList<bool> list, uint32_t measurementTime)
 {
     if (!storageWritable()) {
         return;
     }
 
-    m_handler->openFiles(list);
-    uint8_t sensorsBinary = 0;
-    for (int i = 0; i < list.size(); i++) {
-        if (list[i]) {
-            sensorsBinary |= (1 << i);
-        }
-    }
-    QMetaObject::invokeMethod(m_handler.get(), "sendData", Q_ARG(MessageType::Message, MessageType::Message::START_DMA), Q_ARG(uint8_t, sensorsBinary));
+    QMetaObject::invokeMethod(m_handler.get(), "startMeasurement", Q_ARG(QList<bool>, list), Q_ARG(uint32_t, measurementTime));
 }
 
 void NetworkController::deactivateSensors()

@@ -36,7 +36,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>5523231d</spirit:value>
+            <spirit:value>3d24ae05</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -52,7 +52,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>5523231d</spirit:value>
+            <spirit:value>3d24ae05</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -396,6 +396,45 @@
           </spirit:wireTypeDefs>
         </spirit:wire>
       </spirit:port>
+      <spirit:port>
+        <spirit:name>stopped_0</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic</spirit:typeName>
+              <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>stopped_1</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic</spirit:typeName>
+              <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>stopped</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic</spirit:typeName>
+              <spirit:viewNameRef>xilinx_vhdlsynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_vhdlbehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
     </spirit:ports>
     <spirit:modelParameters>
       <spirit:modelParameter xsi:type="spirit:nameValueTypeType" spirit:dataType="integer">
@@ -411,7 +450,7 @@
       <spirit:file>
         <spirit:name>hdl/input_selector_v1_0.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_5523231d</spirit:userFileType>
+        <spirit:userFileType>CHECKSUM_3d24ae05</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
@@ -459,8 +498,8 @@
         <xilinx:taxonomy>AXI_Peripheral</xilinx:taxonomy>
       </xilinx:taxonomies>
       <xilinx:displayName>input_selector_v1.0</xilinx:displayName>
-      <xilinx:coreRevision>3</xilinx:coreRevision>
-      <xilinx:coreCreationDateTime>2020-02-06T21:38:21Z</xilinx:coreCreationDateTime>
+      <xilinx:coreRevision>4</xilinx:coreRevision>
+      <xilinx:coreCreationDateTime>2021-03-24T10:13:31Z</xilinx:coreCreationDateTime>
       <xilinx:tags>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@a53a7dd_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/input_selector_1.0</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@e086cfc_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/input_selector_1.0</xilinx:tag>
@@ -497,13 +536,24 @@
         <xilinx:tag xilinx:name="ui.data.coregen.dd@21a238fe_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/input_selector_1.0</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@559959e6_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/input_selector_1.0</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@63e99dfe_ARCHIVE_LOCATION">/home/vm/projects/TUDNeutron/ipcores/ip_repo/input_selector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@62647101_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/input_selector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@721ea961_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/input_selector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@64cb11dd_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/input_selector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@21d42917_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/input_selector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6aa98417_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/input_selector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@c568580_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/input_selector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@32251112_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/input_selector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@320ac168_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/input_selector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@422b3ac8_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/input_selector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4e22e8ad_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/input_selector_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6710b9a2_ARCHIVE_LOCATION">/home/sushi/projects/TUDNeutron/hw/SimpleNeutron/ip_repo/input_selector_1.0</xilinx:tag>
       </xilinx:tags>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
-      <xilinx:xilinxVersion>2019.2.1</xilinx:xilinxVersion>
+      <xilinx:xilinxVersion>2020.2</xilinx:xilinxVersion>
       <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="d84e6caf"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="3a06fa05"/>
-      <xilinx:checksum xilinx:scope="ports" xilinx:value="c653a68a"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="b144f1a5"/>
+      <xilinx:checksum xilinx:scope="ports" xilinx:value="29d94538"/>
       <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="249de9c2"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="784e84bf"/>
     </xilinx:packagingInfo>

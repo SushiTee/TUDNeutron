@@ -9,6 +9,8 @@ namespace gpio {
 
 class Switches : public Gpio {
     Switches(uint32_t registerBase, int mem);
+    Switches(Switches &&) = delete;
+    Switches &operator=(Switches &&) = delete;
     ~Switches() = default;
     static Switches &getInstanceImpl(uint32_t registerBase = 0, int mem = 0);
     static Switches &getInstance();
@@ -22,6 +24,6 @@ public:
     static bool hasError();
 };
 
-} // gpio    
+} // gpio
 } // components
 } // simpleneutron

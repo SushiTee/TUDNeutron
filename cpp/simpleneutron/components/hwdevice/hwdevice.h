@@ -10,11 +10,7 @@ typedef struct {
 } DMA_DEVICE;
 
 typedef struct {
-    const char* mRegisterBit;
-    const char* mGpioValue;
-    const char* mGpioDirection;
-    const char* mGpioExport;
-    const char* mGpioUnexport;
+    uint16_t mOffset;
 } LED_GPIO;
 
 constexpr uint32_t DMA_SIZE = 0x800000u; // total size / dma count / 4
@@ -46,13 +42,11 @@ constexpr uint32_t GPIO_1 = 0x41210000u; // word length (out)
 constexpr uint32_t GPIO_2 = 0x41220000u; // switch state (in)
 constexpr uint32_t GPIO_3 = 0x41230000u; // enable test generator on input 7 (out)
 constexpr uint32_t GPIO_4 = 0x41240000u; // enable trigger input (JB1 on zedboard) (out)
+constexpr uint32_t GPIO_5 = 0x41250000u; // measurement time (out)
+constexpr uint32_t GPIO_6 = 0x41260000u; // measurement stopped (in)
 
 constexpr uint16_t DEFAULT_WORD_LENGTH = 0x20u;
 
 constexpr LED_GPIO PS_LED = {
-    "819",
-    "/sys/class/gpio/gpio819/value",
-    "/sys/class/gpio/gpio819/direction",
-    "/sys/class/gpio/export",
-    "/sys/class/gpio/unexport"
+    7 // offset to base (7 for LED)
 };

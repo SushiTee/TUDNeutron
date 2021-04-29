@@ -5,7 +5,7 @@ use ieee.numeric_std.all;
 entity signal_generator_v1_0_M00_AXIS is
   generic (
     -- Users to add parameters here
-
+    STOP_DELAY_TICKS : integer := 10000000;
     -- User parameters ends
     -- Do not modify the parameters beyond this line
 
@@ -17,9 +17,11 @@ entity signal_generator_v1_0_M00_AXIS is
   port (
     -- Users to add ports here
     enabled      : in  std_logic; -- enable this ip core
-    signal_state : out std_logic; -- shows the state (if enabled AND signal detected -> LOW; if enabled AND no signal detected -> HIGH; otherwise LOW )
+    signal_state : out std_logic; -- shows the state (HIGH if measurement is running)
     fifo_reset   : out std_logic; -- resets an connected fifo after being enabled
     number_words : in std_logic_vector(15 downto 0); -- number of words to be send as package
+    measurement_time : in std_logic_vector(31 downto 0); -- measurement time in ms
+    stopped      : out std_logic; -- measurement stopped
     signal_count : in std_logic_vector(31 downto 0);
     signal_frequency: in std_logic_vector(27 downto 0);
     signal_input : in std_logic;
@@ -85,6 +87,13 @@ architecture implementation of signal_generator_v1_0_M00_AXIS is
   signal init_counter                    : std_logic_vector(WAIT_COUNT_BITS-1 downto 0)      := (others => '0');
   -- fifo reset
   signal fifo_reset_internal             : std_logic                                         := '0';
+
+  -- measurment timer signals
+  signal ms_timer                        : unsigned(16 downto 0)                             := (others => '0');
+  signal duration                        : unsigned(31 downto 0)                             := (others => '0');
+  signal stop_measurement                : std_logic                                         := '0';
+  signal measurement_stopped             : std_logic                                         := '0';
+  signal delay_counter                   : unsigned(31 downto 0)                             := (others => '0');
 
   -- signals for driving AXI
   signal axis_tvalid                     : std_logic                                         := '0';
@@ -195,7 +204,7 @@ begin
   process(M_AXIS_ACLK)
   begin
     if rising_edge(M_AXIS_ACLK) then
-      if (mst_exec_state = STATE_SEND_STREAM) then
+      if (mst_exec_state = STATE_SEND_STREAM and measurement_stopped = '0') then
         if ((clock_counter = 1 and signal_counter < unsigned(signal_count)) or (signal_inut_internal = '1' and last_signal_input /= signal_inut_internal)) then
           stream_data_out <= stream_data_out + 1;
           signal_counter <= signal_counter + 1;
@@ -213,12 +222,25 @@ begin
   process(M_AXIS_ACLK)
   begin
     if rising_edge(M_AXIS_ACLK) then
-      if (mst_exec_state = STATE_SEND_STREAM) then
+      if (mst_exec_state = STATE_SEND_STREAM and measurement_stopped = '0') then
         axis_tvalid <= '0';
         if ((clock_counter = 1 and signal_counter < unsigned(signal_count)) or (signal_inut_internal = '1' and last_signal_input /= signal_inut_internal)) then
           axis_tvalid <= '1';
         end if;
+      elsif (mst_exec_state = STATE_SEND_STREAM and stop_measurement = '0' and measurement_stopped = '1') then
+        if (delay_counter < to_unsigned(STOP_DELAY_TICKS, 32)) then
+          delay_counter <= delay_counter + 1;
+          axis_tvalid <= '0';
+        else
+          axis_tvalid <= '1';
+          stop_measurement <= '1';
+        end if;
+      elsif (mst_exec_state /= STATE_SEND_STREAM) then
+        stop_measurement <= '0';
+        delay_counter <= (others => '0');
+        axis_tvalid <= '0';
       else
+        delay_counter <= (others => '0');
         axis_tvalid <= '0';
       end if;
     end if;
@@ -230,7 +252,7 @@ begin
   process(M_AXIS_ACLK)
   begin
     if rising_edge(M_AXIS_ACLK) then
-      if (mst_exec_state = STATE_SEND_STREAM) then
+      if (mst_exec_state = STATE_SEND_STREAM and measurement_stopped = '0') then
         if ((clock_counter = 1 and signal_counter < unsigned(signal_count)) or (signal_inut_internal = '1' and last_signal_input /= signal_inut_internal)) then
           if (word_counter > 1) then
             axis_tlast <= '0';
@@ -240,9 +262,15 @@ begin
             word_counter <= unsigned(number_words);
           end if;
         else
-          axis_tlast <= axis_tlast;
+          axis_tlast <= '0';
           word_counter <= word_counter;
         end if;
+      elsif (mst_exec_state = STATE_SEND_STREAM and measurement_stopped = '0') then
+        axis_tlast <= '0';
+        word_counter <= word_counter;
+      elsif (mst_exec_state = STATE_SEND_STREAM and measurement_stopped = '1') then
+        word_counter <= unsigned(number_words);
+        axis_tlast <= '1';
       else
         word_counter <= unsigned(number_words);
         axis_tlast <= '0';
@@ -250,7 +278,28 @@ begin
     end if;
   end process;
 
-  M_AXIS_TLAST  <= axis_tlast;
+  M_AXIS_TLAST <= axis_tlast;
+
+  -- measurment timer
+  process(M_AXIS_ACLK)
+  begin
+    if rising_edge(M_AXIS_ACLK) then
+      if (mst_exec_state = STATE_SEND_STREAM and measurement_stopped = '0') then
+        if (ms_timer < 99999) then
+          ms_timer <= ms_timer + 1;
+        else
+          ms_timer <= (others => '0');
+          duration <= duration + 1;
+        end if;
+      elsif (mst_exec_state /= STATE_SEND_STREAM) then
+        duration <= (others => '0');
+        ms_timer <= (others => '0');
+      end if;
+    end if;
+  end process;
+
+  measurement_stopped <= '0' when (measurement_time = x"00000000" or duration < unsigned(measurement_time)) else '1';
+  stopped <= measurement_stopped;
 
   -- signal state
   signal_state  <= '1' when (mst_exec_state = STATE_SEND_STREAM) else '0';

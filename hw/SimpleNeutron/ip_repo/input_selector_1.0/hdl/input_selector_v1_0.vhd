@@ -47,7 +47,11 @@ entity input_selector_v1_0 is
 		
 		fifo_reset_0 : in std_logic;
 		fifo_reset_1: in std_logic;
-		fifo_reset : out std_logic
+		fifo_reset : out std_logic;
+		
+		stopped_0 : in std_logic;
+		stopped_1: in std_logic;
+		stopped : out std_logic
 	);
 end input_selector_v1_0;
 
@@ -67,5 +71,6 @@ s01_axis_tready <= m00_axis_tready when selector = '0' else '0';
 -- other
 signal_state <= signal_state_0 when selector = '1' else signal_state_1;
 fifo_reset <= fifo_reset_0 when selector = '1' else fifo_reset_1;
+stopped <= stopped_0 when selector = '1' else stopped_1;
 
 end arch_imp;

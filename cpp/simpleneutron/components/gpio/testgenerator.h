@@ -9,6 +9,8 @@ namespace gpio {
 
 class TestGenerator : public Gpio {
     TestGenerator(uint32_t registerBase, int mem);
+    TestGenerator(TestGenerator &&) = delete;
+    TestGenerator &operator=(TestGenerator &&) = delete;
     ~TestGenerator();
     static TestGenerator &getInstanceImpl(uint32_t registerBase = 0, int mem = 0);
     static TestGenerator &getInstance();
@@ -30,6 +32,6 @@ public:
     static bool hasError();
 };
 
-} // gpio    
+} // gpio
 } // components
 } // simpleneutron

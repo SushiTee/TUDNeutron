@@ -9,6 +9,8 @@ namespace gpio {
 
 class TriggerInput : public Gpio {
     TriggerInput(uint32_t registerBase, int mem);
+    TriggerInput(TriggerInput &&) = delete;
+    TriggerInput &operator=(TriggerInput &&) = delete;
     ~TriggerInput();
     static TriggerInput &getInstanceImpl(uint32_t registerBase = 0, int mem = 0);
     static TriggerInput &getInstance();
@@ -26,6 +28,6 @@ public:
     static bool hasError();
 };
 
-} // gpio    
+} // gpio
 } // components
 } // simpleneutron

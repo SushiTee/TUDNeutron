@@ -44,13 +44,14 @@ class Dma {
     bool mHasError = false;
     std::atomic<bool> mEnabled = false;
     std::atomic<bool> mRunning = false;
-    std::atomic<bool> mWaitForDestroy = false;
+    std::atomic<bool> mStopped = false;
 
     std::unique_ptr<std::thread> mThread = nullptr;
     std::unique_ptr<std::thread> mFifoThread = nullptr;
 
     std::atomic<uint16_t> mWordLength;
-    std::atomic<bool> mDramFifoFull = false;
+    std::atomic<bool> mFifoFull = false;
+    std::atomic<bool> mFifoFullHandled = false;
     std::sig_atomic_t mQuit = false;
 
     std::atomic<bool> mReadPointerWrap = false;
@@ -67,6 +68,8 @@ public:
 
     bool empty();
     bool full();
+    void setFifoFullHandled();
+    bool fifoFullHandled() const;
 
     inline uint8_t getID() const { return ID; };
 
@@ -78,6 +81,7 @@ public:
     void enable();
     void disable();
     void setDestinationAddress(uint32_t address);
+    uint16_t getDataLength();
     uint16_t getWordLength();
     void setWordLength(uint32_t length);
     uint32_t getStatus();
@@ -86,6 +90,7 @@ public:
     bool hasStatusError(uint32_t status);
     bool hasError() const;
     bool isRunning() const;
+    bool isStopped() const;
     void setWaitForDestroy();
     bool getWaitForDestroy();
 

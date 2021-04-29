@@ -47,6 +47,7 @@ public:
 
 public slots:
     void networkConnect(QString host, int port);
+    void startMeasurement(QList<bool> sensorsList, uint32_t measurementTime);
     void sendData(MessageType::Message type, QString data) const;
     void sendData(MessageType::Message type, const std::byte *data, size_t length) const;
     void sendData(MessageType::Message type, uint8_t value) const; // send only one value

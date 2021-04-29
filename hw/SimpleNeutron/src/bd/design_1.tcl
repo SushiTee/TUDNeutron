@@ -131,6 +131,7 @@ xilinx.com:ip:axi_gpio:2.0\
 user.org:user:hold_signal:1.0\
 user.org:user:input_selector:1.0\
 user.org:user:input_trigger:1.0\
+xilinx.com:ip:util_vector_logic:2.0\
 user.org:user:ip_8_to_1_and_7:1.0\
 user.org:user:or:1.0\
 xilinx.com:ip:processing_system7:5.5\
@@ -138,7 +139,6 @@ xilinx.com:ip:proc_sys_reset:5.0\
 akr.neutron:user:signal_detector:1.0\
 user.org:user:signal_generator:1.0\
 user.org:user:signal_input:1.0\
-xilinx.com:ip:util_vector_logic:2.0\
 xilinx.com:ip:xlconcat:2.1\
 "
 
@@ -344,7 +344,7 @@ proc create_root_design { parentCell } {
    CONFIG.Empty_Threshold_Assert_Value_rach {14} \
    CONFIG.Empty_Threshold_Assert_Value_wach {14} \
    CONFIG.Empty_Threshold_Assert_Value_wrch {14} \
-   CONFIG.Enable_Data_Counts_axis {false} \
+   CONFIG.Enable_Data_Counts_axis {true} \
    CONFIG.Enable_ECC_axis {false} \
    CONFIG.Enable_Safety_Circuit {true} \
    CONFIG.Enable_TLAST {true} \
@@ -568,6 +568,19 @@ proc create_root_design { parentCell } {
    CONFIG.C_GPIO_WIDTH {1} \
  ] $gpio_input_trigger
 
+  # Create instance: gpio_measurement_stopped, and set properties
+  set gpio_measurement_stopped [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_gpio:2.0 gpio_measurement_stopped ]
+  set_property -dict [ list \
+   CONFIG.C_ALL_INPUTS {1} \
+   CONFIG.C_GPIO_WIDTH {8} \
+ ] $gpio_measurement_stopped
+
+  # Create instance: gpio_measurement_time, and set properties
+  set gpio_measurement_time [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_gpio:2.0 gpio_measurement_time ]
+  set_property -dict [ list \
+   CONFIG.C_ALL_OUTPUTS {1} \
+ ] $gpio_measurement_time
+
   # Create instance: gpio_num_words, and set properties
   set gpio_num_words [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_gpio:2.0 gpio_num_words ]
   set_property -dict [ list \
@@ -621,6 +634,70 @@ proc create_root_design { parentCell } {
 
   # Create instance: input_trigger_0, and set properties
   set input_trigger_0 [ create_bd_cell -type ip -vlnv user.org:user:input_trigger:1.0 input_trigger_0 ]
+
+  # Create instance: interrupt_or_0, and set properties
+  set interrupt_or_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:util_vector_logic:2.0 interrupt_or_0 ]
+  set_property -dict [ list \
+   CONFIG.C_OPERATION {or} \
+   CONFIG.C_SIZE {1} \
+   CONFIG.LOGO_FILE {data/sym_orgate.png} \
+ ] $interrupt_or_0
+
+  # Create instance: interrupt_or_1, and set properties
+  set interrupt_or_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:util_vector_logic:2.0 interrupt_or_1 ]
+  set_property -dict [ list \
+   CONFIG.C_OPERATION {or} \
+   CONFIG.C_SIZE {1} \
+   CONFIG.LOGO_FILE {data/sym_orgate.png} \
+ ] $interrupt_or_1
+
+  # Create instance: interrupt_or_2, and set properties
+  set interrupt_or_2 [ create_bd_cell -type ip -vlnv xilinx.com:ip:util_vector_logic:2.0 interrupt_or_2 ]
+  set_property -dict [ list \
+   CONFIG.C_OPERATION {or} \
+   CONFIG.C_SIZE {1} \
+   CONFIG.LOGO_FILE {data/sym_orgate.png} \
+ ] $interrupt_or_2
+
+  # Create instance: interrupt_or_3, and set properties
+  set interrupt_or_3 [ create_bd_cell -type ip -vlnv xilinx.com:ip:util_vector_logic:2.0 interrupt_or_3 ]
+  set_property -dict [ list \
+   CONFIG.C_OPERATION {or} \
+   CONFIG.C_SIZE {1} \
+   CONFIG.LOGO_FILE {data/sym_orgate.png} \
+ ] $interrupt_or_3
+
+  # Create instance: interrupt_or_4, and set properties
+  set interrupt_or_4 [ create_bd_cell -type ip -vlnv xilinx.com:ip:util_vector_logic:2.0 interrupt_or_4 ]
+  set_property -dict [ list \
+   CONFIG.C_OPERATION {or} \
+   CONFIG.C_SIZE {1} \
+   CONFIG.LOGO_FILE {data/sym_orgate.png} \
+ ] $interrupt_or_4
+
+  # Create instance: interrupt_or_5, and set properties
+  set interrupt_or_5 [ create_bd_cell -type ip -vlnv xilinx.com:ip:util_vector_logic:2.0 interrupt_or_5 ]
+  set_property -dict [ list \
+   CONFIG.C_OPERATION {or} \
+   CONFIG.C_SIZE {1} \
+   CONFIG.LOGO_FILE {data/sym_orgate.png} \
+ ] $interrupt_or_5
+
+  # Create instance: interrupt_or_6, and set properties
+  set interrupt_or_6 [ create_bd_cell -type ip -vlnv xilinx.com:ip:util_vector_logic:2.0 interrupt_or_6 ]
+  set_property -dict [ list \
+   CONFIG.C_OPERATION {or} \
+   CONFIG.C_SIZE {1} \
+   CONFIG.LOGO_FILE {data/sym_orgate.png} \
+ ] $interrupt_or_6
+
+  # Create instance: interrupt_or_7, and set properties
+  set interrupt_or_7 [ create_bd_cell -type ip -vlnv xilinx.com:ip:util_vector_logic:2.0 interrupt_or_7 ]
+  set_property -dict [ list \
+   CONFIG.C_OPERATION {or} \
+   CONFIG.C_SIZE {1} \
+   CONFIG.LOGO_FILE {data/sym_orgate.png} \
+ ] $interrupt_or_7
 
   # Create instance: ip_8_to_1_and_7_0, and set properties
   set ip_8_to_1_and_7_0 [ create_bd_cell -type ip -vlnv user.org:user:ip_8_to_1_and_7:1.0 ip_8_to_1_and_7_0 ]
@@ -1029,7 +1106,7 @@ proc create_root_design { parentCell } {
   # Create instance: ps7_0_axi_periph, and set properties
   set ps7_0_axi_periph [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect:2.1 ps7_0_axi_periph ]
   set_property -dict [ list \
-   CONFIG.NUM_MI {13} \
+   CONFIG.NUM_MI {15} \
  ] $ps7_0_axi_periph
 
   # Create instance: rst_ps7_0_100M, and set properties
@@ -1064,6 +1141,12 @@ proc create_root_design { parentCell } {
 
   # Create instance: signal_input_0, and set properties
   set signal_input_0 [ create_bd_cell -type ip -vlnv user.org:user:signal_input:1.0 signal_input_0 ]
+
+  # Create instance: stopped_concat, and set properties
+  set stopped_concat [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 stopped_concat ]
+  set_property -dict [ list \
+   CONFIG.NUM_PORTS {8} \
+ ] $stopped_concat
 
   # Create instance: util_vector_logic_0, and set properties
   set util_vector_logic_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:util_vector_logic:2.0 util_vector_logic_0 ]
@@ -1135,13 +1218,6 @@ proc create_root_design { parentCell } {
    CONFIG.LOGO_FILE {data/sym_orgate.png} \
  ] $util_vector_logic_10
 
-  # Create instance: util_vector_logic_11, and set properties
-  set util_vector_logic_11 [ create_bd_cell -type ip -vlnv xilinx.com:ip:util_vector_logic:2.0 util_vector_logic_11 ]
-  set_property -dict [ list \
-   CONFIG.C_OPERATION {not} \
-   CONFIG.LOGO_FILE {data/sym_notgate.png} \
- ] $util_vector_logic_11
-
   # Create instance: xlconcat_0, and set properties
   set xlconcat_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 xlconcat_0 ]
   set_property -dict [ list \
@@ -1188,6 +1264,8 @@ proc create_root_design { parentCell } {
   connect_bd_intf_net -intf_net ps7_0_axi_periph_M10_AXI [get_bd_intf_pins gpio_switch_input/S_AXI] [get_bd_intf_pins ps7_0_axi_periph/M10_AXI]
   connect_bd_intf_net -intf_net ps7_0_axi_periph_M11_AXI [get_bd_intf_pins gpio_signal_generator/S_AXI] [get_bd_intf_pins ps7_0_axi_periph/M11_AXI]
   connect_bd_intf_net -intf_net ps7_0_axi_periph_M12_AXI [get_bd_intf_pins gpio_input_trigger/S_AXI] [get_bd_intf_pins ps7_0_axi_periph/M12_AXI]
+  connect_bd_intf_net -intf_net ps7_0_axi_periph_M13_AXI [get_bd_intf_pins gpio_measurement_time/S_AXI] [get_bd_intf_pins ps7_0_axi_periph/M13_AXI]
+  connect_bd_intf_net -intf_net ps7_0_axi_periph_M14_AXI [get_bd_intf_pins gpio_measurement_stopped/S_AXI] [get_bd_intf_pins ps7_0_axi_periph/M14_AXI]
   connect_bd_intf_net -intf_net signal_detector_0_M00_AXIS [get_bd_intf_pins fifo_generator_0/S_AXIS] [get_bd_intf_pins signal_detector_0/M00_AXIS]
   connect_bd_intf_net -intf_net signal_detector_1_M00_AXIS [get_bd_intf_pins fifo_generator_1/S_AXIS] [get_bd_intf_pins signal_detector_1/M00_AXIS]
   connect_bd_intf_net -intf_net signal_detector_2_M00_AXIS [get_bd_intf_pins fifo_generator_2/S_AXIS] [get_bd_intf_pins signal_detector_2/M00_AXIS]
@@ -1228,14 +1306,15 @@ proc create_root_design { parentCell } {
   connect_bd_net -net fifo_generator_6_axis_overflow [get_bd_pins fifo_generator_6/axis_overflow] [get_bd_pins hold_signal_6/signal_in]
   connect_bd_net -net fifo_generator_7_axis_overflow [get_bd_pins fifo_generator_7/axis_overflow] [get_bd_pins hold_signal_7/signal_in]
   connect_bd_net -net fifo_generator_7_s_axis_tready [get_bd_pins fifo_generator_7/s_axis_tready] [get_bd_pins input_selector_0/m00_axis_tready]
-  connect_bd_net -net hold_signal_0_signal_out [get_bd_pins hold_signal_0/signal_out] [get_bd_pins xlconcat_0/In8]
-  connect_bd_net -net hold_signal_1_signal_out [get_bd_pins hold_signal_1/signal_out] [get_bd_pins xlconcat_0/In9]
-  connect_bd_net -net hold_signal_2_signal_out [get_bd_pins hold_signal_2/signal_out] [get_bd_pins xlconcat_0/In10]
-  connect_bd_net -net hold_signal_3_signal_out [get_bd_pins hold_signal_3/signal_out] [get_bd_pins xlconcat_0/In11]
-  connect_bd_net -net hold_signal_4_signal_out [get_bd_pins hold_signal_4/signal_out] [get_bd_pins xlconcat_0/In12]
-  connect_bd_net -net hold_signal_5_signal_out [get_bd_pins hold_signal_5/signal_out] [get_bd_pins xlconcat_0/In13]
-  connect_bd_net -net hold_signal_6_signal_out [get_bd_pins hold_signal_6/signal_out] [get_bd_pins xlconcat_0/In14]
-  connect_bd_net -net hold_signal_7_signal_out [get_bd_pins hold_signal_7/signal_out] [get_bd_pins xlconcat_0/In15]
+  connect_bd_net -net gpio_measurement_time_gpio_io_o [get_bd_pins gpio_measurement_time/gpio_io_o] [get_bd_pins signal_detector_0/measurement_time] [get_bd_pins signal_detector_1/measurement_time] [get_bd_pins signal_detector_2/measurement_time] [get_bd_pins signal_detector_3/measurement_time] [get_bd_pins signal_detector_4/measurement_time] [get_bd_pins signal_detector_5/measurement_time] [get_bd_pins signal_detector_6/measurement_time] [get_bd_pins signal_detector_7/measurement_time] [get_bd_pins signal_generator_0/measurement_time]
+  connect_bd_net -net hold_signal_0_signal_out [get_bd_pins hold_signal_0/signal_out] [get_bd_pins interrupt_or_0/Op1]
+  connect_bd_net -net hold_signal_1_signal_out [get_bd_pins hold_signal_1/signal_out] [get_bd_pins interrupt_or_1/Op1]
+  connect_bd_net -net hold_signal_2_signal_out [get_bd_pins hold_signal_2/signal_out] [get_bd_pins interrupt_or_2/Op1]
+  connect_bd_net -net hold_signal_3_signal_out [get_bd_pins hold_signal_3/signal_out] [get_bd_pins interrupt_or_3/Op1]
+  connect_bd_net -net hold_signal_4_signal_out [get_bd_pins hold_signal_4/signal_out] [get_bd_pins interrupt_or_4/Op1]
+  connect_bd_net -net hold_signal_5_signal_out [get_bd_pins hold_signal_5/signal_out] [get_bd_pins interrupt_or_5/Op1]
+  connect_bd_net -net hold_signal_6_signal_out [get_bd_pins hold_signal_6/signal_out] [get_bd_pins interrupt_or_6/Op1]
+  connect_bd_net -net hold_signal_7_signal_out [get_bd_pins hold_signal_7/signal_out] [get_bd_pins interrupt_or_7/Op1]
   connect_bd_net -net input_selector_0_fifo_reset [get_bd_pins input_selector_0/fifo_reset] [get_bd_pins util_vector_logic_8/Op2]
   connect_bd_net -net input_selector_0_m00_axis_tdata [get_bd_pins fifo_generator_7/s_axis_tdata] [get_bd_pins input_selector_0/m00_axis_tdata]
   connect_bd_net -net input_selector_0_m00_axis_tkeep [get_bd_pins fifo_generator_7/s_axis_tkeep] [get_bd_pins input_selector_0/m00_axis_tkeep]
@@ -1244,6 +1323,7 @@ proc create_root_design { parentCell } {
   connect_bd_net -net input_selector_0_s00_axis_tready [get_bd_pins input_selector_0/s00_axis_tready] [get_bd_pins signal_generator_0/m00_axis_tready]
   connect_bd_net -net input_selector_0_s01_axis_tready [get_bd_pins input_selector_0/s01_axis_tready] [get_bd_pins signal_detector_7/m00_axis_tready]
   connect_bd_net -net input_selector_0_signal_state [get_bd_pins input_selector_0/signal_state] [get_bd_pins or_0/in7] [get_bd_pins xlconcat_1/In7]
+  connect_bd_net -net input_selector_0_stopped [get_bd_pins input_selector_0/stopped] [get_bd_pins interrupt_or_7/Op2] [get_bd_pins stopped_concat/In7]
   connect_bd_net -net input_trigger_0_trigger_out0 [get_bd_pins input_trigger_0/trigger_out0] [get_bd_pins signal_detector_0/trigger_input]
   connect_bd_net -net input_trigger_0_trigger_out1 [get_bd_pins input_trigger_0/trigger_out1] [get_bd_pins signal_detector_1/trigger_input]
   connect_bd_net -net input_trigger_0_trigger_out2 [get_bd_pins input_trigger_0/trigger_out2] [get_bd_pins signal_detector_2/trigger_input]
@@ -1252,39 +1332,56 @@ proc create_root_design { parentCell } {
   connect_bd_net -net input_trigger_0_trigger_out5 [get_bd_pins input_trigger_0/trigger_out5] [get_bd_pins signal_detector_5/trigger_input]
   connect_bd_net -net input_trigger_0_trigger_out6 [get_bd_pins input_trigger_0/trigger_out6] [get_bd_pins signal_detector_6/trigger_input]
   connect_bd_net -net input_trigger_0_trigger_out7 [get_bd_pins input_trigger_0/trigger_out7] [get_bd_pins signal_detector_7/trigger_input]
+  connect_bd_net -net interrupt_or_0_Res [get_bd_pins interrupt_or_0/Res] [get_bd_pins xlconcat_0/In8]
+  connect_bd_net -net interrupt_or_1_Res [get_bd_pins interrupt_or_1/Res] [get_bd_pins xlconcat_0/In9]
+  connect_bd_net -net interrupt_or_2_Res [get_bd_pins interrupt_or_2/Res] [get_bd_pins xlconcat_0/In10]
+  connect_bd_net -net interrupt_or_3_Res [get_bd_pins interrupt_or_3/Res] [get_bd_pins xlconcat_0/In11]
+  connect_bd_net -net interrupt_or_4_Res [get_bd_pins interrupt_or_4/Res] [get_bd_pins xlconcat_0/In12]
+  connect_bd_net -net interrupt_or_5_Res [get_bd_pins interrupt_or_5/Res] [get_bd_pins xlconcat_0/In13]
+  connect_bd_net -net interrupt_or_6_Res [get_bd_pins interrupt_or_6/Res] [get_bd_pins xlconcat_0/In14]
+  connect_bd_net -net interrupt_or_7_Res [get_bd_pins interrupt_or_7/Res] [get_bd_pins xlconcat_0/In15]
   connect_bd_net -net ip_8_to_1_and_7_0_out0 [get_bd_pins input_selector_0/selector] [get_bd_pins ip_8_to_1_and_7_0/out0] [get_bd_pins util_vector_logic_9/Op1]
   connect_bd_net -net ip_8_to_1_and_7_0_out1 [get_bd_pins ip_8_to_1_and_7_0/out1] [get_bd_pins signal_generator_0/signal_frequency]
   connect_bd_net -net or_0_out0 [get_bd_ports trigger_out] [get_bd_pins or_0/out0]
-  connect_bd_net -net pmod_input_1 [get_bd_ports pmod_input] [get_bd_pins util_vector_logic_11/Op1]
-  connect_bd_net -net processing_system7_0_FCLK_CLK0 [get_bd_pins axi_dma_0/m_axi_s2mm_aclk] [get_bd_pins axi_dma_0/s_axi_lite_aclk] [get_bd_pins axi_dma_1/m_axi_s2mm_aclk] [get_bd_pins axi_dma_1/s_axi_lite_aclk] [get_bd_pins axi_dma_2/m_axi_s2mm_aclk] [get_bd_pins axi_dma_2/s_axi_lite_aclk] [get_bd_pins axi_dma_3/m_axi_s2mm_aclk] [get_bd_pins axi_dma_3/s_axi_lite_aclk] [get_bd_pins axi_dma_4/m_axi_s2mm_aclk] [get_bd_pins axi_dma_4/s_axi_lite_aclk] [get_bd_pins axi_dma_5/m_axi_s2mm_aclk] [get_bd_pins axi_dma_5/s_axi_lite_aclk] [get_bd_pins axi_dma_6/m_axi_s2mm_aclk] [get_bd_pins axi_dma_6/s_axi_lite_aclk] [get_bd_pins axi_dma_7/m_axi_s2mm_aclk] [get_bd_pins axi_dma_7/s_axi_lite_aclk] [get_bd_pins axi_mem_intercon/ACLK] [get_bd_pins axi_mem_intercon/M00_ACLK] [get_bd_pins axi_mem_intercon/S00_ACLK] [get_bd_pins axi_mem_intercon/S01_ACLK] [get_bd_pins axi_mem_intercon/S02_ACLK] [get_bd_pins axi_mem_intercon/S03_ACLK] [get_bd_pins axi_mem_intercon/S04_ACLK] [get_bd_pins axi_mem_intercon/S05_ACLK] [get_bd_pins axi_mem_intercon/S06_ACLK] [get_bd_pins axi_mem_intercon/S07_ACLK] [get_bd_pins fifo_generator_0/s_aclk] [get_bd_pins fifo_generator_1/s_aclk] [get_bd_pins fifo_generator_2/s_aclk] [get_bd_pins fifo_generator_3/s_aclk] [get_bd_pins fifo_generator_4/s_aclk] [get_bd_pins fifo_generator_5/s_aclk] [get_bd_pins fifo_generator_6/s_aclk] [get_bd_pins fifo_generator_7/s_aclk] [get_bd_pins gpio_enable_splitter/s_axi_aclk] [get_bd_pins gpio_input_trigger/s_axi_aclk] [get_bd_pins gpio_num_words/s_axi_aclk] [get_bd_pins gpio_signal_generator/s_axi_aclk] [get_bd_pins gpio_switch_input/s_axi_aclk] [get_bd_pins hold_signal_0/m00_axis_aclk] [get_bd_pins hold_signal_1/m00_axis_aclk] [get_bd_pins hold_signal_2/m00_axis_aclk] [get_bd_pins hold_signal_3/m00_axis_aclk] [get_bd_pins hold_signal_4/m00_axis_aclk] [get_bd_pins hold_signal_5/m00_axis_aclk] [get_bd_pins hold_signal_6/m00_axis_aclk] [get_bd_pins hold_signal_7/m00_axis_aclk] [get_bd_pins processing_system7_0/FCLK_CLK0] [get_bd_pins processing_system7_0/M_AXI_GP0_ACLK] [get_bd_pins processing_system7_0/S_AXI_HP0_ACLK] [get_bd_pins ps7_0_axi_periph/ACLK] [get_bd_pins ps7_0_axi_periph/M00_ACLK] [get_bd_pins ps7_0_axi_periph/M01_ACLK] [get_bd_pins ps7_0_axi_periph/M02_ACLK] [get_bd_pins ps7_0_axi_periph/M03_ACLK] [get_bd_pins ps7_0_axi_periph/M04_ACLK] [get_bd_pins ps7_0_axi_periph/M05_ACLK] [get_bd_pins ps7_0_axi_periph/M06_ACLK] [get_bd_pins ps7_0_axi_periph/M07_ACLK] [get_bd_pins ps7_0_axi_periph/M08_ACLK] [get_bd_pins ps7_0_axi_periph/M09_ACLK] [get_bd_pins ps7_0_axi_periph/M10_ACLK] [get_bd_pins ps7_0_axi_periph/M11_ACLK] [get_bd_pins ps7_0_axi_periph/M12_ACLK] [get_bd_pins ps7_0_axi_periph/S00_ACLK] [get_bd_pins rst_ps7_0_100M/slowest_sync_clk] [get_bd_pins signal_detector_0/m00_axis_aclk] [get_bd_pins signal_detector_1/m00_axis_aclk] [get_bd_pins signal_detector_2/m00_axis_aclk] [get_bd_pins signal_detector_3/m00_axis_aclk] [get_bd_pins signal_detector_4/m00_axis_aclk] [get_bd_pins signal_detector_5/m00_axis_aclk] [get_bd_pins signal_detector_6/m00_axis_aclk] [get_bd_pins signal_detector_7/m00_axis_aclk] [get_bd_pins signal_generator_0/m00_axis_aclk]
+  connect_bd_net -net pmod_input_1 [get_bd_ports pmod_input] [get_bd_pins signal_input_0/signal_input]
+  connect_bd_net -net processing_system7_0_FCLK_CLK0 [get_bd_pins axi_dma_0/m_axi_s2mm_aclk] [get_bd_pins axi_dma_0/s_axi_lite_aclk] [get_bd_pins axi_dma_1/m_axi_s2mm_aclk] [get_bd_pins axi_dma_1/s_axi_lite_aclk] [get_bd_pins axi_dma_2/m_axi_s2mm_aclk] [get_bd_pins axi_dma_2/s_axi_lite_aclk] [get_bd_pins axi_dma_3/m_axi_s2mm_aclk] [get_bd_pins axi_dma_3/s_axi_lite_aclk] [get_bd_pins axi_dma_4/m_axi_s2mm_aclk] [get_bd_pins axi_dma_4/s_axi_lite_aclk] [get_bd_pins axi_dma_5/m_axi_s2mm_aclk] [get_bd_pins axi_dma_5/s_axi_lite_aclk] [get_bd_pins axi_dma_6/m_axi_s2mm_aclk] [get_bd_pins axi_dma_6/s_axi_lite_aclk] [get_bd_pins axi_dma_7/m_axi_s2mm_aclk] [get_bd_pins axi_dma_7/s_axi_lite_aclk] [get_bd_pins axi_mem_intercon/ACLK] [get_bd_pins axi_mem_intercon/M00_ACLK] [get_bd_pins axi_mem_intercon/S00_ACLK] [get_bd_pins axi_mem_intercon/S01_ACLK] [get_bd_pins axi_mem_intercon/S02_ACLK] [get_bd_pins axi_mem_intercon/S03_ACLK] [get_bd_pins axi_mem_intercon/S04_ACLK] [get_bd_pins axi_mem_intercon/S05_ACLK] [get_bd_pins axi_mem_intercon/S06_ACLK] [get_bd_pins axi_mem_intercon/S07_ACLK] [get_bd_pins fifo_generator_0/s_aclk] [get_bd_pins fifo_generator_1/s_aclk] [get_bd_pins fifo_generator_2/s_aclk] [get_bd_pins fifo_generator_3/s_aclk] [get_bd_pins fifo_generator_4/s_aclk] [get_bd_pins fifo_generator_5/s_aclk] [get_bd_pins fifo_generator_6/s_aclk] [get_bd_pins fifo_generator_7/s_aclk] [get_bd_pins gpio_enable_splitter/s_axi_aclk] [get_bd_pins gpio_input_trigger/s_axi_aclk] [get_bd_pins gpio_measurement_stopped/s_axi_aclk] [get_bd_pins gpio_measurement_time/s_axi_aclk] [get_bd_pins gpio_num_words/s_axi_aclk] [get_bd_pins gpio_signal_generator/s_axi_aclk] [get_bd_pins gpio_switch_input/s_axi_aclk] [get_bd_pins hold_signal_0/m00_axis_aclk] [get_bd_pins hold_signal_1/m00_axis_aclk] [get_bd_pins hold_signal_2/m00_axis_aclk] [get_bd_pins hold_signal_3/m00_axis_aclk] [get_bd_pins hold_signal_4/m00_axis_aclk] [get_bd_pins hold_signal_5/m00_axis_aclk] [get_bd_pins hold_signal_6/m00_axis_aclk] [get_bd_pins hold_signal_7/m00_axis_aclk] [get_bd_pins processing_system7_0/FCLK_CLK0] [get_bd_pins processing_system7_0/M_AXI_GP0_ACLK] [get_bd_pins processing_system7_0/S_AXI_HP0_ACLK] [get_bd_pins ps7_0_axi_periph/ACLK] [get_bd_pins ps7_0_axi_periph/M00_ACLK] [get_bd_pins ps7_0_axi_periph/M01_ACLK] [get_bd_pins ps7_0_axi_periph/M02_ACLK] [get_bd_pins ps7_0_axi_periph/M03_ACLK] [get_bd_pins ps7_0_axi_periph/M04_ACLK] [get_bd_pins ps7_0_axi_periph/M05_ACLK] [get_bd_pins ps7_0_axi_periph/M06_ACLK] [get_bd_pins ps7_0_axi_periph/M07_ACLK] [get_bd_pins ps7_0_axi_periph/M08_ACLK] [get_bd_pins ps7_0_axi_periph/M09_ACLK] [get_bd_pins ps7_0_axi_periph/M10_ACLK] [get_bd_pins ps7_0_axi_periph/M11_ACLK] [get_bd_pins ps7_0_axi_periph/M12_ACLK] [get_bd_pins ps7_0_axi_periph/M13_ACLK] [get_bd_pins ps7_0_axi_periph/M14_ACLK] [get_bd_pins ps7_0_axi_periph/S00_ACLK] [get_bd_pins rst_ps7_0_100M/slowest_sync_clk] [get_bd_pins signal_detector_0/m00_axis_aclk] [get_bd_pins signal_detector_1/m00_axis_aclk] [get_bd_pins signal_detector_2/m00_axis_aclk] [get_bd_pins signal_detector_3/m00_axis_aclk] [get_bd_pins signal_detector_4/m00_axis_aclk] [get_bd_pins signal_detector_5/m00_axis_aclk] [get_bd_pins signal_detector_6/m00_axis_aclk] [get_bd_pins signal_detector_7/m00_axis_aclk] [get_bd_pins signal_generator_0/m00_axis_aclk]
   connect_bd_net -net processing_system7_0_FCLK_RESET0_N [get_bd_pins processing_system7_0/FCLK_RESET0_N] [get_bd_pins rst_ps7_0_100M/ext_reset_in]
-  connect_bd_net -net rst_ps7_0_100M_peripheral_aresetn [get_bd_pins axi_dma_0/axi_resetn] [get_bd_pins axi_dma_1/axi_resetn] [get_bd_pins axi_dma_2/axi_resetn] [get_bd_pins axi_dma_3/axi_resetn] [get_bd_pins axi_dma_4/axi_resetn] [get_bd_pins axi_dma_5/axi_resetn] [get_bd_pins axi_dma_6/axi_resetn] [get_bd_pins axi_dma_7/axi_resetn] [get_bd_pins axi_mem_intercon/ARESETN] [get_bd_pins axi_mem_intercon/M00_ARESETN] [get_bd_pins axi_mem_intercon/S00_ARESETN] [get_bd_pins axi_mem_intercon/S01_ARESETN] [get_bd_pins axi_mem_intercon/S02_ARESETN] [get_bd_pins axi_mem_intercon/S03_ARESETN] [get_bd_pins axi_mem_intercon/S04_ARESETN] [get_bd_pins axi_mem_intercon/S05_ARESETN] [get_bd_pins axi_mem_intercon/S06_ARESETN] [get_bd_pins axi_mem_intercon/S07_ARESETN] [get_bd_pins gpio_enable_splitter/s_axi_aresetn] [get_bd_pins gpio_input_trigger/s_axi_aresetn] [get_bd_pins gpio_num_words/s_axi_aresetn] [get_bd_pins gpio_signal_generator/s_axi_aresetn] [get_bd_pins gpio_switch_input/s_axi_aresetn] [get_bd_pins ps7_0_axi_periph/ARESETN] [get_bd_pins ps7_0_axi_periph/M00_ARESETN] [get_bd_pins ps7_0_axi_periph/M01_ARESETN] [get_bd_pins ps7_0_axi_periph/M02_ARESETN] [get_bd_pins ps7_0_axi_periph/M03_ARESETN] [get_bd_pins ps7_0_axi_periph/M04_ARESETN] [get_bd_pins ps7_0_axi_periph/M05_ARESETN] [get_bd_pins ps7_0_axi_periph/M06_ARESETN] [get_bd_pins ps7_0_axi_periph/M07_ARESETN] [get_bd_pins ps7_0_axi_periph/M08_ARESETN] [get_bd_pins ps7_0_axi_periph/M09_ARESETN] [get_bd_pins ps7_0_axi_periph/M10_ARESETN] [get_bd_pins ps7_0_axi_periph/M11_ARESETN] [get_bd_pins ps7_0_axi_periph/M12_ARESETN] [get_bd_pins ps7_0_axi_periph/S00_ARESETN] [get_bd_pins rst_ps7_0_100M/peripheral_aresetn] [get_bd_pins signal_detector_0/m00_axis_aresetn] [get_bd_pins signal_detector_1/m00_axis_aresetn] [get_bd_pins signal_detector_2/m00_axis_aresetn] [get_bd_pins signal_detector_3/m00_axis_aresetn] [get_bd_pins signal_detector_4/m00_axis_aresetn] [get_bd_pins signal_detector_5/m00_axis_aresetn] [get_bd_pins signal_detector_6/m00_axis_aresetn] [get_bd_pins signal_detector_7/m00_axis_aresetn] [get_bd_pins signal_generator_0/m00_axis_aresetn] [get_bd_pins util_vector_logic_1/Op1] [get_bd_pins util_vector_logic_2/Op1] [get_bd_pins util_vector_logic_3/Op1] [get_bd_pins util_vector_logic_4/Op1] [get_bd_pins util_vector_logic_5/Op1] [get_bd_pins util_vector_logic_6/Op1] [get_bd_pins util_vector_logic_7/Op1] [get_bd_pins util_vector_logic_8/Op1]
+  connect_bd_net -net rst_ps7_0_100M_peripheral_aresetn [get_bd_pins axi_dma_0/axi_resetn] [get_bd_pins axi_dma_1/axi_resetn] [get_bd_pins axi_dma_2/axi_resetn] [get_bd_pins axi_dma_3/axi_resetn] [get_bd_pins axi_dma_4/axi_resetn] [get_bd_pins axi_dma_5/axi_resetn] [get_bd_pins axi_dma_6/axi_resetn] [get_bd_pins axi_dma_7/axi_resetn] [get_bd_pins axi_mem_intercon/ARESETN] [get_bd_pins axi_mem_intercon/M00_ARESETN] [get_bd_pins axi_mem_intercon/S00_ARESETN] [get_bd_pins axi_mem_intercon/S01_ARESETN] [get_bd_pins axi_mem_intercon/S02_ARESETN] [get_bd_pins axi_mem_intercon/S03_ARESETN] [get_bd_pins axi_mem_intercon/S04_ARESETN] [get_bd_pins axi_mem_intercon/S05_ARESETN] [get_bd_pins axi_mem_intercon/S06_ARESETN] [get_bd_pins axi_mem_intercon/S07_ARESETN] [get_bd_pins gpio_enable_splitter/s_axi_aresetn] [get_bd_pins gpio_input_trigger/s_axi_aresetn] [get_bd_pins gpio_measurement_stopped/s_axi_aresetn] [get_bd_pins gpio_measurement_time/s_axi_aresetn] [get_bd_pins gpio_num_words/s_axi_aresetn] [get_bd_pins gpio_signal_generator/s_axi_aresetn] [get_bd_pins gpio_switch_input/s_axi_aresetn] [get_bd_pins ps7_0_axi_periph/ARESETN] [get_bd_pins ps7_0_axi_periph/M00_ARESETN] [get_bd_pins ps7_0_axi_periph/M01_ARESETN] [get_bd_pins ps7_0_axi_periph/M02_ARESETN] [get_bd_pins ps7_0_axi_periph/M03_ARESETN] [get_bd_pins ps7_0_axi_periph/M04_ARESETN] [get_bd_pins ps7_0_axi_periph/M05_ARESETN] [get_bd_pins ps7_0_axi_periph/M06_ARESETN] [get_bd_pins ps7_0_axi_periph/M07_ARESETN] [get_bd_pins ps7_0_axi_periph/M08_ARESETN] [get_bd_pins ps7_0_axi_periph/M09_ARESETN] [get_bd_pins ps7_0_axi_periph/M10_ARESETN] [get_bd_pins ps7_0_axi_periph/M11_ARESETN] [get_bd_pins ps7_0_axi_periph/M12_ARESETN] [get_bd_pins ps7_0_axi_periph/M13_ARESETN] [get_bd_pins ps7_0_axi_periph/M14_ARESETN] [get_bd_pins ps7_0_axi_periph/S00_ARESETN] [get_bd_pins rst_ps7_0_100M/peripheral_aresetn] [get_bd_pins signal_detector_0/m00_axis_aresetn] [get_bd_pins signal_detector_1/m00_axis_aresetn] [get_bd_pins signal_detector_2/m00_axis_aresetn] [get_bd_pins signal_detector_3/m00_axis_aresetn] [get_bd_pins signal_detector_4/m00_axis_aresetn] [get_bd_pins signal_detector_5/m00_axis_aresetn] [get_bd_pins signal_detector_6/m00_axis_aresetn] [get_bd_pins signal_detector_7/m00_axis_aresetn] [get_bd_pins signal_generator_0/m00_axis_aresetn] [get_bd_pins util_vector_logic_1/Op1] [get_bd_pins util_vector_logic_2/Op1] [get_bd_pins util_vector_logic_3/Op1] [get_bd_pins util_vector_logic_4/Op1] [get_bd_pins util_vector_logic_5/Op1] [get_bd_pins util_vector_logic_6/Op1] [get_bd_pins util_vector_logic_7/Op1] [get_bd_pins util_vector_logic_8/Op1]
   connect_bd_net -net signal_detector_0_fifo_reset [get_bd_pins signal_detector_0/fifo_reset] [get_bd_pins util_vector_logic_1/Op2]
   connect_bd_net -net signal_detector_0_signal_state [get_bd_pins or_0/in0] [get_bd_pins signal_detector_0/signal_state] [get_bd_pins xlconcat_1/In0]
+  connect_bd_net -net signal_detector_0_stopped [get_bd_pins interrupt_or_0/Op2] [get_bd_pins signal_detector_0/stopped] [get_bd_pins stopped_concat/In0]
   connect_bd_net -net signal_detector_1_fifo_reset [get_bd_pins signal_detector_1/fifo_reset] [get_bd_pins util_vector_logic_2/Op2]
   connect_bd_net -net signal_detector_1_signal_state [get_bd_pins or_0/in1] [get_bd_pins signal_detector_1/signal_state] [get_bd_pins xlconcat_1/In1]
+  connect_bd_net -net signal_detector_1_stopped [get_bd_pins interrupt_or_1/Op2] [get_bd_pins signal_detector_1/stopped] [get_bd_pins stopped_concat/In1]
   connect_bd_net -net signal_detector_2_fifo_reset [get_bd_pins signal_detector_2/fifo_reset] [get_bd_pins util_vector_logic_3/Op2]
   connect_bd_net -net signal_detector_2_signal_state [get_bd_pins or_0/in2] [get_bd_pins signal_detector_2/signal_state] [get_bd_pins xlconcat_1/In2]
+  connect_bd_net -net signal_detector_2_stopped [get_bd_pins interrupt_or_2/Op2] [get_bd_pins signal_detector_2/stopped] [get_bd_pins stopped_concat/In2]
   connect_bd_net -net signal_detector_3_fifo_reset [get_bd_pins signal_detector_3/fifo_reset] [get_bd_pins util_vector_logic_4/Op2]
   connect_bd_net -net signal_detector_3_signal_state [get_bd_pins or_0/in3] [get_bd_pins signal_detector_3/signal_state] [get_bd_pins xlconcat_1/In3]
+  connect_bd_net -net signal_detector_3_stopped [get_bd_pins interrupt_or_3/Op2] [get_bd_pins signal_detector_3/stopped] [get_bd_pins stopped_concat/In3]
   connect_bd_net -net signal_detector_4_fifo_reset [get_bd_pins signal_detector_4/fifo_reset] [get_bd_pins util_vector_logic_5/Op2]
   connect_bd_net -net signal_detector_4_signal_state [get_bd_pins or_0/in4] [get_bd_pins signal_detector_4/signal_state] [get_bd_pins xlconcat_1/In4]
+  connect_bd_net -net signal_detector_4_stopped [get_bd_pins interrupt_or_4/Op2] [get_bd_pins signal_detector_4/stopped] [get_bd_pins stopped_concat/In4]
   connect_bd_net -net signal_detector_5_fifo_reset [get_bd_pins signal_detector_5/fifo_reset] [get_bd_pins util_vector_logic_6/Op2]
   connect_bd_net -net signal_detector_5_signal_state [get_bd_pins or_0/in5] [get_bd_pins signal_detector_5/signal_state] [get_bd_pins xlconcat_1/In5]
+  connect_bd_net -net signal_detector_5_stopped [get_bd_pins interrupt_or_5/Op2] [get_bd_pins signal_detector_5/stopped] [get_bd_pins stopped_concat/In5]
   connect_bd_net -net signal_detector_6_fifo_reset [get_bd_pins signal_detector_6/fifo_reset] [get_bd_pins util_vector_logic_7/Op2]
   connect_bd_net -net signal_detector_6_signal_state [get_bd_pins or_0/in6] [get_bd_pins signal_detector_6/signal_state] [get_bd_pins xlconcat_1/In6]
+  connect_bd_net -net signal_detector_6_stopped [get_bd_pins interrupt_or_6/Op2] [get_bd_pins signal_detector_6/stopped] [get_bd_pins stopped_concat/In6]
   connect_bd_net -net signal_detector_7_fifo_reset [get_bd_pins input_selector_0/fifo_reset_1] [get_bd_pins signal_detector_7/fifo_reset]
   connect_bd_net -net signal_detector_7_m00_axis_tdata [get_bd_pins input_selector_0/s01_axis_tdata] [get_bd_pins signal_detector_7/m00_axis_tdata]
   connect_bd_net -net signal_detector_7_m00_axis_tkeep [get_bd_pins input_selector_0/s01_axis_tkeep] [get_bd_pins signal_detector_7/m00_axis_tkeep]
   connect_bd_net -net signal_detector_7_m00_axis_tlast [get_bd_pins input_selector_0/s01_axis_tlast] [get_bd_pins signal_detector_7/m00_axis_tlast]
   connect_bd_net -net signal_detector_7_m00_axis_tvalid [get_bd_pins input_selector_0/s01_axis_tvalid] [get_bd_pins signal_detector_7/m00_axis_tvalid]
   connect_bd_net -net signal_detector_7_signal_state [get_bd_pins input_selector_0/signal_state_1] [get_bd_pins signal_detector_7/signal_state]
+  connect_bd_net -net signal_detector_7_stopped [get_bd_pins input_selector_0/stopped_1] [get_bd_pins signal_detector_7/stopped]
   connect_bd_net -net signal_generator_0_fifo_reset [get_bd_pins input_selector_0/fifo_reset_0] [get_bd_pins signal_generator_0/fifo_reset]
   connect_bd_net -net signal_generator_0_m00_axis_tdata [get_bd_pins input_selector_0/s00_axis_tdata] [get_bd_pins signal_generator_0/m00_axis_tdata]
   connect_bd_net -net signal_generator_0_m00_axis_tkeep [get_bd_pins input_selector_0/s00_axis_tkeep] [get_bd_pins signal_generator_0/m00_axis_tkeep]
   connect_bd_net -net signal_generator_0_m00_axis_tlast [get_bd_pins input_selector_0/s00_axis_tlast] [get_bd_pins signal_generator_0/m00_axis_tlast]
   connect_bd_net -net signal_generator_0_m00_axis_tvalid [get_bd_pins input_selector_0/s00_axis_tvalid] [get_bd_pins signal_generator_0/m00_axis_tvalid]
   connect_bd_net -net signal_generator_0_signal_state [get_bd_pins input_selector_0/signal_state_0] [get_bd_pins signal_generator_0/signal_state]
+  connect_bd_net -net signal_generator_0_stopped [get_bd_pins input_selector_0/stopped_0] [get_bd_pins signal_generator_0/stopped]
   connect_bd_net -net signal_input_0_out0 [get_bd_pins signal_input_0/out0] [get_bd_pins util_vector_logic_0/Op1]
   connect_bd_net -net signal_input_0_out1 [get_bd_pins signal_detector_1/signal_input] [get_bd_pins signal_input_0/out1]
   connect_bd_net -net signal_input_0_out2 [get_bd_pins signal_detector_2/signal_input] [get_bd_pins signal_input_0/out2]
@@ -1293,11 +1390,11 @@ proc create_root_design { parentCell } {
   connect_bd_net -net signal_input_0_out5 [get_bd_pins signal_detector_5/signal_input] [get_bd_pins signal_input_0/out5]
   connect_bd_net -net signal_input_0_out6 [get_bd_pins signal_detector_6/signal_input] [get_bd_pins signal_input_0/out6]
   connect_bd_net -net signal_input_0_out7 [get_bd_pins signal_detector_7/signal_input] [get_bd_pins signal_input_0/out7] [get_bd_pins util_vector_logic_10/Op1]
+  connect_bd_net -net stopped_concat_dout [get_bd_pins gpio_measurement_stopped/gpio_io_i] [get_bd_pins stopped_concat/dout]
   connect_bd_net -net sws_8bits_1 [get_bd_ports sws_8bits] [get_bd_pins enable_splitter_0/switch_input] [get_bd_pins gpio_switch_input/gpio_io_i]
   connect_bd_net -net trigger_input_1 [get_bd_ports trigger_input] [get_bd_pins input_trigger_0/trigger_input]
   connect_bd_net -net util_vector_logic_0_Res [get_bd_pins signal_detector_0/signal_input] [get_bd_pins util_vector_logic_0/Res]
   connect_bd_net -net util_vector_logic_10_Res [get_bd_pins signal_generator_0/signal_input] [get_bd_pins util_vector_logic_10/Res]
-  connect_bd_net -net util_vector_logic_11_Res [get_bd_pins signal_input_0/signal_input] [get_bd_pins util_vector_logic_11/Res]
   connect_bd_net -net util_vector_logic_1_Res [get_bd_pins fifo_generator_0/s_aresetn] [get_bd_pins hold_signal_0/m00_axis_aresetn] [get_bd_pins util_vector_logic_1/Res]
   connect_bd_net -net util_vector_logic_2_Res [get_bd_pins fifo_generator_1/s_aresetn] [get_bd_pins hold_signal_1/m00_axis_aresetn] [get_bd_pins util_vector_logic_2/Res]
   connect_bd_net -net util_vector_logic_3_Res [get_bd_pins fifo_generator_2/s_aresetn] [get_bd_pins hold_signal_2/m00_axis_aresetn] [get_bd_pins util_vector_logic_3/Res]
@@ -1329,6 +1426,8 @@ proc create_root_design { parentCell } {
   assign_bd_address -offset 0x40470000 -range 0x00010000 -target_address_space [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs axi_dma_7/S_AXI_LITE/Reg] -force
   assign_bd_address -offset 0x41200000 -range 0x00010000 -target_address_space [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs gpio_enable_splitter/S_AXI/Reg] -force
   assign_bd_address -offset 0x41240000 -range 0x00010000 -target_address_space [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs gpio_input_trigger/S_AXI/Reg] -force
+  assign_bd_address -offset 0x41260000 -range 0x00010000 -target_address_space [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs gpio_measurement_stopped/S_AXI/Reg] -force
+  assign_bd_address -offset 0x41250000 -range 0x00010000 -target_address_space [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs gpio_measurement_time/S_AXI/Reg] -force
   assign_bd_address -offset 0x41210000 -range 0x00010000 -target_address_space [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs gpio_num_words/S_AXI/Reg] -force
   assign_bd_address -offset 0x41230000 -range 0x00010000 -target_address_space [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs gpio_signal_generator/S_AXI/Reg] -force
   assign_bd_address -offset 0x41220000 -range 0x00010000 -target_address_space [get_bd_addr_spaces processing_system7_0/Data] [get_bd_addr_segs gpio_switch_input/S_AXI/Reg] -force

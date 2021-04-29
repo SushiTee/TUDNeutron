@@ -10,6 +10,8 @@ namespace gpio {
 
 class WordLengthController : public Gpio {
     WordLengthController(uint32_t registerBase, int mem);
+    WordLengthController(WordLengthController &&) = delete;
+    WordLengthController &operator=(WordLengthController &&) = delete;
     ~WordLengthController();
     static WordLengthController &getInstanceImpl(uint32_t registerBase = 0, int mem = 0);
     static WordLengthController &getInstance();
@@ -26,6 +28,6 @@ public:
     static bool hasError();
 };
 
-} // gpio    
+} // gpio
 } // components
 } // simpleneutron

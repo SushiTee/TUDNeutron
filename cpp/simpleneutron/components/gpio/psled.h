@@ -9,9 +9,12 @@ namespace gpio {
 
 class PsLed {
     PsLed();
+    PsLed(PsLed &&) = delete;
+    PsLed &operator=(PsLed &&) = delete;
     ~PsLed();
 
     int mGpio;
+    uint16_t mGpioNumber = 0;
     bool mHasError = false;
     bool hasErrorImpl();
 
@@ -24,6 +27,6 @@ public:
     static bool hasError();
 };
 
-} // gpio    
+} // gpio
 } // components
 } // simpleneutron

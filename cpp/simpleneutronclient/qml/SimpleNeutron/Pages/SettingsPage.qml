@@ -56,6 +56,34 @@ Page {
         }
     }
 
+    onValidate: {
+        let tmp = parseInt(portTextField.displayText)
+        if (tmp < 1 || tmp > 65535) {
+            Globals.mainWindow.dialog.title = "Invalid port";
+            Globals.mainWindow.dialog.message = "The port must be between 1 and 65535.";
+            Globals.mainWindow.dialog.open();
+            root.backValid = false;
+            return;
+        }
+        tmp = parseInt(signalGeneratorCount.signalCount);
+        if (tmp < 1 || tmp > 2147483647) {
+            Globals.mainWindow.dialog.title = "Invalid test signal count";
+            Globals.mainWindow.dialog.message = "The test signal count must be between 1 and 2147483647.";
+            Globals.mainWindow.dialog.open();
+            root.backValid = false;
+            return;
+        }
+        tmp = parseInt(signalGeneratorFrequency.actualFrequency);
+        if (tmp < 1 || tmp > 50000000) {
+            Globals.mainWindow.dialog.title = "Invalid signal frequency";
+            Globals.mainWindow.dialog.message = "The signal frequency must be between 1 and 50000000.";
+            Globals.mainWindow.dialog.open();
+            root.backValid = false;
+            return;
+        }
+        root.backValid = true;
+    }
+
     Label {
         id: locationDummy
         text: storageLocation;
