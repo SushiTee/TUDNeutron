@@ -45,12 +45,12 @@ Dma::Dma(uint8_t id, int mem)
         return;
     }
 
-    int dmaDevice = open(DMAS[id].mDmaDevice, O_RDONLY | O_SYNC);
-    if (dmaDevice == -1) {
+    mDmaDevice = open(DMAS[id].mDmaDevice, O_RDONLY | O_SYNC);
+    if (mDmaDevice == -1) {
         LogErr << "Error opening " << DMAS[id].mDmaDevice << std::endl;
         return;
     }
-    mMemoryMap = (uint32_t *)mmap(NULL, 0x2000000, PROT_READ, MAP_SHARED, dmaDevice, 0);
+    mMemoryMap = (uint32_t *)mmap(NULL, 0x2000000, PROT_READ, MAP_SHARED, mDmaDevice, 0);
     if (mMemoryMap == MAP_FAILED) {
         LogErr << "DMA (" << std::hex << REGISTER_BASE << "): could not map memory map" << std::endl;
         mHasError = true;
@@ -73,6 +73,12 @@ Dma::Dma(uint8_t id, int mem)
 }
 
 Dma::~Dma() {
+    if (mDmaDevice >= 0) {
+        mDmaDevice = close(mDmaDevice);
+        if (mDmaDevice < 0) {
+            LogOut << "DMA (" << std::hex << REGISTER_BASE << "): could not close DMA Device" << std::endl;
+        }
+    }
     if (mUio >= 0) {
         mUio = close(mUio);
         if (mUio < 0) {

@@ -35,6 +35,7 @@ class Dma {
 
     int mUio;
     int mFifoUio;
+    int mDmaDevice = 0;
     uint32_t *mRegister = 0;
     uint32_t *mMemoryMap = 0;
     uint32_t mSize = DMA_SIZE;
