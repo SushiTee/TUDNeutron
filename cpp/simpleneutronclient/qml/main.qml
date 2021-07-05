@@ -105,8 +105,11 @@ ApplicationWindow {
 
         property string message: ""
 
-        anchors.centerIn: parent
+        parent: Overlay.overlay
         width: parent.width - 20
+        x: parent ? ((parent.width - width) / 2) : 0
+        y: parent ? ((parent.height - height) / 2) : 0
+
         title: "Connection failed"
         modal: true
         standardButtons: Dialog.Ok
